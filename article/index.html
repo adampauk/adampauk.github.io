@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ten reps, one count</title>
+<meta name="description" content="How a slamming weight stack taught us what it takes to count a workout for you: an evening at the leg extension, the readings that went missing, and the two fixes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#000;
+  --ink:#f3f0e9;
+  --text2:#9b978f;
+  --hair:rgba(243,240,233,.12);
+  --citrine:#ffc24a; --citrine-glow:#f09a1c; --citrine-core:#fff6dc;
+  --aqua:#6fe8d6; --aqua-glow:#2fc7b3;
+  --peridot:#b4ee7a;
+  --serif:"Instrument Serif",ui-serif,Georgia,serif;
+  --sans:"Instrument Sans",-apple-system,system-ui,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 18px/1.62 var(--sans);overflow-x:hidden}
+a{color:var(--citrine)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--citrine);outline-offset:3px;border-radius:4px}
+.wrap{max-width:40rem;margin:0 auto;padding:0 16px}
+.wide{max-width:64rem;margin:0 auto;padding:0 16px}
+
+/* top line, as quiet as the rest of the site */
+.site{display:flex;justify-content:space-between;gap:1rem;padding:18px 16px;max-width:64rem;margin:0 auto;font-size:13px;color:var(--text2);letter-spacing:.02em}
+.site a{color:var(--text2);text-decoration:none}
+.site a:hover{color:var(--ink)}
+
+/* hero: the signature is the trace */
+.hero{position:relative;padding:5vh 0 2rem;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:-10% -20% auto;height:70vh;z-index:-1;
+  background:radial-gradient(40% 50% at 50% 40%,rgba(240,154,28,.22),transparent 70%)}
+.kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--citrine)}
+h1{font:400 clamp(3rem,10vw,6.4rem)/.95 var(--serif);letter-spacing:-.01em;margin:.35em 0 .3em}
+h1 em{color:var(--citrine);text-shadow:0 0 28px rgba(240,154,28,.55)}
+.dek{font-size:clamp(1.1rem,2.4vw,1.35rem);line-height:1.5;color:#d9d5cc;max-width:36rem;margin:0}
+.byline{margin-top:1.4rem;font-size:14px;color:var(--text2)}
+
+.trace{margin:2.4rem auto 0;position:relative}
+.trace svg{display:block;width:100%;height:auto}
+.trace .path{fill:none;stroke:var(--aqua);stroke-width:2.2;filter:drop-shadow(0 0 6px rgba(47,199,179,.7))}
+.trace .lost{fill:var(--citrine);filter:drop-shadow(0 0 5px rgba(240,154,28,.9))}
+.trace .stop{stroke:var(--hair);stroke-width:1;stroke-dasharray:3 5}
+.trace .label{fill:var(--text2);font:500 12px var(--sans);letter-spacing:.06em}
+@media (max-width:600px){.trace .label{display:none}}
+.counts{display:flex;justify-content:space-between;gap:1rem;margin-top:1rem;flex-wrap:wrap}
+.count{display:flex;align-items:baseline;gap:.6rem}
+.count b{font:400 clamp(3.4rem,9vw,5.2rem)/1 var(--serif)}
+.count span{font-size:14px;color:var(--text2);max-width:12rem;line-height:1.35}
+.count.sensor b{color:var(--aqua);text-shadow:0 0 22px rgba(47,199,179,.6)}
+.count.fit b{color:var(--citrine);text-shadow:0 0 22px rgba(240,154,28,.7)}
+@media (prefers-reduced-motion:no-preference){
+  .trace .path{stroke-dasharray:2400;stroke-dashoffset:2400;animation:draw 3.2s cubic-bezier(.4,0,.2,1) .3s forwards}
+  .trace .lost{opacity:0;animation:pop .4s ease-out forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  @keyframes pop{to{opacity:1}}
+}
+
+/* article body */
+article{padding:3rem 0 2rem}
+article p{margin:0 0 1.2em}
+article h2{font:400 clamp(2rem,5vw,2.8rem)/1.05 var(--serif);margin:2.6em 0 .6em}
+article h2 em{color:var(--citrine)}
+.lede::first-letter{font:400 4.2em/.8 var(--serif);float:left;margin:.08em .1em 0 0;color:var(--citrine)}
+blockquote{margin:2rem 0;padding:0;font:italic 400 clamp(1.6rem,4vw,2.1rem)/1.25 var(--serif);color:var(--citrine-core)}
+blockquote::before{content:"";display:block;width:2.5rem;height:2px;background:var(--citrine);box-shadow:0 0 12px var(--citrine-glow);margin-bottom:1rem}
+
+/* the log: real lines from the evening */
+.log{margin:2rem 0;border:1px solid var(--hair);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));padding:1.1rem 1.2rem;font:13.5px/1.7 var(--mono);color:#cfcac0;overflow-x:auto}
+.log .t{color:var(--text2)}
+.log .bad{color:var(--citrine)}
+.log .ok{color:var(--peridot)}
+
+figure{margin:2.4rem 0}
+figure img{width:100%;height:auto;display:block;border-radius:20px;background:#fff;filter:invert(1) hue-rotate(180deg) brightness(.92);border:1px solid var(--hair)}
+.film{margin:2.6rem -16px}
+.film video{display:block;width:100%;height:auto;border-radius:20px;background:#000;border:1px solid var(--hair);box-shadow:0 0 60px rgba(47,199,179,.12)}
+.film figcaption{padding:0 16px}
+.film figcaption b{color:var(--ink);font-weight:600}
+@media (min-width:760px){.film{margin:3rem -6rem}}
+figcaption{font-size:14px;color:var(--text2);margin-top:.7rem;line-height:1.5}
+.pair{display:grid;grid-template-columns:1.25fr 1fr;gap:16px;align-items:end}
+@media (max-width:680px){.pair{grid-template-columns:1fr}}
+
+/* status chips encode what is true today */
+.status{display:inline-flex;align-items:center;gap:.45rem;font:600 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;border-radius:999px;padding:.32rem .7rem .3rem;vertical-align:middle;margin-left:.2rem;white-space:nowrap}
+.status::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor}
+.s-shipped{color:var(--peridot);background:rgba(180,238,122,.08)}
+.s-review{color:var(--citrine);background:rgba(255,194,74,.08)}
+.s-open{color:var(--text2);background:rgba(255,255,255,.05)}
+
+.numbers{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:18px;overflow:hidden;margin:2rem 0}
+.numbers div{background:var(--ground);padding:1.1rem 1rem}
+.numbers b{display:block;font:400 2.3rem/1 var(--serif);color:var(--ink)}
+.numbers span{font-size:13.5px;color:var(--text2);line-height:1.4;display:block;margin-top:.4rem}
+@media (max-width:560px){.numbers{grid-template-columns:1fr}}
+
+.state{margin:2rem 0;border-top:1px solid var(--hair)}
+.state div{display:grid;grid-template-columns:9.5rem 1fr;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--hair)}
+.state p{margin:0}
+@media (max-width:520px){.state div{grid-template-columns:1fr;gap:.4rem}}
+
+.lessons{counter-reset:l;list-style:none;padding:0;margin:1.5rem 0}
+.lessons li{counter-increment:l;position:relative;padding:0 0 1.1rem 2.6rem}
+.lessons li::before{content:counter(l);position:absolute;left:0;top:-.15rem;font:400 1.8rem/1 var(--serif);color:var(--citrine)}
+.lessons b{color:var(--ink)}
+
+footer{border-top:1px solid var(--hair);margin-top:3rem;padding:1.6rem 0 3rem;font-size:14px;color:var(--text2)}
+</style>
+</head>
+<body>
+
+<nav class="site" aria-label="Site"><a href="/">Machine links</a><span>Field notes from the build</span></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Field notes, 1 October 2026</div>
+    <h1>Ten reps, <em>one</em> count</h1>
+    <p class="dek">We are building a tracker that writes your workout down while you lift, so you never type a set again. One evening at the leg extension showed us how much has to go right for that to be true.</p>
+    <p class="byline">By the workout-tracker team. About 7 minutes.</p>
+  </div>
+
+  <div class="wide trace" role="img" aria-label="A drawing of ten reps on a weight stack. The sensor counted ten. The first fit of the setup lift counted one, because readings went missing each time the stack slammed onto its stop.">
+    <svg viewBox="0 0 1000 260" aria-hidden="true">
+      <line class="stop" x1="0" y1="214" x2="1000" y2="214"/>
+      <text class="label" x="0" y="246">THE STACK ON ITS STOP</text>
+      <text class="label" x="0" y="22">A SETUP LIFT, DRAWN. DOTS: READINGS LOST AT THE LANDINGS</text>
+      <path class="path" d="M10 214 C40 214 50 60 85 60 S120 214 150 214 C180 214 190 58 225 58 S260 214 290 214 C320 214 330 62 365 62 S400 214 430 214 C460 214 470 56 505 56 S540 214 570 214 C600 214 610 60 645 60 S680 214 710 214 C740 214 750 58 785 58 S820 214 850 214 C860 214 866 120 872 96 M884 70 C895 58 905 70 915 120 S930 214 950 214 C962 214 970 150 976 120"/>
+      <g>
+        <circle class="lost" cx="150" cy="214" r="5" style="animation-delay:.9s"/>
+        <circle class="lost" cx="290" cy="214" r="5" style="animation-delay:1.25s"/>
+        <circle class="lost" cx="430" cy="214" r="5" style="animation-delay:1.6s"/>
+        <circle class="lost" cx="570" cy="214" r="5" style="animation-delay:1.95s"/>
+        <circle class="lost" cx="710" cy="214" r="5" style="animation-delay:2.3s"/>
+        <circle class="lost" cx="850" cy="214" r="5" style="animation-delay:2.65s"/>
+      </g>
+    </svg>
+    <div class="counts">
+      <div class="count sensor"><b>10</b><span>reps the sensor counted, live, on the machine</span></div>
+      <div class="count fit"><b>1</b><span>rep the setup lift's fit found, from the same recording</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+<article>
+
+<p class="lede">The idea is easy to say. You walk up to a machine, hold your phone to the sticker on it, and lift. A sensor the size of a matchbox sits on the weight stack and counts each rep as it happens. When you rest, the phone already knows the set: how many reps, how far the weight travelled, how fast it moved. No notebook, no typing with chalky fingers, no guessing at the end of the week what you did on Tuesday.</p>
+
+<p>Saying it is easy. Making a count you can trust is the whole job. A tracker that is right nine times and silently wrong the tenth is worse than paper, because paper never pretends.</p>
+
+<figure class="pair">
+  <img src="img/sensor-on-machine.png" alt="A 3D render of the sensor pod strapped to a bar." width="1200" height="900" loading="lazy">
+  <img src="img/sensor-pod.png" alt="A 3D render of the sensor pod on its own." width="1000" height="700" loading="lazy">
+  <figcaption>The sensor's printed housing, on a bar and on its own, from our CAD. Inside: a small board with a motion sensor and a Bluetooth radio, a cell, and nothing that needs a socket.</figcaption>
+</figure>
+
+<h2>Teaching a machine <em>once</em></h2>
+
+<p>A weight stack only moves up and down, but every machine moves it differently. A leg extension swings an arm; a cable column pulls a rope; some stacks travel 30 cm, some 60. So for each machine we ask for one thing, once: a <strong>setup lift</strong>. About ten slow, full reps. From those, the app learns how far that stack travels and which way is up, and from then on the sensor counts every set on that machine by itself.</p>
+
+<p>The setup lift is where the maths does the most work. The sensor measures acceleration, not position. To turn acceleration into distance you integrate it twice, and integration has a nasty habit: every small error grows. Over one rep that is fine. Over a sloppy rep, or a gap in the data, it runs away.</p>
+
+<figure class="film">
+  <video controls playsinline preload="none" poster="media/inside-one-rep-poster.jpg" width="1920" height="1080">
+    <source src="media/inside-one-rep.mp4" type="video/mp4">
+    Your browser cannot play this video. <a href="media/inside-one-rep.mp4">Download it (30 MB)</a>.
+  </video>
+  <figcaption><b>Inside one rep.</b> Made from a real recording: the sensor's raw readings, the maths it runs on every one of them, and the moment a lift becomes the number 1 on your set. 25 seconds, with sound. The beep is film sound design; the app does not beep.</figcaption>
+</figure>
+
+<h2>The evening it said <em>no</em></h2>
+
+<p>On 30 September, at our test gym, the leg extension refused its setup lift twice. The sensor on the stack was counting perfectly: ten reps, then ten again, live on the screen. But when the app fitted the same recording to learn the machine, it came back with nonsense.</p>
+
+<div class="log" role="figure" aria-label="What the app found in the two setup lifts">
+  <div><span class="t">22:18</span> setup lift on Leg Extension. Sensor counted <span class="ok">10</span>.</div>
+  <div><span class="t">     </span> fit: <span class="bad">4 reps, 4.36 m of travel</span>. Refused: the range is impossible.</div>
+  <div><span class="t">22:21</span> setup lift again. Sensor counted <span class="ok">10</span>.</div>
+  <div><span class="t">     </span> fit: <span class="bad">1 rep, 0.39 m</span>. Refused: too few reps.</div>
+</div>
+
+<p>Four metres of travel from a machine whose stack moves about forty centimetres. Our first guess was the machine itself: a leg extension swings in an arc, and maybe the fit was being fooled by the curve. That guess was wrong, and we only found out because we stopped guessing and read the recordings sample by sample.</p>
+
+<h2>Where the readings <em>went</em></h2>
+
+<p>The phone keeps a raw copy of everything the sensor sends. Laid out on a timeline, the two lifts told a plain story: the board had dropped some of its own readings. Not many. <strong>3.9 % in one lift and 6.4 % in the other.</strong> But they were not spread evenly. They clumped at the hardest moments: the instant the stack slammed back onto its stop.</p>
+
+<div class="numbers">
+  <div><b>3.9 %</b><span>of readings lost in the first refused lift</span></div>
+  <div><b>6.4 %</b><span>lost in the second, clumped at the landings</span></div>
+  <div><b>0.1–0.3</b><span>m/s of speed error left behind by every landing</span></div>
+</div>
+
+<p>That is the worst possible place to lose data. Each slam left the speed estimate a little off, 0.1 to 0.3 metres per second. The fit decides that a rep is over when the weight comes to rest, and it knows "at rest" only through that speed. With the error in it, no pause on the stop looked like rest any more. The bottoms stopped lining up, and by the third or fourth rep the double integral had wandered off into four metres of imaginary travel.</p>
+
+<blockquote>The one moment you know the speed for certain is when the weight is sitting on its stop.</blockquote>
+
+<h2>Fix it where <em>you</em> are first</h2>
+
+<p>The cause was in the sensor's firmware, but you were standing at the machine with a phone that would not let you train. So the first fix went into the app.</p>
+
+<p>A resting stack is the one moment its speed is exactly zero, and the raw signal says so without any integration: when the load sits on its stop, all that is left is the sensor's own noise. We measured that noise on those very lifts, 0.010 to 0.020 m/s² of spread, and set the line for "resting" at 0.04, three times higher. Now, when every other look at a setup lift would send it back, the app takes one more look. It finds the moments the stack rests, measures each rep between two of them, and takes off whatever drift is left as a straight line. Speed is pinned to zero at both ends of every rep, so a lost reading can no longer carry its error into the next one.</p>
+
+<p>Replayed on the Mac, both refused lifts came out at about <strong>41 cm</strong>, from ten reps and from six, and the answer barely moved anywhere between a line of 0.02 and 0.08. <span class="status s-shipped">In the app since 1 October</span></p>
+
+<p>We also wrote down what it does not fix. In the same replay, two of that evening's six sets still lost their place partway through, whatever setup we gave them. A smarter phone cannot invent readings the board never sent.</p>
+
+<h2>Then fix the <em>cause</em></h2>
+
+<p>So why did a board that counts reps perfectly drop readings at all? The answer was a queue. The firmware's main loop, the one that drains the motion sensor's buffer, was also the one that handed messages to the radio, and when the radio was busy, the loop waited. While it waited, the motion sensor kept filling its small buffer, and when that buffer was full, new readings overwrote old ones. A slam is exactly when there is the most to say, so it was exactly when the loop waited longest.</p>
+
+<p>The firmware change does two things: nothing on the main loop waits for the radio any more, and outgoing messages go into an outbox of 64 instead. Before it went anywhere near a sensor, we replayed that evening's radio traffic through both the old and the new way of sending. <span class="status s-review">Built, in review</span></p>
+
+<p>It will not reach your sensor by surprise, either. A new sensor version first runs on one of our own sensors with a person watching it start, and only then goes onto our server, from where the app offers it. The battery update that went out on 1 October travelled exactly that way.</p>
+
+<h2>What that evening <em>changed</em></h2>
+
+<ol class="lessons">
+  <li><b>A count you cannot trust is worse than no count.</b> The goal is not more numbers; it is never showing you a rep that did not happen, and never losing one that did, even when the sensor moves around a busy gym.</li>
+  <li><b>Read the data before trusting the theory.</b> The arc of the leg extension was a good story and the wrong one. A recording on the phone settled it in an evening.</li>
+  <li><b>Fix the symptom where the lifter is, and the cause where it lives.</b> The app stopped refusing that night; the firmware fix takes longer and gets a proper review.</li>
+  <li><b>Say what is done and what is not.</b> Below is exactly where each piece stands today.</li>
+</ol>
+
+<div class="state" aria-label="Where each piece stands">
+  <div><span class="status s-shipped">Shipped</span><p>Setup lifts measured between the stack's resting moments, so a slamming leg extension can be set up.</p></div>
+  <div><span class="status s-review">In review</span><p>Firmware that never makes the motion sensor wait for the radio, plus the 64-message outbox.</p></div>
+  <div><span class="status s-review">In review</span><p>Rules against ghost reps for the barbell counter, the one that works without a setup lift.</p></div>
+  <div><span class="status s-open">Open</span><p>Proving on real gym sessions that sets which lost their place on 30 September no longer do.</p></div>
+</div>
+
+<p>Most of building this product looks like that evening: a lifter does something perfectly ordinary, like letting a stack drop a little hard on the last rep, and the system has to be ready for it. Every one of those moments we catch makes the next set one less thing you have to think about.</p>
+
+</article>
+
+<footer>
+  <p>Written from the project's own records: the app's diagnostic log and recordings of 30 September, the firmware decision log (D-153) and the pull requests that carried each fix. Numbers are measured unless the text says otherwise.</p>
+  <p><a href="/">Back to Machine links</a></p>
+</footer>
+</main>
+</body>
+</html>
