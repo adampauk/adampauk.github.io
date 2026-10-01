@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Content plan</title>
+<meta name="description" content="The workout-tracker team's content operating system: who we make content for, where, when, and the next four weeks, piece by piece.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#000;--lift:#0c0c0c;--lift2:#141414;
+  --ink:#f3f0e9;--text2:#9b978f;--text3:#6c6862;--hair:rgba(243,240,233,.12);
+  --ig:#ffc24a;--li:#6fe8d6;--blog:#b4ee7a;--story:#f3dfc1;--short:#ff8a7a;
+  --serif:"Instrument Serif",ui-serif,Georgia,serif;
+  --sans:"Instrument Sans",-apple-system,system-ui,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.55 var(--sans);overflow-x:hidden}
+a{color:var(--ig)}
+:focus-visible{outline:2px solid var(--ig);outline-offset:3px;border-radius:6px}
+.page{max-width:76rem;margin:0 auto;padding:0 16px}
+.site{display:flex;justify-content:space-between;gap:1rem;padding:18px 0;font-size:13px;color:var(--text2)}
+.site a{color:var(--text2);text-decoration:none}.site a:hover{color:var(--ink)}
+
+header.top{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:end;padding:3vh 0 2rem;position:relative}
+header.top::before{content:"";position:absolute;inset:-30% 0 auto 20%;height:120%;z-index:-1;background:radial-gradient(45% 50% at 50% 40%,rgba(240,154,28,.16),transparent 70%)}
+@media (max-width:860px){header.top{grid-template-columns:1fr}}
+.kicker{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ig)}
+h1{font:400 clamp(2.8rem,8vw,5.4rem)/.95 var(--serif);margin:.3em 0 .35em}
+h1 em{color:var(--ig);text-shadow:0 0 26px rgba(240,154,28,.5)}
+.dek{color:#d6d2c9;font-size:1.08rem;max-width:34rem;margin:0}
+
+/* next up: the reason to open this page */
+.next{border:1px solid rgba(255,194,74,.35);border-radius:22px;padding:18px 18px 16px;background:linear-gradient(160deg,rgba(255,194,74,.10),rgba(255,194,74,.02) 60%);box-shadow:0 0 50px rgba(240,154,28,.12)}
+.next .lab{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ig)}
+.next h2{font:400 1.75rem/1.1 var(--serif);margin:.35rem 0 .5rem}
+.next .meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13.5px;color:var(--text2)}
+.next .when{color:var(--ink);font-weight:600}
+.next .asset{margin-top:10px;font-size:14px;color:#d6d2c9}
+.next .after{margin-top:10px;font-size:13px;color:var(--text2)}
+
+section{padding:2.6rem 0 0}
+h3.sec{font:400 clamp(1.8rem,4vw,2.4rem)/1.05 var(--serif);margin:0 0 .3rem}
+.secdek{color:var(--text2);margin:0 0 1.3rem;max-width:44rem}
+
+/* strategy cards */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.grid{grid-template-columns:1fr}}
+.card{background:var(--lift);border:1px solid var(--hair);border-radius:18px;padding:16px 16px 14px}
+.card h4{margin:0 0 .45rem;font:600 12.5px var(--sans);letter-spacing:.11em;text-transform:uppercase;color:var(--text2)}
+.card p{margin:0 0 .6em;font-size:15px}.card p:last-child{margin:0}
+.card ul{margin:.2rem 0 0;padding-left:1.1rem;font-size:14.5px}.card li{margin:.2rem 0}
+.big{font:400 1.45rem/1.15 var(--serif);color:var(--ink)}
+.no{color:var(--text3);text-decoration:line-through;text-decoration-color:rgba(255,255,255,.25)}
+
+/* platforms */
+.plats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media (max-width:1000px){.plats{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.plats{grid-template-columns:1fr}}
+.plat{border-radius:18px;padding:14px;background:var(--lift);border:1px solid var(--hair);position:relative;overflow:hidden}
+.plat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c);box-shadow:0 0 14px var(--c)}
+.plat b{display:block;font-size:15px}
+.plat .role{font-size:13px;color:var(--c);margin:.15rem 0 .45rem;font-weight:600}
+.plat p{margin:0;font-size:13.5px;color:#cfcac0}
+.plat .slot{margin-top:.55rem;font:12.5px var(--mono);color:var(--text2)}
+
+/* pillars */
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media (max-width:900px){.pillars{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.pillars{grid-template-columns:1fr}}
+.pillar{border-top:1px solid var(--hair);padding:12px 2px 0}
+.pillar .n{font:400 1.5rem/1 var(--serif);color:var(--ig)}
+.pillar b{display:block;margin:.3rem 0 .25rem}
+.pillar p{margin:0;font-size:14px;color:#cfcac0}
+
+/* calendar */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 1rem}
+.chip{font:600 13px var(--sans);color:var(--ink);background:var(--lift2);border:1px solid var(--hair);border-radius:999px;padding:.45rem .85rem;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:#000;border-color:var(--ink)}
+.chip i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--c);margin-right:.45rem;box-shadow:0 0 8px var(--c)}
+.week{margin:0 0 1.6rem}
+.weekhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1rem;border-bottom:1px solid var(--hair);padding-bottom:.6rem;margin-bottom:.8rem}
+.weekhead .wn{font:600 12.5px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--text2)}
+.weekhead .theme{font:400 1.55rem/1.1 var(--serif)}
+.weekhead .why{font-size:14px;color:var(--text2);flex-basis:100%}
+.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+@media (max-width:1180px){.days{grid-template-columns:1fr}}
+.day{min-height:4rem}
+.day .dl{font:600 12px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin:0 0 6px}
+.day.today .dl{color:var(--ig)}
+@media (max-width:1180px){.day:empty,.day.none{display:none}.day{min-height:0}}
+.item{overflow-wrap:anywhere;background:var(--lift);border:1px solid var(--hair);border-radius:16px;margin:0 0 8px;overflow:hidden;position:relative}
+.item::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--c);box-shadow:0 0 12px var(--c)}
+.item.past{opacity:.45}
+.item.isnext{border-color:rgba(255,194,74,.6);box-shadow:0 0 0 1px rgba(255,194,74,.3),0 0 30px rgba(240,154,28,.18)}
+.item summary{list-style:none;cursor:pointer;padding:12px 12px 10px}
+.item summary::-webkit-details-marker{display:none}
+.tag{display:inline-flex;align-items:center;gap:.35rem;font:600 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--c)}
+.tag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--c)}
+.item .fmt{font-size:12px;color:var(--text2);margin-left:.3rem;text-transform:none;letter-spacing:0;font-weight:500}
+.item .t{display:block;font-weight:600;font-size:14.5px;line-height:1.3;margin:.35rem 0 .3rem}
+.item .tm{font:12px var(--mono);color:var(--text2)}
+.item .body{padding:0 12px 12px;font-size:13.5px;color:#d6d2c9;border-top:1px solid var(--hair)}
+.item .body dl{margin:.6rem 0 0;display:grid;grid-template-columns:5.6rem minmax(0,1fr);gap:.35rem .6rem}
+@media (min-width:1181px){.item .body dl{grid-template-columns:1fr;gap:.1rem}.item .body dd{margin-bottom:.4rem}}
+.item .body dt{color:var(--text3);font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding-top:2px}
+.item .body dd{margin:0}
+.hook{font:italic 400 1.05rem/1.3 var(--serif);color:var(--ink);margin:.6rem 0 0}
+.st{display:inline-block;font:600 10.5px var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:.15rem .45rem;border-radius:6px;margin-right:.3rem}
+.st-have{background:rgba(180,238,122,.12);color:var(--blog)}
+.st-make{background:rgba(255,194,74,.12);color:var(--ig)}
+.st-film{background:rgba(255,138,122,.12);color:var(--short)}
+.st-dep{background:rgba(255,255,255,.07);color:var(--text2)}
+
+/* prep + rituals */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:800px){.two{grid-template-columns:1fr}}
+ol.clean{margin:0;padding-left:1.2rem}ol.clean li{margin:.35rem 0;font-size:15px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:14px}
+.flow span{background:var(--lift2);border:1px solid var(--hair);border-radius:999px;padding:.4rem .8rem}
+.flow b{color:var(--text3);font-weight:400}
+.assets{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media (max-width:900px){.assets{grid-template-columns:repeat(2,1fr)}}
+.asset figure{margin:0}
+.asset img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:14px;border:1px solid var(--hair);display:block;background:#0b0b0b}
+.asset img.line{background:#fff;filter:invert(1) hue-rotate(180deg) brightness(.9);object-fit:contain}
+.asset figcaption{font-size:13px;color:var(--text2);margin-top:.45rem;line-height:1.4}
+.asset figcaption b{color:var(--ink);font-weight:600}
+table.m{width:100%;border-collapse:collapse;font-size:14.5px}
+table.m th,table.m td{text-align:left;padding:.6rem .5rem;border-bottom:1px solid var(--hair);vertical-align:top}
+table.m th{font:600 12px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--text2)}
+.wrapt{overflow-x:auto}
+footer{border-top:1px solid var(--hair);margin:3rem 0 0;padding:1.4rem 0 3rem;font-size:13.5px;color:var(--text2)}
+footer ol{padding-left:1.2rem}
+</style>
+</head>
+<body>
+<div class="page">
+<nav class="site" aria-label="Site"><a href="/">Machine links</a><span><a href="/article/">Field notes</a> &nbsp; Content plan, internal</span></nav>
+
+<header class="top">
+  <div>
+    <div class="kicker">Content operating system, October 2026</div>
+    <h1>Show the <em>work.</em></h1>
+    <p class="dek">We have no product to sell lifters yet, but we have something better for this stage: a real build, with real numbers, failures and decisions. For the next four weeks we publish that, for the people who lift, in the time a founding team actually has.</p>
+  </div>
+  <aside class="next" id="next" aria-live="polite">
+    <div class="lab">Next to publish</div>
+    <h2 id="next-title">Loading the plan</h2>
+    <div class="meta" id="next-meta"></div>
+    <div class="asset" id="next-asset"></div>
+    <div class="after" id="next-after"></div>
+  </aside>
+</header>
+
+<section aria-labelledby="s-strategy">
+  <h3 class="sec" id="s-strategy">The strategy, in six decisions</h3>
+  <p class="secdek">Everything in the calendar follows from these. If one of them changes, the calendar changes with it.</p>
+  <div class="grid">
+    <div class="card"><h4>Who it is for</h4>
+      <p class="big">People who train on machines and want to know they are progressing, without typing it all in.</p>
+      <p>The lifter who logs in the Notes app, forgets half the sets, and never looks at it again. Gym owners are a second audience, reached only through Justus's posts (two in four weeks), because the gym is how the sensor gets to the lifter.</p></div>
+    <div class="card"><h4>What content must do now</h4>
+      <p class="big">Earn attention and learn from it. Not sell.</p>
+      <ul><li>Build a small, real following of lifters who care about tracking.</li><li>Learn how they track today and what they want after a set (polls, questions, comments).</li><li>Make the team credible to the gyms and partners we will need.</li></ul></div>
+    <div class="card"><h4>The angle we own</h4>
+      <p class="big">The honest build log of a tracker that counts for you.</p>
+      <p>Most fitness tech shows finished promises. We show the sensor, the maths, what broke and what we changed, every claim labelled as shipped, in review or still an idea. That honesty is the brand.</p></div>
+    <div class="card"><h4>Founder-led vs product-led</h4>
+      <p><b>Founder-led:</b> LinkedIn and the field notes. Adam writes about decisions and failures, first person. Justus covers the gym side.</p>
+      <p><b>Product-led:</b> Instagram and the short-video repurposes. The sensor, the screen, the number at the end of a set. Faces optional, voice never salesy.</p></div>
+    <div class="card"><h4>Cadence and time</h4>
+      <p class="big">2 originals a week, 4 repurposes. About 4 to 5 hours.</p>
+      <ul><li>Instagram: 1 Reel (Tue), 1 carousel (Thu), Stories (Sat).</li><li>LinkedIn: Adam weekly (Wed), Justus every other Tue.</li><li>TikTok and YouTube Shorts: the week's Reel, re-cut (Sun).</li><li>Field notes: one long piece every two weeks.</li></ul></div>
+    <div class="card"><h4>What we deliberately skip</h4>
+      <ul><li><span class="no">X / Twitter</span> lifters are not there; time better spent on Reels.</li><li><span class="no">A newsletter</span> until there is a list worth writing to; collect interest first.</li><li><span class="no">Reddit posting</span> self-promotion is punished; we read r/weightroom and r/homegym for language and questions only.</li><li><span class="no">Paid ads</span> nothing to buy yet.</li></ul></div>
+  </div>
+</section>
+
+<section aria-labelledby="s-platforms">
+  <h3 class="sec" id="s-platforms">Platforms and their jobs</h3>
+  <p class="secdek">Each platform gets one job and its own native format. Same source material, different cut, never the same post pasted five times.</p>
+  <div class="plats">
+    <div class="plat" style="--c:var(--ig)"><b>Instagram</b><div class="role">Home base for lifters</div><p>Reels for reach, carousels for saves, Stories for asking questions. Where gym people already follow brands and coaches.</p><div class="slot">Reel Tue 18:30 · Carousel Thu 12:00</div></div>
+    <div class="plat" style="--c:var(--li)"><b>LinkedIn</b><div class="role">Founder credibility</div><p>Decisions, failures and numbers in first person. Reaches gym operators, engineers, partners and future hires.</p><div class="slot">Adam Wed 16:00 · Justus Tue 09:00</div></div>
+    <div class="plat" style="--c:var(--blog)"><b>Field notes</b><div class="role">The source of truth</div><p>Long pieces on this site (/article). Every big post points here; every short post is cut from here.</p><div class="slot">Every other Tue 07:00</div></div>
+    <div class="plat" style="--c:var(--short)"><b>TikTok + Shorts</b><div class="role">Free extra reach</div><p>The week's Reel, re-cut with a new first line and native captions. No extra filming.</p><div class="slot">Sun 09:00</div></div>
+    <div class="plat" style="--c:var(--story)"><b>Stories</b><div class="role">Research tool</div><p>Polls, question boxes and rough behind-the-scenes. The answers feed the next week's posts.</p><div class="slot">Sat 10:00</div></div>
+  </div>
+  <p class="secdek" style="margin-top:1rem">Times are Europe/Prague. Summer time ends Sunday 25 October: CEST (UTC+2) before, CET (UTC+1) after. Slots follow the 2026 studies from Sprout Social and Buffer (Instagram strongest Tue–Thu midday to evening, LinkedIn Tue–Thu with Wednesday 16:00 the top slot in Buffer's data, TikTok's single best slot Sunday 09:00) and our own guess that lifters scroll before evening training. Treat them as a starting point: after week 2, move any slot that clearly underperforms.</p>
+</section>
+
+<section aria-labelledby="s-pillars">
+  <h3 class="sec" id="s-pillars">Four pillars we post from</h3>
+  <p class="secdek">Every piece belongs to one. If an idea fits none, it is not for this stage.</p>
+  <div class="pillars">
+    <div class="pillar"><div class="n">Lift</div><b>Never type a set again</b><p>The lifter's experience: the count appears, the rest clock runs, the score rises. Screens and real sets.</p></div>
+    <div class="pillar"><div class="n">Inside</div><b>What the sensor sees</b><p>The maths of one rep, made visual: readings, gravity, speed, distance. Our most distinctive material.</p></div>
+    <div class="pillar"><div class="n">Build</div><b>What broke, what we changed</b><p>Field notes from the build: the leg extension that said no, the battery diary, ghost reps. Status always labelled.</p></div>
+    <div class="pillar"><div class="n">Ask</div><b>Tell us how you train</b><p>Questions to lifters. Their answers decide what we build next, and we say so in public.</p></div>
+  </div>
+</section>
+
+<section aria-labelledby="s-cal">
+  <h3 class="sec" id="s-cal">The next four weeks</h3>
+  <p class="secdek">Tap a piece for its hook, purpose, asset, call to action and what it turns into. Asset labels: <span class="st st-have">have it</span> already exists, <span class="st st-make">make</span> design from existing material, <span class="st st-film">film</span> needs new footage, <span class="st st-dep">depends</span> waits on something else.</p>
+  <div class="filters" role="group" aria-label="Show platforms">
+    <button class="chip" aria-pressed="true" data-f="all">All</button>
+    <button class="chip" aria-pressed="false" data-f="ig" style="--c:var(--ig)"><i></i>Instagram</button>
+    <button class="chip" aria-pressed="false" data-f="li" style="--c:var(--li)"><i></i>LinkedIn</button>
+    <button class="chip" aria-pressed="false" data-f="blog" style="--c:var(--blog)"><i></i>Field notes</button>
+    <button class="chip" aria-pressed="false" data-f="short" style="--c:var(--short)"><i></i>TikTok + Shorts</button>
+    <button class="chip" aria-pressed="false" data-f="story" style="--c:var(--story)"><i></i>Stories</button>
+  </div>
+  <div id="cal"></div>
+  <noscript><p>The calendar needs JavaScript to draw.</p></noscript>
+</section>
+
+<section aria-labelledby="s-prep">
+  <h3 class="sec" id="s-prep">Before Monday 5 October</h3>
+  <div class="two">
+    <div class="card"><h4>Set up once (about 2 hours)</h4>
+      <ol class="clean">
+        <li>Decide the public name and handle for Instagram, TikTok and YouTube. We don't have one yet; nothing below works without it.</li>
+        <li>Instagram bio: one line ("A sensor that counts your reps, built in public") and the field notes link.</li>
+        <li>Cut the first Reel from the Inside one rep film (A) to 9:16 with captions.</li>
+        <li>Pick a free, privacy-friendly page counter for this site, so field-note reads are measurable.</li>
+      </ol></div>
+    <div class="card"><h4>Every week (about 4 to 5 hours)</h4>
+      <ol class="clean">
+        <li><b>Mon, 20 min:</b> look at last week's numbers below; confirm this week's pieces.</li>
+        <li><b>Fri, 45 min at the test gym:</b> film everything the next week needs, in one go.</li>
+        <li><b>Fri–Sun, 2 h:</b> edit the Reel and carousel; write Adam's LinkedIn post.</li>
+        <li><b>Sun, 30 min:</b> re-cut the Reel for TikTok and Shorts; schedule the week.</li>
+        <li><b>Daily, 10 min:</b> answer every comment and DM; note good questions in the idea list.</li>
+      </ol></div>
+  </div>
+</section>
+
+<section aria-labelledby="s-flow">
+  <h3 class="sec" id="s-flow">One piece of work, five posts</h3>
+  <p class="secdek">The flow every two weeks. Each step is a new cut for its platform, not a copy.</p>
+  <div class="flow"><span>Field note (the whole story)</span><b>→</b><span>LinkedIn: Adam's lesson, first person</span><b>→</b><span>Reel: the one visual moment</span><b>→</b><span>Carousel: the explanation, step by step</span><b>→</b><span>Stories: a question about it</span><b>→</b><span>TikTok + Shorts: the Reel with a new first line</span></div>
+</section>
+
+<section aria-labelledby="s-assets">
+  <h3 class="sec" id="s-assets">What we already have</h3>
+  <p class="secdek">Enough for the whole first month. The videos are in Desktop / Workout tracker; the drawings are in the repository's renders.</p>
+  <div class="assets">
+    <div class="asset"><figure><img src="../article/media/inside-one-rep-poster.jpg" alt="A frame from the Inside one rep film: the maths of one rep." loading="lazy"><figcaption><b>Inside one rep, films A and B.</b> 25 s each, 4K. Weeks 1 and 4.</figcaption></figure></div>
+    <div class="asset"><figure><img src="img/live-screen.jpg" alt="The app's live screen during a leg extension set." loading="lazy"><figcaption><b>Live screen, leg extension set 2.</b> Dark and light, iPhone frame. Week 2.</figcaption></figure></div>
+    <div class="asset"><figure><img class="line" src="../article/img/sensor-on-machine.png" alt="CAD drawing of the sensor pod on a bar." loading="lazy"><figcaption><b>CAD renders of the sensor.</b> Plus the turntable film "Sensor render, no labels". Week 3.</figcaption></figure></div>
+    <div class="asset"><figure><img class="line" src="../article/img/sensor-pod.png" alt="CAD drawing of the sensor pod." loading="lazy"><figcaption><b>Field note: Ten reps, one count.</b> Published at /article. The anchor for weeks 1 and 2.</figcaption></figure></div>
+  </div>
+</section>
+
+<section aria-labelledby="s-metrics">
+  <h3 class="sec" id="s-metrics">What we measure, and what we ignore</h3>
+  <p class="secdek">At this stage, reach is noise. We look for signs that the right people care and talk back. Targets are first guesses; reset them after week 2.</p>
+  <div class="wrapt"><table class="m">
+    <thead><tr><th>Signal</th><th>Why it matters now</th><th>Starting target, month 1</th></tr></thead>
+    <tbody>
+      <tr><td>Saves on carousels</td><td>People keep what explains something; the best proxy for "useful".</td><td>Rising week on week</td></tr>
+      <tr><td>Shares of Reels</td><td>Lifters sending us to their training partner is reach that means something.</td><td>Rising week on week</td></tr>
+      <tr><td>Real answers in comments, polls and DMs</td><td>The research we can't get any other way. Count answers, not likes.</td><td>About 50 poll answers, 10 useful comments a week</td></tr>
+      <tr><td>Lifters who ask to try it</td><td>The first sign of pull. Keep a list; they become testers at the test gym.</td><td>5 to 10 names</td></tr>
+      <tr><td>Conversations with gyms or partners from LinkedIn</td><td>The secondary audience, for Justus.</td><td>2 to 3 real conversations</td></tr>
+      <tr><td>Field-note reads</td><td>Whether the long pieces are worth their cost. Needs the page counter.</td><td>Measured from week 2</td></tr>
+    </tbody></table></div>
+  <p class="secdek" style="margin-top:.8rem">Ignored for now: follower count on its own, impressions, likes, and anything from paid boosts.</p>
+</section>
+
+<section aria-labelledby="s-rules">
+  <h3 class="sec" id="s-rules">House rules</h3>
+  <div class="grid">
+    <div class="card"><h4>Say what is true</h4><p>Every claim carries its status: shipped, in review, or an idea. No battery life, no accuracy percentages, no dates we have not hit.</p></div>
+    <div class="card"><h4>Protect people and places</h4><p>Never name our test gym. Never show a member's face or screen without written consent. Film our own team.</p></div>
+    <div class="card"><h4>Don't give away what is not decided</h4><p>New mechanisms we may want to protect (for example the collar idea) stay off public channels until we decide how to protect them.</p></div>
+  </div>
+</section>
+
+<footer>
+  <p>Built from the project's own records (decision log, recordings, pull requests and the published field note) on 1 October 2026. Posting-time evidence:</p>
+  <ol>
+    <li><a href="https://sproutsocial.com/insights/best-times-to-post-on-linkedin/">Sprout Social, best times to post on LinkedIn in 2026</a></li>
+    <li><a href="https://buffer.com/resources/best-time-to-post-social-media/">Buffer, best time to post on social media in 2026</a></li>
+    <li><a href="https://kompozy.io/research/best-time-to-post-index">Kompozy, 2026 best-time-to-post index</a></li>
+  </ol>
+</footer>
+</div>
+
+<script>
+// THE PLAN: one row per piece. Times are Europe/Prague local; tz says which offset applies on that date.
+const P = {ig:["Instagram","var(--ig)"],li:["LinkedIn","var(--li)"],blog:["Field notes","var(--blog)"],short:["TikTok + Shorts","var(--short)"],story:["Stories","var(--story)"]};
+const WEEKS = [
+ {n:1,start:"2026-10-05",theme:"Ten reps, one count",why:"Launch on our strongest real story: the published field note and the Inside one rep film."},
+ {n:2,start:"2026-10-12",theme:"Teach a machine once",why:"The setup lift and the live screen: what using it actually feels like."},
+ {n:3,start:"2026-10-19",theme:"Build in the open: the sensor",why:"The hardware and its hardest problems, battery and ghost reps, with status labels."},
+ {n:4,start:"2026-10-26",theme:"The workout, not the app",why:"The new workout mode and the score at the end. Needs the workout mode on TestFlight first."}
+];
+const ITEMS = [
+ // week 1
+ {d:"2026-10-06",t:"18:30",p:"ig",f:"Reel, 20 s",pil:"Inside",title:"Ten reps. One count.",hook:"The sensor counted 10. The maths said 1.",purpose:"Reach and curiosity; introduce the whole idea in one image.",aud:"Lifters who track, or wish they did",asset:["have","Inside one rep film A, re-cut to 9:16 with captions"],cta:"Read what happened: link in bio",rep:"Sunday's TikTok and Shorts cut; Thursday's carousel uses its frames."},
+ {d:"2026-10-07",t:"16:00",p:"li",f:"Text post, 1 image",pil:"Build",title:"Adam: we almost shipped a tracker that would say you did 1 rep",hook:"A tracker that is right nine times and silently wrong the tenth is worse than paper.",purpose:"Founder credibility; send readers to the field note.",aud:"Gym operators, engineers, early supporters",asset:["have","The article's hero drawing (ten reps, one count)"],cta:"Field note link in the first comment",rep:"Comes from the field note; its lesson list becomes a later carousel."},
+ {d:"2026-10-08",t:"12:00",p:"ig",f:"Carousel, 7 slides",pil:"Inside",title:"What happens inside one rep",hook:"One rep is hundreds of numbers. Here is how they become 1.",purpose:"Saves; make the technology understandable to a lifter.",aud:"Curious lifters, data people",asset:["make","Frames from film A, one step per slide: readings, gravity removed, speed, distance, the count"],cta:"Save it for later",rep:"Becomes a LinkedIn document post in week 2 if it saves well."},
+ {d:"2026-10-10",t:"10:00",p:"story",f:"Stories, poll + slider",pil:"Ask",title:"How do you track your sets today?",hook:"Notes app, an app, paper, or nothing?",purpose:"Research: the language and habits of our lifters.",aud:"Followers so far",asset:["make","Two story frames in the app's colours"],cta:"Vote",rep:"Results open Thursday's carousel in week 2."},
+ {d:"2026-10-11",t:"09:00",p:"short",f:"Vertical video, 20 s",pil:"Inside",title:"What a gym sensor sees in one rep",hook:"POV: your rep, as the sensor sees it.",purpose:"Free extra reach from Tuesday's work.",aud:"Lifters on TikTok and YouTube",asset:["make","Tuesday's Reel with a new first line and native captions"],cta:"Follow the build",rep:"Re-cut of Tuesday's Reel."},
+ // week 2
+ {d:"2026-10-13",t:"09:00",p:"li",f:"Text post",pil:"Build",title:"Justus: a gym provides nothing, not even a socket",hook:"We asked ourselves what a gym should have to give us. The answer is nothing.",purpose:"The gym-owner exception: why our sensors run on battery and need no installation.",aud:"Gym owners and operators",asset:["have","No visual needed; optional sensor render"],cta:"Talk to Justus if your gym wants to be early",rep:"Feeds Justus's outreach; not cut for Instagram."},
+ {d:"2026-10-13",t:"18:30",p:"ig",f:"Reel, 15 s",pil:"Lift",title:"10 reps. Zero taps.",hook:"Your phone stays in your pocket. The set still gets saved.",purpose:"Show the experience, not the tech.",aud:"Lifters",asset:["have","Live screen video, leg extension set 2, plus the chest press rehearsal clip"],cta:"Follow the build",rep:"Sunday's TikTok and Shorts; the screen also illustrates week 4's field note."},
+ {d:"2026-10-14",t:"16:00",p:"li",f:"Document post, 6 pages",pil:"Inside",title:"Adam: why every machine gets taught once",hook:"Every machine moves differently. So we ask for ten slow reps, once.",purpose:"Explain the setup lift decision and what it buys the lifter.",aud:"Engineers, gym operators",asset:["make","Re-use the week 1 carousel style; new pages on the setup lift"],cta:"Ask: what would you measure next?",rep:"Mirrors Thursday's carousel."},
+ {d:"2026-10-15",t:"12:00",p:"ig",f:"Carousel, 6 slides",pil:"Lift",title:"Teach a machine once: the setup lift",hook:"Most of you track in your notes app (poll result). Here is the alternative.",purpose:"Saves; connect the research to the product.",aud:"Lifters",asset:["make","Poll result slide plus 5 explainer slides"],cta:"Save it",rep:"Built on Saturday's poll; same pages as Wednesday's document."},
+ {d:"2026-10-17",t:"10:00",p:"story",f:"Stories, question box + BTS",pil:"Ask",title:"What should it tell you after a set?",hook:"You just finished a set. What do you want to see?",purpose:"Research for the score and summary posts in week 4.",aud:"Followers",asset:["film","15 s of a setup lift at the test gym (Friday filming)"],cta:"Answer in the box",rep:"Answers quoted, anonymously, in week 4's score carousel."},
+ {d:"2026-10-18",t:"09:00",p:"short",f:"Vertical video, 15 s",pil:"Lift",title:"Your notes app can retire",hook:"Stop typing sets between sets.",purpose:"Extra reach.",aud:"Lifters on TikTok and YouTube",asset:["make","Re-cut of Tuesday's Reel"],cta:"Follow the build",rep:"Re-cut of Tuesday's Reel."},
+ // week 3
+ {d:"2026-10-20",t:"18:30",p:"ig",f:"Reel, 15 s",pil:"Build",title:"A gym sensor the size of a matchbox",hook:"No cable. No socket. One strap.",purpose:"Make the hardware tangible and desirable.",aud:"Lifters, gadget people",asset:["have","Sensor render film (no labels) and the CAD drawings"],cta:"Ask us anything about it",rep:"Sunday's TikTok and Shorts; Saturday's BTS shows the real one."},
+ {d:"2026-10-21",t:"16:00",p:"li",f:"Text post, 1 screenshot",pil:"Build",title:"Adam: where does a battery go? We built a diary to find out",hook:"Our sensor kept running out. Instead of guessing, we made it write down every time it woke up.",purpose:"Show engineering judgement; no battery-life numbers.",aud:"Engineers, partners",asset:["film","Screenshot of the Settings battery gauge and wake diary (app 0.1.139)"],cta:"Have you solved this on your own hardware? Tell me",rep:"Seeds a later field note once the measurements are in."},
+ {d:"2026-10-22",t:"12:00",p:"ig",f:"Carousel, 6 slides",pil:"Build",title:"Ghost reps: why a bump must never count",hook:"A sensor carried across the gym should not invent a set.",purpose:"Trust: show we care about the count being right. Status: in review.",aud:"Lifters",asset:["make","Simple diagrams; one slide clearly labelled 'in review'"],cta:"Save it",rep:"Can become a field note when the ghost-rep work ships."},
+ {d:"2026-10-24",t:"10:00",p:"story",f:"Stories, BTS",pil:"Build",title:"A new sensor's first minute",hook:"Every new sensor gets turned in every direction for one minute. Here's why.",purpose:"Behind the scenes; real hands, real board.",aud:"Followers",asset:["film","Phone video of the next board's calibration"],cta:"React with a question",rep:"Clip can open week 3's Shorts."},
+ {d:"2026-10-25",t:"09:00",p:"short",tz:"CET",f:"Vertical video, 15 s",pil:"Build",title:"What's inside this black box?",hook:"It counts your reps. Here's what's inside.",purpose:"Extra reach.",aud:"Lifters on TikTok and YouTube",asset:["make","Re-cut of Tuesday's Reel"],cta:"Follow the build",rep:"Re-cut of Tuesday's Reel. Summer time ends today: 09:00 CET."},
+ // week 4
+ {d:"2026-10-27",t:"07:00",p:"blog",tz:"CET",f:"Field note, long form",pil:"Build",title:"Am I training or not? Why we rebuilt the app around the workout",hook:"We deleted our home tab.",purpose:"Second anchor piece: a real product decision, from the lifter's point of view.",aud:"Everyone who follows the build",asset:["dep","Needs the workout mode on TestFlight and real screenshots from a session"],cta:"Tell us what you'd change",rep:"Source for Wednesday's LinkedIn, Thursday's carousel and the Reel."},
+ {d:"2026-10-27",t:"09:00",p:"li",tz:"CET",f:"Text post",pil:"Lift",title:"Justus: why our first users are the people under the bar",hook:"Not dashboards first. Lifters first.",purpose:"Positioning for gyms: members get the value, gyms get happier members.",aud:"Gym owners and operators",asset:["have","No visual needed"],cta:"Message Justus",rep:"Links the new field note."},
+ {d:"2026-10-27",t:"18:30",p:"ig",tz:"CET",f:"Reel, 20 s",pil:"Lift",title:"Start. Lift. End workout. Your score.",hook:"The best part of a workout is the number at the end.",purpose:"Show the new workout mode and the rising score.",aud:"Lifters",asset:["dep","Screen recording of a real workout on the new version, with the score rising"],cta:"Follow to see it in your gym",rep:"Sunday's TikTok and Shorts."},
+ {d:"2026-10-28",t:"16:00",p:"li",tz:"CET",f:"Text post, 2 screenshots",pil:"Build",title:"Adam: we deleted our home tab",hook:"Testers couldn't tell when they were training. So the tab went.",purpose:"Product judgement in public.",aud:"Builders, partners",asset:["dep","Before and after screenshots"],cta:"Field note link in the first comment",rep:"Cut from Tuesday's field note."},
+ {d:"2026-10-29",t:"12:00",p:"ig",tz:"CET",f:"Carousel, 6 slides",pil:"Lift",title:"Your Workout Score: what goes into it",hook:"Sets in the zone, body covered, full range. That's the score.",purpose:"Saves; explain the score with your answers from week 2.",aud:"Lifters",asset:["make","Score screenshots plus answers from the week 2 question box"],cta:"Save it",rep:"Closes the loop on week 2's question."},
+ {d:"2026-10-31",t:"10:00",p:"story",tz:"CET",f:"Stories, recap + question",pil:"Ask",title:"Four weeks of building, what next?",hook:"Here is what changed this month because of you.",purpose:"Show we listen; pick the next month's topics.",aud:"Followers",asset:["make","Recap frames from the month"],cta:"Vote on what we fix next",rep:"Plans the November calendar."},
+ {d:"2026-11-01",t:"09:00",p:"short",tz:"CET",f:"Vertical video, 20 s",pil:"Lift",title:"The number at the end",hook:"Every workout ends with one number.",purpose:"Extra reach.",aud:"Lifters on TikTok and YouTube",asset:["dep","Re-cut of Tuesday's Reel"],cta:"Follow the build",rep:"Re-cut of Tuesday's Reel."}
+];
+const STL = {have:["st-have","have it"],make:["st-make","make"],film:["st-film","film"],dep:["st-dep","depends"]};
+const DAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+function tzOf(it){ return it.tz || "CEST"; }
+function whenOf(it){ const off = tzOf(it)==="CET" ? "+01:00" : "+02:00"; return new Date(it.d+"T"+it.t+":00"+off); }
+function fmtDay(d){ return new Date(d+"T12:00:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"}); }
+const now = new Date();
+const upcoming = ITEMS.filter(i=>whenOf(i)>now).sort((a,b)=>whenOf(a)-whenOf(b));
+const next = upcoming[0];
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function card(it){
+  const [pn,pc] = P[it.p]; const [sc,sl] = STL[it.asset[0]];
+  const past = whenOf(it) < now ? " past" : ""; const isn = next && it===next ? " isnext" : "";
+  return `<details class="item${past}${isn}" data-p="${it.p}" style="--c:${pc}">
+    <summary><span class="tag">${pn}<span class="fmt">${esc(it.f)}</span></span>
+    <span class="t">${esc(it.title)}</span><span class="tm">${it.t} ${tzOf(it)}</span></summary>
+    <div class="body"><p class="hook">“${esc(it.hook)}”</p><dl>
+      <dt>Purpose</dt><dd>${esc(it.purpose)}</dd>
+      <dt>For</dt><dd>${esc(it.aud)}</dd>
+      <dt>Pillar</dt><dd>${esc(it.pil)}</dd>
+      <dt>Asset</dt><dd><span class="st ${sc}">${sl}</span>${esc(it.asset[1])}</dd>
+      <dt>CTA</dt><dd>${esc(it.cta)}</dd>
+      <dt>Leads to</dt><dd>${esc(it.rep)}</dd></dl></div></details>`;
+}
+function render(filter){
+  const todayKey = new Date().toISOString().slice(0,10);
+  document.getElementById("cal").innerHTML = WEEKS.map(w=>{
+    const cols = DAYS.map((dn,k)=>{
+      const dt = new Date(w.start+"T12:00:00"); dt.setDate(dt.getDate()+k);
+      const key = dt.toISOString().slice(0,10);
+      const its = ITEMS.filter(i=>i.d===key && (filter==="all"||i.p===filter));
+      const label = dt.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});
+      return `<div class="day${key===todayKey?" today":""}${its.length?"":" none"}"><div class="dl">${label}</div>${its.map(card).join("")}</div>`;
+    }).join("");
+    return `<div class="week"><div class="weekhead"><span class="wn">Week ${w.n}</span><span class="theme">${esc(w.theme)}</span><span class="why">${esc(w.why)}</span></div><div class="days">${cols}</div></div>`;
+  }).join("");
+}
+render("all");
+document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed","false"));
+  b.setAttribute("aria-pressed","true"); render(b.dataset.f);
+}));
+// NEXT TO PUBLISH: the first piece still ahead of now, with what it needs.
+if(next){
+  const [pn,pc] = P[next.p]; const days = Math.ceil((whenOf(next)-now)/864e5);
+  document.getElementById("next").style.setProperty("--c",pc);
+  document.getElementById("next-title").textContent = next.title;
+  document.getElementById("next-meta").innerHTML = `<span class="when">${fmtDay(next.d)}, ${next.t} ${tzOf(next)}</span><span>${pn}, ${esc(next.f)}</span><span>${days<=1?"due within a day":"in "+days+" days"}</span>`;
+  document.getElementById("next-asset").innerHTML = `<span class="st ${STL[next.asset[0]][0]}">${STL[next.asset[0]][1]}</span>${esc(next.asset[1])}`;
+  const after = upcoming.slice(1,3).map(i=>`${fmtDay(i.d)}: ${esc(i.title)} (${P[i.p][0]})`).join("<br>");
+  document.getElementById("next-after").innerHTML = after ? "Then:<br>"+after : "";
+} else {
+  document.getElementById("next-title").textContent = "This plan has run out. Plan November.";
+}
+</script>
+</body>
+</html>
