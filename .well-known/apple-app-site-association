@@ -2,10 +2,22 @@
   "applinks": {
     "details": [
       {
-        "appIDs": ["M9MCSX3V5T.eu.fitpods.workouttracker"],
+        "appIDs": [
+          "M9MCSX3V5T.eu.fitpods.workouttracker"
+        ],
         "components": [
-          { "/": "/m/*", "comment": "a gym machine's sticker or QR code opens that machine in the app" },
-          { "/": "/m", "comment": "the same link with its details in the query" }
+          {
+            "/": "/m/*",
+            "comment": "a gym machine's sticker or QR code opens that machine in the app"
+          },
+          {
+            "/": "/m",
+            "comment": "the same link with its details in the query"
+          },
+          {
+            "/": "/staff",
+            "comment": "a team link that turns on staff mode in the app"
+          }
         ]
       }
     ]
