@@ -3,398 +3,414 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Every set, seen.</title>
-<meta name="description" content="A sensor for the strength machines a gym already owns. The 10-minute pitch.">
+<title>Our business plan, first test</title>
+<meta name="description" content="Minor Entrepreneurship: our business plan, first test. Ten minutes, six parts.">
 <!--
-  docs/pitch/index.html — the 10-minute pitch as one interactive page (GitHub Pages: adampauk.github.io/pitch).
-  → / space next · ← back · 1–7 a chapter · 0 the start · F full screen. On the opening: drag the sensor, space lifts it.
-  Each chapter has its own idea: the project (the floor that produced nothing lights up), the test matrix (a flip
-  board), the canvas (blocks lock in, threads show what feeds what), the Brand Key (a dial that opens), the 4Ps (one
-  drop splits in four), the scenarios (an orb on a tilted plane), the finances (gyms as stacked plates, a draining funnel).
-  Parts with a DRAFT badge wait for the team's text.
+  docs/pitch/index.html — the team's 10-minute business plan presentation (GitHub Pages: adampauk.github.io/pitch).
+  Twelve slides in the order of the team's run sheet (Praesentation_fuer_Adam_2026-10-06/00_RUN-SHEET.md), the content
+  from the team's files of 5–6 Oct. A clicker works: → / PageDown / space next, ← / PageUp back; 1–9, 0, - jump; F full screen.
+  Style: one colour (violet), one quiet light, one layer of glass, motion that settles without bouncing (the apple-design
+  skill). The guard list holds on every slide: no accuracy figure, nothing on how the sensor works, no battery life, no
+  "patent pending", no "no upfront costs", no savings / ROI / retention promise, no "the only", "the first" or "live";
+  prices are test prices; finance numbers are a planning case. Slides marked "numbers follow" wait for the team's model.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
   :root {
-    --night:#0C0820; --violet:#7A56FF; --lilac:#CDBDFF; --pearl:#F6F2FF; --rose:#F07AA8; --mint:#7FE3C4; --indigo:#3B2CC9;
-    --ink:#FFFFFF; --ink2:rgba(246,242,255,.76); --ink3:rgba(246,242,255,.5); --line:rgba(255,255,255,.14);
-    --ease:cubic-bezier(.2,.8,.2,1); --spring:cubic-bezier(.34,1.56,.64,1);
+    --bg:#0E0B1D; --v:#8F74FF; --v2:#CDC1FF; --v3:rgba(143,116,255,.16);
+    --ink:#FFFFFF; --ink2:rgba(255,255,255,.74); --ink3:rgba(255,255,255,.5); --line:rgba(255,255,255,.12);
+    --out:cubic-bezier(.22,1,.36,1);   /* critically damped feel: fast in, settles, no overshoot */
   }
   * { box-sizing:border-box; }
-  html, body { margin:0; height:100%; overflow:hidden; background:var(--night); color:var(--ink); }
+  html, body { margin:0; height:100%; overflow:hidden; background:var(--bg); color:var(--ink); }
   body { font-family:"Instrument Sans", "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing:antialiased; }
-  .serif { font-family:"Instrument Serif", Georgia, serif; font-weight:400; letter-spacing:-.01em; }
+  .serif { font-family:"Instrument Serif", Georgia, serif; font-weight:400; }
   .mono { font-family:"JetBrains Mono", Menlo, monospace; }
-  em { font-family:"Instrument Serif", Georgia, serif; font-style:italic; font-weight:400;
-       background:linear-gradient(100deg, #fff 0%, #E3D8FF 40%, #B79CFF 75%, #F6A9D8 100%); -webkit-background-clip:text; background-clip:text; color:transparent; padding-right:.06em; }
+  em { font-family:"Instrument Serif", Georgia, serif; font-style:italic; font-weight:400; color:var(--v2); }
 
-  /* ---- light: the aurora, two slow ribbons, glass bubbles; the hue shifts per chapter ---- */
-  #light { position:fixed; inset:0; overflow:hidden; transition:filter 1.6s var(--ease); }
-  #light .base { position:absolute; inset:0; background:radial-gradient(120% 90% at 60% 110%, #2B1E70 0%, #160F3A 55%, var(--night) 100%); }
-  #light .b { position:absolute; border-radius:50%; filter:blur(120px); mix-blend-mode:screen; animation:drift 26s ease-in-out infinite alternate; }
-  #light .b1 { width:950px; height:950px; left:-12%; top:38%; background:#6E4BFF; opacity:.6; }
-  #light .b2 { width:780px; height:780px; right:-10%; top:-14%; background:#A88BFF; opacity:.5; animation-duration:31s; }
-  #light .b3 { width:600px; height:600px; right:4%; bottom:-16%; background:#E070C8; opacity:.34; animation-duration:23s; }
-  #light .b4 { width:1150px; height:1150px; left:26%; top:-32%; background:#33238F; opacity:.62; animation-duration:37s; }
-  #light .rib { position:absolute; width:1600px; height:1600px; left:50%; top:50%; margin:-800px 0 0 -800px; border-radius:50%; filter:blur(70px); opacity:.22; mix-blend-mode:screen;
-                background:conic-gradient(from 0deg, transparent 0 8%, #9C7BFF 14%, transparent 22% 50%, #F07AA8 58%, transparent 66% 100%); animation:spin 70s linear infinite; }
-  #light .rib.r2 { width:1100px; height:1100px; margin:-550px 0 0 -550px; opacity:.16; animation-duration:95s; animation-direction:reverse;
-                   background:conic-gradient(from 90deg, transparent 0 20%, #7FE3C4 26%, transparent 34% 70%, #B79CFF 78%, transparent 86%); }
-  @keyframes drift { to { transform:translate(90px, -60px) scale(1.12); } }
-  @keyframes spin { to { transform:rotate(360deg); } }
-  .bubble { position:fixed; border-radius:50%; pointer-events:none; -webkit-backdrop-filter:blur(6px) saturate(160%); backdrop-filter:blur(6px) saturate(160%);
-            background:radial-gradient(circle at 30% 25%, rgba(255,255,255,.35), rgba(255,255,255,.04) 45%, rgba(255,255,255,.02));
-            box-shadow:inset 0 1px 1px rgba(255,255,255,.6), inset 0 -10px 30px rgba(184,162,255,.18); animation:float 18s ease-in-out infinite alternate; }
-  @keyframes float { to { transform:translate(60px, -90px); } }
+  /* one quiet light, still */
+  #light { position:fixed; inset:0; background:
+      radial-gradient(60% 70% at 88% 6%, rgba(143,116,255,.28), transparent 70%),
+      radial-gradient(55% 60% at 4% 104%, rgba(143,116,255,.20), transparent 70%),
+      var(--bg); }
 
-  /* the stage: 1600 × 900, scaled to the window */
   #stage { position:absolute; left:50%; top:50%; width:1600px; height:900px; transform-origin:0 0; }
 
-  /* liquid glass */
-  .glass { position:absolute; border-radius:30px; overflow:hidden;
-           background:linear-gradient(150deg, rgba(255,255,255,.17), rgba(255,255,255,.05) 45%, rgba(255,255,255,.09));
-           -webkit-backdrop-filter:blur(28px) saturate(180%); backdrop-filter:blur(28px) saturate(180%);
-           border:1px solid rgba(255,255,255,.24);
-           box-shadow: inset 0 1.5px 1px rgba(255,255,255,.6), inset 0 -1px 1px rgba(255,255,255,.14), inset 0 0 30px rgba(255,255,255,.05), 0 30px 80px rgba(6,3,24,.42); }
-  .glass > .sheen { position:absolute; top:-50%; left:-70%; width:42%; height:200%; transform:rotate(18deg); pointer-events:none;
-                    background:linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent); }
-  .glass.sweep > .sheen { animation:sheen 1.6s var(--ease) forwards; }
-  @keyframes sheen { to { left:150%; } }
+  /* one layer of glass */
+  .glass { position:absolute; border-radius:24px;
+           background:linear-gradient(160deg, rgba(255,255,255,.085), rgba(255,255,255,.035));
+           -webkit-backdrop-filter:blur(24px) saturate(140%); backdrop-filter:blur(24px) saturate(140%);
+           border:1px solid rgba(255,255,255,.11); box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 24px 60px rgba(4,2,16,.35); }
 
-  /* scenes */
-  .scene { position:absolute; inset:0; visibility:hidden; }
-  .scene.active { visibility:visible; }
-  .kick { position:absolute; left:220px; top:118px; font-size:14px; letter-spacing:.24em; text-transform:uppercase; color:var(--lilac); }
-  .title { position:absolute; left:220px; top:140px; margin:0; font-family:"Instrument Serif", Georgia, serif; font-weight:400; font-size:68px; line-height:1.02; letter-spacing:-.015em; white-space:nowrap; }
-  .draft { position:absolute; right:84px; top:118px; font-size:11px; letter-spacing:.16em; color:var(--rose); border:1px solid rgba(240,122,168,.55); border-radius:20px; padding:6px 12px; }
-  .rv { opacity:0; transform:translateY(22px); filter:blur(10px); transition:opacity .7s var(--ease), transform .8s var(--ease), filter .7s var(--ease); }
-  .rv.on { opacity:1; transform:none; filter:none; }
+  /* slides: forward comes in from the right and leaves to the left; back mirrors it */
+  .slide { position:absolute; inset:0; opacity:0; visibility:hidden; transform:translateX(28px);
+           transition:opacity .45s var(--out), transform .6s var(--out), visibility 0s .6s; }
+  .slide.on { opacity:1; visibility:visible; transform:none; transition:opacity .55s var(--out), transform .7s var(--out), visibility 0s; }
+  .slide.gone { transform:translateX(-28px); }
+  .slide.back { transform:translateX(-28px); }
+  .slide.back.gone { transform:translateX(28px); }
+  .st { opacity:0; transform:translateY(12px); filter:blur(6px); transition:opacity .5s var(--out), transform .6s var(--out), filter .5s var(--out); }
+  .st.on { opacity:1; transform:none; filter:none; }
 
-  /* the glass wipe between chapters */
-  #wipe { position:absolute; top:-40px; left:1700px; width:1400px; height:980px; border-radius:60px; z-index:50; pointer-events:none; visibility:hidden;
-          -webkit-backdrop-filter:blur(36px) saturate(200%) brightness(1.06); backdrop-filter:blur(36px) saturate(200%) brightness(1.06);
-          background:linear-gradient(110deg, rgba(255,255,255,.22), rgba(205,189,255,.10) 40%, rgba(255,255,255,.16));
-          border:1px solid rgba(255,255,255,.35); box-shadow:inset 2px 0 2px rgba(255,255,255,.7), inset -1px 0 1px rgba(255,255,255,.2), 0 0 120px rgba(122,86,255,.35); }
-  #wipe .n { position:absolute; left:420px; top:300px; font-family:"Instrument Serif", Georgia, serif; font-size:220px; line-height:1; color:rgba(255,255,255,.95); }
-  #wipe .t { position:absolute; left:430px; top:540px; font-size:18px; letter-spacing:.3em; color:var(--pearl); }
+  .who { position:absolute; left:200px; top:62px; font-size:12px; letter-spacing:.16em; color:var(--ink3); }
+  .who b { color:var(--v2); font-weight:500; }
+  .h { position:absolute; left:200px; top:104px; width:1220px; margin:0; font-family:"Instrument Serif", Georgia, serif; font-weight:400; font-size:58px; line-height:1.04; letter-spacing:-.018em; }
+  .foot { position:absolute; left:200px; right:80px; bottom:44px; font-size:15px; line-height:1.45; color:var(--ink3); }
+  .tag { display:inline-block; font-size:11px; letter-spacing:.14em; color:var(--v2); border:1px solid rgba(205,193,255,.4); border-radius:20px; padding:4px 10px; vertical-align:middle; }
+  .pending { position:absolute; left:200px; top:186px; }
 
-  /* the lens that follows the pointer */
-  #lens { position:fixed; left:0; top:0; width:150px; height:150px; margin:-75px 0 0 -75px; border-radius:50%; pointer-events:none; z-index:60; opacity:0; transition:opacity .5s;
-          -webkit-backdrop-filter:blur(3px) saturate(230%) contrast(1.12) brightness(1.12); backdrop-filter:blur(3px) saturate(230%) contrast(1.12) brightness(1.12);
-          background:radial-gradient(circle at 32% 28%, rgba(255,255,255,.4), rgba(255,255,255,.05) 38%, rgba(255,255,255,0) 60%);
-          box-shadow:inset 0 2px 2px rgba(255,255,255,.75), inset 0 -6px 18px rgba(184,162,255,.35), inset 0 0 0 1px rgba(255,255,255,.25), 0 14px 40px rgba(10,5,40,.35); }
+  /* the stack: one plate per slide */
+  #stack { position:absolute; left:70px; top:120px; width:64px; z-index:5; }
+  #stack .rod { position:absolute; top:-30px; width:2px; height:686px; background:linear-gradient(rgba(255,255,255,.28), rgba(255,255,255,.06)); }
+  #stack .p { position:absolute; left:4px; width:56px; height:42px; border-radius:7px; cursor:pointer;
+              background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); transition:transform .6s var(--out), background .4s, border-color .4s, box-shadow .4s; }
+  #stack .p b { position:absolute; inset:0; display:grid; place-items:center; font:500 11px "JetBrains Mono", monospace; color:var(--ink3); transition:color .4s; }
+  #stack .p.up { transform:translateY(-14px); background:rgba(143,116,255,.18); border-color:rgba(205,193,255,.28); }
+  #stack .p.up b { color:var(--v2); }
+  #stack .p.cur { background:var(--v); border-color:var(--v2); box-shadow:0 0 22px rgba(143,116,255,.6); }
+  #stack .p.cur b { color:#fff; }
+  #stack .p span { position:absolute; left:72px; top:50%; transform:translateY(-50%); white-space:nowrap; font-size:12px; letter-spacing:.1em; color:var(--ink2); opacity:0; transition:opacity .25s;
+                   padding:6px 11px; border-radius:12px; background:rgba(14,11,29,.9); border:1px solid var(--line); pointer-events:none; }
+  #stack .p:hover span { opacity:1; }
+  #brand { position:absolute; right:80px; top:58px; display:flex; align-items:center; gap:12px; font-size:12px; letter-spacing:.16em; color:var(--ink3); z-index:5; }
 
-  /* the weight stack: the progress */
-  #stack { position:absolute; left:64px; top:150px; width:92px; height:600px; z-index:20; }
-  #stack .rod { position:absolute; top:-40px; bottom:0; width:3px; border-radius:2px; background:linear-gradient(#ffffff55, #ffffff18); }
-  #stack .cable { position:absolute; left:44.5px; top:-80px; width:3px; height:80px; background:linear-gradient(transparent, #ffffff55); }
-  #stack .cap { position:absolute; left:6px; top:0; width:80px; height:26px; border-radius:7px; background:linear-gradient(#3a3270, #241c55); border:1px solid rgba(255,255,255,.25); transition:transform .8s var(--spring); }
-  #stack .plate { position:absolute; left:6px; width:80px; height:52px; border-radius:9px; cursor:pointer; transition:transform .8s var(--spring), background .5s, box-shadow .5s, border-color .5s;
-                  background:linear-gradient(#211a48, #18123a); border:1px solid rgba(255,255,255,.14); }
-  #stack .plate b { position:absolute; inset:0; display:grid; place-items:center; font:500 13px "JetBrains Mono", monospace; color:var(--ink3); }
-  #stack .plate span { position:absolute; left:100px; top:50%; transform:translateY(-50%); white-space:nowrap; font-size:12px; letter-spacing:.14em; color:var(--pearl); opacity:0; transition:opacity .3s;
-                       padding:7px 12px; border-radius:14px; background:rgba(20,14,48,.7); border:1px solid rgba(255,255,255,.18); }
-  #stack .plate:hover span, #stack .plate:focus-visible span { opacity:1; }
-  #stack .plate.lifted { background:linear-gradient(#5b44c9, #3c2b9a); border-color:rgba(205,189,255,.55); }
-  #stack .plate.lifted b { color:var(--pearl); }
-  #stack .plate.cur { background:linear-gradient(#c3b0ff, #7a56ff); border-color:#efe8ff; box-shadow:0 0 36px rgba(138,108,255,.95), 0 0 4px #fff; }
-  #stack .plate.cur b { color:#fff; }
-  #stack .pin { position:absolute; left:-18px; width:22px; height:8px; border-radius:4px; background:linear-gradient(90deg, #d9d4e8, #8e88a5); transition:top .8s var(--spring), opacity .4s; }
-  #stack.finale .plate, #stack.finale .cap { transform:translateY(-60px) !important; }
+  /* 1 · title */
+  .t-kick { position:absolute; left:200px; top:212px; font-size:13px; letter-spacing:.2em; color:var(--v2); }
+  .t-h { position:absolute; left:194px; top:244px; margin:0; font-family:"Instrument Serif", Georgia, serif; font-weight:400; font-size:124px; line-height:.94; letter-spacing:-.025em; }
+  .t-name { position:absolute; left:200px; top:180px; font-size:15px; letter-spacing:.16em; color:var(--ink3); }
+  .team { position:absolute; left:200px; top:560px; display:grid; grid-template-columns:repeat(4, 210px); gap:26px; }
+  .team div { border-top:1px solid var(--line); padding-top:14px; }
+  .team b { display:block; font-weight:600; font-size:21px; }
+  .team span { display:block; font-size:15px; color:var(--ink2); margin-top:4px; }
+  .agenda { position:absolute; left:200px; top:720px; font-size:14px; letter-spacing:.1em; color:var(--ink3); }
+  .agenda i { font-style:normal; color:var(--ink2); }
+  #sensor3d { position:absolute; left:1040px; top:150px; width:500px; height:400px; }
 
-  #top { position:absolute; left:220px; right:84px; top:46px; display:flex; justify-content:space-between; align-items:center; font-size:12px; letter-spacing:.18em; color:var(--ink3); z-index:20; }
-  #top .brand { display:flex; align-items:center; gap:14px; color:var(--ink2); }
-  #hint { position:absolute; left:220px; bottom:34px; font-size:11px; letter-spacing:.16em; color:var(--ink3); z-index:20; transition:opacity .6s; }
+  /* 2 · concept: today / with us */
+  .vs { left:200px; top:300px; width:1320px; height:400px; }
+  .vs .row { position:absolute; left:0; right:0; height:200px; display:grid; grid-template-columns:230px 1fr 1fr; align-items:center; border-bottom:1px solid var(--line); }
+  .vs .row:last-child { border-bottom:0; }
+  .vs .col-h { position:absolute; top:-40px; font-size:12px; letter-spacing:.18em; color:var(--ink3); }
+  .vs .k { padding-left:40px; font-size:24px; font-weight:600; }
+  .vs .k small { display:block; font-size:14px; font-weight:400; color:var(--ink3); margin-top:6px; letter-spacing:.02em; }
+  .vs .a { padding-right:40px; font-size:23px; line-height:1.38; color:var(--ink2); }
+  .vs .b { padding:0 40px; font-size:25px; line-height:1.36; }
+  .vs .b b { font-weight:600; }
+  .vs .div { position:absolute; top:24px; bottom:24px; width:1px; background:linear-gradient(transparent, rgba(205,193,255,.5), transparent); }
 
-  /* ---- 0 · the opening ---- */
-  #hero3d { position:absolute; left:860px; top:120px; width:740px; height:560px; cursor:grab; z-index:5; }
-  #hero3d:active { cursor:grabbing; }
-  .h-kick { position:absolute; left:220px; top:228px; font-size:14px; letter-spacing:.28em; color:var(--lilac); }
-  .h-title { position:absolute; left:212px; top:262px; margin:0; font-family:"Instrument Serif", Georgia, serif; font-weight:400; font-size:158px; line-height:.92; letter-spacing:-.025em; white-space:nowrap; }
-  .h-title .ch { display:inline-block; opacity:0; transform:translateY(60px) rotate(6deg); filter:blur(14px); }
-  .h-title em { background:none; }
-  .h-title em .ch { background:linear-gradient(100deg, #fff 0%, #E3D8FF 40%, #B79CFF 75%, #F6A9D8 100%); -webkit-background-clip:text; background-clip:text; color:transparent; padding-right:.04em; }
-  .h-title.go .ch { animation:chIn 1s var(--spring) forwards; }
-  @keyframes chIn { to { opacity:1; transform:none; filter:none; } }
-  .h-pill { position:absolute; left:220px; top:540px; height:76px; padding:0 34px 0 30px; border-radius:38px; display:flex; align-items:center; gap:16px; font-size:23px; color:var(--pearl); }
-  .h-pill i { width:12px; height:12px; border-radius:6px; background:var(--lilac); box-shadow:0 0 14px var(--lilac); animation:pulse 2s ease-in-out infinite; }
-  @keyframes pulse { 50% { transform:scale(.6); opacity:.5; } }
-  .reps { position:absolute; left:1150px; top:640px; width:300px; text-align:center; z-index:6; }
-  .reps .n { font-weight:600; font-size:124px; line-height:1; font-variant-numeric:tabular-nums; display:inline-block;
-             background:linear-gradient(#ffffff, #d8ccff 55%, #9c82ff); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 0 26px rgba(138,108,255,.85)); }
-  .reps .n.up { animation:repUp .5s var(--spring); }
-  @keyframes repUp { from { transform:translateY(30px) scale(.8); opacity:.2; } }
-  .reps .l { font-size:12px; letter-spacing:.24em; color:var(--ink3); margin-top:8px; }
-  .ripple { position:absolute; width:300px; height:300px; margin:-150px 0 0 -150px; border-radius:50%; pointer-events:none; z-index:4;
-            -webkit-backdrop-filter:blur(2px) saturate(220%) brightness(1.15); backdrop-filter:blur(2px) saturate(220%) brightness(1.15);
-            box-shadow:inset 0 0 0 2px rgba(255,255,255,.55), inset 0 0 40px rgba(184,162,255,.5), 0 0 40px rgba(122,86,255,.5); animation:ripple 1.6s var(--ease) forwards; }
-  @keyframes ripple { from { transform:scale(.2); opacity:1; } to { transform:scale(4.2); opacity:0; } }
+  /* 3 · concept: the market */
+  #rings { position:absolute; left:180px; top:250px; width:560px; height:560px; overflow:visible; }
+  #rings circle { fill:rgba(143,116,255,.08); stroke:rgba(205,193,255,.45); stroke-width:1.2; }
+  .facts3 { position:absolute; left:820px; top:270px; width:700px; }
+  .facts3 .f { padding:22px 0; border-bottom:1px solid var(--line); }
+  .facts3 .f:last-child { border-bottom:0; }
+  .facts3 .k { font-size:12px; letter-spacing:.18em; color:var(--v2); }
+  .facts3 .v { font-size:24px; line-height:1.38; margin-top:8px; }
 
-  /* ---- 1 · the project ---- */
-  .feed { top:310px; width:296px; height:226px; padding:24px 26px; transition:transform .9s var(--spring), border-color .6s, background .6s, box-shadow .6s, opacity .6s; }
-  .feed .ic { width:38px; height:38px; }
-  .feed .k { font-size:12px; letter-spacing:.2em; color:var(--ink3); margin-top:14px; }
-  .feed .v { font-weight:600; font-size:44px; letter-spacing:-.02em; margin-top:6px; font-variant-numeric:tabular-nums; }
-  .feed .u { font-size:15px; color:var(--ink2); margin-top:2px; }
-  .feed svg.spark { position:absolute; left:0; right:0; bottom:0; width:100%; height:60px; }
-  .feed.dead { background:linear-gradient(150deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border-style:dashed; border-color:rgba(255,255,255,.22); box-shadow:none; }
-  .feed.dead .v { color:rgba(255,255,255,.28); }
-  .feed.alive { border-color:rgba(205,189,255,.9); background:linear-gradient(150deg, rgba(160,130,255,.45), rgba(255,255,255,.08)); box-shadow:0 0 0 1px rgba(205,189,255,.5), 0 0 80px rgba(122,86,255,.6), 0 30px 80px rgba(6,3,24,.42); }
-  #drop { position:absolute; left:1312px; top:-120px; width:110px; height:44px; border-radius:16px; z-index:8; opacity:0;
-          background:linear-gradient(#3b3747, #1f1c28); border:1px solid rgba(255,255,255,.3); box-shadow:inset 0 1px 1px rgba(255,255,255,.5), 0 0 30px rgba(184,162,255,.6); }
-  #drop.fall { animation:fall 1s cubic-bezier(.5,0,.75,0) forwards, settle .5s .95s var(--spring) forwards; }
-  @keyframes fall { 0% { opacity:1; top:-120px; } 100% { opacity:1; top:448px; } }
-  @keyframes settle { 0% { top:448px; opacity:1; } 40% { top:436px; } 100% { top:446px; opacity:1; } }
-  .p-head { position:absolute; left:220px; top:150px; font-family:"Instrument Serif", Georgia, serif; font-size:76px; line-height:1.02; letter-spacing:-.015em; white-space:nowrap; }
-  .p-head .b { display:block; }
-  .claims { position:absolute; left:220px; right:84px; top:600px; display:grid; grid-template-columns:repeat(3, 1fr); gap:28px; }
-  .claim .k { font-size:12px; letter-spacing:.22em; color:var(--lilac); }
-  .claim .v { font-family:"Instrument Serif", Georgia, serif; font-size:36px; line-height:1.12; margin-top:10px; }
+  /* 4 · test matrix */
+  .tm { left:200px; top:250px; width:1320px; }
+  .tm .r { display:grid; grid-template-columns:240px 1fr 1fr 1fr 1fr; gap:26px; padding:24px 30px; border-bottom:1px solid var(--line); font-size:15.5px; line-height:1.42; color:var(--ink2); }
+  .tm .r:last-child { border-bottom:0; }
+  .tm .r.hd { padding:18px 30px 14px; font-size:11px; letter-spacing:.18em; color:var(--ink3); }
+  .tm .r .w { color:var(--ink); }
+  .tm .r .w b { display:block; font-size:24px; font-weight:600; }
+  .tm .r .w span { display:block; color:var(--ink3); font-size:14px; margin-top:6px; }
+  .tm .r .w .n { display:inline-block; margin-top:10px; font:500 13px "JetBrains Mono", monospace; color:var(--v2); letter-spacing:.06em; }
 
-  /* ---- 2 · the test matrix: a flip board ---- */
-  .board { left:220px; right:84px; top:236px; height:590px; padding:20px 34px; }
-  .brow { display:grid; grid-template-columns: 340px 250px 220px 1fr 130px; gap:22px; align-items:center; height:100px; border-bottom:1px solid var(--line); font-size:18px; line-height:1.3; }
-  .brow:last-child { border-bottom:0; }
-  .brow.head { height:46px; font-size:11px; letter-spacing:.2em; color:var(--ink3); }
-  .brow .dim { color:var(--ink2); }
-  .flaps { display:flex; gap:4px; }
-  .flap { width:30px; height:46px; border-radius:6px; display:grid; place-items:center; position:relative; overflow:hidden;
-          font:700 25px "JetBrains Mono", monospace; color:#fff; background:linear-gradient(#2a2160 50%, #1f1850 50%); box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 4px 10px rgba(0,0,0,.3); }
-  .flap::after { content:""; position:absolute; left:0; right:0; top:50%; height:1px; background:rgba(0,0,0,.55); }
-  .flap.tick { animation:tick .07s linear; }
-  @keyframes tick { 50% { transform:scaleY(.6); filter:brightness(1.6); } }
-  .lamp { display:flex; align-items:center; gap:10px; font-size:11px; letter-spacing:.14em; color:var(--ink3); transition:color .5s; }
-  .lamp i { width:14px; height:14px; border-radius:7px; background:rgba(255,255,255,.12); transition:background .5s, box-shadow .5s; }
-  .lamp.ok { color:var(--mint); } .lamp.ok i { background:var(--mint); box-shadow:0 0 16px var(--mint); }
-  .lamp.run { color:var(--lilac); } .lamp.run i { background:var(--lilac); box-shadow:0 0 16px var(--lilac); animation:pulse 1.6s ease-in-out infinite; }
-  .lamp.open { color:var(--rose); } .lamp.open i { background:var(--rose); box-shadow:0 0 16px var(--rose); }
+  /* 5 · learnings */
+  .ln { position:absolute; left:200px; top:262px; width:1320px; }
+  .ln .r { display:grid; grid-template-columns:44px 1fr 40px 1.25fr; gap:18px; align-items:start; padding:22px 0; border-bottom:1px solid var(--line); }
+  .ln .r:last-child { border-bottom:0; }
+  .ln .n { font:500 14px "JetBrains Mono", monospace; color:var(--v2); padding-top:6px; }
+  .ln .l { font-family:"Instrument Serif", Georgia, serif; font-size:30px; line-height:1.14; }
+  .ln .arr { color:var(--v); font-size:26px; padding-top:2px; }
+  .ln .c { font-size:19px; line-height:1.45; color:var(--ink2); }
+  .ln .c b { color:var(--ink); font-weight:600; }
 
-  /* ---- 3 · the canvas ---- */
-  .bmcwrap { position:absolute; left:220px; right:84px; top:236px; height:600px; perspective:1600px; }
-  .blk { padding:18px 20px; cursor:pointer; transform-style:preserve-3d; opacity:0; transform:translateZ(-700px) rotateX(40deg) rotateY(-20deg); filter:blur(16px);
-         transition:transform 1s var(--spring), opacity .7s var(--ease), filter .7s var(--ease), border-color .5s, background .5s, box-shadow .5s; }
-  .blk.in { opacity:1; transform:none; filter:none; }
-  .blk .t { font-size:11px; letter-spacing:.2em; color:var(--lilac); }
-  .blk ul { list-style:none; margin:10px 0 0; padding:0; font-size:16px; line-height:1.3; }
-  .blk li { margin-bottom:6px; color:var(--ink2); }
+  /* 6 · canvas */
+  .bmc { position:absolute; left:200px; top:196px; width:1330px; height:612px; }
+  .blk { position:absolute; padding:14px 15px; border-radius:16px; background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.1); transition:background .45s var(--out), border-color .45s, opacity .45s, box-shadow .45s; cursor:pointer; }
+  .blk .t { font-size:10.5px; letter-spacing:.16em; color:var(--v2); margin-bottom:8px; }
+  .blk .sub { font-size:9.5px; letter-spacing:.14em; color:var(--ink3); margin:8px 0 5px; }
+  .blk ul { list-style:none; margin:0; padding:0; }
+  .blk li { font-size:12.6px; line-height:1.34; color:var(--ink2); padding:5px 0 5px 10px; border-left:2px solid rgba(255,255,255,.14); margin-bottom:4px; }
+  .blk li.o { border-left-color:var(--v); }
+  .blk li.m { border-left-color:rgba(205,193,255,.55); border-left-style:dotted; }
   .blk li b { color:var(--ink); font-weight:600; }
-  .tt { font-size:9.5px; letter-spacing:.14em; color:var(--rose); border:1px solid rgba(240,122,168,.55); border-radius:10px; padding:1px 6px; margin-left:6px; vertical-align:2px; white-space:nowrap; }
-  .bmcwrap.focusing .blk.in { opacity:.32; filter:blur(1.5px); }
-  .bmcwrap.focusing .blk.in.rel { opacity:.7; filter:none; }
-  .bmcwrap.focusing .blk.in.focus { opacity:1; filter:none; transform:translateZ(70px); border-color:rgba(225,214,255,.9);
-         background:linear-gradient(150deg, rgba(170,140,255,.42), rgba(255,255,255,.1)); box-shadow:0 0 0 1px rgba(205,189,255,.5), 0 0 80px rgba(122,86,255,.55), 0 40px 90px rgba(6,3,24,.5); z-index:3; }
-  #threads { position:absolute; inset:0; overflow:visible; pointer-events:none; z-index:4; }
-  #threads path { fill:none; stroke-width:2.5; stroke-linecap:round; filter:drop-shadow(0 0 6px rgba(184,162,255,.9)); }
+  .blk .note { font-size:11px; color:var(--ink3); margin-top:6px; }
+  .bmc.focusing .blk { opacity:.35; }
+  .bmc.focusing .blk.focus { opacity:1; background:rgba(143,116,255,.14); border-color:rgba(205,193,255,.6); box-shadow:0 0 0 1px rgba(143,116,255,.35), 0 18px 50px rgba(4,2,16,.4); }
+  .legend { position:absolute; left:200px; top:160px; display:flex; gap:22px; font-size:12px; color:var(--ink3); }
+  .legend i { display:inline-block; width:14px; height:0; border-top:2px solid; vertical-align:middle; margin-right:8px; }
+  .bmc.dim .blk { opacity:.12; }
+  .changed { left:500px; top:360px; width:780px; padding:30px 36px; opacity:0; transform:translateY(-8px); transition:opacity .5s var(--out), transform .6s var(--out); pointer-events:none; z-index:3; }
+  .changed.on { opacity:1; transform:none; }
+  .changed .k { font-size:11px; letter-spacing:.18em; color:var(--v2); }
+  .changed p { margin:12px 0 0; font-size:23px; line-height:1.4; }
 
-  /* ---- 4 · the Brand Key: a dial that opens ---- */
-  #dial { position:absolute; left:200px; top:212px; width:640px; height:640px; overflow:visible; }
-  #dial .ring { transform-origin:320px 320px; transition:transform 1.1s var(--spring), opacity .8s; }
-  #dial .lbl { font:500 13px "JetBrains Mono", monospace; letter-spacing:2px; fill:rgba(246,242,255,.55); transition:fill .5s; }
-  #dial .lbl.on { fill:#fff; }
-  #dial .lbl.done { fill:rgba(205,189,255,.85); }
-  #burst { opacity:0; transition:opacity 1.2s var(--ease); }
-  #dial.open #burst { opacity:1; }
-  .bkp { left:900px; right:84px; top:262px; height:470px; padding:42px 46px; }
-  .bkp .num { font-size:12px; letter-spacing:.22em; color:var(--lilac); }
-  .bkp h3 { margin:14px 0 0; font-family:"Instrument Serif", Georgia, serif; font-weight:400; font-size:58px; line-height:1; }
-  .bkp .ans { font-size:25px; line-height:1.4; margin-top:20px; }
-  .bkp .proof { position:absolute; left:46px; right:46px; bottom:34px; font-size:14px; line-height:1.5; color:var(--ink3); padding-top:16px; border-top:1px solid var(--line); }
-  .swap { transition:opacity .3s var(--ease), transform .45s var(--ease), filter .3s; }
-  .swap.out { opacity:0; transform:translateY(12px); filter:blur(6px); }
-  .essence { position:absolute; left:200px; width:640px; top:497px; text-align:center; font-family:"Instrument Serif", Georgia, serif; font-size:64px; line-height:1; opacity:0; transform:scale(.8); transition:opacity 1s .5s var(--ease), transform 1.2s .5s var(--spring); pointer-events:none; }
-  .essence.on { opacity:1; transform:none; }
+  /* 7 · brand key */
+  #key { position:absolute; left:190px; top:190px; width:520px; height:660px; overflow:visible; }
+  #key .fld rect { fill:rgba(255,255,255,.04); stroke:rgba(255,255,255,.14); transition:fill .45s, stroke .45s; }
+  #key .fld text { font:500 13px "JetBrains Mono", monospace; letter-spacing:1.2px; fill:var(--ink3); transition:fill .45s; }
+  #key .fld.seen rect { fill:rgba(143,116,255,.12); stroke:rgba(205,193,255,.32); }
+  #key .fld.seen text { fill:var(--ink2); }
+  #key .fld.cur rect { fill:rgba(143,116,255,.34); stroke:var(--v2); }
+  #key .fld.cur text { fill:#fff; }
+  .bkp { left:780px; top:250px; width:750px; height:520px; padding:40px 46px; }
+  .bkp .n { font-size:12px; letter-spacing:.18em; color:var(--v2); }
+  .bkp h3 { margin:12px 0 0; font-family:"Instrument Serif", Georgia, serif; font-weight:400; font-size:52px; line-height:1; letter-spacing:-.015em; }
+  .bkp .a { font-size:22px; line-height:1.45; margin-top:22px; }
+  .bkp .a p { margin:0 0 12px; }
+  .bkp .a small { display:block; font-size:15px; color:var(--ink3); margin-top:4px; }
+  .bkp .pr { position:absolute; left:46px; right:46px; bottom:32px; padding-top:14px; border-top:1px solid var(--line); font-size:14px; line-height:1.5; color:var(--ink3); }
+  .swap { transition:opacity .28s var(--out), transform .4s var(--out); }
+  .swap.out { opacity:0; transform:translateY(8px); }
 
-  /* ---- 5 · the 4Ps: one drop splits in four ---- */
-  #goo { position:absolute; left:220px; top:236px; width:1296px; height:600px; filter:url(#gooey); }
-  #goo .drop { position:absolute; border-radius:50%; background:radial-gradient(circle at 35% 30%, #E9E0FF, #9C7BFF 45%, #5B3FD8); transition:left 1.1s var(--ease), top 1.1s var(--ease), width .9s var(--spring), height .9s var(--spring), opacity .6s; }
-  .bkdrop { position:absolute; left:220px; width:1296px; top:510px; text-align:center; font-size:14px; letter-spacing:.26em; color:#1a1240; font-weight:700; transition:opacity .5s; pointer-events:none; }
-  .pcard { top:236px; width:306px; height:600px; padding:26px 26px 22px; display:flex; flex-direction:column; opacity:0; transform:scale(.4); border-radius:160px; filter:blur(10px);
-           transition:opacity .7s var(--ease), transform 1s var(--spring), border-radius 1s var(--ease), filter .7s; }
-  .pcard.on { opacity:1; transform:none; border-radius:30px; filter:none; }
-  .pcard .big { font-family:"Instrument Serif", Georgia, serif; font-size:84px; line-height:.86; }
-  .pcard h4 { margin:8px 0 0; font-size:28px; font-weight:600; }
-  .pcard .one { font-family:"Instrument Serif", Georgia, serif; font-size:27px; line-height:1.15; margin-top:14px; }
-  .pcard ul { margin:16px 0 0; padding:0; list-style:none; font-size:15.5px; line-height:1.36; color:var(--ink2); }
-  .pcard li { margin-bottom:9px; padding-left:16px; position:relative; }
-  .pcard li::before { content:""; position:absolute; left:0; top:.55em; width:6px; height:6px; border-radius:3px; background:var(--lilac); box-shadow:0 0 8px var(--violet); }
-  .pcard .from { margin-top:auto; padding-top:14px; font-size:11px; letter-spacing:.16em; color:var(--ink3); border-top:1px solid var(--line); }
-  .pcard .from b { color:var(--lilac); font-weight:500; }
+  /* 8 · the 4Ps */
+  .ps { position:absolute; left:200px; top:240px; width:1330px; }
+  .ps .r { display:grid; grid-template-columns:190px 250px 1fr; gap:30px; padding:20px 0; border-bottom:1px solid var(--line); align-items:start; }
+  .ps .r:last-child { border-bottom:0; }
+  .ps .p { font-family:"Instrument Serif", Georgia, serif; font-size:40px; line-height:1; }
+  .ps .qn { font-size:16px; line-height:1.4; color:var(--ink2); }
+  .ps .qn small { display:block; font-size:12px; letter-spacing:.06em; color:var(--v2); margin-top:8px; font-family:"JetBrains Mono", monospace; }
+  .ps .c { font-size:17.5px; line-height:1.48; color:var(--ink2); }
+  .ps .c b { color:var(--ink); font-weight:600; }
+  .thread { position:absolute; left:200px; top:800px; font-family:"Instrument Serif", Georgia, serif; font-size:30px; }
 
-  /* ---- 6 · the scenarios: an orb on a tilted plane ---- */
-  .sc3d { position:absolute; left:200px; top:250px; width:900px; height:600px; perspective:1300px; }
-  .plane { position:absolute; left:40px; top:30px; width:820px; height:560px; transform:rotateX(54deg) rotateZ(-8deg); transform-style:preserve-3d; border-radius:40px;
-           background:linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.25); box-shadow:0 60px 120px rgba(6,3,24,.5); }
-  .qt { position:absolute; width:calc(50% - 30px); height:calc(50% - 30px); border-radius:26px; display:grid; place-items:center; transition:transform .9s var(--spring), background .6s, box-shadow .6s;
-        background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.18); font-family:"Instrument Serif", Georgia, serif; font-size:42px; color:rgba(255,255,255,.75); }
-  .qt.on { transform:translateZ(46px); background:linear-gradient(135deg, rgba(170,140,255,.55), rgba(240,122,168,.25)); box-shadow:0 0 60px rgba(122,86,255,.7); color:#fff; }
-  .axisb { position:absolute; background:linear-gradient(90deg, transparent, rgba(255,255,255,.75), transparent); box-shadow:0 0 14px rgba(205,189,255,.9); }
-  .axt { position:absolute; font-size:13px; letter-spacing:.18em; color:var(--pearl); white-space:nowrap; }
-  #orb { position:absolute; width:56px; height:56px; margin:-28px 0 0 -28px; border-radius:50%; transform:translateZ(80px); transition:left 1.1s var(--spring), top 1.1s var(--spring), opacity .5s;
-         background:radial-gradient(circle at 35% 30%, #fff, #D8CCFF 30%, #7A56FF 70%); box-shadow:0 0 50px 12px rgba(184,162,255,.85); }
-  .scp { left:1130px; right:84px; top:300px; height:430px; padding:38px 40px; }
-  .scp .q { font-size:12px; letter-spacing:.2em; color:var(--lilac); }
-  .scp h5 { margin:14px 0 0; font-family:"Instrument Serif", Georgia, serif; font-weight:400; font-size:52px; line-height:1; }
-  .scp p { font-size:21px; line-height:1.45; color:var(--ink2); margin-top:20px; }
+  /* 9 · scenarios */
+  .sm { position:absolute; left:290px; top:230px; width:1140px; height:560px; }
+  .q { position:absolute; width:calc(50% - 8px); height:calc(50% - 8px); padding:24px 28px; border-radius:20px; background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.1); transition:background .5s, border-color .5s, opacity .5s; }
+  .q .num { font-family:"Instrument Serif", Georgia, serif; font-size:44px; line-height:1; color:var(--v2); }
+  .q h4 { position:absolute; left:84px; top:26px; margin:0; font-size:24px; font-weight:600; }
+  .q .lab { position:absolute; left:84px; top:60px; font-size:11px; letter-spacing:.18em; color:var(--ink3); }
+  .q .m { font-size:16.5px; line-height:1.45; color:var(--ink2); margin-top:22px; }
+  .q .mv { font-size:16.5px; line-height:1.45; margin-top:10px; padding-left:14px; border-left:2px solid var(--v); }
+  .q.prep { background:rgba(143,116,255,.13); border-color:rgba(205,193,255,.45); }
+  .axY { position:absolute; left:200px; top:230px; height:560px; width:60px; }
+  .axY span { position:absolute; left:0; width:560px; transform-origin:0 0; transform:rotate(-90deg); font-size:12px; letter-spacing:.14em; color:var(--ink3); white-space:nowrap; }
+  .axX { position:absolute; left:290px; top:798px; width:1140px; display:flex; justify-content:space-between; font-size:12px; letter-spacing:.14em; color:var(--ink3); }
+  .idea { position:absolute; left:200px; top:176px; width:1240px; font-size:17px; line-height:1.4; color:var(--ink2); }
+  .centre { left:640px; top:452px; width:440px; padding:16px 22px; text-align:center; font-size:15.5px; line-height:1.4; z-index:2; }
 
-  /* ---- 7 · finances ---- */
-  .kband { left:220px; right:84px; top:236px; height:132px; display:grid; grid-template-columns:repeat(4, 1fr); }
-  .kb { padding:22px 30px; border-right:1px solid var(--line); }
-  .kb:last-child { border-right:0; }
-  .kb .v { font-weight:600; font-size:52px; letter-spacing:-.02em; font-variant-numeric:tabular-nums; line-height:1; }
-  .kb .l { font-size:14px; color:var(--ink2); margin-top:10px; line-height:1.3; }
-  .plates { position:absolute; left:220px; top:404px; width:800px; height:430px; }
-  .qcol { position:absolute; bottom:40px; width:150px; }
-  .qplate { position:absolute; left:0; width:150px; height:15px; border-radius:6px; opacity:0; transform:translateY(-60px);
-            background:linear-gradient(#cdbdff, #7a56ff); box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 0 14px rgba(122,86,255,.6); transition:opacity .4s, transform .6s var(--spring); }
-  .qplate.on { opacity:1; transform:none; }
-  .qlab { position:absolute; bottom:6px; width:150px; text-align:center; font-size:12px; letter-spacing:.16em; color:var(--ink3); }
-  .qnum { position:absolute; width:150px; text-align:center; font-weight:600; font-size:34px; opacity:0; transition:opacity .5s; }
-  .vessel { position:absolute; left:1070px; top:404px; width:446px; height:430px; }
+  /* 10–11 · finances */
+  .fin { left:200px; top:260px; width:840px; }
+  .fin .r { display:grid; grid-template-columns:1fr 200px 200px; padding:20px 34px; border-bottom:1px solid var(--line); font-size:21px; align-items:baseline; }
+  .fin .r:last-child { border-bottom:0; }
+  .fin .r.hd { font-size:11px; letter-spacing:.18em; color:var(--ink3); padding:18px 34px 12px; }
+  .fin .r span:not(:first-child) { text-align:right; font-variant-numeric:tabular-nums; font-weight:600; }
+  .fin .r .ph { color:var(--ink3); font-weight:400; }
+  .side { position:absolute; left:1100px; top:260px; width:430px; }
+  .side .f { padding:20px 0; border-bottom:1px solid var(--line); }
+  .side .k { font-size:12px; letter-spacing:.18em; color:var(--v2); }
+  .side .v { font-size:22px; line-height:1.4; margin-top:8px; }
+  .big { font-size:54px; font-weight:600; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
 
-  /* ---- 8 · the end ---- */
-  .endw { position:absolute; inset:0; display:grid; place-items:center; text-align:center; }
-  .endw h1 { margin:30px 0 0; font-family:"Instrument Serif", Georgia, serif; font-weight:400; font-size:156px; line-height:.95; }
-  .endw p { font-size:15px; letter-spacing:.24em; color:var(--ink2); margin-top:26px; }
-  #flash { position:absolute; inset:-200px; background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.55), rgba(184,162,255,.2) 30%, transparent 60%); opacity:0; pointer-events:none; z-index:40; }
-  #flash.go { animation:flash 1.6s var(--ease); }
-  @keyframes flash { 20% { opacity:1; } 100% { opacity:0; } }
+  /* 12 · closing */
+  .next { position:absolute; left:200px; top:280px; width:760px; }
+  .next .r { display:grid; grid-template-columns:44px 1fr; gap:14px; padding:20px 0; border-bottom:1px solid var(--line); font-size:23px; line-height:1.4; }
+  .next .r:last-child { border-bottom:0; }
+  .next .n { font:500 14px "JetBrains Mono", monospace; color:var(--v2); padding-top:6px; }
+  .ask { left:1030px; top:280px; width:500px; height:420px; padding:44px 46px; display:flex; flex-direction:column; justify-content:space-between; }
+  .ask .k { font-size:12px; letter-spacing:.18em; color:var(--v2); }
+  .ask .q2 { font-family:"Instrument Serif", Georgia, serif; font-size:46px; line-height:1.06; }
+  .ask .ess { display:flex; align-items:center; gap:14px; font-family:"Instrument Serif", Georgia, serif; font-size:26px; color:var(--ink2); }
 
-  :focus-visible { outline:2px solid var(--lilac); outline-offset:4px; }
-  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+  :focus-visible { outline:2px solid var(--v2); outline-offset:3px; }
+  @media (prefers-reduced-motion: reduce) { .slide, .st, .blk, .changed, .swap { transition:opacity .2s ease !important; transform:none !important; filter:none !important; } }
+  @media (prefers-reduced-transparency: reduce) { .glass { background:#1A1533; -webkit-backdrop-filter:none; backdrop-filter:none; } }
 </style>
 </head>
 <body>
-<div id="light"><div class="base"></div><div class="b b1"></div><div class="b b2"></div><div class="b b3"></div><div class="b b4"></div><div class="rib"></div><div class="rib r2"></div></div>
-<div class="bubble" style="width:220px;height:220px;left:6%;top:62%"></div>
-<div class="bubble" style="width:120px;height:120px;left:78%;top:12%;animation-duration:22s"></div>
-<div class="bubble" style="width:70px;height:70px;left:58%;top:80%;animation-duration:15s"></div>
-<svg width="0" height="0" style="position:absolute"><defs><filter id="gooey"><feGaussianBlur in="SourceGraphic" stdDeviation="18" result="b"/><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9" result="g"/><feBlend in="SourceGraphic" in2="g"/></filter></defs></svg>
-
+<div id="light"></div>
 <div id="stage">
-  <canvas id="hero3d" aria-label="The sensor, in 3D: drag to turn it"></canvas>
 
-  <!-- 0 · the opening -->
-  <section class="scene" data-name="Every set, seen." data-steps="0">
-    <div class="h-kick mono rv" data-at="0">A SENSOR FOR THE STRENGTH FLOOR</div>
-    <h1 class="h-title" id="htitle">Every set, <em>seen.</em></h1>
-    <div class="glass h-pill rv" data-at="0" style="transition-delay:.9s"><div class="sheen"></div><i></i>On the machines a gym already owns.</div>
-    <div class="reps rv" data-at="0" style="transition-delay:1.2s"><div class="n" id="repN">0</div><div class="l mono">PRESS SPACE TO LIFT</div></div>
-  </section>
-
-  <!-- 1 · the project: everything produces data, except the floor -->
-  <section class="scene" data-name="The project" data-steps="2">
-    <div class="draft mono">DRAFT · TEAM TEXT TO COME</div>
-    <div class="p-head"><span class="b rv" data-at="0">Everything in a gym produces data.</span><span class="b rv" data-at="0" id="exceptLine" style="transition-delay:1.4s"><em id="except">Except the floor.</em></span></div>
-    <div class="glass feed rv" data-at="0" style="left:220px;transition-delay:.3s"><div class="sheen"></div><svg class="ic" viewBox="0 0 40 40" fill="none" stroke="#CDBDFF" stroke-width="2"><rect x="7" y="12" width="26" height="18" rx="3"/><path d="M13 12V9h14v3M20 18v6"/></svg><div class="k mono">RECEPTION</div><div class="v" data-tick="1284" data-rate="0.9">1,284</div><div class="u">check-ins this week</div><svg class="spark" viewBox="0 0 300 60" preserveAspectRatio="none"><path d="M0 50 L30 42 L60 46 L90 30 L120 36 L150 22 L180 28 L210 16 L240 24 L270 12 L300 18" stroke="#CDBDFF" stroke-width="2" fill="none" opacity=".7"/></svg></div>
-    <div class="glass feed rv" data-at="0" style="left:546px;transition-delay:.45s"><div class="sheen"></div><svg class="ic" viewBox="0 0 40 40" fill="none" stroke="#CDBDFF" stroke-width="2"><rect x="6" y="11" width="28" height="19" rx="3"/><path d="M6 17h28M11 25h7"/></svg><div class="k mono">BILLING</div><div class="v" data-tick="58210" data-pre="€" data-rate="11">€58,210</div><div class="u">collected this month</div><svg class="spark" viewBox="0 0 300 60" preserveAspectRatio="none"><path d="M0 52 L40 48 L80 40 L120 41 L160 30 L200 27 L240 20 L300 10" stroke="#CDBDFF" stroke-width="2" fill="none" opacity=".7"/></svg></div>
-    <div class="glass feed rv" data-at="0" style="left:872px;transition-delay:.6s"><div class="sheen"></div><svg class="ic" viewBox="0 0 40 40" fill="none" stroke="#CDBDFF" stroke-width="2"><rect x="11" y="6" width="18" height="28" rx="2"/><circle cx="24" cy="21" r="1.6" fill="#CDBDFF"/></svg><div class="k mono">THE DOOR</div><div class="v" data-tick="3402" data-rate="1.3">3,402</div><div class="u">entries this week</div><svg class="spark" viewBox="0 0 300 60" preserveAspectRatio="none"><path d="M0 40 L30 30 L60 44 L90 26 L120 34 L150 18 L180 30 L210 20 L240 34 L270 14 L300 22" stroke="#CDBDFF" stroke-width="2" fill="none" opacity=".7"/></svg></div>
-    <div class="glass feed dead rv" id="floorTile" data-at="0" style="left:1198px;transition-delay:.75s"><div class="sheen"></div><svg class="ic" viewBox="0 0 40 40" fill="none" stroke="#CDBDFF" stroke-width="2"><path d="M10 6v28M30 6v28M10 8h20"/><rect x="13" y="22" width="14" height="11" rx="2"/><path d="M13 26h14M13 30h14"/></svg><div class="k mono">THE STRENGTH FLOOR</div><div class="v" id="floorV">—</div><div class="u" id="floorU">nothing recorded</div><svg class="spark" viewBox="0 0 300 60" preserveAspectRatio="none" id="floorSpark"><path d="M0 50 L300 50" stroke="rgba(255,255,255,.25)" stroke-width="2" stroke-dasharray="4 6" fill="none"/></svg></div>
-    <div id="drop"></div>
-    <div class="claims">
-      <div class="claim rv" data-at="2"><div class="k mono">FOR THE MEMBER</div><div class="v">Every rep counted, the rest timed, every set saved. <em>Nothing to type.</em></div></div>
-      <div class="claim rv" data-at="2" style="transition-delay:.25s"><div class="k mono">FOR THE GYM</div><div class="v">How every machine is used, by day and hour. <em>No new machines.</em></div></div>
-      <div class="claim rv" data-at="2" style="transition-delay:.5s"><div class="k mono">WHERE WE ARE</div><div class="v">A working sensor and iPhone app, used in <em>real training.</em></div></div>
+  <!-- 1 · title (Justus, as we start) -->
+  <section class="slide" data-name="Title" data-who="Justus" data-steps="0">
+    <div class="t-name mono st" data-s="0">[BRAND NAME]</div>
+    <div class="t-kick mono st" data-s="0">MINOR ENTREPRENEURSHIP</div>
+    <h1 class="t-h st" data-s="0">Our business plan,<br><em>first test.</em></h1>
+    <canvas id="sensor3d" class="st" data-s="0" aria-label="The sensor"></canvas>
+    <div class="team st" data-s="0">
+      <div><b>Justus</b><span>Business and sales</span></div>
+      <div><b>Adam</b><span>Technical founder</span></div>
+      <div><b>Bennett</b><span>Dutch market and interviews</span></div>
+      <div><b>Brijan</b><span>3D design</span></div>
     </div>
+    <div class="agenda mono st" data-s="0"><i>Concept</i> · Test matrix · Business Model Canvas · Brand Key and 4P · Scenario matrix · Finances</div>
   </section>
 
-  <!-- 2 · the test matrix: a flip board -->
-  <section class="scene" data-name="Test matrix" data-steps="5">
-    <div class="draft mono">DRAFT · TEAM TO CONFIRM</div>
-    <div class="kick mono rv" data-at="0">What we tested</div>
-    <h2 class="title rv" data-at="0">The test <em>matrix.</em></h2>
-    <div class="glass board rv" data-at="0" id="board"><div class="sheen"></div>
-      <div class="brow head mono"><div>WE BELIEVED</div><div>HOW WE TESTED</div><div>WHAT WE MEASURED</div><div>RESULT</div><div>STATUS</div></div>
+  <!-- 2 · concept 1 (Justus) -->
+  <section class="slide" data-name="Concept" data-who="Justus" data-steps="1">
+    <div class="who mono st" data-s="0"><b>JUSTUS</b> · CONCEPT</div>
+    <h2 class="h st" data-s="0">Gym owners steer their strength floor by feel.<br>We make each machine's use <em>visible.</em></h2>
+    <div class="glass vs st" data-s="0">
+      <div class="col-h mono" style="left:270px">TODAY</div><div class="col-h mono st" data-s="1" style="left:815px">WITH US</div>
+      <div class="div st" data-s="1" style="left:775px"></div>
+      <div class="row" style="top:0"><div class="k">Owner<small>pays</small></div><div class="a">Decides on machines by feel. Club software shows check-ins; makers show only their own machines.</div>
+        <div class="b st" data-s="1"><b>A weekly usage report for every machine:</b> what changed on the floor.</div></div>
+      <div class="row" style="top:200px"><div class="k">Member<small>pays nothing</small></div><div class="a">Wants the workout tracked, with little effort.</div>
+        <div class="b st" data-s="1"><b>Sets and reps in our app,</b> with very little typing.</div></div>
     </div>
+    <div class="foot st" data-s="1">One sensor per strength machine the gym already has · no new machines · no screens, cameras, coaching or leaderboards</div>
   </section>
 
-  <!-- 3 · the business model canvas -->
-  <section class="scene" data-name="Business Model Canvas" data-steps="9">
-    <div class="kick mono rv" data-at="0">Business Model Canvas</div>
-    <h2 class="title rv" data-at="0">How the business <em>works.</em></h2>
-    <div class="bmcwrap" id="bmc">
-      <svg id="threads"></svg>
+  <!-- 3 · concept 2 (Justus) -->
+  <section class="slide" data-name="Concept" data-who="Justus" data-steps="2">
+    <div class="who mono st" data-s="0"><b>JUSTUS</b> · CONCEPT</div>
+    <h2 class="h st" data-s="0">The owner pays.<br>Independents first, chains as the <em>goal.</em></h2>
+    <svg id="rings" viewBox="0 0 560 560"></svg>
+    <div class="facts3">
+      <div class="f st" data-s="0"><div class="k mono">CUSTOMER</div><div class="v">Owners of independent gyms with about 15–50 strength machines. The Netherlands: about 1,357 gyms (our estimate).</div></div>
+      <div class="f st" data-s="1"><div class="k mono">WHY NOW</div><div class="v">€83,000 net invested per German gym in 2025; about 80 % plan to invest in 2026 (DSSV, 2026).</div></div>
+      <div class="f st" data-s="2"><div class="k mono">PATH</div><div class="v">Independents prove the value <em>→</em> then chains.</div></div>
     </div>
+    <div class="foot st" data-s="2">So far 13 people in two test rounds · none a clean test yet · nothing signed</div>
   </section>
 
-  <!-- 4 · the brand key -->
-  <section class="scene" data-name="Brand Key" data-steps="8">
-    <div class="kick mono rv" data-at="0">Positioning · the Brand Key Model</div>
-    <h2 class="title rv" data-at="0">Who we are, in <em>nine answers.</em></h2>
-    <svg id="dial" viewBox="0 0 640 640" class="rv" data-at="0"></svg>
-    <div class="essence" id="essence">Every set, <em>seen.</em></div>
-    <div class="glass bkp rv" data-at="0"><div class="sheen"></div><div class="swap" id="bkin"></div></div>
-  </section>
-
-  <!-- 5 · the 4Ps -->
-  <section class="scene" data-name="Marketing mix" data-steps="5">
-    <div class="kick mono rv" data-at="0">Marketing mix · the 4Ps</div>
-    <h2 class="title rv" data-at="0">One brand, <em>four decisions.</em></h2>
-    <div id="goo"><div class="drop" id="d0"></div><div class="drop" id="d1"></div><div class="drop" id="d2"></div><div class="drop" id="d3"></div><div class="drop" id="d4"></div></div>
-    <div class="bkdrop mono" id="bkdrop">THE BRAND KEY</div>
-    <div class="glass pcard" style="left:220px" data-p="1"><div class="sheen"></div><div class="big"><em>P1</em></div><h4>Product</h4><div class="one">A sensor per machine, a report for the owner, an app for the member.</div>
-      <ul><li>Fits any machine the gym owns; no screen, no wiring</li><li>Each machine's use, when, which sit idle</li><li>Live count, rest timed, every set saved</li></ul><div class="from mono">FROM <b>RESTRAINT · BENEFITS</b></div></div>
-    <div class="glass pcard" style="left:550px" data-p="2"><div class="sheen"></div><div class="big"><em>P2</em></div><h4>Price</h4><div class="one">€8 per machine per month.</div>
-      <ul><li>At least 10 machines, 12 months</li><li>A 4-week audit, €390, credited on signing</li><li>Tested with gyms until 16 October</li></ul><div class="from mono">FROM <b>THE DISCRIMINATOR</b></div></div>
-    <div class="glass pcard" style="left:880px" data-p="3"><div class="sheen"></div><div class="big"><em>P3</em></div><h4>Place</h4><div class="one">Direct to the owner. We install and service.</div>
-      <ul><li>Around Zwolle until January 2027</li><li>Baden-Württemberg from February 2027, 140 gyms researched</li><li>Later, dealers on commission</li></ul><div class="from mono">FROM <b>THE TARGET GROUP</b></div></div>
-    <div class="glass pcard" style="left:1210px" data-p="4"><div class="sheen"></div><div class="big"><em>P4</em></div><h4>Promotion</h4><div class="one">"Your gym floor starts producing data."</div>
-      <ul><li>Calls in Germany, walk-ins in the Netherlands</li><li>A real sample report, not a demo</li><li>Referrals; FIBO, April 2027</li></ul><div class="from mono">FROM <b>THE INSIGHT</b></div></div>
-  </section>
-
-  <!-- 6 · the scenario matrix -->
-  <section class="scene" data-name="Scenario matrix" data-steps="4">
-    <div class="draft mono">DRAFT · TEAM TEXT TO COME</div>
-    <div class="kick mono rv" data-at="0">The futures we plan for</div>
-    <h2 class="title rv" data-at="0">Scenario <em>matrix.</em></h2>
-    <div class="sc3d rv" data-at="0">
-      <div class="plane" id="plane">
-        <div class="qt" data-q="1" style="right:20px;top:20px">The full loop</div>
-        <div class="qt" data-q="2" style="left:20px;top:20px">The owner's tool</div>
-        <div class="qt" data-q="3" style="right:20px;bottom:20px">The member's app</div>
-        <div class="qt" data-q="4" style="left:20px;bottom:20px">Back to the bench</div>
-        <div class="axisb" style="left:50%;top:-30px;bottom:-30px;width:2px;background:linear-gradient(transparent, rgba(255,255,255,.8), transparent)"></div>
-        <div class="axisb" style="top:50%;left:-30px;right:-30px;height:2px"></div>
-        <div id="orb" style="left:50%;top:50%"></div>
-      </div>
-      <div class="axt mono" style="left:360px;top:-6px">OWNERS PAY FOR FLOOR DATA ↑</div>
-      <div class="axt mono" style="left:640px;top:612px">MEMBERS USE THE APP →</div>
+  <!-- 4 · test matrix 1 (Bennett) -->
+  <section class="slide" data-name="Test matrix" data-who="Bennett" data-steps="1">
+    <div class="who mono st" data-s="0"><b>BENNETT</b> · TEST MATRIX</div>
+    <h2 class="h st" data-s="0">Two test rounds: 8 + 5 <em>people.</em></h2>
+    <div class="glass tm st" data-s="0">
+      <div class="r hd mono"><div>ROUND · RESPONDENTS</div><div>CONFIRMATION</div><div>DOUBT</div><div>REJECTION</div><div>ACTION</div></div>
+      <div class="r"><div class="w"><b>Test 1</b><span>September</span><div class="n">8 OF 10</div><span>4 lifters (L1–L4), a chain club manager (O1), 3 Dutch members (L5–L7)</span></div>
+        <div>A log without typing rated well 3 times, before our idea was described (L2, L3, O1) · machine-usage data “the best point” (O1, prompted)</div>
+        <div>How much a wrong count matters depends on the situation: rep range, training phase</div>
+        <div>L5–L7 could not picture it without seeing it work (prompted) · none of the five in the first group logs today · the chain dropped its connected machines: costly, low value</div>
+        <div>The owner pays, the member uses it free · round 2 for owners, kill lines fixed in advance · no retention promise</div></div>
+      <div class="r st" data-s="1"><div class="w"><b>Test 2</b><span>Sept – early Oct</span><div class="n">5 OF 10</div><span>3 Dutch gyms (NL-04, NL-05, NL-06), 2 members (M-NL-05, M-DE-01)</span></div>
+        <div>Value seen on all the unconnected machines, any brand (NL-06, prompted) · logging without typing liked, if reliable (M-NL-05, prompted)</div>
+        <div>No exact counts needed day to day · retention only if proven · their first price estimate far below our test prices (NL-06, prompted)</div>
+        <div>None of the three gyms saw a strong need for usage data: they already see their floor (our reading)</div>
+        <div>Narrower target · decisions, not data · a pilot with little staff work · end each talk with a concrete offer</div></div>
     </div>
-    <div class="glass scp rv" data-at="0"><div class="sheen"></div><div class="swap" id="scin"></div></div>
+    <div class="foot st" data-s="0">No conversation counts as a clean test yet. “Prompted” = said after we described our idea: a reaction, not proof of need. Nothing is signed or paid.</div>
   </section>
 
-  <!-- 7 · finances -->
-  <section class="scene" data-name="Finances" data-steps="2">
-    <div class="draft mono">DRAFT · TEAM NUMBERS TO COME</div>
-    <div class="kick mono rv" data-at="0">Finances</div>
-    <h2 class="title rv" data-at="0">The numbers, <em>per machine.</em></h2>
-    <div class="glass kband rv" data-at="0"><div class="sheen"></div>
-      <div class="kb"><div class="v" data-count="8" data-pre="€">€0</div><div class="l">per machine, per month</div></div>
-      <div class="kb"><div class="v" data-count="30">0</div><div class="l">paying gyms by the end of 2027</div></div>
-      <div class="kb"><div class="v" data-count="115200" data-pre="€">€0</div><div class="l">a year, at 30 gyms × 40 machines</div></div>
-      <div class="kb"><div class="v" data-count="6" data-post=" months">0</div><div class="l">to pay back a gym's sensors</div></div>
+  <!-- 5 · test matrix 2 + learnings (Bennett) -->
+  <section class="slide" data-name="What we learned" data-who="Bennett" data-steps="3">
+    <div class="who mono st" data-s="0"><b>BENNETT</b> · TEST MATRIX</div>
+    <h2 class="h st" data-s="0">Three learnings, and what we <em>changed.</em></h2>
+    <div class="ln">
+      <div class="r st" data-s="0"><div class="n">01</div><div class="l">Some members like it, but the owner must buy it.</div><div class="arr">→</div>
+        <div class="c"><b>The owner is our only buyer:</b> independent gyms with about 15–50 strength machines. Members use it and pay nothing.</div></div>
+      <div class="r st" data-s="1"><div class="n">02</div><div class="l">Data alone does not sell.</div><div class="arr">→</div>
+        <div class="c"><b>Decisions, not data.</b> In the trial the owner names one machine decision first: buy, move, service or retire. The report leads with change (proposed).</div></div>
+      <div class="r st" data-s="2"><div class="n">03</div><div class="l">Owners want results before they pay, with little risk and staff work.</div><div class="arr">→</div>
+        <div class="c"><b>No paid check: a free four-week trial</b> with full use; the owner signs only at the read-out. We install, remove and fix.</div></div>
+      <div class="r st" data-s="3"><div class="n">+</div><div class="l">About ourselves: our questions sometimes led the answer.</div><div class="arr">→</div>
+        <div class="c"><b>New interview rules:</b> consent on tape, neutral questions before we show anything, the offer only at the end.</div></div>
     </div>
-    <div class="plates" id="plates"></div>
-    <svg class="vessel" id="vessel" viewBox="0 0 446 430"></svg>
+    <div class="foot st" data-s="3">Next: 5 more conversations for test 2 · checkpoint Fri 16 Oct</div>
   </section>
 
-  <!-- 8 · the end -->
-  <section class="scene" data-name="Thank you" data-steps="0">
-    <div class="endw"><div>
-      <div class="rv" data-at="0" id="endmark" style="width:180px;height:180px;margin:0 auto"></div>
-      <h1 class="rv" data-at="0" style="transition-delay:.5s">Every set, <em>seen.</em></h1>
-      <p class="mono rv" data-at="0" style="transition-delay:1s">THANK YOU · QUESTIONS</p>
-    </div></div>
+  <!-- 6 · the canvas (Adam) -->
+  <section class="slide" data-name="Business Model Canvas" data-who="Adam" data-steps="6">
+    <div class="who mono st" data-s="0"><b>ADAM</b> · BUSINESS MODEL CANVAS</div>
+    <h2 class="h st" data-s="0" style="font-size:46px">Business Model Canvas, as of 5 October <em>2026.</em></h2>
+    <div class="legend st" data-s="0"><span><i style="border-color:var(--v)"></i>gym / owner</span><span><i style="border-color:rgba(205,193,255,.55);border-top-style:dotted"></i>member</span><span><i style="border-color:rgba(255,255,255,.2)"></i>partners and the whole business</span></div>
+    <div class="glass changed" id="changed"><div class="k mono">WHAT CHANGED SINCE BMC 1.0</div>
+      <p>We dropped “a cheaper substitute for EGYM”: we do not want to be cheaper, we want to be worth it.</p>
+      <p>The sensors are no longer sold at a thin margin: the price now includes installation.</p></div>
+    <div class="bmc st" data-s="0" id="bmc"></div>
+    <div class="foot st" data-s="0" style="font-size:12.5px;bottom:40px">Priced per machine, not per gym. Prices are our test prices (team decision, 5 Oct 2026); €10 and €15 a month are tested as well. The sensor cost is the team's target.</div>
   </section>
 
-  <div id="flash"></div>
-  <div id="wipe"><div class="n" id="wipeN">01</div><div class="t mono" id="wipeT">THE PROJECT</div></div>
-  <nav id="stack" aria-label="Chapters"></nav>
-  <div id="top" class="mono"><div class="brand"><span id="topmark" style="width:26px;height:26px;display:inline-block"></span><span id="chapter">EVERY SET, SEEN.</span></div><div id="count">00 / 07</div></div>
-  <div id="hint" class="mono">→ NEXT · ← BACK · 1–7 CHAPTERS · F FULL SCREEN</div>
+  <!-- 7 · brand key (Brijan) -->
+  <section class="slide" data-name="Brand Key" data-who="Brijan" data-steps="8">
+    <div class="who mono st" data-s="0"><b>BRIJAN</b> · BRAND KEY</div>
+    <h2 class="h st" data-s="0">Brand Key: every set <em>seen.</em></h2>
+    <svg id="key" viewBox="0 0 520 660" class="st" data-s="0"></svg>
+    <div class="glass bkp st" data-s="0"><div class="swap" id="bkin"></div></div>
+  </section>
+
+  <!-- 8 · the 4Ps (Brijan) -->
+  <section class="slide" data-name="4P" data-who="Brijan" data-steps="4">
+    <div class="who mono st" data-s="0"><b>BRIJAN</b> · 4P</div>
+    <h2 class="h st" data-s="0">The 4Ps: one offer, from the Brand <em>Key.</em></h2>
+    <div class="ps">
+      <div class="r st" data-s="0"><div class="p">Product</div><div class="qn">What do we offer?<small>INSIGHT 4 · BENEFITS 5 · DISCRIMINATOR 8</small></div>
+        <div class="c"><b>One sensor per strength machine</b> (retrofit, no new machines), a member app (iPhone first) and a weekly usage report for the owner. We install, support and review it once a year. Left out on purpose: screens, cameras, coaching, leaderboards.</div></div>
+      <div class="r st" data-s="1"><div class="p">Price</div><div class="qn">What does the owner pay?<small>TARGET 3 · VALUES 6 · REASONS 7</small></div>
+        <div class="c"><b>Test prices: €249 per machine once + €20 per machine a month</b>, 12 months, at least 10 machines (20 machines: €4,980 once + €400 a month). A free four-week trial with full use comes first; the owner signs at the read-out. Members pay nothing.</div></div>
+      <div class="r st" data-s="2"><div class="p">Place</div><div class="qn">Where and how does the owner buy?<small>ROOTS 1 · TARGET 3 · VALUES 6</small></div>
+        <div class="c"><b>Direct, in person:</b> walk-in → floor walk → free trial → read-out. The Netherlands until Jan 2027; from Feb 2027 around Heilbronn. We install and remove ourselves. Chains after ≥ 10 paying gyms and 3 references.</div></div>
+      <div class="r st" data-s="3"><div class="p">Promotion</div><div class="qn">How does the owner hear of us and say yes?<small>INSIGHT 4 · VALUES 6 · REASONS 7 · ESSENCE 9</small></div>
+        <div class="c"><b>Open with the owner's own gap;</b> the priced offer only at the end. A sample weekly report (labelled sample), not the device. “Every set seen” · “No new machines, no screens, no camera”. Referrals at every read-out.</div></div>
+    </div>
+    <div class="thread st" data-s="4">One thread: we add, we don't replace, and we <em>observe.</em></div>
+  </section>
+
+  <!-- 9 · scenario matrix (Bennett) -->
+  <section class="slide" data-name="Scenario matrix" data-who="Bennett" data-steps="5">
+    <div class="who mono st" data-s="0"><b>BENNETT</b> · SCENARIO MATRIX</div>
+    <h2 class="h st" data-s="0">Two trends, four futures, and what we prepare <em>for.</em></h2>
+    <div class="idea st" data-s="0">Our idea, in every future: members' training counted and each machine's use shown to the owner, on the machines a gym already owns.</div>
+    <div class="axY st" data-s="0"><span class="mono" style="top:560px">INDEPENDENTS GAIN GROUND ↓ &nbsp; · &nbsp; ↑ CHAINS CONSOLIDATE</span></div>
+    <div class="sm" id="sm">
+      <div class="q st" data-s="1" data-q="1" style="left:0;top:0"><div class="num">1</div><h4>Smart chains</h4><div class="lab mono">THREAT</div>
+        <div class="m">Head offices buy connected floors; our pool of ordinary machines shrinks.</div><div class="mv">Be the data for the rest of the floor; as an option, the technology others build in.</div></div>
+      <div class="q st" data-s="2" data-q="2" style="right:0;top:0"><div class="num">2</div><h4>Lean chains</h4><div class="lab mono">LATER OPPORTUNITY</div>
+        <div class="m">Chains run ordinary machines longer. Big accounts, slow decisions.</div><div class="mv">The chain path after ≥ 10 paying gyms and 3 references. An upside, not in our planning numbers.</div></div>
+      <div class="q st" data-s="3" data-q="3" style="left:0;bottom:0"><div class="num">3</div><h4>Mixed floors</h4><div class="lab mono">LIKELY NEAR TERM</div>
+        <div class="m">Owners add a connected circuit and keep the rest: 12 of 23 gyms in Heilbronn-Franken already do.</div><div class="mv">“Bring the rest of your floor into the same data.”</div></div>
+      <div class="q st" data-s="4" data-q="4" style="right:0;bottom:0"><div class="num">4</div><h4>The owner's floor</h4><div class="lab mono">BEST FIT</div>
+        <div class="m">Independents keep their machines longer and compete on service.</div><div class="mv">The plan as built: walk-ins, the free four-week trial, referrals.</div></div>
+    </div>
+    <div class="axX mono st" data-s="0"><span>← CONNECTED MACHINES BECOME STANDARD</span><span>ORDINARY MACHINES STAY →</span></div>
+    <div class="foot st" data-s="5" style="font-size:13.5px;bottom:28px">We prepare for 3 and 4 for the next two to three years (our reading, not a forecast) and watch for very cheap connected machines. Sources: Deloitte, 2026: in Germany in 2025 chain facilities grew 12.6 %, independents 2.4 %; Playlist & EGYM, 2026: more than 33,000 locations.</div>
+  </section>
+
+  <!-- 10 · finances 1 (Justus) -->
+  <section class="slide" data-name="Finances" data-who="Justus" data-steps="1">
+    <div class="who mono st" data-s="0"><b>JUSTUS</b> · FINANCES</div>
+    <span class="tag mono pending st" data-s="0">PLANNING CASE (OUR ESTIMATES) · NUMBERS FOLLOW</span>
+    <h2 class="h st" data-s="0">Planning case: €249 once + €20 a month, after a free <em>trial.</em></h2>
+    <div class="glass fin st" data-s="0">
+      <div class="r hd mono"><span>PLANNING CASE</span><span style="text-align:right">YEAR 1</span><span style="text-align:right">YEAR 2</span></div>
+      <div class="r"><span>Gyms under contract</span><span class="ph">—</span><span class="ph">—</span></div>
+      <div class="r"><span>Turnover</span><span class="ph">—</span><span class="ph">—</span></div>
+      <div class="r"><span>Result</span><span class="ph">—</span><span class="ph">—</span></div>
+      <div class="r"><span>Cash at year end</span><span class="ph">—</span><span class="ph">—</span></div>
+    </div>
+    <div class="side">
+      <div class="f st" data-s="1"><div class="k mono">BREAK-EVEN</div><div class="big ph">—</div><div class="v" style="color:var(--ink3);font-size:16px">month, in the planning case</div></div>
+      <div class="f st" data-s="1"><div class="k mono">TEST PRICES</div><div class="v">€249 per machine once<br>+ €20 per machine a month</div></div>
+    </div>
+    <div class="foot st" data-s="0">Planning case (our estimates), not a forecast.</div>
+  </section>
+
+  <!-- 11 · finances 2 (Justus) -->
+  <section class="slide" data-name="Financing" data-who="Justus" data-steps="2">
+    <div class="who mono st" data-s="0"><b>JUSTUS</b> · FINANCES</div>
+    <span class="tag mono pending st" data-s="0">PLANNING CASE (OUR ESTIMATES) · NUMBERS FOLLOW</span>
+    <h2 class="h st" data-s="0">The financing need, and the lever that <em>moves it.</em></h2>
+    <div class="facts3" style="left:200px;width:820px;top:270px">
+      <div class="f st" data-s="0"><div class="k mono">FINANCING NEED</div><div class="v"><span class="big ph">—</span></div></div>
+      <div class="f st" data-s="1"><div class="k mono">WHO PAYS</div><div class="v">The founders fund the start-up phase. Outside money in two parts, February and May 2027: <b>planned, not secured.</b></div></div>
+      <div class="f st" data-s="2"><div class="k mono">THE LEVER</div><div class="v">Trial → order: how many free trials end in an order, ours against the published medians.</div></div>
+    </div>
+    <div class="foot st" data-s="2" style="font-size:13px">Chains: an upside, illustrative only, not in the planning case.</div>
+  </section>
+
+  <!-- 12 · closing (during questions) -->
+  <section class="slide" data-name="Next" data-who="Team" data-steps="1">
+    <div class="who mono st" data-s="0"><b>THE TEAM</b> · QUESTIONS</div>
+    <h2 class="h st" data-s="0">What we test next, and where we'd value your <em>feedback.</em></h2>
+    <div class="next">
+      <div class="r st" data-s="0"><div class="n">01</div><div>Five more test-2 conversations by Fri 16 Oct, one price per owner.</div></div>
+      <div class="r st" data-s="0"><div class="n">02</div><div>A member test with lifters outside the team (protocol in draft).</div></div>
+      <div class="r st" data-s="0"><div class="n">03</div><div>The source of the first funding part, by mid-December.</div></div>
+    </div>
+    <div class="glass ask st" data-s="1"><div class="k mono">YOUR VIEW</div><div class="q2">Is this enough evidence to go <em>on?</em></div>
+      <div class="ess"><span id="endmark" style="width:40px;height:40px;display:inline-block"></span>Every set seen.</div></div>
+  </section>
+
+  <nav id="stack" aria-label="Slides"></nav>
+  <div id="brand" class="mono"><span id="topmark" style="width:22px;height:22px;display:inline-block"></span><span id="count">01 / 12</span></div>
 </div>
-<div id="lens"></div>
 
 <script src="sensor-model.js"></script>
 <script type="importmap">
@@ -405,381 +421,156 @@
 </script>
 <script type="module">
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
-const scenes = $$('.scene');
-const CHAPTERS = scenes.slice(1, 8).map((s) => s.dataset.name);
-const HUES = [0, -22, 28, 0, 40, -14, 16, -28, 0];   // the light shifts a little per chapter
-const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-
-// ---- the mark ----------------------------------------------------------------------------------------------------------
+const slides = $$('.slide');
 const MARK = `<svg viewBox="0 0 64 64" width="100%" height="100%" style="overflow:visible;display:block">
-  <defs><linearGradient id="ml" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6F2FF"/><stop offset=".55" stop-color="#E4DAFF"/><stop offset="1" stop-color="#B29CFF"/></linearGradient>
-  <linearGradient id="mr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9B8BD6"/><stop offset="1" stop-color="#3A3A46"/></linearGradient>
-  <filter id="mh" x="-60%" y="-200%" width="220%" height="500%"><feGaussianBlur stdDeviation="3.2"/></filter></defs>
-  <rect x="12" y="15" width="40" height="10" rx="5" fill="#8A6CFF" opacity=".9" filter="url(#mh)"/><rect x="31" y="25" width="2" height="12" rx="1" fill="url(#mr)"/>
-  <rect x="12" y="37" width="40" height="13" rx="6.5" fill="#1B1640" stroke="#4A4280" stroke-width=".8"/><path d="M18.5 37.6h27" stroke="#B29CFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
-  <rect x="12" y="15" width="40" height="10" rx="5" fill="url(#ml)"/></svg>`;
+  <rect x="12" y="15" width="40" height="10" rx="5" fill="#CDC1FF"/><rect x="31" y="25" width="2" height="12" rx="1" fill="#8F74FF"/>
+  <rect x="12" y="37" width="40" height="13" rx="6.5" fill="none" stroke="#8F74FF" stroke-width="1.6"/></svg>`;
 $('#topmark').innerHTML = MARK; $('#endmark').innerHTML = MARK;
-$('#endmark').style.filter = 'drop-shadow(0 0 40px rgba(184,162,255,.8))';
 
-// ---- the stage fits the window -----------------------------------------------------------------------------------------
-let S = 1;
-function fit() { S = Math.min(innerWidth / 1600, innerHeight / 900); $('#stage').style.transform = `translate(${-800 * S}px, ${-450 * S}px) scale(${S})`; }
+// the stage fits the window
+function fit() { const s = Math.min(innerWidth / 1600, innerHeight / 900); $('#stage').style.transform = `translate(${-800 * s}px, ${-450 * s}px) scale(${s})`; }
 addEventListener('resize', fit); fit();
 
-// ---- the lens: follows the pointer, rests when it does --------------------------------------------------------------
-(function lens() {
-  const el = $('#lens'); let x = innerWidth / 2, y = innerHeight / 2, tx = x, ty = y, idle;
-  addEventListener('pointermove', (e) => { tx = e.clientX; ty = e.clientY; el.style.opacity = 1; clearTimeout(idle); idle = setTimeout(() => { el.style.opacity = 0; }, 2200); });
-  (function f() { x += (tx - x) * 0.14; y += (ty - y) * 0.14; el.style.transform = `translate(${x}px, ${y}px)`; requestAnimationFrame(f); })();
-})();
-
-// ---- the weight stack --------------------------------------------------------------------------------------------------
+// the stack: one plate per slide
 const stack = $('#stack');
-stack.innerHTML = `<div class="cable"></div><div class="rod" style="left:22px"></div><div class="rod" style="left:67px"></div><div class="cap" id="cap"></div>` +
-  CHAPTERS.map((n, i) => `<div class="plate" data-i="${i + 1}" style="top:${34 + i * 60}px" role="button" tabindex="0" aria-label="${n}"><b>${String(i + 1).padStart(2, '0')}</b><span class="mono">${n.toUpperCase()}</span></div>`).join('') +
-  `<div class="pin" id="pin"></div>`;
-function drawStack(cur) {
-  const lift = cur >= 1 ? 22 : 0;
-  $$('.plate', stack).forEach((p) => { const i = +p.dataset.i, up = cur >= i; p.classList.toggle('lifted', up); p.classList.toggle('cur', i === cur); p.style.transform = up ? `translateY(${-lift}px)` : 'none'; });
-  $('#cap').style.transform = cur >= 1 ? `translateY(${-lift}px)` : 'none';
-  const at = Math.min(Math.max(cur, 1), 7);
-  $('#pin').style.top = `${34 + (at - 1) * 60 + 22 - lift}px`; $('#pin').style.opacity = cur >= 1 && cur <= 7 ? 1 : 0;
-  stack.classList.toggle('finale', cur === 8);
-}
-stack.addEventListener('click', (e) => { const p = e.target.closest('.plate'); if (p) go(+p.dataset.i, 0); });
-stack.addEventListener('keydown', (e) => { const p = e.target.closest('.plate'); if (p && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); e.stopPropagation(); go(+p.dataset.i, 0); } });
+stack.innerHTML = `<div class="rod" style="left:14px"></div><div class="rod" style="left:48px"></div>` +
+  slides.map((s, i) => `<div class="p" data-i="${i}" style="top:${i * 54}px" role="button" tabindex="0" aria-label="${i + 1}: ${s.dataset.name}"><b>${String(i + 1).padStart(2, '0')}</b><span>${s.dataset.who} · ${s.dataset.name}</span></div>`).join('');
+stack.addEventListener('click', (e) => { const p = e.target.closest('.p'); if (p) go(+p.dataset.i); });
 
-// ---- scenes, steps, the wipe -------------------------------------------------------------------------------------------
-let cur = -1, step = 0, busy = false;
-const stepsOf = (i) => +scenes[i].dataset.steps;
-const enter = {}, at = {}, leaveH = {};
+// slides and steps
+let cur = -1, step = 0;
+const hooks = {};
 function paint() {
-  const s = scenes[cur];
-  $$('.rv', s).forEach((e) => e.classList.toggle('on', +(e.dataset.at || 0) <= step));
-  $$('.glass', s).forEach((g) => { const r = g.classList.contains('rv') ? g.classList.contains('on') : true; if (r && !g.classList.contains('sweep')) g.classList.add('sweep'); });
-  at[s.dataset.name]?.(step);
-  history.replaceState(null, '', `#${cur}${step ? '.' + step : ''}`);
+  const s = slides[cur];
+  $$('.st', s).forEach((e) => e.classList.toggle('on', +e.dataset.s <= step));
+  hooks[cur]?.(step);
+  $$('.p', stack).forEach((p) => { const i = +p.dataset.i; p.classList.toggle('up', i < cur); p.classList.toggle('cur', i === cur); });
+  $('#count').textContent = `${String(cur + 1).padStart(2, '0')} / 12`;
+  history.replaceState(null, '', `#${cur + 1}${step ? '.' + step : ''}`);
 }
-async function go(i, s = 0, instant = false) {
-  i = Math.max(0, Math.min(scenes.length - 1, i));
-  if (busy) return;
-  const changing = i !== cur;
-  if (changing && cur >= 0 && !instant && i >= 1) {
-    busy = true;
-    const w = $('#wipe'); $('#wipeN').textContent = i <= 7 ? String(i).padStart(2, '0') : '—'; $('#wipeT').textContent = scenes[i].dataset.name.toUpperCase();
-    w.style.visibility = 'visible';
-    const a = w.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-1500px)', offset: .45 }, { transform: 'translateX(-1500px)', offset: .55 }, { transform: 'translateX(-3200px)' }],
-      { duration: 1250, easing: 'cubic-bezier(.7,0,.3,1)' });
-    await wait(560); swapTo(i, s);
-    await a.finished; w.style.visibility = 'hidden'; busy = false;
-  } else if (changing) swapTo(i, s); else { step = s === 'last' ? stepsOf(cur) : s; paint(); }
+function go(i, s = 0) {
+  i = Math.max(0, Math.min(slides.length - 1, i));
+  const dir = i < cur ? 'back' : '';
+  if (i !== cur) {
+    if (cur >= 0) { const o = slides[cur]; o.className = `slide gone ${dir}`; $$('.st', o).forEach((e) => e.classList.remove('on')); }
+    const n = slides[i]; n.className = `slide ${dir}`; void n.offsetWidth; n.className = `slide on ${dir}`;
+    cur = i;
+  }
+  step = s === 'last' ? +slides[cur].dataset.steps : s;
+  requestAnimationFrame(paint);
 }
-function swapTo(i, s) {
-  if (cur >= 0) { leaveH[scenes[cur].dataset.name]?.(); scenes[cur].classList.remove('active'); $$('.rv', scenes[cur]).forEach((e) => e.classList.remove('on')); $$('.glass', scenes[cur]).forEach((g) => g.classList.remove('sweep')); }
-  cur = i; step = s === 'last' ? stepsOf(i) : s;
-  scenes[cur].classList.add('active');
-  $('#light').style.filter = `hue-rotate(${HUES[cur]}deg)`;
-  drawStack(cur);
-  $('#chapter').textContent = (cur === 0 ? 'Every set, seen.' : scenes[cur].dataset.name).toUpperCase();
-  $('#count').textContent = `${String(Math.min(cur, 7)).padStart(2, '0')} / 07`;
-  $('#hero3d').style.opacity = cur === 0 ? 1 : 0; $('#hero3d').style.pointerEvents = cur === 0 ? 'auto' : 'none';
-  $('#hint').style.opacity = cur === 0 ? 1 : .55;
-  enter[scenes[cur].dataset.name]?.();
-  requestAnimationFrame(() => requestAnimationFrame(paint));
-}
-function next() { if (busy) return; if (step < stepsOf(cur)) { step++; paint(); } else if (cur < scenes.length - 1) go(cur + 1, 0); }
-function back() { if (busy) return; if (step > 0) { step--; paint(); } else if (cur > 0) go(cur - 1, 'last'); }
+const next = () => (step < +slides[cur].dataset.steps ? (step++, paint()) : go(cur + 1));
+const back = () => (step > 0 ? (step--, paint()) : cur > 0 && go(cur - 1, 'last'));
 addEventListener('keydown', (e) => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
-  if (e.key === ' ' && cur === 0) { e.preventDefault(); lift(); return; }
-  if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); next(); }
-  else if (['ArrowLeft', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); back(); }
-  else if (/^[1-7]$/.test(e.key)) go(+e.key, 0);
-  else if (e.key === '0' || e.key === 'Home') go(0, 0);
+  if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); next(); }
+  else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); back(); }
+  else if (/^[1-9]$/.test(e.key)) go(+e.key - 1); else if (e.key === '0') go(9); else if (e.key === '-') go(10); else if (e.key === '=') go(11);
+  else if (e.key === 'Home') go(0); else if (e.key === 'End') go(11);
   else if (e.key.toLowerCase() === 'f') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
 });
-let tx0 = null;
-addEventListener('touchstart', (e) => { tx0 = e.touches[0].clientX; }, { passive: true });
-addEventListener('touchend', (e) => { if (tx0 === null) return; const d = e.changedTouches[0].clientX - tx0; if (Math.abs(d) > 50) (d < 0 ? next : back)(); tx0 = null; });
+let tx = null;
+addEventListener('touchstart', (e) => { tx = e.touches[0].clientX; }, { passive: true });
+addEventListener('touchend', (e) => { if (tx === null) return; const d = e.changedTouches[0].clientX - tx; if (Math.abs(d) > 50) (d < 0 ? next : back)(); tx = null; });
 
-// rising numbers
-function countUp(el, to = +el.dataset.count, ms = 1500) {
-  const pre = el.dataset.pre || '', post = el.dataset.post || '', t0 = performance.now();
-  const tick = (t) => { const k = Math.min(1, (t - t0) / ms), e = 1 - Math.pow(1 - k, 4); el.textContent = pre + Math.round(to * e).toLocaleString('en-GB') + post; if (k < 1) requestAnimationFrame(tick); };
-  requestAnimationFrame(tick);
-}
-
-// ======================================================================================================================
-// 0 · the opening: the title assembles; space lifts the sensor and sends a ripple
-(function () { const h = $('#htitle'); const em = h.querySelector('em'); const plain = h.childNodes[0].textContent;
-  h.innerHTML = [...plain].map((c, i) => `<span class="ch" style="animation-delay:${0.1 + i * 0.05}s">${c === ' ' ? '&nbsp;' : c}</span>`).join('') +
-    `<em>${[...em.textContent].map((c, i) => `<span class="ch" style="animation-delay:${0.65 + i * 0.07}s">${c}</span>`).join('')}</em>`; })();
-enter['Every set, seen.'] = () => { const h = $('#htitle'); h.classList.remove('go'); void h.offsetWidth; h.classList.add('go'); };
-let lift = () => {};
-
-// 1 · the project
-let ticking = null;
-enter['The project'] = () => {
-  clearInterval(ticking);
-  $$('.feed [data-tick]').forEach((el) => countUp(el, +el.dataset.tick, 1600));
-  ticking = setInterval(() => $$('.scene.active .feed [data-rate]').forEach((el) => { el.dataset.tick = String(+el.dataset.tick + Math.round(+el.dataset.rate * (1 + Math.random())));
-    el.textContent = (el.dataset.pre || '') + (+el.dataset.tick).toLocaleString('en-GB'); }), 700);
-};
-leaveH['The project'] = () => clearInterval(ticking);
-let floorLit = false;
-at['The project'] = (s) => {
-  const tile = $('#floorTile'), drop = $('#drop');
-  if (s >= 1 && !floorLit) {
-    floorLit = true; drop.classList.remove('fall'); void drop.offsetWidth; drop.classList.add('fall');
-    setTimeout(() => {
-      tile.classList.remove('dead'); tile.classList.add('alive');
-      const r = document.createElement('div'); r.className = 'ripple'; r.style.left = '1346px'; r.style.top = '423px'; $('#stage').appendChild(r); setTimeout(() => r.remove(), 1700);
-      $('#floorV').dataset.tick = '412'; countUp($('#floorV'), 412, 1800); setTimeout(() => { $('#floorV').dataset.rate = '0.6'; }, 1900); $('#floorU').textContent = 'sets counted this week';
-      setTimeout(() => { drop.classList.remove('fall'); drop.style.top = '446px'; drop.style.opacity = '1'; drop.style.transition = 'opacity .8s, transform .8s';   // the sensor sinks into the tile
-        requestAnimationFrame(() => requestAnimationFrame(() => { drop.style.opacity = '0'; drop.style.transform = 'scale(.6)'; })); }, 700);
-      $('#floorSpark').innerHTML = '<path d="M0 54 L40 44 L80 46 L120 30 L160 34 L200 18 L240 22 L300 6" stroke="#fff" stroke-width="2.5" fill="none" style="filter:drop-shadow(0 0 6px #b8a2ff)"/>';
-      const ex = $('#except'); ex.style.transition = 'opacity .4s'; ex.style.opacity = 0;
-      setTimeout(() => { ex.textContent = 'Now the floor does too.'; ex.style.opacity = 1; }, 420);
-    }, 1050);
-  }
-  if (s === 0 && floorLit) {
-    floorLit = false; drop.classList.remove('fall'); drop.style.opacity = ''; drop.style.transform = ''; drop.style.top = ''; drop.style.transition = ''; delete $('#floorV').dataset.rate; tile.classList.add('dead'); tile.classList.remove('alive');
-    $('#floorV').textContent = '—'; $('#floorU').textContent = 'nothing recorded'; $('#except').textContent = 'Except the floor.';
-    $('#floorSpark').innerHTML = '<path d="M0 50 L300 50" stroke="rgba(255,255,255,.25)" stroke-width="2" stroke-dasharray="4 6" fill="none"/>';
-  }
-  $$('.feed').forEach((f) => { f.style.transformOrigin = '50% 0'; f.style.transform = s >= 2 ? 'scale(.94)' : 'none'; });
-};
-
-// 2 · the test matrix: a flip board
-const TESTS = [   // [we believed, how we tested, what we measured, result, status]
-  ['Lifters do not keep a log of their sets', 'Interviews with lifters', 'Who keeps a log today', '0 OF 6', 'ok', 'CONFIRMED'],
-  ['Gym-goers prefer a sensor on the machine', 'Published survey, 615 people', 'Who prefers it to a wearable', '60 %', 'ok', 'SUPPORTED'],
-  ['A sensor counts sets on the machines a gym has', 'Prototype on real machines', 'Sets counted exactly', 'RUNNING', 'run', 'RUNNING'],
-  ['An owner pays per machine, every month', 'Price talks with gyms, until 16 Oct', 'Yes at €8 per machine', 'OPEN', 'open', 'TO TEST'],
-  ['One charge lasts long enough', 'Overnight battery runs', 'Days per charge', '~2 DAYS', 'run', 'RUNNING'],
-];
-$('#board').insertAdjacentHTML('beforeend', TESTS.map(([b, h, m, r]) => `<div class="brow"><div>${b}</div><div class="dim">${h}</div><div class="dim">${m}</div>
-  <div class="flaps">${Array.from({ length: 8 }, () => '<div class="flap"> </div>').join('')}</div><div class="lamp mono"><i></i><span></span></div></div>`).join(''));
-const flipped = new Set();
-function flip(row, text) {
-  const flaps = $$('.flap', row), CH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%~';
-  const target = text.padEnd(8, ' ').slice(0, 8);
-  flaps.forEach((f, i) => { let n = 6 + i * 2;
-    const t = setInterval(() => { f.classList.remove('tick'); void f.offsetWidth; f.classList.add('tick');
-      if (--n <= 0) { clearInterval(t); f.textContent = target[i] === ' ' ? ' ' : target[i]; } else f.textContent = CH[Math.floor(Math.random() * CH.length)]; }, 55); });
-}
-at['Test matrix'] = (s) => {
-  $$('#board .brow:not(.head)').forEach((row, i) => {
-    const on = s >= i + 1, [, , , r, cls, label] = TESTS[i], lamp = $('.lamp', row);
-    if (on && !flipped.has(i)) { flipped.add(i); flip(row, r); setTimeout(() => { lamp.className = `lamp mono ${cls}`; $('span', lamp).textContent = label; }, 700); }
-    if (!on && flipped.has(i)) { flipped.delete(i); $$('.flap', row).forEach((f) => { f.textContent = ' '; }); lamp.className = 'lamp mono'; $('span', lamp).textContent = ''; }
-  });
-};
-
-// 3 · the canvas: the blocks lock in; the focused one lifts and threads show what it feeds
-const BMC = {
-  KP: [1, 3, 1, 3, 'KEY PARTNERS', ['<b>Equipment distributors</b>, also a sales channel', 'Machine manufacturers', 'Hardware and component suppliers', 'Service partners', 'Investors']],
-  KA: [3, 5, 1, 2, 'KEY ACTIVITIES', ['<b>Install</b> and onboard', 'Maintain hardware and software', 'Build and test the app']],
-  KR: [3, 5, 2, 3, 'KEY RESOURCES', ['<b>The sensor</b> and its software', 'A network of gym owners', 'A test facility, our own 3D printer']],
-  VP: [5, 7, 1, 3, 'VALUE PROPOSITIONS', ['<b>Gym:</b> a cheaper substitute for smart machines', 'Which machines are used, when, which sit idle', 'Servicing and buying by real use', '<b>Member:</b> tracking with nothing to type', 'Progress you can see', 'Retention<span class="tt mono">TO TEST</span>']],
-  CR: [7, 9, 1, 2, 'CUSTOMER RELATIONSHIPS', ['<b>Self-service</b> by design', 'Co-creation with the first 3–10 gyms']],
-  CH: [7, 9, 2, 3, 'CHANNELS', ['<b>Direct sales</b>, a live demo every time', 'Distributors on commission', 'Members come through their gym']],
-  CS: [9, 11, 1, 3, 'CUSTOMER SEGMENTS', ['<b>Payers:</b> independent strength gyms', '<b>Users:</b> their members', 'Later: suppliers, personal trainers']],
-  C: [1, 6, 3, 4, 'COST STRUCTURE', ['<b>Build:</b> software, hardware, legal and CE', '<b>Run:</b> servers, sales, support', '<b>Per unit:</b> about €30 per sensor']],
-  R: [6, 11, 3, 4, 'REVENUE STREAMS', ['<b>Subscription, priced per machine</b>: where the profit sits', 'Hardware sale or included<span class="tt mono">TO DECIDE</span>', 'A pro app for members<span class="tt mono">TO TEST</span>']],
-};
-const REL = { CS: ['VP', 'CH', 'CR', 'R'], VP: ['CS', 'KR', 'KA'], CH: ['CS', 'VP'], CR: ['CS'], R: ['CS', 'VP'], KR: ['VP', 'KA', 'C'], KA: ['VP', 'KP', 'C'], KP: ['KA', 'KR'], C: ['KR', 'KA'] };
-const BMC_ORDER = ['CS', 'VP', 'CH', 'CR', 'R', 'KR', 'KA', 'KP', 'C'];
-(function () {
-  const W = 1296, H = 600, cw = (W - 9 * 12) / 10, rh = [0, 222, 444, 600], g = 12;
-  const box = {};
-  $('#bmc').insertAdjacentHTML('afterbegin', Object.entries(BMC).map(([k, [c0, c1, r0, r1, t, xs]], n) => {
-    const x = (c0 - 1) * (cw + g), w = (c1 - c0) * (cw + g) - g, y = rh[r0 - 1] + (r0 > 1 ? g / 2 : 0), h = rh[r1 - 1] - rh[r0 - 1] - (r0 > 1 ? g / 2 : 0) - (r1 < 4 ? g / 2 : 0);
-    box[k] = { x: x + w / 2, y: y + h / 2 };
-    return `<div class="glass blk" data-k="${k}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;transition-delay:${n * 0.07}s"><div class="sheen"></div><div class="t mono">${t}</div><ul>${xs.map((x) => `<li>${x}</li>`).join('')}</ul></div>`;
-  }).join(''));
-  window.BMCBOX = box;
+// 3 · the market, ring by ring
+(function rings() {
+  const R = [[270, '9,647', 'gyms in Germany'], [190, '4,202', 'independents (Deloitte, 2026)'], [118, '2,520–3,150', 'with a machine floor (our estimate)']];
+  $('#rings').innerHTML = R.map(([r, n, l], i) => `<g class="ring" data-i="${i}" style="opacity:0;transition:opacity .6s cubic-bezier(.22,1,.36,1)">
+      <circle cx="280" cy="${280 + (270 - r)}" r="${r}"/>
+      <text x="280" y="${280 + (270 - r) - r + (i === 2 ? 98 : 46)}" text-anchor="middle" fill="#fff" font-family="Instrument Sans" font-weight="600" font-size="${i === 2 ? 34 : 30}">${n}</text>
+      <text x="280" y="${280 + (270 - r) - r + (i === 2 ? 126 : 72)}" text-anchor="middle" fill="rgba(255,255,255,.62)" font-family="Instrument Sans" font-size="15">${l}</text></g>`).join('') +
+    '';
 })();
-enter['Business Model Canvas'] = () => { $$('#bmc .blk').forEach((b) => b.classList.remove('in')); setTimeout(() => $$('#bmc .blk').forEach((b) => b.classList.add('in')), 300); };
-at['Business Model Canvas'] = (s) => {
-  const k = s === 0 ? null : BMC_ORDER[s - 1], rel = k ? REL[k] : [];
-  $('#bmc').classList.toggle('focusing', !!k);
-  $$('#bmc .blk').forEach((b) => { b.classList.toggle('focus', b.dataset.k === k); b.classList.toggle('rel', rel.includes(b.dataset.k)); if (k) b.style.transitionDelay = '0s'; });
-  const svg = $('#threads'); svg.innerHTML = '';
-  if (!k) return;
-  const a = BMCBOX[k];
-  svg.innerHTML = `<defs><linearGradient id="tg" x1="0" x2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#B79CFF"/></linearGradient></defs>` + rel.map((r, i) => {
-    const b = BMCBOX[r], mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2 - 60, d = `M${a.x} ${a.y} Q ${mx} ${my} ${b.x} ${b.y}`;
-    return `<path d="${d}" stroke="url(#tg)" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" style="transition:stroke-dashoffset .9s ${0.2 + i * 0.12}s cubic-bezier(.2,.8,.2,1)"/>
-      <circle cx="${b.x}" cy="${b.y}" r="6" fill="#fff" opacity="0" style="transition:opacity .4s ${0.9 + i * 0.12}s;filter:drop-shadow(0 0 8px #b8a2ff)"/>`;
-  }).join('');
-  requestAnimationFrame(() => requestAnimationFrame(() => { $$('#threads path').forEach((p) => p.setAttribute('stroke-dashoffset', '0')); $$('#threads circle').forEach((c) => c.setAttribute('opacity', '1')); }));
-};
-$('#bmc').addEventListener('click', (e) => { const b = e.target.closest('.blk'); if (b) { step = BMC_ORDER.indexOf(b.dataset.k) + 1; paint(); } });
+hooks[2] = (s) => { $$('#rings .ring').forEach((g) => { g.style.opacity = +g.dataset.i <= s ? 1 : 0; }); };
 
-// 4 · the Brand Key: a dial turns to each answer; the ninth opens it
+// 6 · the canvas as of 5 October 2026 (the team's BMC_2026-10-05), in the order of Adam's talk track
+const B = {   // [left, top, width, height, title, html]
+  KP: [0, 0, 258, 448, 'KEY PARTNERS', '<ul><li>Equipment distributors: also a sales channel on commission, once gyms pay</li><li>Machine manufacturers</li><li>Hardware manufacturers and component suppliers</li><li>Outsourced developers: code review, extra capacity</li><li>Service partners: on-site maintenance</li><li>Investors</li><li>Our network: private contacts and gym owners</li></ul>'],
+  KA: [266, 0, 258, 196, 'KEY ACTIVITIES', '<ul><li class="o">Full service: installation, set-up and onboarding, maintenance, on-site help as fallback</li><li class="o">Free four-week trials, a weekly usage report, the read-out with the owner</li><li>Sales and marketing · manufacturing, outsourced</li><li class="m">App: development, testing, updates</li></ul>'],
+  KR: [266, 204, 258, 244, 'KEY RESOURCES', '<ul><li>Network to gym owners; know-how in how gyms run</li><li>A test facility; hardware production; own 3D printer</li><li>IP protection for the hardware (planned); legal advice; CE</li><li>The software and tech stack</li><li>Capital: founders fund the start-up phase; €50,000 outside money in two parts (Feb and May 2027)</li></ul>'],
+  VP: [532, 0, 266, 448, 'VALUE PROPOSITIONS', '<div class="sub mono">TO THE GYM OWNER</div><ul><li class="o"><b>One sensor per strength machine:</b> retrofit, no new machines</li><li class="o"><b>Weekly usage report:</b> which machines are used, how much and when; peak hours</li><li class="o"><b>What changed on the floor:</b> trends per machine for buying, replacing, layout and service</li><li class="o">Maintenance by real use, not the calendar</li><li class="o">A better member experience and something to stand out with</li></ul><div class="sub mono">TO THE MEMBER</div><ul><li class="m"><b>The whole workout tracked with little effort:</b> no typing of reps; the weight in one tap</li><li class="m">Progress you can see</li></ul><div class="note">Left out on purpose: screens, cameras, coaching, leaderboards.</div>'],
+  CR: [806, 0, 258, 196, 'CUSTOMER RELATIONSHIPS', '<ul><li>Self-service by design: most requests without a human</li><li class="o">We install, and review the year with the owner</li><li class="o">Spare units at the gym; tickets by e-mail; paid on-site help as plan B</li><li class="o">First 3–10 gyms: co-creation with a named contact</li></ul>'],
+  CH: [806, 204, 258, 244, 'CHANNELS', '<ul><li class="o"><b>Direct sales to the owner:</b> gym visits, calls and e-mails within the legal rules, trade fairs</li><li class="o"><b>Way in: a free four-week trial with full use;</b> the order is signed at the end</li><li class="o">Referrals from paying gyms; distributors later</li><li class="m">Members: through their gym; social media, SEO</li></ul>'],
+  CS: [1072, 0, 258, 448, 'CUSTOMER SEGMENTS', '<ul><li class="o"><b>Payer:</b> the owner of an independent gym with about 15–50 strength machines</li><li class="m"><b>Users:</b> the gym\'s members, from beginners to advanced lifters</li><li class="m"><b>Later:</b> members who want more, with a Pro version of the app</li><li class="o"><b>Next: chains,</b> once independent gyms have proved the value</li><li>Later: personal trainers; equipment suppliers</li><li>Not for now: EMS-style studios; gyms built on personal guidance</li></ul>'],
+  C: [0, 456, 661, 156, 'COST STRUCTURE', '<ul style="columns:2;column-gap:22px"><li><b>Build, one-off:</b> software and hardware development; legal: patent, UG founding, CE</li><li><b>Run:</b> servers, tools, marketing, sales travel and fairs, after-sales</li><li><b>Per sensor:</b> under €50 including assembly, target about €40</li><li>Free trials (installation and visits); loan interest</li></ul>'],
+  R: [669, 456, 661, 156, 'REVENUE STREAMS', '<ul style="columns:2;column-gap:22px"><li class="o"><b>Sensors: €249 per machine, once,</b> installation included</li><li class="o"><b>Subscription: €20 per machine a month,</b> where the profit sits; 12 months, at least 10 machines</li><li class="o">Example, 20 machines: €4,980 once + €400 a month</li><li class="m">Later: a Pro app subscription for members</li></ul>'],
+};
+$('#bmc').innerHTML = Object.entries(B).map(([k, [x, y, w, h, t, html]]) => `<div class="blk" data-k="${k}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px"><div class="t mono">${t}</div>${html}</div>`).join('');
+const WALK = [null, 'CS', 'VP', 'CH', 'R', 'CHANGED', 'C'];   // Adam's talk track: segments, value, channels, revenue, what changed, costs
+hooks[5] = (s) => {
+  const k = WALK[s], focus = k && k !== 'CHANGED' ? k : null;
+  $('#bmc').classList.toggle('focusing', !!focus);
+  $$('#bmc .blk').forEach((b) => b.classList.toggle('focus', b.dataset.k === focus));
+  $('#changed').classList.toggle('on', k === 'CHANGED'); $('#bmc').classList.toggle('dim', k === 'CHANGED');
+};
+$('#bmc').addEventListener('click', (e) => { const b = e.target.closest('.blk'); if (!b) return; const i = WALK.indexOf(b.dataset.k); step = i > 0 ? i : step; paint(); $$('#bmc .blk').forEach((x) => x.classList.toggle('focus', x === b)); $('#bmc').classList.add('focusing'); });
+
+// 7 · the Brand Key: the keyhole, read from the base up
 const BK = [
-  ['Root strengths', 'A founder runs a gym. A working sensor and iPhone app, built in-house since 8 September 2026 and used in real training.', 'Prototype and test records (project team, 2026)'],
-  ['Competitive environment', 'Smart machines (EGYM), retrofits with a screen or a tap (Trackbar, Virtuagym Connect), usage sensors for owners, cameras, logging apps.', 'Company websites, checked 23 Sept and 5 Oct 2026'],
-  ['Target group', 'Buyer: the owner of an independent gym with 15–50 strength machines. User: the lifter who will not type between sets.', '4,202 single-site gyms in Germany (Deloitte, 2026)'],
-  ['Insight', 'Owner: "Everything in my gym produces data, except the floor." Member: "I\'d log every set, if it didn\'t cost me the set."', 'None of the 6 lifters we interviewed keeps a log'],
-  ['Benefits', 'Owner: buy, move and service machines by use, not by feel, with no new machines. Member: every set saved, the rest timed, nothing to type.', 'Ten machines: €17,165 upfront with Trackbar (Trackbar, n.d.)'],
-  ['Values', 'Accuracy: no number we cannot back. Restraint: we record, we don\'t coach. Openness: the data goes where the gym wants. The Sage: calm and exact.', 'Decided: no screen on the machine (28 Sept 2026)'],
-  ['Reasons to believe', 'It already counts on real machines. Machine sensors work, and gym-goers prefer them. The owner tests it for 4 weeks before paying.', '60 % of 615 gym-goers prefer sensors on the machine (Radhakrishnan et al., 2020)'],
-  ['Discriminator', 'We observe; the others intervene. Machines of any brand, nothing for the member to do, no screen, no camera, data for owner and member.', 'Compared in the business plan, table 7.1'],
-  ['Brand essence', 'Every set, seen.', 'The one line everything else answers to'],
+  ['Root strengths', '<p>Backgrounds that fit: a gym owner, an engineer, B2B sales and design.</p><p>One shared problem: a training log gets in the way of training. And a shared passion for the gym.</p>', 'Team'],
+  ['Competitive environment', '<p>What an owner can do today: smart machines (EGYM, Technogym, milon, Life Fitness) · retrofits with a screen or a tap (Trackbar, Virtuagym Connect) · owner-only usage data, abroad (Ecofit, OnSight, TrackMyGym) · Cyclops (UK, owners and members) · cameras · club software (Magicline) · gut feel.</p>', 'Company websites'],
+  ['Target', '<p>The owner of an independent gym with about 15–50 strength machines, who decides alone; first those with a machine decision coming.</p><p>Members use it and pay nothing.</p>', '4,202 independents in Germany, operators with up to four sites (Deloitte, 2026); 2,520–3,150 with a machine floor (our estimate)'],
+  ['Insight', '<p>Owner: “My software shows me the door, not the floor.”</p><p>Member: “I’d log every set, if it didn’t cost me the set.”<small>Our wording, not quotes.</small></p>', 'Club software shows check-ins (Magicline, n.d.); makers show only their own connected machines (Life Fitness, n.d.)'],
+  ['Benefits', '<p><b>Functional:</b> the owner decides to buy, move, service or retire a machine by its use, with no new machines; the member gets sets and reps recorded with very little typing.</p><p><b>Emotional:</b> the owner can show a partner or a bank why a machine goes or stays; the member trains as before, and it is remembered.</p>', 'Business plan §7.3'],
+  ['Values', '<p><b>Restraint:</b> we record, we don’t coach.</p><p><b>Privacy:</b> machines, not people.</p><p><b>Honest:</b> a gap is a gap, never a zero.</p>', 'Business plan §7.3'],
+  ['Reasons to believe', '<p>A working prototype, used in real training sessions on gym machines (5 days, 18–27 Sept) · a founder runs a gym · 60 % of 615 surveyed preferred sensors on the machines to wearables · low risk to try: a free four-week trial, the owner decides at the end.</p>', 'Radhakrishnan et al. (2020)'],
+  ['Discriminator', '<p style="font-family:Instrument Serif,Georgia,serif;font-size:34px;line-height:1.1">We observe; the others intervene.</p><p>We record what happens: no screen, no camera, no coaching, no leaderboard.</p>', 'Scope: the products that serve both owner and member (smart machines, Trackbar, Virtuagym Connect) add screens, logins, plans or coaching'],
+  ['Brand essence', '<p style="font-family:Instrument Serif,Georgia,serif;font-size:64px;line-height:1">Every set <em>seen.</em></p><small>seen = recorded, no camera</small>', 'The one line the eight answers below lead to'],
 ];
-(function dial() {
-  const svg = $('#dial'), C = 320, R1 = 300, R2 = 232, R3 = 160;
-  const labels = BK.map((b, i) => { const a = i * 40;
-    return `<g transform="rotate(${a} ${C} ${C})"><path id="lp${i}" d="M ${C - 120} ${C - R1 + 34} A ${R1 - 34} ${R1 - 34} 0 0 1 ${C + 120} ${C - R1 + 34}" fill="none"/>
-      <text class="lbl" data-i="${i}" text-anchor="middle"><textPath href="#lp${i}" startOffset="50%">${(i + 1) + ' · ' + b[0].toUpperCase()}</textPath></text>
-      <line x1="${C}" y1="${C - R1 + 4}" x2="${C}" y2="${C - R1 + 18}" stroke="rgba(255,255,255,.7)" stroke-width="2"/></g>`; }).join('');
-  const ticks = Array.from({ length: 72 }, (_, i) => `<line x1="${C}" y1="${C - R2}" x2="${C}" y2="${C - R2 + (i % 2 ? 8 : 16)}" stroke="rgba(255,255,255,${i % 2 ? .25 : .5})" stroke-width="1.5" transform="rotate(${i * 5} ${C} ${C})"/>`).join('');
-  svg.innerHTML = `<defs><radialGradient id="disc" cx="40%" cy="30%" r="80%"><stop offset="0" stop-color="rgba(255,255,255,.22)"/><stop offset=".6" stop-color="rgba(255,255,255,.05)"/><stop offset="1" stop-color="rgba(255,255,255,.02)"/></radialGradient>
-      <radialGradient id="kh" cx="50%" cy="45%" r="60%"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#D8CCFF"/><stop offset="1" stop-color="#7A56FF"/></radialGradient>
-      <radialGradient id="bst" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="rgba(255,255,255,.95)"/><stop offset=".35" stop-color="rgba(216,204,255,.55)"/><stop offset="1" stop-color="rgba(122,86,255,0)"/></radialGradient></defs>
-    <g class="ring outer" id="outer"><circle cx="${C}" cy="${C}" r="${R1}" fill="url(#disc)" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/>${labels}</g>
-    <g class="ring" id="inner"><circle cx="${C}" cy="${C}" r="${R2}" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.22)"/>${ticks}</g>
-    <circle cx="${C}" cy="${C}" r="${R3}" fill="rgba(20,14,48,.55)" stroke="rgba(255,255,255,.3)"/>
-    <g id="burst"><circle cx="${C}" cy="${C}" r="330" fill="url(#bst)"/></g>
-    <path id="keyholeP" d="M${C} ${C - 78} a 46 46 0 0 1 26 84 l 20 74 h -92 l 20 -74 a 46 46 0 0 1 26 -84 z" fill="url(#kh)" style="filter:drop-shadow(0 0 22px rgba(184,162,255,.9));transition:opacity .8s"/>
-    <path d="M${C - 14} 6 L${C + 14} 6 L${C} 30 Z" fill="#fff" style="filter:drop-shadow(0 0 8px #b8a2ff)"/>`;
+(function keyhole() {
+  // the keyhole: a round head and a tapering stem; nine fields, read from the base up
+  const svg = $('#key');
+  const F = [   // [x, y, w, h] in the keyhole, base first
+    [130, 600, 260, 46], [118, 546, 284, 46], [108, 492, 304, 46], [98, 438, 324, 46],
+    [60, 340, 400, 46], [40, 286, 440, 46], [40, 232, 440, 46], [60, 178, 400, 46], [150, 70, 220, 92]];
+  svg.innerHTML = `<path d="M260 10 C 392 10, 500 112, 500 238 C 500 318, 458 384, 396 420 L 432 656 L 88 656 L 124 420 C 62 384, 20 318, 20 238 C 20 112, 128 10, 260 10 Z" fill="rgba(143,116,255,.05)" stroke="rgba(205,193,255,.35)" stroke-width="1.4"/>` +
+    F.map(([x, y, w, h], i) => `<g class="fld" data-i="${i}" style="cursor:pointer"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${i === 8 ? 46 : 12}"/>
+      <text x="260" y="${y + h / 2 + 5}" text-anchor="middle">${i + 1} · ${BK[i][0].toUpperCase()}</text></g>`).join('');
+  svg.addEventListener('click', (e) => { const g = e.target.closest('.fld'); if (g) { step = +g.dataset.i; paint(); } });
 })();
 let bkShown = -1;
-at['Brand Key'] = (s) => {
-  const open = s === 8;
-  $('#outer').style.transform = open ? `rotate(${-s * 40 + 20}deg) scale(1.08)` : `rotate(${-s * 40}deg)`;
-  $('#inner').style.transform = `rotate(${s * 55}deg)`;
-  $$('#dial .lbl').forEach((l) => { const i = +l.dataset.i; l.classList.toggle('on', i === s); l.classList.toggle('done', i < s); });
-  $('#dial').classList.toggle('open', open); $('#essence').classList.toggle('on', open);
-  $('#outer').style.opacity = open ? .3 : 1;
-  $('#keyholeP').style.opacity = open ? 0 : 1;
+hooks[6] = (s) => {
+  $$('#key .fld').forEach((g) => { const i = +g.dataset.i; g.classList.toggle('cur', i === s); g.classList.toggle('seen', i < s); });
   if (bkShown === s) return; bkShown = s;
   const box = $('#bkin'); box.classList.add('out');
   setTimeout(() => { const [t, a, p] = BK[s];
-    box.innerHTML = `<div class="num mono">${String(s + 1).padStart(2, '0')} / 09</div><h3>${open ? '<em>The essence.</em>' : t}</h3><div class="ans">${open ? 'Nine answers, one line. Everything we say and build answers to it.' : a}</div><div class="proof mono">${p}</div>`;
-    box.classList.remove('out'); }, 260);
+    box.innerHTML = `<div class="n mono">${String(s + 1).padStart(2, '0')} / 09 · READ FROM THE BASE UP</div><h3>${t}</h3><div class="a">${a}</div><div class="pr mono">${p}</div>`;
+    box.classList.remove('out'); }, 200);
 };
-leaveH['Brand Key'] = () => { bkShown = -1; };
 
-// 5 · the 4Ps: one drop splits into four, each grows into a card
-const DROPS = { home: [570, 220, 230], ps: [[73, 300], [403, 300], [733, 300], [1063, 300]] };
-function dropsAt(s) {
-  const [hx, hy, hr] = DROPS.home;
-  const d0 = $('#d0'); d0.style.width = d0.style.height = `${s >= 1 ? 0 : hr}px`; d0.style.left = `${hx + 80 - (s >= 1 ? 0 : hr / 2)}px`; d0.style.top = `${hy + 80 - (s >= 1 ? 0 : hr / 2)}px`; d0.style.opacity = s >= 1 ? 0 : 1;
-  for (let i = 1; i <= 4; i++) {
-    const d = $('#d' + i), split = s >= 1, gone = s >= i + 1, [x, y] = DROPS.ps[i - 1], r = gone ? 0 : split ? 96 : 60;
-    const cx = split ? x + 80 : hx + 80, cy = split ? y : hy + 80;
-    d.style.width = d.style.height = `${r}px`; d.style.left = `${cx - r / 2}px`; d.style.top = `${cy - r / 2}px`; d.style.opacity = gone ? 0 : 1;
-  }
-  $('#bkdrop').style.opacity = s === 0 ? 1 : 0;
-  $$('.pcard').forEach((c) => c.classList.toggle('on', s >= +c.dataset.p + 1));
-}
-at['Marketing mix'] = dropsAt;
-enter['Marketing mix'] = () => dropsAt(0);
+// 9 · scenarios: after the four, light the two we prepare for
+hooks[8] = (s) => { $$('#sm .q').forEach((q) => q.classList.toggle('prep', s >= 5 && ['3', '4'].includes(q.dataset.q))); };
 
-// 6 · the scenarios: the orb rolls from future to future
-const SC = [
-  ['The plane', 'Two questions we cannot answer yet decide which business this becomes: do owners pay for the floor\'s data, and do members use the app?', 'TWO UNCERTAINTIES'],
-  ['The full loop', 'Owners buy the floor\'s data and members train with the app. Each side grows the other. We scale direct, then through distributors.', 'OWNERS PAY · MEMBERS USE IT'],
-  ['The owner\'s tool', 'The sensors earn their keep on usage data alone. The app stays a bonus for the members who want it.', 'OWNERS PAY · MEMBERS DON\'T'],
-  ['The member\'s app', 'Members love it, owners will not pay: the gym offers it as a perk, or members pay for the app themselves.', 'MEMBERS USE IT · OWNERS DON\'T PAY'],
-  ['Back to the bench', 'Neither side values it enough. We change the offer before we spend on growth.', 'NEITHER'],
-];
-const ORB = [[50, 50], [75, 25], [25, 25], [75, 75], [25, 75]];
-let scShown = -1;
-at['Scenario matrix'] = (s) => {
-  const [x, y] = ORB[s]; $('#orb').style.left = `${x}%`; $('#orb').style.top = `${y}%`;
-  $$('.qt').forEach((q) => q.classList.toggle('on', +q.dataset.q === s));
-  $('#plane').style.transform = `rotateX(54deg) rotateZ(${-8 + s * 2}deg)`;
-  if (scShown === s) return; scShown = s;
-  const box = $('#scin'); box.classList.add('out');
-  setTimeout(() => { const [t, p, q] = SC[s]; box.innerHTML = `<div class="q mono">${q}</div><h5>${s === 0 ? 'Two <em>questions.</em>' : t}</h5><p>${p}</p>`; box.classList.remove('out'); }, 260);
-};
-leaveH['Scenario matrix'] = () => { scShown = -1; };
-$('#plane').style.transition = 'transform 1.2s cubic-bezier(.34,1.56,.64,1)';
-
-// 7 · finances: rising numbers, gyms as stacked plates, a draining funnel
-const QS = [['Q1 2027', 6], ['Q2 2027', 13], ['Q3 2027', 21], ['Q4 2027', 30]];
-(function () {
-  $('#plates').innerHTML = `<div class="mono" style="position:absolute;left:0;top:0;font-size:11px;letter-spacing:.2em;color:var(--ink3)">PAYING GYMS · ONE PLATE = 2 GYMS</div>` +
-    QS.map(([l, n], qi) => { const x = 20 + qi * 195, k = Math.round(n / 2);
-      return `<div class="qcol" style="left:${x}px;height:${k * 19}px">${Array.from({ length: k }, (_, j) => `<div class="qplate" data-q="${qi}" data-j="${j}" style="bottom:${j * 19}px"></div>`).join('')}</div>
-        <div class="qnum" data-q="${qi}" style="left:${x}px;bottom:${40 + k * 19 + 12}px">${n}</div><div class="qlab mono" style="left:${x}px">${l}</div>`; }).join('');
-  const v = $('#vessel');
-  v.innerHTML = `<defs><linearGradient id="liq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D8CCFF"/><stop offset="1" stop-color="#7A56FF"/></linearGradient>
-      <clipPath id="vclip"><path d="M40 40 H406 L300 230 V370 H146 V230 Z"/></clipPath></defs>
-    <text x="0" y="12" fill="rgba(246,242,255,.5)" font-family="JetBrains Mono" font-size="11" letter-spacing="2.2">THE FUNNEL TO 30 GYMS</text>
-    <path d="M40 40 H406 L300 230 V370 H146 V230 Z" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
-    <g clip-path="url(#vclip)"><rect id="liquid" x="0" y="40" width="446" height="400" fill="url(#liq)" opacity=".85"/>
-      <path id="wave" d="M0 0 Q 28 -10 56 0 T 112 0 T 168 0 T 224 0 T 280 0 T 336 0 T 392 0 T 448 0 T 504 0 V 20 H 0 Z" fill="#E9E0FF" opacity=".7"/></g>` +
-    [['900', 'gyms contacted', 70], ['300', 'conversations', 150], ['60', 'four-week audits', 260], ['30', 'paying gyms', 350]].map(([n, l, y]) =>
-      `<text x="223" y="${y}" text-anchor="middle" fill="#fff" font-family="Instrument Sans" font-weight="600" font-size="30" class="fl" opacity="0">${n}</text>
-       <text x="223" y="${y + 20}" text-anchor="middle" fill="rgba(255,255,255,.75)" font-family="JetBrains Mono" font-size="11" letter-spacing="1.5" class="fl" opacity="0">${l.toUpperCase()}</text>`).join('');
-})();
-let finRaf = null, liqY = 40, liqTo = 40;
-enter['Finances'] = () => {
-  $$('.kb .v').forEach((el) => countUp(el));
-  cancelAnimationFrame(finRaf); liqY = liqTo = 40;
-  const t0 = performance.now();
-  (function wave(t) { liqY += (liqTo - liqY) * 0.025; $('#liquid').setAttribute('y', liqY.toFixed(1));
-    $('#wave').setAttribute('transform', `translate(${-((t - t0) / 20) % 112} ${liqY - 10})`); finRaf = requestAnimationFrame(wave); })(t0);
-};
-leaveH['Finances'] = () => cancelAnimationFrame(finRaf);
-at['Finances'] = (s) => {
-  $$('.qplate').forEach((p) => { const on = s >= 1; p.style.transitionDelay = on ? `${+p.dataset.q * 0.25 + +p.dataset.j * 0.05}s` : '0s'; p.classList.toggle('on', on); });
-  $$('.qnum').forEach((n) => { n.style.transitionDelay = s >= 1 ? `${+n.dataset.q * 0.25 + 0.6}s` : '0s'; n.style.opacity = s >= 1 ? 1 : 0; });
-  liqTo = s >= 2 ? 330 : 40;   // the liquid drains: 900 contacted at the top, 30 paying at the neck
-  $$('.fl').forEach((t, i) => { t.style.transition = `opacity .5s ${s >= 2 ? Math.floor(i / 2) * 0.6 : 0}s`; t.setAttribute('opacity', s >= 2 ? '1' : '0'); });
-};
-$('section[data-name="Finances"]').dataset.steps = '2';
-
-// 8 · the end: the whole stack lifts once, light
-enter['Thank you'] = () => { const f = $('#flash'); f.classList.remove('go'); void f.offsetWidth; f.classList.add('go'); };
-
-// ---- the opening's sensor, in 3D -------------------------------------------------------------------------------------
-(async function hero() {
+// 1 · the sensor, turning slowly (the product may be shown; nothing on how it works)
+(async function sensor() {
   const THREE = await import('three');
   const { mergeVertices, toCreasedNormals } = await import('three/addons/utils/BufferGeometryUtils.js');
   const { RoomEnvironment } = await import('three/addons/environments/RoomEnvironment.js');
-  const canvas = $('#hero3d');
+  const canvas = $('#sensor3d');
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(2, devicePixelRatio * 1.5)); renderer.setSize(740, 560, false);
+  renderer.setPixelRatio(Math.min(2, devicePixelRatio * 1.5)); renderer.setSize(500, 400, false);
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.outputColorSpace = THREE.SRGBColorSpace;
   const scene = new THREE.Scene();
-  scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture; scene.environmentIntensity = 0.5;
+  scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture; scene.environmentIntensity = 0.55;
   const stl = (b64) => { const bin = atob(b64), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
     const v = new DataView(u.buffer), n = v.getUint32(80, true), p = new Float32Array(n * 9);
     for (let t = 0, o = 84; t < n; t++, o += 50) for (let k = 0; k < 9; k++) p[t * 9 + k] = v.getFloat32(o + 12 + k * 4, true);
     const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(p, 3)); return toCreasedNormals(mergeVertices(g, 1e-4), THREE.MathUtils.degToRad(32)); };
-  const mat = new THREE.MeshPhysicalMaterial({ color: '#25222E', roughness: 0.5, metalness: 0.15, clearcoat: 0.45, clearcoatRoughness: 0.3, sheen: 0.8, sheenColor: new THREE.Color('#B8A2FF') });
+  const mat = new THREE.MeshPhysicalMaterial({ color: '#232030', roughness: 0.5, metalness: 0.12, clearcoat: 0.45, clearcoatRoughness: 0.3, sheen: 0.6, sheenColor: new THREE.Color('#B9A8FF') });
   const pod = new THREE.Group(), inner = new THREE.Group(); inner.rotation.x = -Math.PI / 2;
   inner.add(new THREE.Mesh(stl(window.SENSOR.pod), mat), new THREE.Mesh(stl(window.SENSOR.lid), mat));
   const box = new THREE.Box3().setFromObject(inner), c = box.getCenter(new THREE.Vector3()); inner.position.sub(c); pod.add(inner); scene.add(pod);
   const light = (col, i, p) => { const l = new THREE.DirectionalLight(col, i); l.position.set(...p); scene.add(l); };
-  light('#ffffff', 3.6, [-60, 90, 80]); light('#D9CCFF', 6, [80, 30, -90]); light('#F07AA8', 2.4, [90, -10, 40]); light('#9C82FF', 4, [-90, -30, -30]); light('#ffffff', 1.2, [0, -80, 60]);
-  const camera = new THREE.PerspectiveCamera(26, 740 / 560, 1, 2000); camera.position.set(0, 40, 190); camera.lookAt(0, 0, 0);
-  let yaw = -0.6, pitch = 0.35, drag = null, liftT = -1, reps = 0;
-  canvas.addEventListener('pointerdown', (e) => { drag = [e.clientX, e.clientY, yaw, pitch]; canvas.setPointerCapture(e.pointerId); });
-  canvas.addEventListener('pointermove', (e) => { if (!drag) return; yaw = drag[2] + (e.clientX - drag[0]) * 0.008; pitch = Math.max(-0.6, Math.min(1.1, drag[3] + (e.clientY - drag[1]) * 0.006)); });
-  canvas.addEventListener('pointerup', () => { drag = null; });
-  lift = () => { if (liftT >= 0) return; liftT = performance.now();
-    setTimeout(() => { reps++; const n = $('#repN'); n.textContent = reps; n.classList.remove('up'); void n.offsetWidth; n.classList.add('up');
-      const r = document.createElement('div'); r.className = 'ripple'; r.style.left = '1230px'; r.style.top = '400px'; $('#stage').appendChild(r); setTimeout(() => r.remove(), 1700); }, 480); };
-  canvas.addEventListener('dblclick', () => lift());
-  (function frame(t) {
-    if (!drag) yaw += 0.0028;
-    let y = 0; if (liftT >= 0) { const k = (t - liftT) / 1000; y = k < 1 ? 18 * Math.sin(Math.PI * k) : 0; if (k >= 1) liftT = -1; }
-    pod.rotation.set(pitch, yaw, 0); pod.position.y = y + 3 * Math.sin(t / 900);
-    if (cur === 0) renderer.render(scene, camera);
-    requestAnimationFrame(frame);
-  })(0);
+  light('#ffffff', 3.2, [-60, 90, 80]); light('#C9BBFF', 5, [80, 30, -90]); light('#8F74FF', 3, [-90, -30, -30]);
+  const camera = new THREE.PerspectiveCamera(24, 500 / 400, 1, 2000); camera.position.set(0, 46, 200); camera.lookAt(0, 0, 0);
+  let yaw = -0.7;
+  (function frame() { yaw += 0.0016; pod.rotation.set(0.32, yaw, 0); if (cur === 0) renderer.render(scene, camera); requestAnimationFrame(frame); })();
 })();
 
-// ---- start where the address says (#chapter.step) ---------------------------------------------------------------------
+// start where the address says (#slide.step)
 const [h0, h1] = location.hash.slice(1).split('.').map(Number);
-document.fonts.ready.then(() => { swapTo(Number.isFinite(h0) ? Math.max(0, Math.min(8, h0)) : 0, 0); const s = Number.isFinite(h1) ? h1 : 0; for (let k = 0; k < s; k++) setTimeout(next, 150 * (k + 1)); });
+document.fonts.ready.then(() => go(Number.isFinite(h0) ? h0 - 1 : 0, Number.isFinite(h1) ? h1 : 0));
 </script>
 </body>
 </html>
