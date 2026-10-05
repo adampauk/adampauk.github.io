@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Business plan</title>
+<!--
+  docs/pitch/silver/index.html — the pitch in the silver direction (three sample slides for the founder's look).
+  Pearl-silver ground with silk folds drawn live (WebGL), one still prism of light, frosted glass over the silk, Apple's
+  system font (SF Pro on a Mac), graphite text, no accent colour, no navigation chrome. The silk moves only while a
+  slide changes, then rests. → / PageDown / space next, ← / PageUp back, F full screen.
+-->
+<style>
+  :root { --ink:#1D1D1F; --ink2:#48484D; --ink3:#86868B; --hair:rgba(29,29,31,.10);
+          --out:cubic-bezier(.22,1,.36,1); }
+  * { box-sizing:border-box; }
+  html, body { margin:0; height:100%; overflow:hidden; background:#E7E8EC; color:var(--ink); }
+  body { font-family:-apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Inter, Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  #silk { position:fixed; inset:0; width:100vw; height:100vh; display:block; }
+  #prism { position:fixed; inset:-20%; pointer-events:none; mix-blend-mode:soft-light; opacity:.9;
+           background:linear-gradient(118deg, transparent 38%, rgba(255,110,140,.55) 44%, rgba(255,200,90,.55) 47%, rgba(140,230,170,.5) 50%, rgba(110,170,255,.55) 53%, rgba(190,140,255,.5) 56%, transparent 62%);
+           filter:blur(28px); }
+  #stage { position:absolute; left:50%; top:50%; width:1600px; height:900px; transform-origin:0 0; }
+
+  /* frosted glass: bright edge where the light catches it, a soft shadow under it */
+  .glass { position:absolute; border-radius:30px;
+           background:linear-gradient(180deg, rgba(255,255,255,.58), rgba(255,255,255,.30));
+           -webkit-backdrop-filter:blur(30px) saturate(170%) brightness(1.04); backdrop-filter:blur(30px) saturate(170%) brightness(1.04);
+           border:1px solid rgba(255,255,255,.8);
+           box-shadow: inset 0 1px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(255,255,255,.4), 0 24px 60px rgba(54,62,92,.16), 0 2px 8px rgba(54,62,92,.06); }
+
+  .slide { position:absolute; inset:0; opacity:0; visibility:hidden; transform:translateY(14px) scale(.995); filter:blur(8px);
+           transition:opacity .5s var(--out), transform .8s var(--out), filter .6s var(--out), visibility 0s .8s; }
+  .slide.on { opacity:1; visibility:visible; transform:none; filter:none; transition:opacity .7s .25s var(--out), transform 1s .25s var(--out), filter .8s .25s var(--out), visibility 0s; }
+  .st { opacity:0; transform:translateY(10px); transition:opacity .6s var(--out), transform .7s var(--out); }
+  .st.on { opacity:1; transform:none; }
+
+  .eyebrow { font-size:15px; font-weight:600; letter-spacing:.01em; color:#6E6E73; }
+  .display { margin:0; font-weight:600; letter-spacing:-.035em; line-height:1.0; color:var(--ink);
+             background:linear-gradient(180deg, #2A2A2E 0%, #1D1D1F 55%, #55565E 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .lead { font-size:28px; line-height:1.36; font-weight:400; letter-spacing:-.012em; color:var(--ink2); }
+  .small { font-size:15px; line-height:1.45; color:var(--ink3); }
+
+  /* opener */
+  .op-t { position:absolute; left:140px; top:296px; width:860px; font-size:96px; }
+  .op-l { position:absolute; left:144px; top:618px; width:640px; }
+  .op-cap { position:absolute; left:144px; top:250px; }
+  #sensor3d { position:absolute; left:960px; top:230px; width:620px; height:480px; }
+
+  /* hook */
+  .hook { position:absolute; left:0; right:0; top:330px; text-align:center; font-size:96px; }
+  .hook-s { position:absolute; left:0; right:0; top:560px; text-align:center; }
+  .chip { display:inline-flex; align-items:center; gap:12px; height:52px; padding:0 24px; border-radius:26px; font-size:18px; color:var(--ink2); position:relative; }
+
+  /* canvas */
+  .bmc-h { position:absolute; left:120px; top:84px; font-size:44px; }
+  .bmc-e { position:absolute; left:120px; top:62px; }
+  .bmc { position:absolute; left:120px; top:156px; width:1360px; height:690px; }
+  .blk { position:absolute; padding:16px 16px 12px; border-radius:22px; transition:opacity .45s var(--out), transform .6s var(--out), box-shadow .45s; }
+  .blk .t { font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink3); margin-bottom:9px; }
+  .blk .sub { font-size:10.5px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--ink3); margin:10px 0 5px; }
+  .blk ul { list-style:none; margin:0; padding:0; }
+  .blk li { font-size:12.9px; line-height:1.32; color:var(--ink2); padding:3px 0 3px 12px; position:relative; margin-bottom:3px; }
+  .blk li::before { content:""; position:absolute; left:0; top:.62em; width:4px; height:4px; border-radius:2px; background:#9A9AA2; }
+  .blk li b { color:var(--ink); font-weight:600; }
+  .blk .note { font-size:12px; color:var(--ink3); margin-top:6px; }
+  .bmc.focusing .blk { opacity:.45; }
+  .bmc.focusing .blk.focus { opacity:1; transform:scale(1.015); box-shadow: inset 0 1px 0 #fff, 0 30px 70px rgba(54,62,92,.24); }
+  .bmc-f { position:absolute; left:120px; bottom:22px; }
+
+  @media (prefers-reduced-motion: reduce) { .slide, .st, .blk { transition:opacity .2s ease !important; transform:none !important; filter:none !important; } }
+</style>
+</head>
+<body>
+<canvas id="silk"></canvas>
+<div id="prism"></div>
+<div id="stage">
+
+  <section class="slide" data-steps="0">
+    <div class="op-cap eyebrow st" data-s="0">Business plan · Minor Entrepreneurship</div>
+    <h1 class="display op-t st" data-s="0">We make each<br>machine's use<br>visible.</h1>
+    <p class="lead op-l st" data-s="0">A small sensor on the strength machines a gym already owns.</p>
+    <canvas id="sensor3d" class="st" data-s="0" aria-label="The sensor"></canvas>
+  </section>
+
+  <section class="slide" data-steps="0">
+    <h2 class="display hook st" data-s="0">Which machine would you<br>replace next year?</h2>
+    <div class="hook-s st" data-s="0"><span class="glass chip">€83,000 invested per German gym in 2025 <span style="color:var(--ink3)">· DSSV</span></span></div>
+  </section>
+
+  <section class="slide" data-steps="6">
+    <div class="bmc-e eyebrow st" data-s="0">Business Model Canvas · as of 5 October 2026</div>
+    <h2 class="display bmc-h st" data-s="0">The gym pays, the member uses.</h2>
+    <div class="bmc st" data-s="0" id="bmc"></div>
+    <div class="bmc-f small st" data-s="0" style="font-size:12.5px">Priced per machine, not per gym. Prices are our test prices (team decision, 5 Oct 2026); €10 and €15 a month are tested as well. The sensor cost is the team's target.</div>
+  </section>
+
+</div>
+
+<script src="sensor-model.js"></script>
+<script type="importmap">
+{ "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const slides = $$('.slide');
+
+function fit() { const s = Math.min(innerWidth / 1600, innerHeight / 900); $('#stage').style.transform = `translate(${-800 * s}px, ${-450 * s}px) scale(${s})`; silkSize(); }
+
+// ---- the silk: folds of a silver satin, drawn live; it moves only while a slide changes -------------------------------
+const cv = $('#silk'), gl = cv.getContext('webgl', { antialias: true, premultipliedAlpha: false });
+const VS = 'attribute vec2 p; void main(){ gl_Position = vec4(p, 0., 1.); }';
+const FS = `precision highp float;
+uniform vec2 res; uniform vec2 off; uniform float ang;
+float h(vec2 p){
+  p += off;
+  float c = cos(ang), s = sin(ang); p = mat2(c, -s, s, c) * p;
+  vec2 q = p;
+  q.x += .42 * sin(q.y * 1.15 + 1.3) + .18 * sin(q.y * 2.3 + 0.4);
+  float a = .62 * sin(q.x * 2.05 + q.y * .55);
+  a += .30 * sin(q.x * 3.6 - q.y * 1.1 + 2.1);
+  a += .12 * sin(q.x * 6.3 + q.y * 1.9 + 4.2);
+  return a;
+}
+void main(){
+  vec2 uv = gl_FragCoord.xy / res;
+  vec2 p = (gl_FragCoord.xy - .5 * res) / res.y * 1.7;
+  float e = 1.5 / res.y;
+  float dx = (h(p + vec2(e, 0.)) - h(p - vec2(e, 0.))) / (2. * e);
+  float dy = (h(p + vec2(0., e)) - h(p - vec2(0., e))) / (2. * e);
+  vec3 n = normalize(vec3(-dx * .34, -dy * .34, 1.));
+  vec3 L = normalize(vec3(-.45, .55, .75)), V = vec3(0., 0., 1.), H = normalize(L + V);
+  float d = clamp(dot(n, L), 0., 1.);
+  float sp = pow(clamp(dot(n, H), 0., 1.), 60.);
+  float rim = pow(1. - clamp(n.z, 0., 1.), 2.);
+  vec3 lo = vec3(.52, .56, .66), mid = vec3(.78, .80, .86), hi = vec3(.965, .97, .98);
+  vec3 col = mix(lo, mid, smoothstep(.25, .75, d));
+  col = mix(col, hi, smoothstep(.72, 1., d));
+  col += sp * .30 + rim * vec3(.05, .06, .09);
+  col = mix(col, vec3(.905, .91, .925), smoothstep(.25, 1.3, length((uv - vec2(.32, .55)) * vec2(1.2, 1.))) * .35);
+  gl_FragColor = vec4(col, 1.);
+}`;
+function sh(type, src) { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; }
+const prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(prog); gl.useProgram(prog);
+const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+const loc = gl.getAttribLocation(prog, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+const U = { res: gl.getUniformLocation(prog, 'res'), off: gl.getUniformLocation(prog, 'off'), ang: gl.getUniformLocation(prog, 'ang') };
+function silkSize() { const d = Math.min(2, devicePixelRatio || 1); cv.width = innerWidth * d; cv.height = innerHeight * d; gl.viewport(0, 0, cv.width, cv.height); drawSilk(); }
+const POSE = [[0.0, 0.0, 0.0], [0.9, -0.25, 0.10], [1.7, 0.30, -0.06]];   // where the silk rests for each slide
+let pose = [...POSE[0]], from = [...POSE[0]], to = [...POSE[0]], t0 = 0, moving = false;
+function drawSilk() { gl.uniform2f(U.res, cv.width, cv.height); gl.uniform2f(U.off, pose[0], pose[1]); gl.uniform1f(U.ang, pose[2]); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); }
+function flowTo(i) { from = [...pose]; to = [...POSE[i % POSE.length]]; t0 = performance.now(); if (!moving) { moving = true; requestAnimationFrame(tick); } }
+function tick(t) {
+  const k = Math.min(1, (t - t0) / 1600), e = 1 - Math.pow(1 - k, 3);
+  pose = from.map((a, j) => a + (to[j] - a) * e); drawSilk();
+  if (k < 1) requestAnimationFrame(tick); else moving = false;
+}
+addEventListener('resize', fit); fit();
+
+// ---- slides and steps ---------------------------------------------------------------------------------------------------
+let cur = -1, step = 0; const hooks = {};
+function paint() { $$('.st', slides[cur]).forEach((e) => e.classList.toggle('on', +e.dataset.s <= step)); hooks[cur]?.(step); history.replaceState(null, '', `#${cur + 1}${step ? '.' + step : ''}`); }
+function go(i, s = 0) {
+  i = Math.max(0, Math.min(slides.length - 1, i));
+  if (i !== cur) { if (cur >= 0) { slides[cur].classList.remove('on'); $$('.st', slides[cur]).forEach((e) => e.classList.remove('on')); } slides[i].classList.add('on'); cur = i; flowTo(i); }
+  step = s === 'last' ? +slides[cur].dataset.steps : s; requestAnimationFrame(paint);
+}
+const next = () => (step < +slides[cur].dataset.steps ? (step++, paint()) : go(cur + 1));
+const back = () => (step > 0 ? (step--, paint()) : cur > 0 && go(cur - 1, 'last'));
+addEventListener('keydown', (e) => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); next(); }
+  else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); back(); }
+  else if (e.key.toLowerCase() === 'f') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
+});
+
+// ---- the canvas as of 5 October 2026 ----------------------------------------------------------------------------------
+const B = {
+  KP: [0, 0, 262, 520, 'Key partners', '<ul><li>Equipment distributors: also a sales channel on commission, once gyms pay</li><li>Machine manufacturers</li><li>Hardware manufacturers and component suppliers</li><li>Outsourced developers: code review, extra capacity</li><li>Service partners: on-site maintenance</li><li>Investors</li><li>Our network: private contacts and gym owners</li></ul>'],
+  KA: [274, 0, 262, 236, 'Key activities', '<ul><li>Full service: installation, set-up, onboarding, maintenance, on-site help as fallback</li><li>Free four-week trials, a weekly usage report, the read-out with the owner</li><li>Sales and marketing · manufacturing, outsourced</li><li>App: development, testing, updates</li></ul>'],
+  KR: [274, 248, 262, 272, 'Key resources', '<ul><li>Network to gym owners; know-how in how gyms run</li><li>A test facility; hardware production; own 3D printer</li><li>IP protection for the hardware (planned); legal advice; CE</li><li>The software and tech stack</li><li>Capital: founders fund the start-up phase; €50,000 outside money in two parts (Feb and May 2027)</li></ul>'],
+  VP: [548, 0, 264, 520, 'Value propositions', '<div class="sub">To the gym owner</div><ul><li><b>One sensor per strength machine:</b> retrofit, no new machines</li><li><b>Weekly usage report:</b> which machines are used, how much and when; peak hours</li><li><b>What changed on the floor:</b> trends per machine for buying, replacing, layout and service</li><li>Maintenance by real use, not the calendar</li><li>A better member experience and something to stand out with</li></ul><div class="sub">To the member</div><ul><li><b>The whole workout tracked with little effort:</b> no typing of reps; the weight in one tap</li><li>Progress you can see</li></ul><div class="note">Left out on purpose: screens, cameras, coaching, leaderboards.</div>'],
+  CR: [824, 0, 262, 236, 'Customer relationships', '<ul><li>Self-service by design: most requests without a human</li><li>We install, and review the year with the owner</li><li>Spare units at the gym; tickets by e-mail; paid on-site help as plan B</li><li>First 3–10 gyms: co-creation with a named contact</li></ul>'],
+  CH: [824, 248, 262, 272, 'Channels', '<ul><li><b>Direct sales to the owner:</b> gym visits, calls and e-mails within the legal rules, trade fairs</li><li><b>Way in: a free four-week trial with full use;</b> the order is signed at the end</li><li>Referrals from paying gyms; distributors later</li><li>Members: through their gym; social media, SEO</li></ul>'],
+  CS: [1098, 0, 262, 520, 'Customer segments', '<ul><li><b>Payer:</b> the owner of an independent gym with about 15–50 strength machines</li><li><b>Users:</b> the gym\'s members, from beginners to advanced lifters</li><li><b>Later:</b> members who want more, with a Pro version of the app</li><li><b>Next: chains,</b> once independent gyms have proved the value</li><li>Later: personal trainers; equipment suppliers</li><li>Not for now: EMS-style studios; gyms built on personal guidance</li></ul>'],
+  C: [0, 532, 674, 150, 'Cost structure', '<ul style="columns:2;column-gap:24px"><li><b>Build, one-off:</b> software and hardware development; legal: patent, UG founding, CE</li><li><b>Run:</b> servers, tools, marketing, sales travel and fairs, after-sales</li><li><b>Per sensor:</b> under €50 including assembly, target about €40</li><li>Free trials (installation and visits); loan interest</li></ul>'],
+  R: [686, 532, 674, 150, 'Revenue streams', '<ul style="columns:2;column-gap:24px"><li><b>Sensors: €249 per machine, once,</b> installation included</li><li><b>Subscription: €20 per machine a month,</b> where the profit sits; 12 months, at least 10 machines</li><li>Example, 20 machines: €4,980 once + €400 a month</li><li>Later: a Pro app subscription for members</li></ul>'],
+};
+$('#bmc').innerHTML = Object.entries(B).map(([k, [x, y, w, h, t, html]]) => `<div class="glass blk" data-k="${k}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px"><div class="t">${t}</div>${html}</div>`).join('');
+const WALK = [null, 'CS', 'VP', 'CH', 'R', null, 'C'];
+hooks[2] = (s) => { const k = WALK[s]; $('#bmc').classList.toggle('focusing', !!k); $$('#bmc .blk').forEach((b) => b.classList.toggle('focus', b.dataset.k === k)); };
+
+// ---- the sensor, in brushed graphite, turning slowly --------------------------------------------------------------------
+(async function sensor() {
+  const THREE = await import('three');
+  const { mergeVertices, toCreasedNormals } = await import('three/addons/utils/BufferGeometryUtils.js');
+  const { RoomEnvironment } = await import('three/addons/environments/RoomEnvironment.js');
+  const canvas = $('#sensor3d');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(2, devicePixelRatio * 1.5)); renderer.setSize(620, 480, false);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.outputColorSpace = THREE.SRGBColorSpace;
+  const scene = new THREE.Scene();
+  scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture; scene.environmentIntensity = 1.0;
+  const stl = (b64) => { const bin = atob(b64), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+    const v = new DataView(u.buffer), n = v.getUint32(80, true), p = new Float32Array(n * 9);
+    for (let t = 0, o = 84; t < n; t++, o += 50) for (let k = 0; k < 9; k++) p[t * 9 + k] = v.getFloat32(o + 12 + k * 4, true);
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(p, 3)); return toCreasedNormals(mergeVertices(g, 1e-4), THREE.MathUtils.degToRad(32)); };
+  const mat = new THREE.MeshPhysicalMaterial({ color: '#2B2C31', roughness: 0.42, metalness: 0.2, clearcoat: 0.6, clearcoatRoughness: 0.25 });
+  const pod = new THREE.Group(), inner = new THREE.Group(); inner.rotation.x = -Math.PI / 2;
+  inner.add(new THREE.Mesh(stl(window.SENSOR.pod), mat), new THREE.Mesh(stl(window.SENSOR.lid), mat));
+  const box = new THREE.Box3().setFromObject(inner), c = box.getCenter(new THREE.Vector3()); inner.position.sub(c); pod.add(inner); scene.add(pod);
+  const light = (col, i, p) => { const l = new THREE.DirectionalLight(col, i); l.position.set(...p); scene.add(l); };
+  light('#ffffff', 2.4, [-60, 90, 80]); light('#E8ECF5', 2.2, [80, 40, -60]); light('#ffffff', .8, [0, -60, 80]);
+  const shadow = new THREE.Mesh(new THREE.PlaneGeometry(140, 70), new THREE.MeshBasicMaterial({ transparent: true, opacity: .18, color: '#3A4060',
+    alphaMap: (() => { const cc = document.createElement('canvas'); cc.width = cc.height = 128; const g = cc.getContext('2d'); const r = g.createRadialGradient(64, 64, 4, 64, 64, 64); r.addColorStop(0, '#fff'); r.addColorStop(1, '#000'); g.fillStyle = r; g.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(cc); })() }));
+  shadow.rotation.x = -Math.PI / 2; shadow.position.y = -22;   // (left out: its edge showed as a faint box)
+  const camera = new THREE.PerspectiveCamera(22, 620 / 480, 1, 2000); camera.position.set(0, 52, 210); camera.lookAt(0, -4, 0);
+  let yaw = -0.75;
+  (function frame() { yaw += 0.0012; pod.rotation.set(0.28, yaw, 0); if (cur === 0) renderer.render(scene, camera); requestAnimationFrame(frame); })();
+})();
+
+const [h0, h1] = location.hash.slice(1).split('.').map(Number);
+go(Number.isFinite(h0) ? h0 - 1 : 0, Number.isFinite(h1) ? h1 : 0);
+</script>
+</body>
+</html>
