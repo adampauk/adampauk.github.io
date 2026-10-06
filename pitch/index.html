@@ -29,11 +29,12 @@
            border:1px solid rgba(255,255,255,.8);
            box-shadow: inset 0 1px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(255,255,255,.4), 0 24px 60px rgba(54,62,92,.16), 0 2px 8px rgba(54,62,92,.06); }
 
-  .slide { position:absolute; inset:0; opacity:0; visibility:hidden; transform:translateY(14px) scale(.995); filter:blur(8px);
-           transition:opacity .5s var(--out), transform .8s var(--out), filter .6s var(--out), visibility 0s .8s; }
-  .slide.on { opacity:1; visibility:visible; transform:none; filter:none; transition:opacity .7s .25s var(--out), transform 1s .25s var(--out), filter .8s .25s var(--out), visibility 0s; }
-  .st { opacity:0; transform:translateY(10px); transition:opacity .6s var(--out), transform .7s var(--out); }
-  .st.on { opacity:1; transform:none; }
+  .slide { position:absolute; inset:0; visibility:hidden; transition:visibility 0s .3s; }
+  .slide.on { visibility:visible; transition:none; }
+  /* each element fades by itself (an ancestor's opacity or filter would switch its glass off while it moves) */
+  .st { opacity:0; transform:translateY(8px); transition:opacity .26s ease, transform .3s ease; }
+  .st.on { opacity:1; transform:none; transition:opacity .55s var(--out) .3s, transform .7s var(--out) .3s; }
+  h2.st.on { transition-delay:.22s; } .sub2.st.on { transition-delay:.26s; }
 
   .eyebrow { font-size:15px; font-weight:600; letter-spacing:.01em; color:#6E6E73; }
   .display { margin:0; font-weight:600; letter-spacing:-.03em; line-height:1.02; color:var(--ink); }
@@ -63,8 +64,6 @@
   .blk li::before { content:""; position:absolute; left:0; top:.62em; width:4px; height:4px; border-radius:2px; background:#9A9AA2; }
   .blk li b { color:var(--ink); font-weight:600; }
   .blk .bn { font-size:12px; line-height:1.35; color:var(--ink3); margin-top:6px; }
-  .bmc.focusing .blk { opacity:.45; }
-  .bmc.focusing .blk.focus { opacity:1; transform:scale(1.015); box-shadow: inset 0 1px 0 #fff, 0 30px 70px rgba(54,62,92,.24); }
   .bmc-f { position:absolute; left:120px; bottom:22px; }
 
   ::selection { background:#1D1D1F; color:#F2F3F5; }
@@ -72,7 +71,8 @@
   body.idle, body.idle * { cursor:none !important; }
   .glass { border-radius:18px; }
   h2.title { position:absolute; left:120px; top:84px; width:1360px; font-size:54px; }
-  .sub2 { position:absolute; left:122px; top:150px; font-size:19px; color:var(--ink3); }
+  .sub2 { position:absolute; left:122px; top:150px; width:1356px; font-size:22px; line-height:1.36; letter-spacing:-.006em; color:var(--ink2); }
+  .agenda { position:absolute; left:0; right:0; top:800px; display:flex; justify-content:center; gap:44px; font-size:17px; font-weight:500; color:var(--ink3); }
   .note { position:absolute; left:120px; right:120px; bottom:40px; font-size:15px; line-height:1.45; color:var(--ink3); }
   .board { position:absolute; left:120px; width:1360px; padding:0; overflow:hidden; }
   .hair { border-color:rgba(29,29,31,.12) !important; }
@@ -81,7 +81,7 @@
              box-shadow:inset 0 1px 0 #fff, 0 8px 24px rgba(54,62,92,.14); opacity:.72; transition:opacity .25s, transform .2s; }
   #present:hover { opacity:1; } #present:active { transform:scale(.97); }
   body.fs #present { display:none; }
-  #sensor3d { position:absolute; transition:left .9s var(--out), top .9s var(--out), width .9s var(--out), height .9s var(--out), opacity .5s; z-index:1; }
+  #sensor3d { position:absolute; opacity:0; transition:opacity .26s ease; z-index:1; } #sensor3d.on { opacity:1; transition:opacity .7s var(--out) .3s; }
   /* 1 opener */ .op { position:absolute; left:0; right:0; top:660px; text-align:center; font-size:62px; }
   /* 3 demo */ .rep { left:880px; top:170px; width:600px; height:600px; padding:34px 38px; }
   .rep h3 { margin:0; font-size:28px; font-weight:600; letter-spacing:-.02em; } .rep .lab { position:absolute; right:30px; top:36px; font-size:13px; font-weight:600; color:var(--ink3); padding:5px 10px; border-radius:10px; background:rgba(29,29,31,.06); }
@@ -92,42 +92,36 @@
   .sz .n { font-size:112px; font-weight:600; letter-spacing:-.04em; line-height:1; text-align:right; padding-right:36px; }
   .sz .t { font-size:34px; letter-spacing:-.015em; line-height:1.2; } .sz .t small { display:block; font-size:16px; color:var(--ink3); margin-top:6px; letter-spacing:0; }
   .path { position:absolute; left:640px; top:742px; font-size:24px; color:var(--ink2); display:flex; align-items:center; gap:16px; }
-  /* 5 test matrix */ .tm { top:200px; }
-  .tm .r { display:grid; grid-template-columns:230px 1fr 1fr 1fr 1fr; gap:26px; padding:22px 30px; border-top:1px solid rgba(29,29,31,.1); font-size:16px; line-height:1.42; color:var(--ink2); }
-  .tm .r:first-child { border-top:0; padding:16px 30px 10px; font-size:15px; font-weight:600; color:var(--ink3); }
+  /* 5 test matrix */ .tm { top:212px; }
+  .tm .r { display:grid; grid-template-columns:240px 1fr 1fr 1fr 1fr; gap:28px; padding:28px 32px; border-top:1px solid rgba(29,29,31,.1); font-size:18px; line-height:1.42; color:var(--ink2); }
+  .tm .r:first-child { border-top:0; padding:18px 32px 12px; font-size:15px; font-weight:600; color:var(--ink3); }
   .tm .w b { display:block; font-size:24px; color:var(--ink); font-weight:600; letter-spacing:-.02em; } .tm .w i { display:block; font-style:normal; font-size:15px; color:var(--ink3); margin-top:6px; }
-  /* 6 learned */ .ln { position:absolute; left:120px; top:210px; width:1360px; }
+  /* 6 learned */ .ln { position:absolute; left:120px; top:222px; width:1360px; }
   .ln .hd { display:grid; grid-template-columns:560px 90px 1fr; font-size:15px; font-weight:600; color:var(--ink3); padding-bottom:8px; }
   .ln .r { display:grid; grid-template-columns:560px 90px 1fr; align-items:center; padding:20px 0; border-top:1px solid rgba(29,29,31,.12); }
   .ln .l { font-size:28px; font-weight:600; letter-spacing:-.02em; line-height:1.18; } .ln .c { font-size:19px; line-height:1.45; color:var(--ink2); } .ln .c b { color:var(--ink); }
   /* 7 canvas */ .bmc .blk { background:transparent; border:0; border-radius:0; box-shadow:none; padding:16px 18px; }
-  .cv { top:190px; height:670px; } .cv .lineV, .cv .lineH { position:absolute; background:rgba(29,29,31,.12); }
-  .bmc.focusing .blk { opacity:.35; } .bmc.focusing .blk.focus { opacity:1; transform:none; background:rgba(255,255,255,.55); box-shadow:none; }
-  .bmc.dim .blk { opacity:.15; }
-  .chg { position:absolute; left:400px; top:360px; width:800px; padding:30px 36px; opacity:0; transform:translateY(8px); transition:opacity .5s var(--out), transform .6s var(--out); z-index:3; pointer-events:none; }
-  .chg.on { opacity:1; transform:none; } .chg h3 { margin:0 0 10px; font-size:24px; font-weight:600; } .chg p { margin:8px 0 0; font-size:21px; line-height:1.42; color:var(--ink2); }
-  /* 8 brand key */ #key { position:absolute; left:150px; top:190px; width:520px; height:660px; overflow:visible; }
-  #key .fld rect { fill:rgba(255,255,255,.35); stroke:rgba(29,29,31,.16); transition:fill .4s, stroke .4s; }
-  #key .fld text { font:600 15px -apple-system, "SF Pro Text", sans-serif; fill:var(--ink3); transition:fill .4s; }
-  #key .fld.seen rect { fill:rgba(255,255,255,.6); } #key .fld.seen text { fill:var(--ink2); }
-  #key .fld.cur rect { fill:#1D1D1F; stroke:#1D1D1F; } #key .fld.cur text { fill:#F2F3F5; }
-  .bkp { left:740px; top:220px; width:740px; height:560px; padding:42px 46px; }
-  .bkp .n { font-size:15px; font-weight:600; color:var(--ink3); } .bkp h3 { margin:10px 0 0; font-size:46px; font-weight:600; letter-spacing:-.03em; line-height:1.04; }
-  .bkp .a { font-size:21px; line-height:1.46; margin-top:20px; color:var(--ink2); } .bkp .a p { margin:0 0 12px; } .bkp .a b { color:var(--ink); }
-  .bkp .pr { position:absolute; left:46px; right:46px; bottom:30px; padding-top:14px; border-top:1px solid rgba(29,29,31,.12); font-size:15px; line-height:1.45; color:var(--ink3); }
-  .swap { transition:opacity .28s var(--out), transform .4s var(--out); } .swap.out { opacity:0; transform:translateY(8px); }
-  /* 9 4P */ .ps { top:190px; } .ps .r { display:grid; grid-template-columns:200px 260px 1fr; gap:28px; padding:20px 30px; border-top:1px solid rgba(29,29,31,.1); align-items:start; }
-  .ps .r:first-child { border-top:0; } .ps .p { font-size:28px; font-weight:600; letter-spacing:-.02em; } .ps .q { font-size:16px; line-height:1.4; color:var(--ink3); } .ps .c { font-size:17px; line-height:1.48; color:var(--ink2); } .ps .c b { color:var(--ink); }
+  .cv { top:200px; height:656px; }
+  /* 8 brand key */ .bkg { position:absolute; left:0; top:0; overflow:visible; pointer-events:none; }
+  .bkl { position:absolute; left:120px; width:300px; display:flex; align-items:center; justify-content:flex-end; text-align:right; font-size:17px; font-weight:600; letter-spacing:-.01em; color:var(--ink2); }
+  .bkc { position:absolute; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; text-wrap:balance; }
+  .bkc b { font-size:17px; font-weight:600; line-height:1.25; letter-spacing:-.01em; color:var(--ink); }
+  .bkc span { font-size:15px; line-height:1.32; color:var(--ink3); margin-top:4px; }
+  .bkc.ess i { font-style:normal; font-size:15px; font-weight:600; color:var(--ink3); }
+  .bkc.ess b { font-size:40px; line-height:1.1; letter-spacing:-.03em; margin-top:6px; } .bkc.ess span { margin-top:6px; }
+  .bkr { position:absolute; left:1150px; width:330px; display:flex; align-items:center; font-size:15px; line-height:1.34; color:var(--ink3); text-wrap:pretty; }
+  /* 9 4P */ .ps { top:212px; } .ps .r { display:grid; grid-template-columns:200px 260px 1fr; gap:28px; padding:26px 32px; border-top:1px solid rgba(29,29,31,.1); align-items:start; }
+  .ps .r:first-child { border-top:0; } .ps .p { font-size:28px; font-weight:600; letter-spacing:-.02em; } .ps .q { font-size:16px; line-height:1.4; color:var(--ink3); } .ps .c { font-size:19px; line-height:1.48; color:var(--ink2); } .ps .c b { color:var(--ink); }
   .thread { position:absolute; left:120px; top:800px; font-size:28px; font-weight:600; letter-spacing:-.02em; }
-  /* 10 scenarios */ .sb { top:200px; height:580px; } .q4 { position:absolute; width:50%; height:50%; padding:24px 30px; transition:background .5s; }
+  /* 10 scenarios */ .sb { top:236px; height:536px; } .q4 { position:absolute; width:50%; height:50%; padding:24px 30px; transition:background .5s; }
   .q4 .num { font-size:15px; font-weight:600; color:var(--ink3); } .q4 h4 { margin:4px 0 0; font-size:28px; font-weight:600; letter-spacing:-.02em; } .q4 .lab { font-size:15px; color:var(--ink3); margin-top:2px; }
   .q4 .m { font-size:17px; line-height:1.42; color:var(--ink2); margin-top:12px; } .q4 .mv { font-size:17px; line-height:1.42; color:var(--ink); margin-top:8px; font-weight:500; }
   .q4.prep { background:rgba(255,255,255,.55); } .axl { position:absolute; font-size:15px; color:var(--ink3); }
   .axl.axv { left:-49px; width:290px; text-align:center; transform:rotate(-90deg); } .axl.axv.st.on { transform:rotate(-90deg); }
-  /* 11-12 finances */ .fn { top:200px; width:900px; } .fn .r { display:grid; grid-template-columns:1fr 220px 220px; padding:18px 32px; border-top:1px solid rgba(29,29,31,.1); font-size:21px; align-items:baseline; }
+  /* 11-12 finances */ .fn { top:212px; width:900px; } .fn .r { display:grid; grid-template-columns:1fr 220px 220px; padding:18px 32px; border-top:1px solid rgba(29,29,31,.1); font-size:21px; align-items:baseline; }
   .fn .r:first-child { border-top:0; font-size:15px; font-weight:600; color:var(--ink3); } .fn .r span:not(:first-child) { text-align:right; font-variant-numeric:tabular-nums; font-weight:600; }
   .fn .r small { display:block; font-size:15px; color:var(--ink3); font-weight:400; margin-top:3px; }
-  .side { position:absolute; left:1080px; top:206px; width:400px; } .side .f { padding:18px 0; border-top:1px solid rgba(29,29,31,.12); } .side .f:first-child { border-top:0; }
+  .side { position:absolute; left:1080px; top:218px; width:400px; } .side .f { padding:18px 0; border-top:1px solid rgba(29,29,31,.12); } .side .f:first-child { border-top:0; }
   .side .k { font-size:15px; font-weight:600; color:var(--ink3); } .side .v { font-size:21px; line-height:1.38; margin-top:6px; } .big { font-size:96px; font-weight:600; letter-spacing:-.04em; line-height:1; }
   .lever .r.h { border-top:0; padding-top:0; font-size:15px; font-weight:600; color:var(--ink3); } .lever .r { display:grid; grid-template-columns:110px 1fr 130px; padding:14px 0; border-top:1px solid rgba(29,29,31,.12); font-size:19px; align-items:baseline; } .lever .r span:last-child { text-align:right; font-weight:600; }
   /* 13 closing */ .nx { position:absolute; left:120px; top:240px; width:780px; } .nx .r { padding:22px 0; border-top:1px solid rgba(29,29,31,.12); font-size:24px; line-height:1.38; } .nx .r:first-child { border-top:0; }
@@ -141,11 +135,12 @@
 <div id="prism"></div>
 <div id="stage">
   <canvas id="sensor3d" aria-label="The sensor"></canvas>
-  <section class="slide" data-steps="0"><h1 class="display op st" data-s="0">We make each machine's use visible.</h1></section>
+  <section class="slide" data-steps="0"><h1 class="display op st" data-s="0">We make each machine's use visible.</h1>
+    <div class="agenda st" data-s="0"><span>Concept</span><span>Test matrix</span><span>Business Model Canvas</span><span>Brand Key</span><span>Marketing mix</span><span>Scenario matrix</span><span>Finances</span></div></section>
 
   <section class="slide" data-steps="0">
     <h2 class="display hook st" data-s="0">Which machine would you<br>replace next year?</h2>
-    <div class="hook-s st" data-s="0"><span class="glass chip">€83,000 invested per German gym in 2025 <span style="color:var(--ink3)">· DSSV</span></span></div>
+    <div class="hook-s"><span class="glass chip st" data-s="0">€83,000 invested per German gym in 2025 <span style="color:var(--ink3)">· DSSV</span></span></div>
   </section>
 
   <section class="slide" data-steps="0">
@@ -171,8 +166,9 @@
     <div class="path st" data-s="0">Tens of thousands of strength machines <span style="color:var(--ink3);font-size:18px">(our estimate)</span></div>
   </section>
 
-  <section class="slide" data-steps="1">
-    <h2 class="display title st" data-s="0">Two test rounds: 8 + 5 people.</h2>
+  <section class="slide" data-steps="0">
+    <h2 class="display title st" data-s="0">Test matrix</h2>
+    <div class="sub2 st" data-s="0">Two test rounds so far: 8 + 5 people.</div>
     <div class="glass board tm st" data-s="0">
       <div class="r"><div>Round</div><div>Confirmation</div><div>Doubt</div><div>Rejection</div><div>Action</div></div>
       <div class="r"><div class="w"><b>Test 1 · 8 of 10</b><i>September · 4 lifters (L1–L4), a chain club manager (O1), 3 Dutch members (L5–L7)</i></div>
@@ -180,7 +176,7 @@
         <div>How much a wrong count matters depends on the situation: rep range, training phase</div>
         <div>L5–L7 could not picture it without seeing it work (prompted) · none of the first five logs today · the chain dropped its connected machines: costly, low value</div>
         <div>The owner pays, the member uses it free · round 2 for owners, kill lines fixed in advance · no retention promise</div></div>
-      <div class="r st" data-s="1"><div class="w"><b>Test 2 · 5 of 10</b><i>Sept – early Oct · 3 Dutch gyms (NL-04, NL-05, NL-06), 2 members (M-NL-05, M-DE-01)</i></div>
+      <div class="r st" data-s="0"><div class="w"><b>Test 2 · 5 of 10</b><i>Sept – early Oct · 3 Dutch gyms (NL-04, NL-05, NL-06), 2 members (M-NL-05, M-DE-01)</i></div>
         <div>Value seen on all the unconnected machines, any brand (NL-06, prompted) · logging without typing liked, if reliable (M-NL-05, prompted)</div>
         <div>No exact counts needed day to day · retention only if proven · their first price estimate far below our test prices (NL-06, prompted)</div>
         <div>None of the three gyms saw a strong need for usage data: they already see their floor (our reading)</div>
@@ -189,60 +185,69 @@
     <div class="note st" data-s="0">No conversation counts as a clean test yet. “Prompted” = said after we described our idea: a reaction, not proof of need. Nothing is signed or paid.</div>
   </section>
 
-  <section class="slide" data-steps="3">
-    <h2 class="display title st" data-s="0">Three learnings, and what we changed.</h2>
+  <section class="slide" data-steps="0">
+    <h2 class="display title st" data-s="0">Test matrix</h2>
+    <div class="sub2 st" data-s="0">What the tests taught us, and what we changed.</div>
     <div class="ln"><div class="hd st" data-s="0"><div>What we learned</div><div></div><div>What we changed</div></div>
       <div class="r st" data-s="0"><div class="l">Some members like it, but the owner must buy it.</div><svg width="60" height="14"><path d="M0 7h52M46 2l6 5-6 5" fill="none" stroke="#1D1D1F" stroke-width="1.5"/></svg><div class="c"><b>The owner is our only buyer:</b> independent gyms with about 15–50 strength machines. Members use it and pay nothing.</div></div>
-      <div class="r st" data-s="1"><div class="l">Data alone does not sell.</div><svg width="60" height="14"><path d="M0 7h52M46 2l6 5-6 5" fill="none" stroke="#1D1D1F" stroke-width="1.5"/></svg><div class="c"><b>Decisions, not data.</b> In the trial the owner names one machine decision first; the report leads with what changed (proposed).</div></div>
-      <div class="r st" data-s="2"><div class="l">Owners want results before they pay, with little staff work.</div><svg width="60" height="14"><path d="M0 7h52M46 2l6 5-6 5" fill="none" stroke="#1D1D1F" stroke-width="1.5"/></svg><div class="c"><b>A free four-week trial</b> with full use; the owner signs only at the read-out. We install, remove and fix.</div></div>
-      <div class="r st" data-s="3"><div class="l">Our questions sometimes led the answer.</div><svg width="60" height="14"><path d="M0 7h52M46 2l6 5-6 5" fill="none" stroke="#1D1D1F" stroke-width="1.5"/></svg><div class="c"><b>New interview rules:</b> consent on tape, neutral questions before we show anything, the offer only at the end.</div></div>
+      <div class="r st" data-s="0"><div class="l">Data alone does not sell.</div><svg width="60" height="14"><path d="M0 7h52M46 2l6 5-6 5" fill="none" stroke="#1D1D1F" stroke-width="1.5"/></svg><div class="c"><b>Decisions, not data.</b> In the trial the owner names one machine decision first; the report leads with what changed (proposed).</div></div>
+      <div class="r st" data-s="0"><div class="l">Owners want results before they pay, with little staff work.</div><svg width="60" height="14"><path d="M0 7h52M46 2l6 5-6 5" fill="none" stroke="#1D1D1F" stroke-width="1.5"/></svg><div class="c"><b>A free four-week trial</b> with full use; the owner signs only at the read-out. We install, remove and fix.</div></div>
+      <div class="r st" data-s="0"><div class="l">Our questions sometimes led the answer.</div><svg width="60" height="14"><path d="M0 7h52M46 2l6 5-6 5" fill="none" stroke="#1D1D1F" stroke-width="1.5"/></svg><div class="c"><b>New interview rules:</b> consent on tape, neutral questions before we show anything, the offer only at the end.</div></div>
     </div>
-    <div class="note st" data-s="3">Next: five more conversations for test 2 · checkpoint Friday 16 October</div>
+    <div class="note st" data-s="0">Next: five more conversations for test 2 · checkpoint Friday 16 October</div>
   </section>
 
-  <section class="slide" data-steps="6">
-    <h2 class="display title st" data-s="0">The gym pays, the member uses.</h2>
-    <div class="sub2 st" data-s="0">Business Model Canvas, as of 5 October 2026</div>
-    <div class="glass board cv st" data-s="0"><div class="bmc" id="bmc" style="position:absolute;left:0;top:0;width:1360px;height:670px"></div></div>
-    <div class="glass chg" id="chg"><h3>What changed since our first canvas</h3>
-      <p>We dropped “a cheaper substitute for EGYM”: we do not want to be cheaper, we want to be worth it.</p>
-      <p>The sensors are no longer sold at a thin margin: the price now includes installation.</p></div>
+  <section class="slide" data-steps="0">
+    <h2 class="display title st" data-s="0">Business Model Canvas</h2>
+    <div class="sub2 st" data-s="0">As of 5 October 2026: the gym pays, the member uses.</div>
+    <div class="glass board cv st" data-s="0"><div class="bmc" id="bmc" style="position:absolute;left:0;top:0;width:1360px;height:656px"></div></div>
   </section>
 
-  <section class="slide" data-steps="8">
-    <h2 class="display title st" data-s="0">Brand Key: every set seen.</h2>
-    <svg id="key" viewBox="0 0 520 660" class="st" data-s="0"></svg>
-    <div class="glass bkp st" data-s="0"><div class="swap" id="bkin"></div></div>
+  <section class="slide" data-steps="0">
+    <h2 class="display title st" data-s="0">Brand Key</h2>
+    <div class="sub2 st" data-s="0">Read from the base up to the essence.</div>
+    <svg class="bkg st" data-s="0" width="1600" height="900" viewBox="0 0 1600 900" aria-hidden="true"><defs><linearGradient id="kf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".72"/><stop offset="1" stop-color="#fff" stop-opacity=".42"/></linearGradient><radialGradient id="kh" cx=".28" cy=".1" r=".55"><stop offset="0" stop-color="#fff" stop-opacity=".6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><clipPath id="kc"><path d="M583.3 515 A270 270 0 1 1 976.7 515 L1113.0 839.4 Q1120 856 1102 856 L458 856 Q440 856 447.0 839.4 Z"/></clipPath><filter id="ks" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="28"/></filter></defs><path d="M583.3 515 A270 270 0 1 1 976.7 515 L1113.0 839.4 Q1120 856 1102 856 L458 856 Q440 856 447.0 839.4 Z" fill="rgba(54,62,92,.20)" filter="url(#ks)" transform="translate(0 28)"/><path d="M583.3 515 A270 270 0 1 1 976.7 515 L1113.0 839.4 Q1120 856 1102 856 L458 856 Q440 856 447.0 839.4 Z" fill="url(#kf)"/><path d="M583.3 515 A270 270 0 1 1 976.7 515 L1113.0 839.4 Q1120 856 1102 856 L458 856 Q440 856 447.0 839.4 Z" fill="url(#kh)"/><g clip-path="url(#kc)"><rect x="400" y="40" width="800" height="174" fill="#fff" fill-opacity=".3"/><g stroke="rgba(29,29,31,.11)" stroke-width="1"><line x1="534.2" y1="214" x2="1025.8" y2="214"/><line x1="511.1" y1="289" x2="1048.9" y2="289"/><line x1="510.1" y1="364" x2="1049.9" y2="364"/><line x1="531.0" y1="439" x2="1029.0" y2="439"/><line x1="581.3" y1="515" x2="978.7" y2="515"/><line x1="545.6" y1="600" x2="1014.4" y2="600"/><line x1="509.9" y1="685" x2="1050.1" y2="685"/><line x1="474.2" y1="770" x2="1085.8" y2="770"/></g></g><path d="M583.3 515 A270 270 0 1 1 976.7 515 L1113.0 839.4 Q1120 856 1102 856 L458 856 Q440 856 447.0 839.4 Z" fill="none" stroke="rgba(29,29,31,.09)" stroke-width="3"/><path d="M583.3 515 A270 270 0 1 1 976.7 515 L1113.0 839.4 Q1120 856 1102 856 L458 856 Q440 856 447.0 839.4 Z" fill="none" stroke="#fff" stroke-width="1.6"/><g stroke="rgba(29,29,31,.2)" stroke-width="1" fill="rgba(29,29,31,.5)"><line x1="432" y1="251.5" x2="515.7" y2="251.5"/><line x1="1044.3" y1="251.5" x2="1138" y2="251.5"/><circle cx="521.7" cy="251.5" r="2.6"/><circle cx="1038.3" cy="251.5" r="2.6"/><line x1="432" y1="326.5" x2="504.0" y2="326.5"/><line x1="1056.0" y1="326.5" x2="1138" y2="326.5"/><circle cx="510.0" cy="326.5" r="2.6"/><circle cx="1050.0" cy="326.5" r="2.6"/><line x1="432" y1="401.5" x2="513.6" y2="401.5"/><line x1="1046.4" y1="401.5" x2="1138" y2="401.5"/><circle cx="519.6" cy="401.5" r="2.6"/><circle cx="1040.4" cy="401.5" r="2.6"/><line x1="432" y1="477.0" x2="547.5" y2="477.0"/><line x1="1012.5" y1="477.0" x2="1138" y2="477.0"/><circle cx="553.5" cy="477.0" r="2.6"/><circle cx="1006.5" cy="477.0" r="2.6"/><line x1="432" y1="557.5" x2="559.5" y2="557.5"/><line x1="1000.5" y1="557.5" x2="1138" y2="557.5"/><circle cx="565.5" cy="557.5" r="2.6"/><circle cx="994.5" cy="557.5" r="2.6"/><line x1="432" y1="642.5" x2="523.7" y2="642.5"/><line x1="1036.3" y1="642.5" x2="1138" y2="642.5"/><circle cx="529.7" cy="642.5" r="2.6"/><circle cx="1030.3" cy="642.5" r="2.6"/><line x1="432" y1="727.5" x2="488.0" y2="727.5"/><line x1="1072.0" y1="727.5" x2="1138" y2="727.5"/><circle cx="494.0" cy="727.5" r="2.6"/><circle cx="1066.0" cy="727.5" r="2.6"/><line x1="432" y1="813.0" x2="452.1" y2="813.0"/><line x1="1107.9" y1="813.0" x2="1138" y2="813.0"/><circle cx="458.1" cy="813.0" r="2.6"/><circle cx="1101.9" cy="813.0" r="2.6"/></g></svg>
+    <div class="bkc ess st" data-s="0" style="left:600px;top:80px;width:360px;height:128px"><i>Brand essence</i><b>Every set seen.</b><span>seen = recorded, no camera</span></div>
+    <div class="bkl st" data-s="0" style="top:214px;height:75px">Discriminator</div><div class="bkc st" data-s="0" style="left:555px;top:214px;width:451px;height:75px"><b>We observe; the others intervene.</b><span>No screen, no camera, no coaching, no leaderboard.</span></div><div class="bkr st" data-s="0" style="top:214px;height:75px">Scope: products for both owner and member (smart machines, Trackbar, Virtuagym Connect) add screens, logins, plans or coaching.</div>
+    <div class="bkl st" data-s="0" style="top:289px;height:75px">Reasons to believe</div><div class="bkc st" data-s="0" style="left:534px;top:289px;width:492px;height:75px"><b>A working prototype, used in real sessions</b><span>A founder runs a gym · a free four-week trial</span></div><div class="bkr st" data-s="0" style="top:289px;height:75px">5 days, 18–27 Sept, on gym machines. 60&nbsp;% of 615 surveyed preferred sensors on machines to wearables (Radhakrishnan et al., 2020).</div>
+    <div class="bkl st" data-s="0" style="top:364px;height:75px">Values</div><div class="bkc st" data-s="0" style="left:552px;top:364px;width:457px;height:75px"><b>Restraint · Privacy · Honest</b><span>We record, we don't coach. Machines, not people. A gap is a gap, never a zero.</span></div><div class="bkr st" data-s="0" style="top:364px;height:75px">Business plan §7.3</div>
+    <div class="bkl st" data-s="0" style="top:439px;height:76px">Benefits</div><div class="bkc st" data-s="0" style="left:598px;top:439px;width:364px;height:76px"><b>The owner decides by use, not by feel.</b><span>Members' sets recorded with very little typing</span></div><div class="bkr st" data-s="0" style="top:439px;height:76px">Buy, move, service or retire a machine, with no new ones; and show a partner or a bank why. Business plan §7.3</div>
+    <div class="bkl st" data-s="0" style="top:515px;height:85px">Insight</div><div class="bkc st" data-s="0" style="left:602px;top:515px;width:356px;height:85px"><b>“My software shows me the door,<br>not the floor.”</b><span>Our wording, not quotes</span></div><div class="bkr st" data-s="0" style="top:515px;height:85px">Member: “I'd log every set, if it didn't cost me the set.” Club software shows check-ins only (Magicline, n.d.).</div>
+    <div class="bkl st" data-s="0" style="top:600px;height:85px">Target</div><div class="bkc st" data-s="0" style="left:566px;top:600px;width:428px;height:85px"><b>Independent gyms, 15–50 strength machines</b><span>The owner decides alone; members use it free.</span></div><div class="bkr st" data-s="0" style="top:600px;height:85px">4,202 independents in Germany, operators with up to four sites (Deloitte, 2026); 2,520–3,150 with a machine floor (our estimate).</div>
+    <div class="bkl st" data-s="0" style="top:685px;height:85px">Competitive environment</div><div class="bkc st" data-s="0" style="left:531px;top:685px;width:499px;height:85px"><b>Smart machines, retrofits, club software, gut feel</b><span>What an owner can do today</span></div><div class="bkr st" data-s="0" style="top:685px;height:85px">EGYM, Technogym, milon, Life Fitness · Trackbar, Virtuagym Connect · Ecofit, OnSight, TrackMyGym · Cyclops (UK) · cameras · Magicline. Company websites.</div>
+    <div class="bkl st" data-s="0" style="top:770px;height:86px">Root strengths</div><div class="bkc st" data-s="0" style="left:495px;top:770px;width:570px;height:86px"><b>A gym owner, an engineer, B2B sales and design</b><span>One shared problem: a training log gets in the way of training.</span></div><div class="bkr st" data-s="0" style="top:770px;height:86px">Our team, and a shared passion for the gym</div>
   </section>
 
-  <section class="slide" data-steps="4">
-    <h2 class="display title st" data-s="0">One offer, from the Brand Key.</h2>
+  <section class="slide" data-steps="0">
+    <h2 class="display title st" data-s="0">Marketing mix</h2>
+    <div class="sub2 st" data-s="0">The 4Ps: one offer, derived from the Brand Key.</div>
     <div class="glass board ps st" data-s="0">
       <div class="r"><div class="p">Product</div><div class="q">What do we offer?<br>From insight, benefits, discriminator</div><div class="c"><b>One sensor per strength machine</b> (retrofit, no new machines), a member app (iPhone first) and a weekly usage report for the owner. We install, support and review it once a year. Left out on purpose: screens, cameras, coaching, leaderboards.</div></div>
-      <div class="r st" data-s="1"><div class="p">Price</div><div class="q">What does the owner pay?<br>From target, values, reasons to believe</div><div class="c"><b>Test prices: €249 per machine once + €20 per machine a month</b>, 12 months, at least 10 machines (20 machines: €4,980 once + €400 a month). A free four-week trial with full use comes first. Members pay nothing.</div></div>
-      <div class="r st" data-s="2"><div class="p">Place</div><div class="q">Where does the owner buy?<br>From root strengths, target, values</div><div class="c"><b>Direct, in person:</b> gym visit, floor walk, free trial, order at the end. The Netherlands until Jan 2027; from Feb 2027 around Heilbronn. Chains after proof.</div></div>
-      <div class="r st" data-s="3"><div class="p">Promotion</div><div class="q">How does the owner say yes?<br>From insight, values, reasons, essence</div><div class="c"><b>Open with the owner's own gap;</b> the priced offer only at the end. A sample weekly report (labelled sample), events and fairs, referrals; calls and e-mails within the legal rules, no letters.</div></div>
+      <div class="r st" data-s="0"><div class="p">Price</div><div class="q">What does the owner pay?<br>From target, values, reasons to believe</div><div class="c"><b>Test prices: €249 per machine once + €20 per machine a month</b>, 12 months, at least 10 machines (20 machines: €4,980 once + €400 a month). A free four-week trial with full use comes first. Members pay nothing.</div></div>
+      <div class="r st" data-s="0"><div class="p">Place</div><div class="q">Where does the owner buy?<br>From root strengths, target, values</div><div class="c"><b>Direct, in person:</b> gym visit, floor walk, free trial, order at the end. The Netherlands until Jan 2027; from Feb 2027 around Heilbronn. Chains after proof.</div></div>
+      <div class="r st" data-s="0"><div class="p">Promotion</div><div class="q">How does the owner say yes?<br>From insight, values, reasons, essence</div><div class="c"><b>Open with the owner's own gap;</b> the priced offer only at the end. A sample weekly report (labelled sample), events and fairs, referrals; calls and e-mails within the legal rules, no letters.</div></div>
     </div>
-    <div class="thread st" data-s="4">One thread: we add, we don't replace, and we observe.</div>
+    <div class="thread st" data-s="0">One thread: we add, we don't replace, and we observe.</div>
   </section>
 
-  <section class="slide" data-steps="5">
-    <h2 class="display title st" data-s="0">Two trends, four futures.</h2>
-    <div class="sub2 st" data-s="0">Our idea in every one: members' training counted, each machine's use shown to the owner, on the machines a gym already owns.</div>
-    <div class="axl st" data-s="0" style="left:120px;top:794px;width:680px;text-align:center">Connected machines become standard</div><div class="axl st" data-s="0" style="left:800px;top:794px;width:680px;text-align:center">Ordinary machines stay</div>
-    <div class="axl axv st" data-s="0" style="top:335px">Chains consolidate</div><div class="axl axv st" data-s="0" style="top:625px">Independents gain ground</div>
+  <section class="slide" data-steps="0">
+    <h2 class="display title st" data-s="0">Scenario matrix</h2>
+    <div class="sub2 st" data-s="0">Two trends, four futures, and what we prepare for. Our idea in every one: members' training counted, each machine's use shown to the owner, on the machines a gym already owns.</div>
+    <div class="axl st" data-s="0" style="left:120px;top:784px;width:680px;text-align:center">Connected machines become standard</div><div class="axl st" data-s="0" style="left:800px;top:784px;width:680px;text-align:center">Ordinary machines stay</div>
+    <div class="axl axv st" data-s="0" style="top:358px">Chains consolidate</div><div class="axl axv st" data-s="0" style="top:626px">Independents gain ground</div>
     <div class="glass board sb st" data-s="0" id="sb">
       <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(29,29,31,.14)"></div><div style="position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(29,29,31,.14)"></div>
-      <div class="q4 st" data-s="1" data-q="1" style="left:0;top:0"><div class="num">1 · Threat</div><h4>Smart chains</h4><div class="m">Head offices buy connected floors; our pool of ordinary machines shrinks.</div><div class="mv">Be the data for the rest of the floor; as an option, the technology others build in.</div></div>
-      <div class="q4 st" data-s="2" data-q="2" style="left:50%;top:0"><div class="num">2 · Later opportunity</div><h4>Lean chains</h4><div class="m">Chains run ordinary machines longer. Big accounts, slow decisions.</div><div class="mv">The chain path after 10 paying gyms and 3 references. An upside, not in our numbers.</div></div>
-      <div class="q4 st" data-s="3" data-q="3" style="left:0;top:50%"><div class="num">3 · Likely near term</div><h4>Mixed floors</h4><div class="m">Owners add a connected circuit and keep the rest: 12 of 23 gyms in Heilbronn-Franken already do.</div><div class="mv">“Bring the rest of your floor into the same data.”</div></div>
-      <div class="q4 st" data-s="4" data-q="4" style="left:50%;top:50%"><div class="num">4 · Best fit</div><h4>The owner's floor</h4><div class="m">Independents keep their machines longer and compete on service.</div><div class="mv">The plan as built: walk-ins, the free four-week trial, referrals.</div></div>
+      <div class="q4 st" data-s="0" data-q="1" style="left:0;top:0"><div class="num">1 · Threat</div><h4>Smart chains</h4><div class="m">Head offices buy connected floors; our pool of ordinary machines shrinks.</div><div class="mv">Be the data for the rest of the floor; as an option, the technology others build in.</div></div>
+      <div class="q4 st" data-s="0" data-q="2" style="left:50%;top:0"><div class="num">2 · Later opportunity</div><h4>Lean chains</h4><div class="m">Chains run ordinary machines longer. Big accounts, slow decisions.</div><div class="mv">The chain path after 10 paying gyms and 3 references. An upside, not in our numbers.</div></div>
+      <div class="q4 prep st" data-s="0" data-q="3" style="left:0;top:50%"><div class="num">3 · Likely near term</div><h4>Mixed floors</h4><div class="m">Owners add a connected circuit and keep the rest: 12 of 23 gyms in Heilbronn-Franken already do.</div><div class="mv">“Bring the rest of your floor into the same data.”</div></div>
+      <div class="q4 prep st" data-s="0" data-q="4" style="left:50%;top:50%"><div class="num">4 · Best fit</div><h4>The owner's floor</h4><div class="m">Independents keep their machines longer and compete on service.</div><div class="mv">The plan as built: walk-ins, the free four-week trial, referrals.</div></div>
     </div>
-    <div class="note st" data-s="5" style="bottom:22px;font-size:14px">We prepare for 3 and 4 for the next two to three years (our reading, not a forecast) and watch for very cheap connected machines. Deloitte, 2026: chain facilities +12.6 %, independents +2.4 % (Germany, 2025). Playlist &amp; EGYM, 2026: more than 33,000 locations.</div>
+    <div class="note st" data-s="0" style="bottom:22px;font-size:14px">We prepare for 3 and 4 for the next two to three years (our reading, not a forecast) and watch for very cheap connected machines. Deloitte, 2026: chain facilities +12.6 %, independents +2.4 % (Germany, 2025). Playlist &amp; EGYM, 2026: more than 33,000 locations.</div>
   </section>
 
-  <section class="slide" data-steps="1">
-    <h2 class="display title st" data-s="0">Planning case: €249 once + €20 a month.</h2>
+  <section class="slide" data-steps="0">
+    <h2 class="display title st" data-s="0">Finances</h2>
+    <div class="sub2 st" data-s="0">Planning case: €249 once + €20 a month per machine, after a free four-week trial.</div>
     <div class="glass board fn st" data-s="0">
       <div class="r"><span>Planning case (our estimates)</span><span>Year 1</span><span>Year 2</span></div>
       <div class="r"><span>Gyms under contract<small>27 by Jan 2030</small></span><span>12</span><span>20</span></div>
@@ -251,37 +256,39 @@
       <div class="r"><span>Cash at year end<small>with the financing</small></span><span>€44,252</span><span>€54,604</span></div>
     </div>
     <div class="side">
-      <div class="f st" data-s="1"><div class="k">Break-even</div><div class="v">12-month result ≥ 0 from <b>February 2028</b></div></div>
-      <div class="f st" data-s="1"><div class="k">Cash before the outside money</div><div class="v">Back above zero in <b>June 2029</b></div></div>
-      <div class="f st" data-s="1"><div class="k">Turnover</div><div class="v" style="font-size:18px">Gyms × 20 machines × (€249 once + €20 a month)</div></div>
+      <div class="f st" data-s="0"><div class="k">Break-even</div><div class="v">12-month result ≥ 0 from <b>February 2028</b></div></div>
+      <div class="f st" data-s="0"><div class="k">Cash before the outside money</div><div class="v">Back above zero in <b>June 2029</b></div></div>
+      <div class="f st" data-s="0"><div class="k">Turnover</div><div class="v" style="font-size:18px">Gyms × 20 machines × (€249 once + €20 a month)</div></div>
     </div>
     <div class="note st" data-s="0">Year 1 = Feb 2027 – Jan 2028, Year 2 = Feb 2028 – Jan 2029. Sensor cost €40 including assembly: our target, not yet measured. Team financial model v3.1, 6 Oct 2026. A planning case, not a forecast.</div>
   </section>
 
-  <section class="slide" data-steps="2">
-    <h2 class="display title st" data-s="0">Financing need, and the lever that moves it.</h2>
-    <div class="st" data-s="0" style="position:absolute;left:120px;top:210px"><div class="big">€63,322</div><div style="font-size:21px;color:var(--ink3);margin-top:8px">financing need, planning case (our estimates)</div></div>
-    <div class="side" style="left:120px;top:400px;width:620px">
+  <section class="slide" data-steps="0">
+    <h2 class="display title st" data-s="0">Finances</h2>
+    <div class="sub2 st" data-s="0">Financing need, and the lever that moves it.</div>
+    <div class="st" data-s="0" style="position:absolute;left:120px;top:222px"><div class="big">€63,322</div><div style="font-size:21px;color:var(--ink3);margin-top:18px">financing need, planning case (our estimates)</div></div>
+    <div class="side" style="left:120px;top:410px;width:620px">
       <div class="f st" data-s="0"><div class="k">The founders</div><div class="v"><b>€18,092</b> for the start-up phase, Oct 2026 – Jan 2027</div></div>
       <div class="f st" data-s="0"><div class="k">Outside money: planned, not secured</div><div class="v"><b>€50,000</b>: €40,000 at the founding (Feb 2027) + €10,000 after the proof of concept (May 2027); source chosen by mid-December</div></div>
     </div>
-    <div class="glass board lever st" data-s="1" style="left:880px;top:220px;width:600px;padding:26px 32px">
+    <div class="glass board lever st" data-s="0" style="left:820px;top:232px;width:660px;padding:26px 32px">
       <div class="r h"><span style="grid-column:1/3">Free trials that end in an order</span><span>Break-even</span></div>
       <div class="r"><span>30 %</span><span>our planning case, above both medians</span><span>Feb 2028</span></div>
-      <div class="r st" data-s="2"><span>25.2 %</span><span>IoT median (Bailyn, 2025)</span><span>Mar 2029</span></div>
-      <div class="r st" data-s="2"><span>18.2 %</span><span>opt-in median</span><span>Jul 2030</span></div>
+      <div class="r st" data-s="0"><span>25.2 %</span><span>IoT median (Bailyn, 2025)</span><span>Mar 2029</span></div>
+      <div class="r st" data-s="0"><span>18.2 %</span><span>opt-in median</span><span>Jul 2030</span></div>
     </div>
-    <div class="note st" data-s="2" style="font-size:14px">Upside, not in these numbers: chains. Illustrative arithmetic only: 20 clubs × 30 machines × €20 = €12,000 a month; our 20 gyms pay €8,000 a month in Jan 2029.</div>
+    <div class="note st" data-s="0" style="font-size:14px">Upside, not in these numbers: chains. Illustrative arithmetic only: 20 clubs × 30 machines × €20 = €12,000 a month; our 20 gyms pay €8,000 a month in Jan 2029.</div>
   </section>
 
-  <section class="slide" data-steps="1">
-    <h2 class="display title st" data-s="0">What we test next.</h2>
+  <section class="slide" data-steps="0">
+    <h2 class="display title st" data-s="0">Next steps</h2>
+    <div class="sub2 st" data-s="0">What we test next, and where we'd value your feedback.</div>
     <div class="nx">
       <div class="r st" data-s="0">Five more test-2 conversations by Friday 16 October, one price per owner.</div>
       <div class="r st" data-s="0">A member test with lifters outside the team (protocol in draft).</div>
       <div class="r st" data-s="0">The source of the first funding part, by mid-December.</div>
     </div>
-    <div class="glass ask st" data-s="1"><div class="q2">Is this enough evidence to go on?</div><div class="ess">Every set seen.</div></div>
+    <div class="glass ask st" data-s="0"><div class="q2">Is this enough evidence to go on?</div><div class="ess">Every set seen.</div></div>
   </section>
 
 </div>
@@ -301,7 +308,7 @@ const slides = $$('.slide');
 function fit() { const s = Math.min(innerWidth / 1600, innerHeight / 900); $('#stage').style.transform = `translate(${-800 * s}px, ${-450 * s}px) scale(${s})`; silkSize(); }
 
 // ---- the silk: folds of a silver satin, drawn live; it moves only while a slide changes -------------------------------
-const cv = $('#silk'), gl = cv.getContext('webgl', { antialias: true, premultipliedAlpha: false });
+const cv = $('#silk'), gl = cv.getContext('webgl', { antialias: false, premultipliedAlpha: false });
 const VS = 'attribute vec2 p; void main(){ gl_Position = vec4(p, 0., 1.); }';
 const FS = `precision highp float;
 uniform vec2 res; uniform vec2 off; uniform float ang;
@@ -338,7 +345,7 @@ const prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS))
 const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
 const loc = gl.getAttribLocation(prog, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
 const U = { res: gl.getUniformLocation(prog, 'res'), off: gl.getUniformLocation(prog, 'off'), ang: gl.getUniformLocation(prog, 'ang') };
-function silkSize() { const d = Math.min(2, devicePixelRatio || 1); cv.width = innerWidth * d; cv.height = innerHeight * d; gl.viewport(0, 0, cv.width, cv.height); drawSilk(); }
+function silkSize() { const d = 0.5; cv.width = innerWidth * d; cv.height = innerHeight * d; gl.viewport(0, 0, cv.width, cv.height); drawSilk(); }
 const POSE = [[0.0, 0.0, 0.0], [0.9, -0.25, 0.10], [1.5, 0.2, -0.04], [2.3, -0.1, 0.06], [3.0, 0.35, -0.08], [3.7, 0.0, 0.04], [4.5, -0.3, -0.05], [5.2, 0.15, 0.09], [6.0, -0.2, -0.03], [6.7, 0.3, 0.05], [7.4, -0.05, -0.07], [8.1, 0.25, 0.03], [8.9, 0.0, 0.0]];   // where the silk rests for each slide
 let pose = [...POSE[0]], from = [...POSE[0]], to = [...POSE[0]], t0 = 0, moving = false;
 function drawSilk() { gl.uniform2f(U.res, cv.width, cv.height); gl.uniform2f(U.off, pose[0], pose[1]); gl.uniform1f(U.ang, pose[2]); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); }
@@ -361,7 +368,7 @@ function go(i, s = 0) {
 const next = () => (step < +slides[cur].dataset.steps ? (step++, paint()) : go(cur + 1));
 const back = () => (step > 0 ? (step--, paint()) : cur > 0 && go(cur - 1, 'last'));
 addEventListener('keydown', (e) => {
-  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return;
   if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); next(); }
   else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); back(); }
   else if (e.key.toLowerCase() === 'f') { if (fsEl()) (document.exitFullscreen || document.webkitExitFullscreen).call(document); else $('#present').click(); }
@@ -369,57 +376,27 @@ addEventListener('keydown', (e) => {
 
 // ---- the canvas as of 5 October 2026 ----------------------------------------------------------------------------------
 const B = {
-  KP: [0, 0, 262, 508, 'Key partners', '<ul><li>Equipment distributors: also a sales channel on commission, once gyms pay</li><li>Machine manufacturers</li><li>Hardware manufacturers and component suppliers</li><li>Outsourced developers: code review, extra capacity</li><li>Service partners: on-site maintenance</li><li>Investors</li><li>Our network: private contacts and gym owners</li></ul>'],
-  KA: [274, 0, 262, 230, 'Key activities', '<ul><li>Full service: installation, set-up, onboarding, maintenance, on-site help as fallback</li><li>Free four-week trials, a weekly usage report, the read-out with the owner</li><li>Sales and marketing · manufacturing, outsourced</li><li>App: development, testing, updates</li></ul>'],
-  KR: [274, 242, 262, 266, 'Key resources', '<ul><li>Network to gym owners; know-how in how gyms run</li><li>A test facility; hardware production; own 3D printer</li><li>IP protection for the hardware (planned); legal advice; CE</li><li>The software and tech stack</li><li>Capital: founders fund the start-up phase; €50,000 outside money in two parts (Feb and May 2027)</li></ul>'],
-  VP: [548, 0, 264, 508, 'Value propositions', '<div class="sub">To the gym owner</div><ul><li><b>One sensor per strength machine:</b> retrofit, no new machines</li><li><b>Weekly usage report:</b> which machines are used, how much and when; peak hours</li><li><b>What changed on the floor:</b> trends per machine for buying, replacing, layout and service</li><li>Maintenance by real use, not the calendar</li><li>A better member experience and something to stand out with</li></ul><div class="sub">To the member</div><ul><li><b>The whole workout tracked with little effort:</b> no typing of reps; the weight in one tap</li><li>Progress you can see</li></ul><div class="bn">Left out on purpose: screens, cameras, coaching, leaderboards.</div>'],
-  CR: [824, 0, 262, 230, 'Customer relationships', '<ul><li>Self-service by design: most requests without a human</li><li>We install, and review the year with the owner</li><li>Spare units at the gym; tickets by e-mail; paid on-site help as plan B</li><li>First 3–10 gyms: co-creation with a named contact</li></ul>'],
-  CH: [824, 242, 262, 266, 'Channels', '<ul><li><b>Direct sales to the owner:</b> gym visits, calls and e-mails within the legal rules, trade fairs</li><li><b>Way in: a free four-week trial with full use;</b> the order is signed at the end</li><li>Referrals from paying gyms; distributors later</li><li>Members: through their gym; social media, SEO</li></ul>'],
-  CS: [1098, 0, 262, 508, 'Customer segments', '<ul><li><b>Payer:</b> the owner of an independent gym with about 15–50 strength machines</li><li><b>Users:</b> the gym\'s members, from beginners to advanced lifters</li><li><b>Later:</b> members who want more, with a Pro version of the app</li><li><b>Next: chains,</b> once independent gyms have proved the value</li><li>Later: personal trainers; equipment suppliers</li><li>Not for now: EMS-style studios; gyms built on personal guidance</li></ul>'],
-  C: [0, 520, 674, 150, 'Cost structure', '<ul style="columns:2;column-gap:24px"><li><b>Build, one-off:</b> software and hardware development; legal: patent, UG founding, CE</li><li><b>Run:</b> servers, tools, marketing, sales travel and fairs, after-sales</li><li><b>Per sensor:</b> under €50 including assembly, target about €40</li><li>Free trials (installation and visits); loan interest</li></ul>'],
-  R: [686, 520, 674, 150, 'Revenue streams', '<ul style="columns:2;column-gap:24px"><li><b>Sensors: €249 per machine, once,</b> installation included</li><li><b>Subscription: €20 per machine a month,</b> where the profit sits; 12 months, at least 10 machines</li><li>Example, 20 machines: €4,980 once + €400 a month</li><li>Later: a Pro app subscription for members</li></ul><div class="bn">Test prices (team decision, 5 Oct 2026); €10 and €15 a month are tested as well.</div>'],
+  KP: [0, 0, 262, 496, 'Key partners', '<ul><li>Equipment distributors: also a sales channel on commission, once gyms pay</li><li>Machine manufacturers</li><li>Hardware manufacturers and component suppliers</li><li>Outsourced developers: code review, extra capacity</li><li>Service partners: on-site maintenance</li><li>Investors</li><li>Our network: private contacts and gym owners</li></ul>'],
+  KA: [274, 0, 262, 222, 'Key activities', '<ul><li>Full service: installation, set-up, onboarding, maintenance, on-site help as fallback</li><li>Free four-week trials, a weekly usage report, the read-out with the owner</li><li>Sales and marketing · manufacturing, outsourced</li><li>App: development, testing, updates</li></ul>'],
+  KR: [274, 234, 262, 262, 'Key resources', '<ul><li>Network to gym owners; know-how in how gyms run</li><li>A test facility; hardware production; own 3D printer</li><li>IP protection for the hardware (planned); legal advice; CE</li><li>The software and tech stack</li><li>Capital: founders fund the start-up phase; €50,000 outside money in two parts (Feb and May 2027)</li></ul>'],
+  VP: [548, 0, 264, 496, 'Value propositions', '<div class="sub">To the gym owner</div><ul><li><b>One sensor per strength machine:</b> retrofit, no new machines</li><li><b>Weekly usage report:</b> which machines are used, how much and when; peak hours</li><li><b>What changed on the floor:</b> trends per machine for buying, replacing, layout and service</li><li>Maintenance by real use, not the calendar</li><li>A better member experience and something to stand out with</li></ul><div class="sub">To the member</div><ul><li><b>The whole workout tracked with little effort:</b> no typing of reps; the weight in one tap</li><li>Progress you can see</li></ul><div class="bn">Left out on purpose: screens, cameras, coaching, leaderboards.</div>'],
+  CR: [824, 0, 262, 222, 'Customer relationships', '<ul><li>Self-service by design: most requests without a human</li><li>We install, and review the year with the owner</li><li>Spare units at the gym; tickets by e-mail; paid on-site help as plan B</li><li>First 3–10 gyms: co-creation with a named contact</li></ul>'],
+  CH: [824, 234, 262, 262, 'Channels', '<ul><li><b>Direct sales to the owner:</b> gym visits, calls and e-mails within the legal rules, trade fairs</li><li><b>Way in: a free four-week trial with full use;</b> the order is signed at the end</li><li>Referrals from paying gyms; distributors later</li><li>Members: through their gym; social media, SEO</li></ul>'],
+  CS: [1098, 0, 262, 496, 'Customer segments', '<ul><li><b>Payer:</b> the owner of an independent gym with about 15–50 strength machines</li><li><b>Users:</b> the gym\'s members, from beginners to advanced lifters</li><li><b>Later:</b> members who want more, with a Pro version of the app</li><li><b>Next: chains,</b> once independent gyms have proved the value</li><li>Later: personal trainers; equipment suppliers</li><li>Not for now: EMS-style studios; gyms built on personal guidance</li></ul>'],
+  C: [0, 508, 674, 148, 'Cost structure', '<ul style="columns:2;column-gap:24px"><li><b>Build, one-off:</b> software and hardware development; legal: patent, UG founding, CE</li><li><b>Run:</b> servers, tools, marketing, sales travel and fairs, after-sales</li><li><b>Per sensor:</b> under €50 including assembly, target about €40</li><li>Free trials (installation and visits); loan interest</li></ul>'],
+  R: [686, 508, 674, 148, 'Revenue streams', '<ul style="columns:2;column-gap:24px"><li><b>Sensors: €249 per machine, once,</b> installation included</li><li><b>Subscription: €20 per machine a month,</b> where the profit sits; 12 months, at least 10 machines</li><li>Example, 20 machines: €4,980 once + €400 a month</li><li>Later: a Pro app subscription for members</li></ul><div class="bn">Test prices (team decision, 5 Oct 2026); €10 and €15 a month are tested as well.</div>'],
 };
 $('#bmc').innerHTML = Object.entries(B).map(([k, [x, y, w, h, t, html]]) => `<div class="blk" data-k="${k}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px"><div class="t">${t}</div>${html}</div>`).join('');
 // one board: hairlines where the blocks meet
-$('#bmc').insertAdjacentHTML('beforeend', [[268, 0, 1, 514], [542, 0, 1, 514], [818, 0, 1, 514], [1092, 0, 1, 514], [0, 514, 1360, 1], [274, 236, 262, 1], [824, 236, 262, 1], [680, 515, 1, 155]]
+$('#bmc').insertAdjacentHTML('beforeend', [[268, 0, 1, 502], [542, 0, 1, 502], [818, 0, 1, 502], [1092, 0, 1, 502], [0, 502, 1360, 1], [274, 228, 262, 1], [824, 228, 262, 1], [680, 503, 1, 153]]
   .map(([x, y, w, h]) => `<div style="position:absolute;left:${x}px;top:${y}px;width:${w}px;height:${h}px;background:rgba(29,29,31,.12)"></div>`).join(''));
-const WALK = [null, 'CS', 'VP', 'CH', 'R', 'CHANGED', 'C'];   // Adam's talk track
-hooks[6] = (s) => { const k = WALK[s], f = k && k !== 'CHANGED' ? k : null;
-  $('#bmc').classList.toggle('focusing', !!f); $('#bmc').classList.toggle('dim', k === 'CHANGED'); $('#chg').classList.toggle('on', k === 'CHANGED');
-  $$('#bmc .blk').forEach((b) => b.classList.toggle('focus', b.dataset.k === f)); };
-
-// the Brand Key: the keyhole, read from the base up
-const BK = [
-  ['Root strengths', '<p>Backgrounds that fit: a gym owner, an engineer, B2B sales and design.</p><p>One shared problem: a training log gets in the way of training. A shared passion for the gym.</p>', 'Team'],
-  ['Competitive environment', '<p>What an owner can do today: smart machines (EGYM, Technogym, milon, Life Fitness), retrofits with a screen or a tap (Trackbar, Virtuagym Connect), owner-only usage data abroad (Ecofit, OnSight, TrackMyGym), Cyclops (UK, owners and members), cameras, club software (Magicline), gut feel.</p>', 'Company websites'],
-  ['Target', '<p>The owner of an independent gym with about 15–50 strength machines, who decides alone; first those with a machine decision coming.</p><p>Members use it and pay nothing.</p>', '4,202 independents in Germany, operators with up to four sites (Deloitte, 2026); 2,520–3,150 with a machine floor (our estimate)'],
-  ['Insight', '<p>Owner: “My software shows me the door, not the floor.”</p><p>Member: “I’d log every set, if it didn’t cost me the set.”</p><p style="font-size:16px;color:#56565B">Our wording, not quotes.</p>', 'Club software shows check-ins (Magicline, n.d.); makers show only their own connected machines (Life Fitness, n.d.)'],
-  ['Benefits', '<p><b>Functional:</b> the owner decides to buy, move, service or retire a machine by its use, with no new machines; the member gets sets and reps recorded with very little typing.</p><p><b>Emotional:</b> the owner can show a partner or a bank why a machine goes or stays; the member trains as before, and it is remembered.</p>', 'Business plan §7.3'],
-  ['Values', '<p><b>Restraint:</b> we record, we don’t coach.</p><p><b>Privacy:</b> machines, not people.</p><p><b>Honest:</b> a gap is a gap, never a zero.</p>', 'Business plan §7.3'],
-  ['Reasons to believe', '<p>A working prototype, used in real training sessions on gym machines (5 days, 18–27 Sept). A founder runs a gym. 60 % of 615 surveyed preferred sensors on the machines to wearables. Low risk to try: a free four-week trial.</p>', 'Radhakrishnan et al. (2020)'],
-  ['Discriminator', '<p style="font-size:32px;font-weight:600;color:#1D1D1F;letter-spacing:-.02em;line-height:1.15">We observe; the others intervene.</p><p>We record what happens: no screen, no camera, no coaching, no leaderboard.</p>', 'Scope: products that serve both owner and member (smart machines, Trackbar, Virtuagym Connect) add screens, logins, plans or coaching'],
-  ['Brand essence', '<p style="font-size:60px;font-weight:600;color:#1D1D1F;letter-spacing:-.035em;line-height:1">Every set seen.</p><p>seen = recorded, no camera</p>', 'The one line the eight answers lead to'],
-];
-(function keyhole() {
-  const F = [[130, 600, 260, 46], [118, 546, 284, 46], [108, 492, 304, 46], [98, 438, 324, 46], [60, 340, 400, 46], [40, 286, 440, 46], [40, 232, 440, 46], [60, 178, 400, 46], [150, 70, 220, 92]];
-  $('#key').innerHTML = `<path d="M260 10 C 392 10, 500 112, 500 238 C 500 318, 458 384, 396 420 L 432 656 L 88 656 L 124 420 C 62 384, 20 318, 20 238 C 20 112, 128 10, 260 10 Z" fill="rgba(255,255,255,.22)" stroke="rgba(29,29,31,.35)" stroke-width="1.2"/>` +
-    F.map(([x, y, w, h], i) => `<g class="fld" data-i="${i}" style="cursor:pointer"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${i === 8 ? 46 : 12}"/><text x="260" y="${y + h / 2 + 5}" text-anchor="middle">${BK[i][0]}</text></g>`).join('');
-  $('#key').addEventListener('click', (e) => { const g = e.target.closest('.fld'); if (g) { step = +g.dataset.i; paint(); } });
-})();
-let bkShown = -1;
-hooks[7] = (s) => {
-  $$('#key .fld').forEach((g) => { const i = +g.dataset.i; g.classList.toggle('cur', i === s); g.classList.toggle('seen', i < s); });
-  if (bkShown === s) return; bkShown = s;
-  const box = $('#bkin'); box.classList.add('out');
-  setTimeout(() => { const [t, a, p] = BK[s]; box.innerHTML = `<div class="n">${s + 1} of 9, read from the base up</div><h3>${t}</h3><div class="a">${a}</div><div class="pr">${p}</div>`; box.classList.remove('out'); }, 200);
-};
-// the scenarios: after the four, the two we prepare for
-hooks[9] = (s) => { $$('#sb .q4').forEach((q) => q.classList.toggle('prep', s >= 5 && ['3', '4'].includes(q.dataset.q))); };
 
 // the sensor: large on the opener, beside the report on the demo, gone elsewhere
 const SPOT = { 0: [400, 70, 800, 600], 2: [80, 180, 760, 570] };
-function placeSensor(i) { const c = $('#sensor3d'), p = SPOT[i]; if (!p) { c.style.opacity = 0; return; }
-  c.style.opacity = 1; c.style.left = `${p[0]}px`; c.style.top = `${p[1]}px`; c.style.width = `${p[2]}px`; c.style.height = `${p[3]}px`; }
+function placeSensor(i) { const c = $('#sensor3d'), p = SPOT[i]; c.classList.toggle('on', !!p); if (!p) return;
+  Object.assign(c.style, { left: `${p[0]}px`, top: `${p[1]}px`, width: `${p[2]}px`, height: `${p[3]}px` }); }
+
+addEventListener('click', (e) => { if (e.button === 0 && !e.target.closest('button, a')) next(); });
 
 // Present: the whole screen, no browser chrome; Esc leaves it as usual
 const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement;
