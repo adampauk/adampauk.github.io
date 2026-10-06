@@ -72,6 +72,7 @@
   .glass { border-radius:18px; }
   h2.title { position:absolute; left:120px; top:84px; width:1360px; font-size:54px; }
   .sub2 { position:absolute; left:122px; top:150px; width:1356px; font-size:22px; line-height:1.36; letter-spacing:-.006em; color:var(--ink2); }
+  .thanks { position:absolute; left:0; right:0; top:770px; text-align:center; font-size:28px; letter-spacing:-.01em; color:var(--ink2); }
   .agenda { position:absolute; left:0; right:0; top:800px; display:flex; justify-content:center; gap:44px; font-size:17px; font-weight:500; color:var(--ink3); }
   .note { position:absolute; left:120px; right:120px; bottom:40px; font-size:15px; line-height:1.45; color:var(--ink3); }
   .board { position:absolute; left:120px; width:1360px; padding:0; overflow:hidden; }
@@ -271,14 +272,8 @@
   </section>
 
   <section class="slide" data-steps="0">
-    <h2 class="display title st" data-s="0">Next steps</h2>
-    <div class="sub2 st" data-s="0">What we test next, and where we'd value your feedback.</div>
-    <div class="nx">
-      <div class="r st" data-s="0">Five more test-2 conversations by Friday 16 October, one price per owner.</div>
-      <div class="r st" data-s="0">A member test with lifters outside the team (protocol in draft).</div>
-      <div class="r st" data-s="0">The source of the first funding part, by mid-December.</div>
-    </div>
-    <div class="glass ask st" data-s="0"><div class="q2">Is this enough evidence to go on?</div><div class="ess">Every set seen.</div></div>
+    <h1 class="display op st" data-s="0">Every set seen.</h1>
+    <div class="thanks st" data-s="0">Thank you.</div>
   </section>
 
 </div>
@@ -417,7 +412,7 @@ $('#bktiers').addEventListener('pointermove', (e) => { const q = new DOMPoint(e.
 $('#bktiers').addEventListener('pointerleave', () => kAim(.3, .12));
 
 // the sensor: large on the opener, beside the report on the demo, gone elsewhere
-const SPOT = { 0: [400, 70, 800, 600], 2: [80, 180, 760, 570] };
+const SPOT = { 0: [400, 70, 800, 600], 2: [80, 180, 760, 570], 12: [400, 70, 800, 600] };
 function placeSensor(i) { const c = $('#sensor3d'), p = SPOT[i]; c.classList.toggle('on', !!p); if (!p) return;
   Object.assign(c.style, { left: `${p[0]}px`, top: `${p[1]}px`, width: `${p[2]}px`, height: `${p[3]}px` }); }
 
@@ -455,7 +450,7 @@ let idleT; addEventListener('pointermove', () => { document.body.classList.remov
   shadow.rotation.x = -Math.PI / 2; shadow.position.y = -22;   // (left out: its edge showed as a faint box)
   const camera = new THREE.PerspectiveCamera(22, 800 / 600, 1, 2000); camera.position.set(0, 52, 210); camera.lookAt(0, -4, 0);
   let yaw = -0.75;
-  (function frame() { yaw += 0.0012; pod.rotation.set(0.28, yaw, 0); if (cur === 0 || cur === 2) renderer.render(scene, camera); requestAnimationFrame(frame); })();
+  (function frame() { yaw += 0.0012; pod.rotation.set(0.28, yaw, 0); if (cur in SPOT) renderer.render(scene, camera); requestAnimationFrame(frame); })();
 })();
 
 const [h0, h1] = location.hash.slice(1).split('.').map(Number);
