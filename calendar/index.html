@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Content calendar</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/assets/pearl.css">
+<!--
+  The October content calendar (adampauk.github.io/content), in the pearl look. Channels are told apart without colour:
+  every item carries the channel's name and its own small mark (Instagram a dot, LinkedIn a square, Stories a ring,
+  TikTok and Shorts a play triangle, Field notes three text lines). The same mark sits on the filter pills and in the detail sheet.
+-->
+<style>
+  button { font:inherit; color:inherit; }
+  .page { max-width:var(--wide); margin:0 auto; padding:0 16px 72px; }
+
+  /* the channel mark: one shape per channel, graphite only */
+  .k { display:inline-block; flex:none; width:9px; height:9px; background:var(--ink); border-radius:50%; }
+  .k[hidden] { display:none; }
+  [data-ch="li"] > .k, .k[data-ch="li"] { border-radius:2px; }
+  [data-ch="story"] > .k, .k[data-ch="story"] { background:transparent; box-shadow:inset 0 0 0 1.6px var(--ink); }
+  [data-ch="short"] > .k, .k[data-ch="short"] { width:9px; height:10px; border-radius:0; clip-path:polygon(0 0, 100% 50%, 0 100%); }
+  [data-ch="blog"] > .k, .k[data-ch="blog"] { width:10px; height:9px; border-radius:0;
+    background:linear-gradient(var(--ink) 0 0) 0 0 / 100% 1.8px no-repeat, linear-gradient(var(--ink) 0 0) 0 50% / 100% 1.8px no-repeat,
+               linear-gradient(var(--ink) 0 0) 0 100% / 60% 1.8px no-repeat; }
+
+  /* heading and the next item */
+  .top { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:24px; padding:52px 0 28px; }
+  .top h1 { font-size:clamp(40px, 7vw, 64px); }
+  .top .sub { margin-top:14px; max-width:38rem; text-wrap:pretty; font-size:18px; line-height:1.45; letter-spacing:-.008em; color:var(--ink2); }
+  .next { width:min(100%, 23rem); padding:18px 20px 18px; text-align:left; cursor:pointer; border-radius:22px;
+          transition:transform .45s var(--out), box-shadow .45s var(--out); }
+  .next:hover { transform:translateY(-2px); }
+  .next small { display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:var(--ink4); }
+  .next b { display:block; font:700 21px/1.2 var(--display); letter-spacing:-.022em; margin:8px 0 4px; color:var(--ink); }
+  .next span { display:block; font-size:14px; line-height:1.4; color:var(--ink3); }
+
+  /* filter pills */
+  .bar { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 20px; margin:0 0 16px; }
+  .legend { display:flex; flex-wrap:wrap; gap:6px; }
+  .pill { display:inline-flex; align-items:center; gap:8px; height:36px; padding:0 14px; border:0; border-radius:999px; cursor:pointer;
+          font-size:14px; font-weight:500; color:var(--ink3); background:rgba(255,255,255,.42); box-shadow:inset 0 0 0 1px rgba(255,255,255,.75);
+          transition:background .25s, color .25s, box-shadow .25s; }
+  .pill:hover { color:var(--ink); background:rgba(255,255,255,.62); }
+  .pill[aria-pressed="true"] { color:var(--ink); background:var(--white); box-shadow:0 1px 3px rgba(29,29,31,.12), 0 0 0 1px rgba(29,29,31,.04); }
+  .tzn { font-size:13px; color:var(--ink3); }
+  @media (max-width:520px) { .legend { gap:6px 5px; } .pill { height:34px; padding:0 12px; gap:7px; } }
+
+  /* the calendar: one glass panel, white items on it */
+  .cal { overflow:hidden; padding:0; }
+  .dow, .wk { display:grid; grid-template-columns:8.5rem repeat(7, minmax(0, 1fr)); }
+  .dow div { padding:14px 12px 10px; font-size:13px; font-weight:600; color:var(--ink4); }
+  .wk { border-top:1px solid var(--hair); }
+  .wl { padding:14px 14px 14px 18px; border-right:1px solid var(--hair); }
+  .wl span { display:block; font-size:12px; font-weight:600; color:var(--grey); }
+  .wl b { display:block; margin-top:4px; font:700 17px/1.18 var(--display); letter-spacing:-.02em; color:var(--ink); }
+  .d { padding:10px 7px 10px; border-right:1px solid var(--hair); min-height:7rem; min-width:0; }
+  .d:last-child { border-right:0; }
+  .d .n { font-size:13px; font-weight:500; color:var(--ink4); padding:0 5px 8px; font-variant-numeric:tabular-nums; }
+  .d.today .n { display:inline-block; color:#fff; background:var(--ink); border-radius:999px; padding:2px 8px; margin:0 0 6px 2px; font-weight:600; }
+  .ev { display:block; width:100%; text-align:left; border:0; margin:0 0 6px; padding:8px 10px 9px; cursor:pointer; overflow-wrap:anywhere;
+        background:rgba(255,255,255,.88); border-radius:12px; box-shadow:0 1px 2px rgba(29,29,31,.06), 0 0 0 1px rgba(29,29,31,.04);
+        transition:transform .4s var(--out), box-shadow .4s var(--out), background .25s; }
+  .ev:hover { background:#fff; transform:translateY(-1px); box-shadow:0 1px 2px rgba(29,29,31,.06), 0 8px 20px rgba(54,62,92,.12); }
+  .ev .tm { display:flex; align-items:flex-start; gap:6px; font-size:11.5px; line-height:1.3; color:var(--ink4); font-variant-numeric:tabular-nums; }
+  .ev .tm .k { margin-top:3px; }
+  .ev .tt { display:block; margin-top:4px; font-size:13px; font-weight:600; line-height:1.28; letter-spacing:-.005em; color:var(--ink); }
+  .ev.past { opacity:.45; }
+  .ev.past:hover { opacity:.8; }
+  .ev.nx { box-shadow:0 0 0 1.5px var(--ink), 0 8px 20px rgba(54,62,92,.12); background:#fff; }
+
+  @media (max-width:959px) {
+    .dow { display:none; }
+    .cal { background:none; border:0; border-radius:0; box-shadow:none; -webkit-backdrop-filter:none; backdrop-filter:none; overflow:visible; }
+    .wk { display:block; margin-bottom:14px; padding:16px 14px 10px; border:1px solid rgba(255,255,255,.8); border-radius:22px;
+          background:linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.36));
+          -webkit-backdrop-filter:blur(26px) saturate(170%) brightness(1.04); backdrop-filter:blur(26px) saturate(170%) brightness(1.04);
+          box-shadow:inset 0 1px 0 #fff, 0 14px 36px rgba(54,62,92,.10), 0 2px 8px rgba(54,62,92,.05); }
+    .wl { border:0; padding:0 2px 12px; }
+    .wl b { font-size:20px; }
+    .d { border:0; min-height:0; padding:0; display:grid; grid-template-columns:4.6rem minmax(0, 1fr); gap:8px; margin-bottom:6px; }
+    .d.empty { display:none; }
+    .d .n { padding:10px 0 0 2px; font-size:13px; }
+    .d.today .n { justify-self:start; align-self:start; margin:7px 0 0; padding:3px 9px; }
+    .ev { padding:11px 13px 12px; }
+    .ev .tm { font-size:12.5px; }
+    .ev .tt { font-size:15px; }
+  }
+
+  /* rhythm, checklist, what to watch, rules */
+  .cols { display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); gap:28px; margin-top:28px; padding:26px 26px 22px; }
+  @media (max-width:1100px) { .cols { grid-template-columns:repeat(3, minmax(0, 1fr)); } }
+  @media (max-width:760px) { .cols { grid-template-columns:1fr 1fr; } }
+  @media (max-width:520px) { .cols { grid-template-columns:1fr; gap:22px; padding:22px 18px 16px; } }
+  .cols h2 { margin:0 0 8px; font:700 19px/1.2 var(--display); letter-spacing:-.022em; color:var(--ink); }
+  .cols ul { list-style:none; margin:0; padding:0; }
+  .cols li { padding:9px 0; border-top:1px solid var(--hair); font-size:14.5px; line-height:1.4; color:var(--ink); }
+  .cols li span { color:var(--ink4); }
+  .cols .src { margin:12px 0 0; font-size:13px; line-height:1.5; color:var(--ink3); }
+  .cols .src a { color:var(--ink2); text-underline-offset:2px; text-decoration-color:rgba(29,29,31,.3); }
+
+  /* the detail sheet */
+  dialog { border:0; padding:0; background:transparent; color:var(--ink); max-width:30rem; width:calc(100% - 32px); overflow:visible; }
+  dialog::backdrop { background:rgba(222,224,230,.55); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
+  dialog[open] .sheet { animation:rise .5s var(--out); }
+  @keyframes rise { from { opacity:0; transform:translateY(10px) scale(.99); } to { opacity:1; transform:none; } }
+  .sheet { position:relative; overflow:auto; overscroll-behavior:contain; max-height:calc(100vh - 32px); max-height:calc(100dvh - 32px); background:var(--white); border-radius:24px;
+           box-shadow:0 1px 2px rgba(29,29,31,.06), 0 30px 80px rgba(54,62,92,.24); }
+  .sheet img { display:block; width:100%; aspect-ratio:16/8; object-fit:cover; background:var(--panel); border-bottom:1px solid var(--hair); }
+  .sheet img.line { background:#fff; object-fit:contain; }
+  .sb { padding:20px 22px 22px; }
+  .sb .pf { display:flex; align-items:center; gap:8px; padding-right:36px; font-size:13px; font-weight:600; color:var(--ink3); }
+  .sb h3 { margin:8px 0 4px; font:700 26px/1.12 var(--display); letter-spacing:-.03em; }
+  .sb .wh { font-size:14px; color:var(--ink4); font-variant-numeric:tabular-nums; }
+  .sb .hk { margin:16px 0; padding:12px 14px; border-radius:14px; background:var(--panel); font-size:17px; font-weight:500; line-height:1.38; letter-spacing:-.01em; color:var(--ink); }
+  .sb dl { display:grid; grid-template-columns:4.5rem minmax(0, 1fr); gap:10px 12px; margin:0; font-size:14.5px; line-height:1.42; }
+  .sb dt { color:var(--ink4); font-size:13px; font-weight:600; padding-top:1px; }
+  .sb dd { margin:0; color:var(--ink2); }
+  .st { display:inline-block; font-size:11.5px; font-weight:600; line-height:1; padding:4px 8px 4px; border-radius:999px; margin:0 8px 2px 0; vertical-align:1px; white-space:nowrap; }
+  .st.have { background:var(--ink); color:#fff; }
+  .st.make { box-shadow:inset 0 0 0 1.4px var(--ink); color:var(--ink); }
+  .st.film { background:rgba(29,29,31,.09); color:var(--ink); }
+  .st.wait { box-shadow:inset 0 0 0 1.4px rgba(29,29,31,.35); color:var(--ink4); border:0; background-image:none; }
+  .x { position:absolute; top:12px; right:12px; z-index:2; display:grid; place-items:center; width:32px; height:32px; padding:0; border:0; border-radius:50%; cursor:pointer;
+       background:rgba(255,255,255,.82); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); box-shadow:0 1px 3px rgba(29,29,31,.16); color:var(--ink); }
+  .x svg { width:12px; height:12px; }
+</style>
+</head>
+<body>
+<header class="site"><a class="mark" href="/blog/">Every set seen.</a><nav aria-label="Site"><a href="/blog/">Blog</a><a href="/calendar/" aria-current="page">Content calendar</a><a href="/flows/">E-mail flows</a><a href="/emails/">E-mails</a></nav></header>
+<div class="page">
+
+<div class="top">
+  <div>
+    <h1 class="display">Content calendar. <span class="soft">October.</span></h1>
+    <div class="sub">Lifters first. An honest build log. Two new pieces and four re-cuts a week.</div>
+  </div>
+  <button class="next glass" id="next" type="button"><small><i class="k" id="nk" hidden></i>Next</small><b id="nt">Loading</b><span id="nm"></span></button>
+</div>
+
+<div class="bar">
+  <div class="legend" role="group" aria-label="Filter by platform">
+    <button class="pill" data-f="all" aria-pressed="true">All</button>
+    <button class="pill" data-f="ig" data-ch="ig" aria-pressed="false"><i class="k"></i>Instagram</button>
+    <button class="pill" data-f="li" data-ch="li" aria-pressed="false"><i class="k"></i>LinkedIn</button>
+    <button class="pill" data-f="story" data-ch="story" aria-pressed="false"><i class="k"></i>Stories</button>
+    <button class="pill" data-f="short" data-ch="short" aria-pressed="false"><i class="k"></i>TikTok, Shorts</button>
+    <button class="pill" data-f="blog" data-ch="blog" aria-pressed="false"><i class="k"></i>Field notes</button>
+  </div>
+  <div class="tzn">Prague time: CEST until 25 Oct, CET after.</div>
+</div>
+
+<div class="cal glass" id="cal"></div>
+
+<div class="cols glass">
+  <div><h2>Rhythm</h2><ul>
+    <li>Reel <span>Tue 18:30</span></li><li>Adam, LinkedIn <span>Wed 16:00</span></li><li>Carousel <span>Thu 12:00</span></li><li>Stories <span>Sat 10:00</span></li><li>Re-cut to TikTok, Shorts <span>Sun 09:00</span></li><li>Justus, LinkedIn <span>every 2nd Tue 09:00</span></li></ul>
+    <p class="src">Slots from <a href="https://buffer.com/resources/best-time-to-post-social-media/">Buffer</a> and <a href="https://sproutsocial.com/insights/best-times-to-post-on-linkedin/">Sprout Social</a> 2026 data; review after week 2.</p></div>
+  <div><h2>Before 5 Oct</h2><ul>
+    <li>Pick the public name and handles</li><li>Instagram bio and field-notes link</li><li>Cut Reel 1 from the film</li><li>Add a page counter to this site</li></ul></div>
+  <div><h2>Watch</h2><ul>
+    <li>Saves <span>on carousels</span></li><li>Shares <span>on Reels</span></li><li>Real answers <span>in polls and DMs</span></li><li>Lifters asking to try it</li></ul></div>
+  <div><h2>Never</h2><ul>
+    <li>Name the test gym</li><li>Show members without consent</li><li>Promise battery life</li><li>Post undecided inventions</li></ul></div>
+  <div><h2>Skipped on purpose</h2><ul>
+    <li>X</li><li>Newsletter</li><li>Reddit posting</li><li>Ads</li></ul></div>
+</div>
+</div>
+
+<dialog id="dlg"><div class="sheet" id="sheet"></div></dialog>
+
+<script>
+const P={ig:["Instagram","ig"],li:["LinkedIn","li"],blog:["Field notes","blog"],short:["TikTok, Shorts","short"],story:["Stories","story"]};
+const IMG={film:["../article/media/inside-one-rep-poster.jpg",""],screen:["img/live-screen.jpg",""],pod:["../article/img/sensor-pod.png","line"],bar:["../article/img/sensor-on-machine.png","line"]};
+const W=[["2026-10-05","Ten reps, one count"],["2026-10-12","Teach a machine once"],["2026-10-19","The sensor"],["2026-10-26","The workout"]];
+// date, time, platform, format, title, hook, why, [asset status, asset], cta, then, image
+const I=[
+["2026-10-06","18:30","ig","Reel","Ten reps. One count.","The sensor counted 10. The maths said 1.","Reach. The whole idea in one image.",["have","Film A, re-cut 9:16 with captions"],"Read the field note","Sunday re-cut, Thursday carousel","film"],
+["2026-10-07","16:00","li","Post","We almost shipped a 1-rep tracker","Right nine times, silently wrong the tenth.","Credibility. Sends readers to the field note.",["have","Hero drawing from the article"],"Link in first comment","Lesson list becomes a carousel","bar"],
+["2026-10-08","12:00","ig","Carousel","Inside one rep","Hundreds of numbers become 1.","Saves. Makes the tech make sense.",["make","7 slides from film A frames"],"Save","LinkedIn document in week 2","film"],
+["2026-10-10","10:00","story","Poll","How do you track sets?","Notes, app, paper, nothing?","Research.",["make","2 frames"],"Vote","Result opens week 2 carousel",""],
+["2026-10-11","09:00","short","Video","A rep, as the sensor sees it","POV: your rep, in numbers.","Free reach.",["make","Tuesday's Reel, new first line"],"Follow","",""],
+["2026-10-13","09:00","li","Post","Justus: gyms provide nothing","Not even a socket.","For gym owners: no installation.",["have","Text only"],"Message Justus","Outreach",""],
+["2026-10-13","18:30","ig","Reel","10 reps. Zero taps.","Phone in your pocket. Set still saved.","Show the feeling, not the tech.",["have","Live screen video, chest press clip"],"Follow","Sunday re-cut","screen"],
+["2026-10-14","16:00","li","Document","Why every machine is taught once","Ten slow reps, once.","Explain the setup lift.",["make","Pages in week 1 carousel style"],"What would you measure?","Mirrors Thursday carousel",""],
+["2026-10-15","12:00","ig","Carousel","The setup lift","Most of you track in Notes. Try this.","Saves, using the poll result.",["make","Poll slide and 5 explainers"],"Save","",""],
+["2026-10-17","10:00","story","Questions","What should it show after a set?","You just finished. What do you want to see?","Research for week 4.",["film","15 s of a setup lift at the gym"],"Answer","Feeds the score carousel",""],
+["2026-10-18","09:00","short","Video","Your notes app can retire","Stop typing between sets.","Free reach.",["make","Tuesday's Reel, new first line"],"Follow","",""],
+["2026-10-20","18:30","ig","Reel","A sensor the size of a matchbox","No cable. No socket. One strap.","Make the hardware tangible.",["have","Sensor render film, CAD drawings"],"Ask us anything","Sunday re-cut","pod"],
+["2026-10-21","16:00","li","Post","Where does a battery go?","So we made the sensor keep a diary.","Engineering judgement. No numbers.",["film","Settings battery screenshot"],"Solved this before? Tell me","Later field note",""],
+["2026-10-22","12:00","ig","Carousel","Ghost reps","A bump must never count.","Trust. Labelled: in review.",["make","Simple diagrams"],"Save","",""],
+["2026-10-24","10:00","story","Behind the scenes","A new sensor's first minute","Turned every way, once.","Real hands, real board.",["film","Next board's calibration"],"Reply","Opens Sunday's video",""],
+["2026-10-25","09:00","short","Video","What's inside this black box?","It counts your reps.","Free reach. Winter time starts today.",["make","Tuesday's Reel, new first line"],"Follow","",""],
+["2026-10-27","07:00","blog","Field note","We deleted our home tab","Am I training or not?","Anchor piece for week 4.",["wait","Workout mode on TestFlight first"],"Tell us what to change","LinkedIn, Reel, carousel",""],
+["2026-10-27","09:00","li","Post","Justus: lifters first","Not dashboards. People under the bar.","Positioning for gyms.",["have","Text only"],"Message Justus","",""],
+["2026-10-27","18:30","ig","Reel","Start. Lift. Score.","The best part is the number at the end.","Show the new workout mode.",["wait","Screen recording of a real workout"],"Follow","Sunday re-cut","screen"],
+["2026-10-28","16:00","li","Post","Why the home tab went","Testers couldn't tell if they were training.","Product judgement in public.",["wait","Before and after screenshots"],"Link in first comment","",""],
+["2026-10-29","12:00","ig","Carousel","What makes your score","Sets in the zone, body covered, full range.","Saves. Closes week 2's question.",["make","Score screens and your answers"],"Save","",""],
+["2026-10-31","10:00","story","Recap","What changed because of you","Four weeks, in five frames.","Show we listen. Plan November.",["make","Recap frames"],"Vote what's next","November plan",""],
+["2026-11-01","09:00","short","Video","The number at the end","Every workout ends with one number.","Free reach.",["wait","Tuesday's Reel, new first line"],"Follow","",""]
+];
+const ST={have:"have it",make:"make",film:"film",wait:"waits"};
+const tz=d=>d>="2026-10-25"?"CET":"CEST";
+const at=e=>new Date(e[0]+"T"+e[1]+":00"+(tz(e[0])==="CET"?"+01:00":"+02:00"));
+const now=new Date(), next=I.filter(e=>at(e)>now).sort((a,b)=>at(a)-at(b))[0];
+const day=d=>new Date(d+"T12:00:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const key=dt=>dt.getFullYear()+"-"+String(dt.getMonth()+1).padStart(2,"0")+"-"+String(dt.getDate()).padStart(2,"0");
+let F="all";
+function draw(){
+  const today=key(new Date()), narrow=innerWidth<960;
+  let h='<div class="dow"><div></div>'+["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map(x=>"<div>"+x+"</div>").join("")+"</div>";
+  W.forEach(([s,theme],wi)=>{
+    h+=`<div class="wk"><div class="wl"><span>Week ${wi+1}</span><b>${theme}</b></div>`;
+    for(let k=0;k<7;k++){
+      const dt=new Date(s+"T12:00:00");dt.setDate(dt.getDate()+k);const kd=key(dt);
+      const ev=I.map((e,i)=>[e,i]).filter(([e])=>e[0]===kd&&(F==="all"||e[2]===F));
+      const lab=narrow?dt.toLocaleDateString("en-GB",{weekday:"short",day:"numeric"}):dt.getDate();
+      h+=`<div class="d${kd===today?" today":""}${ev.length?"":" empty"}"><div class="n">${lab}</div><div>`+
+        ev.map(([e,i])=>`<button class="ev${at(e)<now?" past":""}${e===next?" nx":""}" data-i="${i}"><span class="tm" data-ch="${P[e[2]][1]}"><i class="k"></i>${e[1]} ${P[e[2]][0]}</span><span class="tt">${esc(e[4])}</span></button>`).join("")+`</div></div>`;
+    }
+    h+="</div>";
+  });
+  document.getElementById("cal").innerHTML=h;
+}
+const dlg=document.getElementById("dlg");
+const X='<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1.5 1.5l9 9M10.5 1.5l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>';
+function show(i){
+  const e=I[i],[pn,pc]=P[e[2]],im=IMG[e[10]];
+  const s=document.getElementById("sheet");
+  s.innerHTML=`<button class="x" aria-label="Close">${X}</button>${im?`<img src="/content/${im[0]}" class="${im[1]}" alt="">`:""}<div class="sb">
+  <div class="pf" data-ch="${pc}"><i class="k"></i>${pn}, ${e[3]}</div><h3>${esc(e[4])}</h3><div class="wh">${day(e[0])}, ${e[1]} ${tz(e[0])}</div>
+  <p class="hk">“${esc(e[5])}”</p><dl><dt>Why</dt><dd>${esc(e[6])}</dd><dt>Asset</dt><dd><span class="st ${e[7][0]}">${ST[e[7][0]]}</span>${esc(e[7][1])}</dd><dt>CTA</dt><dd>${esc(e[8])}</dd>${e[9]?`<dt>Then</dt><dd>${esc(e[9])}</dd>`:""}</dl></div>`;
+  s.querySelector(".x").onclick=()=>dlg.close();dlg.showModal();
+}
+dlg.addEventListener("click",ev=>{if(ev.target===dlg)dlg.close()});
+document.getElementById("cal").addEventListener("click",ev=>{const b=ev.target.closest(".ev");if(b)show(+b.dataset.i)});
+document.querySelectorAll(".pill").forEach(p=>p.onclick=()=>{document.querySelectorAll(".pill").forEach(x=>x.setAttribute("aria-pressed","false"));p.setAttribute("aria-pressed","true");F=p.dataset.f;draw()});
+if(next){const n=document.getElementById("next"),nk=document.getElementById("nk");nk.dataset.ch=P[next[2]][1];nk.hidden=false;
+  document.getElementById("nt").textContent=next[4];
+  document.getElementById("nm").textContent=`${day(next[0])}, ${next[1]} ${tz(next[0])}, ${P[next[2]][0]} ${next[3]}`;
+  n.onclick=()=>show(I.indexOf(next));}
+else document.getElementById("nt").textContent="Plan November";
+draw();addEventListener("resize",()=>{clearTimeout(window._r);window._r=setTimeout(draw,150)});
+</script>
+</body>
+</html>
