@@ -44,7 +44,7 @@
 </div>
 <div class="bar">
   <div class="seg" id="mail" role="group" aria-label="E-mail">
-    <button data-v="1">After the floor walk</button><button data-v="2">Weekly report</button><button data-v="3">Book your read-out</button>
+    <button data-v="1">After the floor walk</button><button data-v="2">Weekly report</button><button data-v="3">Book your read-out</button><button data-v="4">Welcome</button><button data-v="5">Which machines</button><button data-v="6">Free pilot</button>
   </div>
   <div class="spacer"></div>
   <div class="seg" id="width" role="group" aria-label="Width">
@@ -64,8 +64,8 @@
 </main>
 <div class="note">Sample values are invented for the preview. In the real e-mails the fields like {{first_name}} are filled by the e-mail tool.</div>
 <script>
-const FILES = { 1: '01_after-the-floor-walk.html', 2: '02_weekly-report.html', 3: '03_book-your-read-out.html' };
-const FROM = { 1: 'Adam', 2: 'Every set seen.', 3: 'Adam' };
+const FILES = { 1: '01_after-the-floor-walk.html', 2: '02_weekly-report.html', 3: '03_book-your-read-out.html', 4: '04_welcome.html', 5: '05_which-machines.html', 6: '06_free-pilot.html' };
+const FROM = { 1: 'Adam', 2: 'Every set seen.', 3: 'Adam', 4: 'The Smart Gym Team', 5: 'The Smart Gym Team', 6: 'The Smart Gym Team' };
 const SAMPLE = { first_name: 'Daan', gym_name: 'Gym Centrum', machine: 'leg press', trial_end: 'Friday 31 October', week: '2',
   slot_1_day: 'Tuesday 28 October', slot_1_time: '10:00 to 10:30', slot_2_day: 'Wednesday 29 October', slot_2_time: '14:00 to 14:30',
   slot_3_day: 'Thursday 30 October', slot_3_time: '17:30 to 18:00', consent_place: 'your gym', consent_date: '14 October',
@@ -108,7 +108,7 @@ async function show() {
 for (const g of ['mail', 'width', 'fill']) document.getElementById(g).addEventListener('click', (e) => {
   const b = e.target.closest('button'); if (!b) return; state[g] = b.dataset.v; show();
 });
-addEventListener('keydown', (e) => { if (['1', '2', '3'].includes(e.key) && !e.metaKey && !e.ctrlKey) { state.mail = e.key; show(); } });
+addEventListener('keydown', (e) => { if (['1', '2', '3', '4', '5', '6'].includes(e.key) && !e.metaKey && !e.ctrlKey) { state.mail = e.key; show(); } });
 show();
 </script>
 </body>
