@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Every Set Seen Business Plan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<!--
+  docs/pitch/business-plan/index.html: the business plan of 9 Oct 2026, presented on Mon 19 Oct (course week 7, the plan's
+  assessment). The silver look of the 7 Oct pitch (docs/pitch/index.html): pearl-silver silk drawn live, frosted glass,
+  Apple's system font, graphite, no accent. One click is one slide; each title is the plan's part.
+  Right / PageDown / space / click: next. Left / PageUp: back. F: full screen. On the Brand Key, point at a field.
+  Every figure is the plan's (76_Business-Plan_FINAL_2026-10-09); planning-case figures are targets, not measurements.
+-->
+<style>
+  /* One deliberate light look: silver silk, frosted glass, graphite type. Stage 1600 x 900, scaled to the window. */
+  :root { --ink:#1D1D1F; --ink2:#3A3A3F; --ink3:#56565B; --ink4:#8A8A90; --hair:rgba(29,29,31,.12); --ground:#E7E8EC;
+          --paper:rgba(255,255,255,.58); --font:-apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+          --out:cubic-bezier(.22,1,.36,1); color-scheme:light; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; height:100%; overflow:hidden; background:var(--ground); color:var(--ink); }
+  body { font-family:var(--font); -webkit-font-smoothing:antialiased; }
+  #silk { position:fixed; inset:0; width:100vw; height:100vh; display:block; }
+  #prism { position:fixed; inset:-20%; pointer-events:none; mix-blend-mode:soft-light; opacity:.5;
+           background:linear-gradient(118deg, transparent 38%, rgba(255,110,140,.55) 44%, rgba(255,200,90,.55) 47%, rgba(140,230,170,.5) 50%, rgba(110,170,255,.55) 53%, rgba(190,140,255,.5) 56%, transparent 62%);
+           filter:blur(44px); }
+  #stage { position:absolute; left:50%; top:50%; width:1600px; height:900px; transform-origin:0 0; }
+
+  .glass { position:absolute; border-radius:18px;
+           background:linear-gradient(180deg, rgba(255,255,255,.58), rgba(255,255,255,.30));
+           -webkit-backdrop-filter:blur(30px) saturate(170%) brightness(1.04); backdrop-filter:blur(30px) saturate(170%) brightness(1.04);
+           border:1px solid rgba(255,255,255,.8);
+           box-shadow: inset 0 1px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(255,255,255,.4), 0 24px 60px rgba(54,62,92,.16), 0 2px 8px rgba(54,62,92,.06); }
+
+  .slide { position:absolute; inset:0; visibility:hidden; transition:visibility 0s .3s; }
+  .slide.on { visibility:visible; transition:none; }
+  /* each element fades by itself (an ancestor's opacity would switch its glass off while it moves) */
+  .st { opacity:0; transform:translateY(8px); transition:opacity .26s ease, transform .3s ease; }
+  .st.on { opacity:1; transform:none; transition:opacity .55s var(--out) .3s, transform .7s var(--out) .3s; }
+  h2.st.on { transition-delay:.22s; } .sub2.st.on { transition-delay:.26s; }
+
+  .display { margin:0; font-weight:600; letter-spacing:-.03em; line-height:1.02; color:var(--ink); text-wrap:balance; }
+  h2.title { position:absolute; left:120px; top:84px; width:1360px; font-size:54px; }
+  .sub2 { position:absolute; left:122px; top:150px; width:1356px; font-size:22px; line-height:1.36; letter-spacing:-.006em; color:var(--ink2); text-wrap:pretty; }
+  .board { position:absolute; left:120px; width:1360px; padding:0; overflow:hidden; }
+  .k { font-size:13px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink3); }
+  ::selection { background:#1D1D1F; color:#F2F3F5; }
+  :focus-visible { outline:2px solid #1D1D1F; outline-offset:3px; border-radius:6px; }
+  body.idle, body.idle * { cursor:none !important; }
+
+  #present { position:fixed; right:calc(22px + env(safe-area-inset-right, 0px)); bottom:calc(20px + env(safe-area-inset-bottom, 0px)); z-index:20; display:flex; align-items:center; gap:9px; height:40px; padding:0 16px 0 13px; border-radius:20px; font:500 14px var(--font); color:var(--ink); cursor:pointer;
+             background:rgba(255,255,255,.55); -webkit-backdrop-filter:blur(20px) saturate(170%); backdrop-filter:blur(20px) saturate(170%); border:1px solid rgba(255,255,255,.85);
+             box-shadow:inset 0 1px 0 #fff, 0 8px 24px rgba(54,62,92,.14); opacity:.72; transition:opacity .25s, transform .2s; }
+  #present:hover { opacity:1; } #present:active { transform:scale(.97); }
+  body.fs #present { display:none; }
+  #sensor3d { position:absolute; opacity:0; transition:opacity .26s ease; z-index:1; pointer-events:none; }
+  #sensor3d.on { opacity:1; transition:opacity .7s var(--out) .3s; }
+
+  /* opener and close */
+  .op { position:absolute; left:0; right:0; top:640px; text-align:center; font-size:62px; }
+  .agenda { position:absolute; left:160px; right:160px; top:752px; display:flex; flex-wrap:wrap; justify-content:center; gap:14px 34px; font-size:18px; font-weight:500; color:var(--ink3); }
+  .thanks { position:absolute; left:0; right:0; top:770px; text-align:center; font-size:28px; letter-spacing:-.01em; color:var(--ink2); }
+
+  /* team */
+  .tc { top:300px; width:320px; height:300px; padding:30px 28px; display:flex; flex-direction:column; gap:16px; }
+  .tc .nm { white-space:nowrap; font-size:27px; font-weight:600; letter-spacing:-.02em; line-height:1.1; }
+  .tc .rl { font-size:19px; line-height:1.35; color:var(--ink); font-weight:500; margin-top:-8px; min-height:52px; }
+  .tc .v { font-size:17px; line-height:1.45; color:var(--ink2); margin-top:6px; text-wrap:pretty; }
+  .stats { position:absolute; left:120px; top:704px; width:1360px; display:grid; grid-template-columns:repeat(3, 1fr); gap:26px; }
+  .stats .n { font-size:64px; font-weight:600; letter-spacing:-.04em; line-height:1; font-variant-numeric:tabular-nums; }
+  .stats .t { font-size:19px; line-height:1.35; color:var(--ink2); margin-top:10px; }
+
+  /* idea generation */
+  .cocd { left:120px; top:228px; width:600px; height:612px; }
+  .cocd text { font-family:var(--font); }
+  .rounds { position:absolute; left:790px; top:228px; width:690px; }
+  .rounds .r { padding:20px 0 22px; border-top:1px solid var(--hair); display:grid; grid-template-columns:132px 1fr; column-gap:24px; }
+  .rounds .r:first-child { border-top:0; padding-top:6px; }
+  .rounds .d { font-size:16px; font-weight:600; color:var(--ink3); padding-top:7px; font-variant-numeric:tabular-nums; }
+  .rounds .h { font-size:27px; font-weight:600; letter-spacing:-.02em; line-height:1.18; text-wrap:balance; }
+  .rounds .x { font-size:17.5px; line-height:1.45; color:var(--ink2); margin-top:6px; text-wrap:pretty; }
+
+  /* customers */
+  .mk { position:absolute; left:120px; top:212px; }
+  .mrow { position:absolute; left:900px; width:580px; }
+  .mrow .n { font-size:44px; font-weight:600; letter-spacing:-.035em; line-height:1; font-variant-numeric:tabular-nums; }
+  .mrow .t { font-size:20px; line-height:1.3; color:var(--ink); font-weight:500; margin-top:10px; }
+  .mrow .s { font-size:16.5px; line-height:1.4; color:var(--ink2); margin-top:4px; }
+  .lead-line { position:absolute; height:1px; background:rgba(29,29,31,.22); }
+
+  /* competitors */
+  .pm { left:120px; top:216px; width:1360px; height:640px; }
+  .pm text { font-family:var(--font); }
+
+  /* prototypes */
+  .pcs { position:absolute; left:120px; top:232px; width:1360px; display:grid; grid-template-columns:repeat(3, 1fr); gap:26px; }
+  .pc { position:relative; padding:30px 30px 26px; display:flex; flex-direction:column; min-height:500px; }
+  .pc .h { font-size:34px; font-weight:600; letter-spacing:-.025em; line-height:1.1; margin-top:8px; }
+  .pc .x { font-size:18px; line-height:1.45; color:var(--ink2); margin-top:12px; text-wrap:pretty; }
+  .pc .lrn { margin-top:auto; padding-top:16px; border-top:1px solid var(--hair); font-size:17px; line-height:1.42; color:var(--ink); text-wrap:pretty; }
+  .pc .fig { margin-top:22px; }
+  .tl3 { display:grid; gap:14px; }
+  .tl3 .i { display:grid; grid-template-columns:20px 1fr; column-gap:14px; align-items:baseline; font-size:18px; line-height:1.35; color:var(--ink2); }
+  .tl3 .i::before { content:""; width:10px; height:10px; border-radius:5px; background:var(--ink); transform:translateY(-1px); }
+  .tl3 b { color:var(--ink); font-weight:600; }
+  .nums { display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; }
+  .nums .n { font-size:52px; font-weight:600; letter-spacing:-.04em; line-height:1; font-variant-numeric:tabular-nums; }
+  .nums .t { font-size:15px; color:var(--ink3); margin-top:6px; font-weight:500; }
+  .dcard { border-radius:14px; background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); box-shadow:0 8px 22px rgba(54,62,92,.10); padding:16px 18px; position:relative; }
+  .dcard .lab { position:absolute; right:14px; top:14px; font-size:12px; font-weight:600; color:var(--ink3); padding:4px 8px; border-radius:8px; background:rgba(29,29,31,.06); }
+  .dcard .wk { font-size:13px; font-weight:600; color:var(--ink3); letter-spacing:.04em; text-transform:uppercase; }
+  .dcard .q { font-size:20px; font-weight:600; letter-spacing:-.015em; line-height:1.25; margin-top:8px; padding-right:70px; }
+  .dcard .o { display:flex; gap:8px; margin-top:12px; }
+  .dcard .o span { font-size:14px; font-weight:500; padding:6px 11px; border-radius:16px; border:1px solid rgba(29,29,31,.16); color:var(--ink2); }
+  .dcard .hn { font-size:14px; color:var(--ink3); margin-top:12px; }
+
+  /* test matrix */
+  .tm { top:224px; }
+  .tm .r { display:grid; grid-template-columns:240px 1fr 1fr 1fr 1fr; gap:28px; padding:24px 30px; border-top:1px solid rgba(29,29,31,.1); font-size:17px; line-height:1.42; color:var(--ink2); }
+  .tm .r:first-child { border-top:0; padding:18px 30px 10px; font-size:15px; font-weight:600; color:var(--ink3); }
+  .tm .sep { display:block; height:10px; }
+  .tm .w b { display:block; font-size:24px; color:var(--ink); font-weight:600; letter-spacing:-.02em; } .tm .w i { display:block; font-style:normal; font-size:15px; color:var(--ink3); margin-top:6px; }
+
+  /* canvas */
+  .cv { top:200px; height:656px; }
+  .bmc { position:absolute; left:0; top:0; width:1360px; height:656px; }
+  .blk { position:absolute; padding:16px 18px 12px; }
+  .blk .t { font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink3); margin-bottom:9px; }
+  .blk .sub { font-size:10.5px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--ink3); margin:10px 0 5px; }
+  .blk ul { list-style:none; margin:0; padding:0; }
+  .blk li { font-size:12.9px; line-height:1.32; color:var(--ink2); padding:3px 0 3px 12px; position:relative; margin-bottom:3px; }
+  .blk li::before { content:""; position:absolute; left:0; top:.62em; width:4px; height:4px; border-radius:2px; background:#9A9AA2; }
+  .blk li b { color:var(--ink); font-weight:600; }
+  .blk li { break-inside:avoid; }
+  .blk .bn { font-size:12px; line-height:1.35; color:var(--ink3); margin-top:6px; }
+
+  /* brand key */
+  .bkg { position:absolute; left:0; top:0; overflow:visible; pointer-events:none; }
+  .bkg .tier { pointer-events:all; cursor:default; } .bkg .tier rect { fill:#fff; fill-opacity:0; transition:fill-opacity .35s var(--out); }
+  .bkg .tier.hot rect { fill-opacity:.62; }
+  .bkg text { text-anchor:middle; font-size:18px; font-weight:600; letter-spacing:-.01em; fill:var(--ink3); transition:fill .3s; font-family:var(--font); }
+  .bkg .tier.hot text { fill:var(--ink); }
+  .bkg text.el { font-size:15px; } .bkg text.es { font-size:42px; letter-spacing:-.03em; fill:var(--ink); }
+  .bkcard { left:1130px; top:0; width:350px; padding:28px 30px 24px; opacity:0; transform:translateY(400px); transition:opacity .35s ease, transform .55s var(--out); pointer-events:none; }
+  .bkcard.on { opacity:1; }
+  .bkcard .n { font-size:15px; font-weight:600; color:var(--ink3); } .bkcard .c { font-size:27px; font-weight:600; letter-spacing:-.02em; line-height:1.15; margin-top:8px; text-wrap:balance; }
+  .bkcard .d { font-size:18px; line-height:1.42; color:var(--ink2); margin-top:12px; text-wrap:pretty; }
+  .bkcard .p { font-size:15px; line-height:1.4; color:var(--ink3); margin-top:16px; padding-top:12px; border-top:1px solid rgba(29,29,31,.12); text-wrap:pretty; }
+
+  /* marketing mix */
+  .ps { top:212px; } .ps .r { display:grid; grid-template-columns:190px 250px 1fr; gap:28px; padding:22px 32px; border-top:1px solid rgba(29,29,31,.1); align-items:start; }
+  .ps .r:first-child { border-top:0; } .ps .p { font-size:28px; font-weight:600; letter-spacing:-.02em; } .ps .q { font-size:16px; line-height:1.4; color:var(--ink3); } .ps .c { font-size:18.5px; line-height:1.46; color:var(--ink2); text-wrap:pretty; } .ps .c b { color:var(--ink); }
+  .thread { position:absolute; left:120px; top:808px; font-size:28px; font-weight:600; letter-spacing:-.02em; }
+
+  /* scenarios */
+  .sb { top:236px; height:536px; } .q4 { position:absolute; width:50%; height:50%; padding:24px 30px; }
+  .q4 .num { font-size:15px; font-weight:600; color:var(--ink3); } .q4 h4 { margin:4px 0 0; font-size:28px; font-weight:600; letter-spacing:-.02em; }
+  .q4 .m { font-size:17px; line-height:1.42; color:var(--ink2); margin-top:12px; text-wrap:pretty; } .q4 .mv { font-size:17px; line-height:1.42; color:var(--ink); margin-top:8px; font-weight:500; text-wrap:pretty; }
+  .q4 .big { position:absolute; right:30px; top:18px; font-size:64px; font-weight:600; letter-spacing:-.04em; color:rgba(29,29,31,.16); line-height:1; }
+  .q4.prep { background:rgba(255,255,255,.55); } .axl { position:absolute; font-size:15px; color:var(--ink3); }
+  .axl.axv { left:-49px; width:290px; text-align:center; transform:rotate(-90deg); } .axl.axv.st.on { transform:rotate(-90deg); }
+
+  /* finances */
+  .chart { position:absolute; left:120px; top:216px; }
+  .chart text { font-family:var(--font); }
+  .fn { left:960px; top:224px; width:520px; }
+  .fn .r { display:grid; grid-template-columns:1fr 128px 128px; column-gap:14px; padding:16px 26px; border-top:1px solid rgba(29,29,31,.1); font-size:18px; line-height:1.3; align-items:baseline; color:var(--ink2); }
+  .fn .r:first-child { border-top:0; font-size:14px; font-weight:600; color:var(--ink3); padding-top:20px; }
+  .fn .r span:not(:first-child) { text-align:right; font-variant-numeric:tabular-nums; font-weight:600; color:var(--ink); }
+  .fn .r:first-child span { color:var(--ink3) !important; }
+  .side { position:absolute; left:1040px; top:216px; width:440px; } .side .f { padding:16px 0; border-top:1px solid rgba(29,29,31,.12); } .side .f:first-child { border-top:0; padding-top:0; }
+  .side .kk { font-size:15px; font-weight:600; color:var(--ink3); } .side .v { font-size:19px; line-height:1.4; margin-top:6px; color:var(--ink2); text-wrap:pretty; } .side .v b { color:var(--ink); }
+  .big2 { font-size:84px; font-weight:600; letter-spacing:-.045em; line-height:1; font-variant-numeric:tabular-nums; }
+
+  /* feasibility and risks */
+  .road { position:absolute; left:120px; top:228px; width:1360px; height:270px; }
+  .road .ln { position:absolute; left:20px; right:20px; top:44px; height:2px; background:rgba(29,29,31,.22); }
+  .road .m { position:absolute; top:0; width:158px; }
+  .road .m .d { font-size:15px; font-weight:600; color:var(--ink3); height:28px; font-variant-numeric:tabular-nums; }
+  .road .m .dot { width:14px; height:14px; border-radius:7px; background:var(--ink); margin:2px 0 0; box-shadow:0 0 0 5px rgba(255,255,255,.7); }
+  .road .m .h { font-size:19px; font-weight:600; letter-spacing:-.015em; line-height:1.2; margin-top:22px; text-wrap:balance; }
+  .road .m .x { font-size:15px; line-height:1.4; color:var(--ink2); margin-top:6px; text-wrap:pretty; }
+  .road .m.now .dot { background:#fff; box-shadow:0 0 0 2px var(--ink), 0 0 0 7px rgba(255,255,255,.7); }
+  .rks { position:absolute; left:120px; top:530px; width:1360px; display:grid; grid-template-columns:repeat(3, 1fr); gap:26px; }
+  .rk { position:relative; padding:26px 28px; display:flex; flex-direction:column; min-height:250px; }
+  .rk .h { font-size:25px; font-weight:600; letter-spacing:-.02em; line-height:1.15; }
+  .rk .x { font-size:17px; line-height:1.45; color:var(--ink2); margin-top:10px; text-wrap:pretty; }
+  .rk .g { margin-top:auto; padding-top:14px; border-top:1px solid var(--hair); font-size:17px; line-height:1.42; color:var(--ink); text-wrap:pretty; }
+  .rk .g b { font-weight:600; }
+
+  @media (prefers-reduced-motion: reduce) { .slide, .st { transition:opacity .2s ease !important; transform:none !important; } .axl.axv { transform:rotate(-90deg) !important; } }
+
+  /* problem and value proposition (18 Oct): the member and the gym owner, side by side */
+  .pv { top:236px; width:660px; height:620px; padding:32px 38px; display:flex; flex-direction:column; }
+  .pv .who { font-size:30px; font-weight:600; letter-spacing:-.02em; margin-bottom:18px; }
+  .pv .t { font-size:23px; line-height:1.35; color:var(--ink); margin-top:6px; text-wrap:pretty; }
+  .pv .n { font-size:72px; font-weight:600; letter-spacing:-.04em; line-height:1; margin-top:22px; font-variant-numeric:tabular-nums; }
+  .pv .s { font-size:17px; line-height:1.4; color:var(--ink3); margin-top:8px; }
+  .pv .vk { margin-top:auto; padding-top:18px; border-top:1px solid var(--hair); }
+  .tc .v { font-size:19px !important; }
+
+  /* the pitch guide of 18 Oct (Startup Pitch Presentation.docx): a small label with the course part, a headline that
+     says the conclusion, one main thing per slide, sources on the slide, assumptions marked */
+  .d-lab { position:absolute; left:120px; top:84px; font-size:16px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--ink3); }
+  h2.d-say { position:absolute; left:118px; top:112px; width:1360px; margin:0; font-size:46px; font-weight:600; letter-spacing:-.025em; line-height:1.1; color:var(--ink); text-wrap:balance; }
+  h2.d-say.half { width:720px; } h2.d-say.narrow { width:320px; font-size:40px; }
+  .d-hint { position:absolute; left:120px; top:300px; width:300px; font-size:20px; color:var(--ink3); line-height:1.35; }
+  .d-lede { position:absolute; left:220px; right:220px; top:740px; text-align:center; font-size:26px; line-height:1.4; color:var(--ink2); text-wrap:balance; }
+  .d-team { position:absolute; left:120px; top:320px; width:1360px; display:grid; grid-template-columns:repeat(4,1fr); gap:34px; }
+  .d-team > div { border-top:3px solid var(--ink); padding-top:24px; }
+  .d-team .nm { font-size:30px; font-weight:600; letter-spacing:-.02em; }
+  .d-team .rl { font-size:24px; margin-top:12px; color:var(--ink); font-weight:500; }
+  .d-team .fx { font-size:20px; margin-top:12px; color:var(--ink3); line-height:1.35; }
+  .d-two { position:absolute; left:120px; top:260px; width:1360px; display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  .d-two .glass { position:relative; height:560px; padding:36px 42px; display:flex; flex-direction:column; }
+  .d-two .who { font-size:17px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--ink3); }
+  .d-two .n { font-size:124px; font-weight:600; letter-spacing:-.05em; line-height:1; margin-top:26px; font-variant-numeric:tabular-nums; }
+  .d-two .t { font-size:25px; line-height:1.3; margin-top:16px; color:var(--ink); text-wrap:balance; }
+  .d-two .f { font-size:24px; line-height:1.3; margin-top:auto; padding-top:20px; border-top:1px solid var(--hair); font-weight:600; }
+  .d-two .src { font-size:15px; color:var(--ink3); margin-top:12px; }
+  .d-tm { left:120px; top:250px; width:1360px; padding:8px 0; }
+  .d-tm .r { display:grid; grid-template-columns:.9fr 1.15fr 1.1fr 1.1fr 1.05fr; gap:24px; padding:24px 32px; align-items:baseline; font-size:21px; line-height:1.32; color:var(--ink2); }
+  .d-tm .r + .r { border-top:1px solid var(--hair); }
+  .d-tm .hd { font-size:15px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink3); padding-top:20px; padding-bottom:14px; }
+  .d-tm .w { font-size:28px; font-weight:600; letter-spacing:-.02em; color:var(--ink); }
+  .d-tm .w i { display:block; font-style:normal; font-size:17px; font-weight:400; color:var(--ink3); margin-top:6px; letter-spacing:0; }
+  .d-ladder { position:absolute; left:120px; top:640px; width:1360px; display:flex; gap:44px; font-size:21px; color:var(--ink2); }
+  .d-ladder b { color:var(--ink); }
+  .d-vp { position:absolute; left:120px; top:270px; width:1360px; display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  .d-vp .glass { position:relative; height:400px; padding:36px 42px; }
+  .d-vp .who { font-size:28px; font-weight:600; letter-spacing:-.02em; }
+  .d-vp ul { margin:22px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:18px; }
+  .d-vp li { font-size:26px; line-height:1.3; padding-left:22px; position:relative; color:var(--ink); }
+  .d-vp li::before { content:""; position:absolute; left:0; top:.55em; width:8px; height:8px; border-radius:4px; background:var(--ink); }
+  .d-note { position:absolute; left:120px; top:720px; width:1360px; font-size:21px; color:var(--ink2); line-height:1.4; }
+  .d-flow { position:absolute; left:120px; top:300px; width:740px; display:flex; flex-direction:column; gap:14px; }
+  .d-flow span { font-size:28px; font-weight:600; letter-spacing:-.015em; padding-left:44px; position:relative; }
+  .d-flow span::before { content:counter(f); counter-increment:f; position:absolute; left:0; top:2px; width:30px; height:30px; border-radius:15px; background:var(--ink); color:#fff; font-size:16px; display:flex; align-items:center; justify-content:center; }
+  .d-flow { counter-reset:f; }
+  .d-status { position:absolute; left:120px; top:500px; width:740px; display:flex; flex-direction:column; gap:20px; }
+  .d-status > div { display:grid; grid-template-columns:150px 1fr; gap:18px; align-items:baseline; }
+  .d-status .k { font-size:16px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; }
+  .d-status .ok { color:#1F6F45; } .d-status .lim { color:#8A6A16; } .d-status .dev { color:var(--ink3); }
+  .d-status .v { font-size:22px; line-height:1.35; color:var(--ink2); } .d-status .v b { color:var(--ink); }
+  .d-shot { position:absolute; left:990px; top:46px; width:360px; }
+  .d-shot img { display:block; width:360px; height:780px; object-fit:cover; object-position:top; border-radius:52px;
+                box-shadow:0 40px 90px rgba(54,62,92,.28), 0 0 0 1px rgba(29,29,31,.10); }
+  .d-shot .cap { font-size:17px; color:var(--ink3); text-align:center; margin-top:12px; }
+  .d-cmp { left:120px; top:250px; width:1360px; padding:6px 0; }
+  .d-cmp .r { display:grid; grid-template-columns:1.35fr .8fr 1fr 1.05fr 1.5fr; gap:20px; padding:18px 30px; align-items:center; font-size:21px; line-height:1.3; }
+  .d-cmp .r + .r { border-top:1px solid var(--hair); }
+  .d-cmp .hd { font-size:15px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink3); padding-top:18px; padding-bottom:12px; }
+  .d-cmp .w { font-size:23px; font-weight:600; letter-spacing:-.01em; }
+  .d-cmp .w i { display:block; font-style:normal; font-size:16px; font-weight:400; color:var(--ink3); margin-top:3px; }
+  .d-cmp .y { font-weight:600; color:var(--ink); } .d-cmp .n { color:var(--ink3); } .d-cmp .p { color:var(--ink2); }
+  .d-cmp .e { color:var(--ink2); font-size:19px; }
+  .d-cmp .us { background:rgba(255,255,255,.55); border-radius:12px; }
+  .d-calc { position:absolute; left:120px; top:300px; width:1360px; display:grid; grid-template-columns:1fr 60px 1fr 60px 1fr; align-items:start; }
+  .d-calc .n { font-size:96px; font-weight:600; letter-spacing:-.045em; line-height:1; font-variant-numeric:tabular-nums; }
+  .d-calc .t { font-size:23px; line-height:1.32; margin-top:16px; color:var(--ink2); text-wrap:balance; max-width:380px; }
+  .d-calc .opx { font-size:64px; font-weight:300; color:var(--ink3); text-align:center; line-height:1.3; }
+  .d-wider { position:absolute; left:120px; top:640px; width:1360px; display:flex; flex-direction:column; gap:12px; font-size:21px; color:var(--ink2); padding-top:24px; border-top:1px solid var(--hair); }
+  .d-wider b { color:var(--ink); }
+  .cv { top:220px !important; height:656px !important; }
+  .blk .t { font-size:15px !important; margin-bottom:12px !important; } .blk .sub { font-size:13px !important; margin:14px 0 6px !important; }
+  .blk li { font-size:21px !important; line-height:1.3 !important; padding:4px 0 4px 14px !important; margin-bottom:6px !important; }
+  .blk li::before { width:5px !important; height:5px !important; top:.6em !important; }
+  .d-4p { position:absolute; left:120px; top:260px; width:1360px; display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+  .d-4p .glass { position:relative; height:220px; padding:30px 38px; display:flex; flex-direction:column; justify-content:space-between; }
+  .d-4p .p { font-size:17px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:var(--ink3); }
+  .d-4p .c { font-size:32px; font-weight:600; letter-spacing:-.02em; line-height:1.2; text-wrap:balance; }
+  .d-exp { position:absolute; left:120px; top:780px; width:1360px; font-size:25px; color:var(--ink2); }
+  .d-exp b { color:var(--ink); }
+  .bkcard { left:1150px !important; width:330px !important; }
+  .d-sc { position:absolute; left:120px; top:260px; width:1360px; display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .d-sc .glass { position:relative; height:230px; padding:30px 38px; }
+  .d-sc .glass.dim.st.on { opacity:.55; }
+  .d-sc .nb { position:absolute; right:32px; top:20px; font-size:60px; font-weight:600; color:rgba(29,29,31,.16); }
+  .d-sc .h { font-size:32px; font-weight:600; letter-spacing:-.02em; max-width:520px; }
+  .d-sc .x { font-size:24px; line-height:1.3; color:var(--ink2); margin-top:14px; }
+  .d-axis { position:absolute; left:120px; top:780px; width:1360px; display:flex; gap:40px; font-size:19px; color:var(--ink3); }
+  .d-fin { position:absolute; left:120px; top:260px; width:1360px; display:grid; grid-template-columns:1fr 1fr 1.35fr; gap:28px; }
+  .d-fin .glass { position:relative; height:520px; padding:32px 36px; display:flex; flex-direction:column; }
+  .d-fin .k2 { font-size:16px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:var(--ink3); }
+  .d-fin .big { font-size:72px; font-weight:600; letter-spacing:-.045em; line-height:1; margin-top:auto; font-variant-numeric:tabular-nums; }
+  .d-fin .t { font-size:24px; margin-top:12px; color:var(--ink); }
+  .d-fin .t2 { font-size:19px; margin-top:16px; color:var(--ink3); line-height:1.4; padding-top:14px; border-top:1px solid var(--hair); }
+  .d-fin .asm .r { display:grid; grid-template-columns:1fr 90px 110px; gap:10px; padding:16px 0; border-bottom:1px solid var(--hair); font-size:21px; align-items:baseline; }
+  .d-fin .asm .r:first-of-type { font-size:15px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink3); margin-top:18px; }
+  .d-fin .asm .r span:not(:first-child) { text-align:right; font-weight:600; font-variant-numeric:tabular-nums; }
+  .d-fin .asm .src { font-size:15px; color:var(--ink3); margin-top:auto; }
+  .d-road { position:absolute; left:120px; top:270px; width:1360px; height:230px; display:grid; grid-template-columns:repeat(5,1fr); }
+  .d-road .ln { position:absolute; left:0; right:0; top:58px; height:2px; background:rgba(29,29,31,.18); }
+  .d-road .m { position:relative; padding-right:20px; }
+  .d-road .d { font-size:19px; font-weight:600; color:var(--ink3); }
+  .d-road .dot { width:18px; height:18px; border-radius:50%; background:#fff; border:2px solid #1D1D1F; margin:20px 0; position:relative; z-index:1; }
+  .d-road .h { font-size:26px; font-weight:600; letter-spacing:-.015em; line-height:1.2; }
+  .d-road .x { font-size:20px; color:var(--ink2); margin-top:8px; line-height:1.3; }
+  .d-risk { position:absolute; left:120px; top:560px; width:1360px; display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .d-risk .glass { position:relative; padding:28px 32px; height:220px; }
+  .d-risk .h { font-size:27px; font-weight:600; letter-spacing:-.02em; }
+  .d-risk .x { font-size:21px; line-height:1.35; color:var(--ink2); margin-top:12px; }
+  .thanks { font-size:28px !important; }
+  .blk[data-k="C"] li, .blk[data-k="R"] li { font-size:18px !important; padding:2px 0 2px 14px !important; margin-bottom:2px !important; }
+</style>
+</head>
+<body>
+<canvas id="silk"></canvas>
+<div id="prism"></div>
+<div id="stage">
+  <canvas id="sensor3d" aria-label="The sensor"></canvas>
+
+  <!-- 1 opening -->
+  <section class="slide">
+    <h1 class="display op st" data-s="0">You lift. We count.</h1>
+    <div class="d-lede st" data-s="0">A small sensor on the machines a gym already has records every set and rep. Members never type; the owner sees how each machine is used.</div>
+  </section>
+
+  <!-- 2 team -->
+  <section class="slide">
+    <div class="d-lab st" data-s="0">Team</div>
+    <h2 class="d-say st" data-s="0">Four co-founders from business, engineering and management.</h2>
+    <div class="d-team">
+      <div class="st" data-s="0"><div class="nm">Justus Kessler</div><div class="rl">Management and sales, Hochschule Heilbronn</div><div class="fx">A year in sales at MeterGrid, a Stuttgart start-up</div></div>
+      <div class="st" data-s="0"><div class="nm">Adam Pauk</div><div class="rl">Entrepreneurship, Brno University of Technology</div><div class="fx">Founded an IT company, and a gym</div></div>
+      <div class="st" data-s="0"><div class="nm">Bennett Hoekstra</div><div class="rl">Human resource management, Windesheim</div><div class="fx">Held our interviews with Dutch gyms</div></div>
+      <div class="st" data-s="0"><div class="nm">Brijan van Leeuwen</div><div class="rl">Mechanical engineering, Windesheim</div><div class="fx">Final year; built the first unit</div></div>
+    </div>
+  </section>
+
+  <!-- 3 problem -->
+  <section class="slide">
+    <div class="d-lab st" data-s="0">Problem</div>
+    <h2 class="d-say st" data-s="0">Writing down every set interrupts training, so most people stop.</h2>
+    <div class="d-two">
+      <div class="glass st" data-s="0"><div class="who">The member</div><div class="n">3&nbsp;%</div><div class="t">of health and fitness app users are still active after 30 days</div><div class="f">None of our first five interviewees keeps a training log.</div><div class="src">App data 2023 (Curry, 2026); our interviews, September 2026</div></div>
+      <div class="glass st" data-s="0"><div class="who">The gym owner</div><div class="n">€83,000</div><div class="t">invested per German gym in 2025, while the gym’s software only counts who walks in</div><div class="f">Machines are bought, moved and retired by feel.</div><div class="src">DSSV, 2026</div></div>
+    </div>
+  </section>
+
+  <!-- 5 value proposition -->
+  <section class="slide">
+    <div class="d-lab st" data-s="0">Value proposition</div>
+    <h2 class="d-say st" data-s="0">The machine counts, so members just train and owners see each machine’s use.</h2>
+    <div class="d-vp">
+      <div class="glass st" data-s="0"><div class="who">For members, free</div><ul><li>Sets and reps recorded with no typing</li><li>The weight in one tap</li><li>The rest timed by itself, also on a locked phone</li></ul></div>
+      <div class="glass st" data-s="0"><div class="who">For the gym owner, paid</div><ul><li>How often each machine is used, every week</li><li>Buy, move or retire machines by use, not by feel</li><li>Logging as a service for every member</li></ul></div>
+    </div>
+    <div class="d-note st" data-s="0"><b>Idea generation:</b> one of ten ideas in our COCD box. It won once we learned that the gym, not the member, would pay.</div>
+  </section>
+
+  <!-- 6 prototypes -->
+  <section class="slide">
+    <div class="d-lab st" data-s="0">Prototypes</div>
+    <h2 class="d-say half st" data-s="0">It already counts real sets on real machines.</h2>
+    <div class="d-flow st" data-s="0"><span>You lift</span><span>The ring fills with each rep</span><span>The set is saved, nothing typed</span></div>
+    <div class="d-status">
+      <div class="st" data-s="0"><div class="k ok">Works</div><div class="v"><b>34 of 35 checked sets counted exactly,</b> 4 to 12 Oct, on 14 machines and exercises (one set off by one rep)</div></div>
+      <div class="st" data-s="0"><div class="k lim">Limited</div><div class="v">One lifter, from our team, checking his own sets; 5 times it saw a set that wasn’t one</div></div>
+      <div class="st" data-s="0"><div class="k dev">Next</div><div class="v">Other lifters and seat settings; the owner app runs on sample data so far</div></div>
+    </div>
+    <div class="d-shot st" data-s="0"><img src="photos/app-set-3x.jpg" alt="The app during a set: 7 reps counted"><div class="cap">The app during a set</div></div>
+  </section>
+
+  <!-- 4 test matrix -->
+  <section class="slide">
+    <div class="d-lab st" data-s="0">Test matrix</div>
+    <h2 class="d-say st" data-s="0">People want logging without typing. Gyms are not convinced yet.</h2>
+    <div class="glass d-tm st" data-s="0">
+      <div class="r hd"><div></div><div>Confirmed</div><div>Doubted</div><div>Rejected</div><div>What we changed</div></div>
+      <div class="r"><div class="w">Test 1<i>8 people, September</i></div><div>3 of them rated a log without typing well, before we described our idea</div><div>Whether a wrong count matters depends on the training</div><div>None of the first five keeps a log today</div><div>Sell to the gym owner, not the member</div></div>
+      <div class="r"><div class="w">Test 2<i>3 Dutch gyms, 2 members</i></div><div>A gym saw value on all its ordinary machines</div><div>One gym guessed a price far below ours</div><div>No gym felt a strong need for usage data yet</div><div>A free four-week trial; a narrower target</div></div>
+    </div>
+    <div class="d-ladder st" data-s="0"><span><b>We have:</b> interview findings</span><span><b>Not yet:</b> people outside our team using it</span><span><b>Not yet:</b> a gym that has paid</span></div>
+  </section>
+
+  <!-- 8 customers -->
+  <section class="slide">
+    <div class="d-lab st" data-s="0">Customers</div>
+    <h2 class="d-say st" data-s="0">We start with independent gyms with 10 or more machines.</h2>
+    <div class="d-calc st" data-s="0">
+      <div><div class="n">1,479</div><div class="t">independent gyms we visit first: 724 near Baden-Württemberg, 755 in the Netherlands</div></div>
+      <div class="opx">×</div>
+      <div><div class="n">€9,600</div><div class="t">a year each: 40 machines at €20 a month</div></div>
+      <div class="opx">=</div>
+      <div><div class="n">€14.2&nbsp;m</div><div class="t">a year, if every one of them signed</div></div>
+    </div>
+    <div class="d-wider st" data-s="0"><span><b>9,511</b> such gyms in Germany, Austria, Switzerland, the Netherlands and Belgium (€91.3 m a year)</span><span><b>40,965</b> in Europe (€393.3 m a year)</span><span>Assumption: 40 sensors a gym, our standard offer. Chains come later.</span></div>
+  </section>
+
+  <!-- 7 competitors -->
+  <section class="slide">
+    <div class="d-lab st" data-s="0">Competitors</div>
+    <h2 class="d-say st" data-s="0">Today members type, gyms buy new machines, or nobody tracks at all.</h2>
+    <div class="glass d-cmp st" data-s="0">
+      <div class="r hd"><div></div><div>No typing</div><div>Works on the gym’s machines</div><div>Owner sees each machine</div><div>What it takes</div></div>
+      <div class="r"><div class="w">Paper or a notes app</div><div class="n">No</div><div class="y">Yes</div><div class="n">No</div><div class="e">Writing every set</div></div>
+      <div class="r"><div class="w">Logging apps</div><div class="n">No</div><div class="y">Yes</div><div class="n">No</div><div class="e">Typing every set</div></div>
+      <div class="r"><div class="w">Smart machines<i>EGYM, Technogym, milon</i></div><div class="y">Yes</div><div class="n">No</div><div class="p">Own machines only</div><div class="e">Buying new machines</div></div>
+      <div class="r"><div class="w">Add-on trackers<i>Trackbar, Virtuagym Connect</i></div><div class="p">Partly</div><div class="y">Yes</div><div class="n">No</div><div class="e">A screen per machine, or picking the exercise</div></div>
+      <div class="r us"><div class="w">Our sensor</div><div class="y">Yes</div><div class="y">Yes</div><div class="y">Yes, on sample data so far</div><div class="e">Fitting and charging sensors; counting checked by one lifter so far</div></div>
+    </div>
+  </section>
+
+  <!-- 9 business model canvas -->
+  <section class="slide">
+    <div class="d-lab st" data-s="0">Business Model Canvas</div>
+    <h2 class="d-say st" data-s="0">The gym pays per machine. Members use it free.</h2>
+    <div class="glass board cv st" data-s="0"><div class="bmc" id="bmc"></div></div>
+  </section>
+
+  <!-- 11 brand key -->
+  <section class="slide" id="bkslide">
+    <div class="d-lab st" data-s="0">Brand Key</div>
+    <h2 class="d-say narrow st" data-s="0">What we stand for: every set seen.</h2>
+    <div class="d-hint st" data-s="0">Read from the bottom up. Point at a field.</div>
+    <svg class="bkg st" data-s="0" width="1600" height="900" viewBox="0 0 1600 900" aria-label="Brand Key"><defs><linearGradient id="kf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".66"/><stop offset="1" stop-color="#fff" stop-opacity=".36"/></linearGradient><radialGradient id="kh" cx=".3" cy=".12" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><clipPath id="kc"><path d="M581.5 495 A250 250 0 1 1 938.5 495 L1083.0 839.4 Q1090 856 1072 856 L448 856 Q430 856 437.0 839.4 Z"/></clipPath><filter id="ks" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="28"/></filter></defs><path d="M581.5 495 A250 250 0 1 1 938.5 495 L1083.0 839.4 Q1090 856 1072 856 L448 856 Q430 856 437.0 839.4 Z" fill="rgba(54,62,92,.20)" filter="url(#ks)" transform="translate(0 28)"/><path d="M581.5 495 A250 250 0 1 1 938.5 495 L1083.0 839.4 Q1090 856 1072 856 L448 856 Q430 856 437.0 839.4 Z" fill="url(#kf)"/><path d="M581.5 495 A250 250 0 1 1 938.5 495 L1083.0 839.4 Q1090 856 1072 856 L448 856 Q430 856 437.0 839.4 Z" fill="url(#kh)"/><g id="bktiers" clip-path="url(#kc)"><g class="tier" data-i="8" data-m="139"><rect x="420" y="70" width="680" height="138"/><text x="760" y="116" class="el">Brand essence</text><text x="760" y="162" class="es">Every set seen.</text></g><g class="tier" data-i="7" data-m="244"><rect x="420" y="208" width="680" height="71"/><text x="760" y="250">Discriminator</text></g><g class="tier" data-i="6" data-m="314"><rect x="420" y="279" width="680" height="71"/><text x="760" y="320">Reasons to believe</text></g><g class="tier" data-i="5" data-m="386"><rect x="420" y="350" width="680" height="71"/><text x="760" y="392">Values</text></g><g class="tier" data-i="4" data-m="458"><rect x="420" y="421" width="680" height="74"/><text x="760" y="464">Benefits</text></g><g class="tier" data-i="3" data-m="540"><rect x="420" y="495" width="680" height="90"/><text x="760" y="546">Insight</text></g><g class="tier" data-i="2" data-m="630"><rect x="420" y="585" width="680" height="90"/><text x="760" y="636">Target</text></g><g class="tier" data-i="1" data-m="720"><rect x="420" y="675" width="680" height="90"/><text x="760" y="726">Competitive environment</text></g><g class="tier" data-i="0" data-m="810"><rect x="420" y="765" width="680" height="91"/><text x="760" y="816">Root strengths</text></g><g stroke="rgba(29,29,31,.11)" stroke-width="1" style="pointer-events:none"><line x1="534.5" y1="208" x2="985.5" y2="208"/><line x1="511.4" y1="279" x2="1008.6" y2="279"/><line x1="509.8" y1="350" x2="1010.2" y2="350"/><line x1="529.3" y1="421" x2="990.7" y2="421"/><line x1="579.5" y1="495" x2="940.5" y2="495"/><line x1="541.7" y1="585" x2="978.3" y2="585"/><line x1="503.9" y1="675" x2="1016.1" y2="675"/><line x1="466.2" y1="765" x2="1053.8" y2="765"/></g></g><path d="M581.5 495 A250 250 0 1 1 938.5 495 L1083.0 839.4 Q1090 856 1072 856 L448 856 Q430 856 437.0 839.4 Z" fill="none" stroke="rgba(29,29,31,.09)" stroke-width="3"/><path d="M581.5 495 A250 250 0 1 1 938.5 495 L1083.0 839.4 Q1090 856 1072 856 L448 856 Q430 856 437.0 839.4 Z" fill="none" stroke="#fff" stroke-width="1.6"/></svg>
+    <div class="glass bkcard" id="bkcard"><div class="in"></div></div>
+  </section>
+
+  <!-- 10 marketing mix -->
+  <section class="slide">
+    <div class="d-lab st" data-s="0">Marketing mix</div>
+    <h2 class="d-say st" data-s="0">We win the first gyms in person, with a free four-week trial.</h2>
+    <div class="d-4p">
+      <div class="glass st" data-s="0"><div class="p">Product</div><div class="c">Sensors on the gym’s own machines, any brand, and two apps</div></div>
+      <div class="glass st" data-s="0"><div class="p">Price</div><div class="c">€249 per machine once, then €20 a month</div></div>
+      <div class="glass st" data-s="0"><div class="p">Place</div><div class="c">We walk into gyms near Baden-Württemberg; first trials in the Netherlands</div></div>
+      <div class="glass st" data-s="0"><div class="p">Promotion</div><div class="c">A free four-week trial; the owner sees their own numbers before paying</div></div>
+    </div>
+    <div class="d-exp st" data-s="0"><b>First experiment:</b> 20 free trials. <b>Success:</b> 7 of them order, by June 2027.</div>
+  </section>
+
+  <!-- 12 scenario matrix -->
+  <section class="slide">
+    <div class="d-lab st" data-s="0">Scenario matrix</div>
+    <h2 class="d-say st" data-s="0">Whatever happens, there are gyms with ordinary machines. We start there.</h2>
+    <div class="d-sc">
+      <div class="glass st dim" data-s="0"><div class="nb">4</div><div class="h">Chains buy smart machines</div><div class="x">The threat: the data comes with the machine</div></div>
+      <div class="glass st dim" data-s="0"><div class="nb">3</div><div class="h">Chains keep ordinary machines</div><div class="x">Later: one trial in one gym, then all their gyms</div></div>
+      <div class="glass st" data-s="0"><div class="nb">2</div><div class="h">Independents add some smart machines</div><div class="x">Next: we cover all their other machines</div></div>
+      <div class="glass st" data-s="0"><div class="nb">1</div><div class="h">Independents keep ordinary machines</div><div class="x">We start here</div></div>
+    </div>
+    <div class="d-axis st" data-s="0"><span>Top: chains take over. Bottom: independent gyms grow.</span><span>Left: smart machines everywhere. Right: ordinary machines stay.</span></div>
+  </section>
+
+  <!-- 13 finances -->
+  <section class="slide">
+    <div class="d-lab st" data-s="0">Finances</div>
+    <h2 class="d-say st" data-s="0">About €130,000 gets us to the first orders. Every rate is still an assumption.</h2>
+    <div class="d-fin">
+      <div class="glass st" data-s="0"><div class="k2">One gym, 40 machines</div><div class="big">€9,960</div><div class="t">once, then €800 a month</div><div class="t2">Sensors cost us about €40 each (target). After support, €725 a month stays.</div></div>
+      <div class="glass st" data-s="0"><div class="k2">Money needed</div><div class="big">€129,717</div><div class="t">€19,114 from us</div><div class="t2">€115,000 from outside: planned, not found yet</div></div>
+      <div class="glass st asm" data-s="0"><div class="k2">Our assumptions, and what others measured</div>
+        <div class="r"><span></span><span>Ours</span><span>Published</span></div>
+        <div class="r"><span>Gyms that pay, per 100 visited</span><span>5.33</span><span>0.78</span></div>
+        <div class="r"><span>Free trials that become orders</span><span>36&nbsp;%</span><span>25.2&nbsp;%</span></div>
+        <div class="r"><span>Gyms that renew</span><span>88.1&nbsp;%</span><span>80.6&nbsp;%</span></div>
+        <div class="src">Published: Bailyn, 2025; ChartMogul, 2023</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 feasibility and risks -->
+  <section class="slide">
+    <div class="d-lab st" data-s="0">Feasibility and risks</div>
+    <h2 class="d-say st" data-s="0">Each step proves one thing. If a step fails, we change the plan.</h2>
+    <div class="d-road st" data-s="0"><div class="ln"></div>
+      <div class="m"><div class="d">Jan 2027</div><div class="dot"></div><div class="h">First Dutch pilot</div><div class="x">5 sensors in one gym</div></div>
+      <div class="m"><div class="d">Feb 2027</div><div class="dot"></div><div class="h">Company founded</div><div class="x">Only with the first money promised</div></div>
+      <div class="m"><div class="d">May 2027</div><div class="dot"></div><div class="h">First gyms buy</div><div class="x">At least 2 trial gyms</div></div>
+      <div class="m"><div class="d">Jun 2027</div><div class="dot"></div><div class="h">Trials to orders</div><div class="x">7 of the first 20</div></div>
+      <div class="m"><div class="d">Aug 2028</div><div class="dot"></div><div class="h">Gyms renew</div><div class="x">18 of the first 20</div></div>
+    </div>
+    <div class="d-risk">
+      <div class="glass st" data-s="0"><div class="h">The price may be too high</div><div class="x">Today a gym can count about €0.64 of value for each €1 it pays.</div></div>
+      <div class="glass st" data-s="0"><div class="h">Useful, but not urgent</div><div class="x">Gyms decide on machines every year or two, but would pay every month.</div></div>
+      <div class="glass st" data-s="0"><div class="h">Money before proof</div><div class="x">We need outside money before any gym has paid.</div></div>
+    </div>
+  </section>
+
+  <!-- 15 close -->
+  <section class="slide">
+    <h1 class="display op st" data-s="0">Every set seen.</h1>
+    <div class="thanks st" data-s="0">Next: our first pilot gym in January 2027. Thank you.</div>
+  </section>
+
+</div>
+<button id="present" type="button" aria-label="Present in full screen"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#1D1D1F" stroke-width="1.6" stroke-linecap="round"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4"/></svg>Present</button>
+
+<script src="sensor-model.js"></script>
+<script type="importmap">
+{ "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const slides = $$('.slide');
+
+function fit() { const s = Math.min(innerWidth / 1600, innerHeight / 900); $('#stage').style.transform = `translate(${-800 * s}px, ${-450 * s}px) scale(${s})`; silkSize(); }
+
+// ---- the silk: folds of a silver satin, drawn live; it flows slowly, and moves further while a slide changes ----------
+const cv = $('#silk'), gl = cv.getContext('webgl', { antialias: false, premultipliedAlpha: false });
+const VS = 'attribute vec2 p; void main(){ gl_Position = vec4(p, 0., 1.); }';
+const FS = `precision highp float;
+uniform vec2 res; uniform vec2 off; uniform float ang; uniform float tm;
+float h(vec2 p){
+  p += off;
+  float c = cos(ang), s = sin(ang); p = mat2(c, -s, s, c) * p;
+  vec2 q = p;
+  q.x += .42 * sin(q.y * 1.15 + 1.3 + tm * .16) + .18 * sin(q.y * 2.3 + 0.4 - tm * .11);
+  float a = .62 * sin(q.x * 2.05 + q.y * .55);
+  a += .30 * sin(q.x * 3.6 - q.y * 1.1 + 2.1 + tm * .09);
+  a += .12 * sin(q.x * 6.3 + q.y * 1.9 + 4.2);
+  return a;
+}
+void main(){
+  vec2 uv = gl_FragCoord.xy / res;
+  vec2 p = (gl_FragCoord.xy - .5 * res) / res.y * 1.7;
+  float e = 1.5 / res.y;
+  float dx = (h(p + vec2(e, 0.)) - h(p - vec2(e, 0.))) / (2. * e);
+  float dy = (h(p + vec2(0., e)) - h(p - vec2(0., e))) / (2. * e);
+  vec3 n = normalize(vec3(-dx * .34, -dy * .34, 1.));
+  vec3 L = normalize(vec3(-.45, .55, .75)), V = vec3(0., 0., 1.), H = normalize(L + V);
+  float d = clamp(dot(n, L), 0., 1.);
+  float sp = pow(clamp(dot(n, H), 0., 1.), 60.);
+  float rim = pow(1. - clamp(n.z, 0., 1.), 2.);
+  vec3 lo = vec3(.52, .56, .66), mid = vec3(.78, .80, .86), hi = vec3(.965, .97, .98);
+  vec3 col = mix(lo, mid, smoothstep(.25, .75, d));
+  col = mix(col, hi, smoothstep(.72, 1., d));
+  col += sp * .30 + rim * vec3(.05, .06, .09);
+  col = mix(col, vec3(.905, .91, .925), smoothstep(.25, 1.3, length((uv - vec2(.32, .55)) * vec2(1.2, 1.))) * .35);
+  gl_FragColor = vec4(col, 1.);
+}`;
+let silkOk = !!gl, U = {};
+if (silkOk) {
+  const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };
+  const prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(prog); gl.useProgram(prog);
+  const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(prog, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  U = { res: gl.getUniformLocation(prog, 'res'), off: gl.getUniformLocation(prog, 'off'), ang: gl.getUniformLocation(prog, 'ang'), tm: gl.getUniformLocation(prog, 'tm') };
+}
+function silkSize() { if (!silkOk) return; const d = 0.5; cv.width = innerWidth * d; cv.height = innerHeight * d; gl.viewport(0, 0, cv.width, cv.height); drawSilk(); }
+const POSE = [[0.0, 0.0, 0.0], [0.9, -0.25, 0.10], [1.5, 0.2, -0.04], [2.3, -0.1, 0.06], [3.0, 0.35, -0.08], [3.7, 0.0, 0.04], [4.5, -0.3, -0.05], [5.2, 0.15, 0.09],
+  [6.0, -0.2, -0.03], [6.7, 0.3, 0.05], [7.4, -0.05, -0.07], [8.1, 0.25, 0.03], [8.8, -0.15, 0.06], [9.5, 0.1, -0.04], [10.2, 0.0, 0.0]];   // where the silk rests for each slide
+let pose = [...POSE[0]], from = [...POSE[0]], to = [...POSE[0]], t0 = 0, now = 0;
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function drawSilk() { if (!silkOk) return; gl.uniform2f(U.res, cv.width, cv.height); gl.uniform2f(U.off, pose[0], pose[1]); gl.uniform1f(U.ang, pose[2]); gl.uniform1f(U.tm, still ? 0 : now / 1000); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); }
+function flowTo(i) { from = [...pose]; to = [...POSE[i % POSE.length]]; t0 = performance.now(); }
+(function tick(t) {
+  now = t || 0; const k = Math.min(1, (now - t0) / 1600), e = 1 - Math.pow(1 - k, 3);
+  pose = from.map((a, j) => a + (to[j] - a) * e); drawSilk(); requestAnimationFrame(tick);
+})();
+addEventListener('resize', fit); fit();
+
+// ---- slides: one click is one slide --------------------------------------------------------------------------------
+let cur = -1;
+function go(i) {
+  i = Math.max(0, Math.min(slides.length - 1, i));
+  if (i === cur) return;
+  if (cur >= 0) { slides[cur].classList.remove('on'); $$('.st', slides[cur]).forEach((e) => e.classList.remove('on')); }
+  slides[i].classList.add('on'); cur = i; flowTo(i); placeSensor(i); bkShow(-1);
+  requestAnimationFrame(() => $$('.st', slides[cur]).forEach((e) => e.classList.add('on')));
+  try { history.replaceState(null, '', `#${cur + 1}`); } catch (e) { /* a sandboxed frame may refuse */ }
+}
+const next = () => go(cur + 1), back = () => go(cur - 1);
+addEventListener('keydown', (e) => {
+  if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return;
+  if (slides[cur].id === 'bkslide' && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) { e.preventDefault(); bkShow(Math.max(0, Math.min(8, bkOn < 0 ? 0 : bkOn + (e.key === 'ArrowUp' ? 1 : -1)))); return; }
+  if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); next(); }
+  else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); back(); }
+  else if (e.key === 'Home') go(0); else if (e.key === 'End') go(slides.length - 1);
+  else if (e.key.toLowerCase() === 'f') { if (fsEl()) (document.exitFullscreen || document.webkitExitFullscreen).call(document); else $('#present').click(); }
+});
+
+// ---- the canvas: BMC 2.0 (5 Oct 2026, with the decisions of 6 Oct) ----------------------------------------------------
+const B = {
+  KP: [0, 0, 262, 496, 'Key partners', '<ul><li>Dealers and service firms</li><li>Machine makers</li><li>Parts suppliers</li><li>A lawyer and a patent attorney</li></ul>'],
+  KA: [274, 0, 262, 222, 'Key activities', '<ul><li>Fitting sensors, free trials</li><li>Building both apps</li><li>Selling</li></ul>'],
+  KR: [274, 234, 262, 262, 'Key resources', '<ul><li>Our contacts with gym owners</li><li>Our software</li><li>A 3D printer</li><li>Our money and outside money</li></ul>'],
+  VP: [548, 0, 264, 496, 'Value propositions', '<div class="sub">To the owner</div><ul><li>How each machine is used, every week</li><li>A floor plan of busy and idle machines</li></ul><div class="sub">To the member</div><ul><li>Sets and reps with no typing</li></ul>'],
+  CR: [824, 0, 262, 222, 'Customer relationships', '<ul><li>Mostly self-service</li><li>A personal contact for the first gyms</li><li>A yearly review</li></ul>'],
+  CH: [824, 234, 262, 262, 'Channels', '<ul><li>Walking into gyms</li><li>Trade fairs and referrals</li><li>A free four-week trial</li></ul>'],
+  CS: [1098, 0, 262, 496, 'Customer segments', '<ul><li><b>Pays:</b> owners of gyms with 10 or more machines</li><li><b>First:</b> independent gyms</li><li><b>Uses:</b> their members</li><li><b>Later:</b> chains</li></ul>'],
+  C: [0, 508, 674, 148, 'Cost structure', '<ul style="columns:2;column-gap:24px"><li>Building the software and hardware</li><li>Sensors, about €40 each</li><li>Free trials and sales trips</li><li>Hosting and support</li></ul>'],
+  R: [686, 508, 674, 148, 'Revenue streams', '<ul style="columns:2;column-gap:24px"><li><b>€249 per machine,</b> once</li><li><b>€20 per machine</b> a month</li><li>At least 10 machines, 12 months</li><li>One price, no discounts</li></ul>'],
+};
+$('#bmc').innerHTML = Object.entries(B).map(([k, [x, y, w, h, t, html]]) => `<div class="blk" data-k="${k}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px"><div class="t">${t}</div>${html}</div>`).join('')
+  + [[268, 0, 1, 502], [542, 0, 1, 502], [818, 0, 1, 502], [1092, 0, 1, 502], [0, 502, 1360, 1], [274, 228, 262, 1], [824, 228, 262, 1], [680, 503, 1, 153]]
+    .map(([x, y, w, h]) => `<div style="position:absolute;left:${x}px;top:${y}px;width:${w}px;height:${h}px;background:rgba(29,29,31,.12)"></div>`).join('');
+
+// ---- the Brand Key: point at a field, or press up / down, and its answer comes up beside the keyhole ------------------
+const BK = [   // 0 = root strengths ... 8 = brand essence: [name, claim, detail, still to prove]
+  ['Root strengths', 'A gym owner, an engineer, a salesman and a designer.', 'We share one problem: writing down your training gets in the way of training.', 'Still to prove: that we can sell. No owner has paid yet.'],
+  ['Competitive environment', 'Smart machines, add-on trackers, gym software, or gut feeling.', 'Smart machines (EGYM, Technogym, milon, Life Fitness), member trackers (Trackbar, Virtuagym Connect), cameras (Exersight), usage data (Cyclops), gym software (Magicline).', 'Gave up: Gymtrack, Sony Advagym, ShapeLog.'],
+  ['Target', 'Owners of gyms with 10 or more machines, with a machine decision coming.', 'Independent gyms first: the Netherlands, then Germany from February 2027.', 'Still to prove: that independent gyms are the right fit.'],
+  ['Insight', '“My software shows me who walks in, not what they use.”', 'The member: “I’d log every set, if it didn’t cost me the set.”', 'Our words, not quotes. Still to prove: both.'],
+  ['Benefits', 'Decide by use, not by feel.', 'Buy, move, service or retire a machine by how much it is used. Members get their sets recorded with almost no typing.', 'The feeling: confidence to show a partner, a bank or a landlord why a machine goes or stays.'],
+  ['Values', 'Modest. Private. Honest.', 'We record; we don’t coach. We count machines, not people. A missing number stays missing, never a zero.', 'Personality: the straight-talking service technician.'],
+  ['Reasons to believe', 'A working prototype, used in real training.', 'Five days on gym machines. One of us runs a gym. A free four-week trial, and we pay for any damage our sensors cause.', '60&nbsp;% of 615 people asked preferred sensors on machines to wearables (Radhakrishnan et al., 2020).'],
+  ['Discriminator', 'We watch; we don’t interfere.', 'No screen, no camera, no coaching, no ranking.', 'An attitude, not a secret technology.'],
+  ['Brand essence', 'Every set seen.', 'Seen means recorded, without a camera. It promises a record, not a result.', 'Our working essence.'],
+];
+const bkCard = $('#bkcard'); let bkOn = -1;
+function bkShow(i) {
+  if (i === bkOn) return; bkOn = i;
+  $$('#bktiers .tier').forEach((g) => g.classList.toggle('hot', +g.dataset.i === i));
+  if (i < 0) { bkCard.classList.remove('on'); return; }
+  const [n, c, d, pr] = BK[i], inner = $('.in', bkCard);
+  inner.innerHTML = `<div class="n">${n}</div><div class="c">${c}</div><div class="d">${d}</div><div class="p">${pr}</div>`;
+  inner.animate([{ opacity: 0.25 }, { opacity: 1 }], { duration: 280, easing: 'ease-out' });
+  const m = +$(`#bktiers .tier[data-i="${i}"]`).dataset.m, h = bkCard.offsetHeight;
+  bkCard.style.transform = `translateY(${Math.round(Math.max(110, Math.min(860 - h, m - h / 2)))}px)`;
+  bkCard.classList.add('on');
+}
+$('#bktiers').addEventListener('pointerover', (e) => { const g = e.target.closest('.tier'); if (g) bkShow(+g.dataset.i); });
+const kh = $('#kh'), KB = { l: 430, t: 70, w: 660, h: 786 };
+let kx = .3, ky = .12, ktx = .3, kty = .12, kRun = false;
+const kStep = () => { kx += (ktx - kx) * .14; ky += (kty - ky) * .14; kh.setAttribute('cx', kx.toFixed(3)); kh.setAttribute('cy', ky.toFixed(3));
+  if (Math.abs(ktx - kx) + Math.abs(kty - ky) > .002) requestAnimationFrame(kStep); else kRun = false; };
+const kAim = (x, y) => { ktx = x; kty = y; if (!kRun) { kRun = true; requestAnimationFrame(kStep); } };
+$('#bktiers').addEventListener('pointermove', (e) => { const q = new DOMPoint(e.clientX, e.clientY).matrixTransform($('.bkg').getScreenCTM().inverse()); kAim((q.x - KB.l) / KB.w, (q.y - KB.t) / KB.h); });
+$('#bktiers').addEventListener('pointerleave', () => kAim(.3, .12));
+
+// ---- the cash line: cumulative cash, Jan 2027 to Jan 2028 (Table 10.10; Jan 2027 is the start-up phase's total) --------
+(function cash() {
+  if (!document.getElementById('cash')) return;
+  const M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'];
+  const before = [-39433, -64532, -79300, -102336, -47273, -3820, 22151, 46882, 64087, 94988, 121689, 146451, 105056];
+  const withF = [0, 39582, 24813, 1778, 86841, 130294, 156265, 180995, 198201, 229101, 255802, 280565, 239170];
+  const X0 = 70, X1 = 840, Y = (v) => 403 - v * (313 / 300000), X = (i) => X0 + i * (X1 - X0) / 12;   // 300k at y 90, 0 at y 403, -150k at y 560
+  const path = (a) => a.map((v, i) => `${i ? 'L' : 'M'}${X(i).toFixed(1)} ${Y(v).toFixed(1)}`).join(' ');
+  const grid = [-150000, -100000, -50000, 0, 100000, 200000, 300000].map((v) => `<line x1="${X0}" y1="${Y(v)}" x2="${X1}" y2="${Y(v)}" stroke="${v ? 'rgba(29,29,31,.10)' : 'rgba(29,29,31,.35)'}"/><text x="${X0 - 12}" y="${Y(v) + 5}" text-anchor="end">${v === 0 ? '€0' : (v < 0 ? '−' : '') + '€' + Math.abs(v / 1000) + 'k'}</text>`).join('');
+  const ticks = M.map((m, i) => `<text x="${X(i)}" y="${Y(-150000) + 30}" text-anchor="middle">${m}</text>`).join('')
+    + `<text x="${X(0)}" y="${Y(-150000) + 52}" text-anchor="middle" font-weight="600">2027</text><text x="${X(12)}" y="${Y(-150000) + 52}" text-anchor="middle" font-weight="600">2028</text>`;
+  $('#cash').innerHTML = `
+    <g font-size="15" fill="#56565B"><text x="0" y="22" font-weight="600">Money in the bank, end of each month</text></g>
+    <g font-size="14" fill="#3A3A3F"><line x1="0" y1="51" x2="26" y2="51" stroke="#1D1D1F" stroke-width="3"/><text x="34" y="56">Without outside money</text>
+      <line x1="210" y1="51" x2="236" y2="51" stroke="#8A8A90" stroke-width="3" stroke-dasharray="6 5"/><text x="244" y="56">With outside money</text></g>
+    <g font-size="13" fill="#56565B">${grid}${ticks}</g>
+    <path d="${path(withF)}" fill="none" stroke="#8A8A90" stroke-width="3" stroke-dasharray="7 6" stroke-linejoin="round"/>
+    <path d="${path(before)}" fill="none" stroke="#1D1D1F" stroke-width="3.5" stroke-linejoin="round"/>
+    <circle cx="${X(3)}" cy="${Y(-102336)}" r="7" fill="#1D1D1F" stroke="#fff" stroke-width="2.5"/>
+    <circle cx="${X(3)}" cy="${Y(1778)}" r="6" fill="#fff" stroke="#8A8A90" stroke-width="2.5"/>
+    <g font-size="15" fill="#1D1D1F">
+      <text x="${X(3) + 16}" y="${Y(-102336) + 22}" font-weight="600">−€102,336 in April 2027</text>
+      <text x="${X(3) + 16}" y="${Y(-102336) + 42}" fill="#56565B">the lowest point without outside money</text>
+      <text x="${X0 + 10}" y="${Y(1778) - 92}" fill="#56565B">€1,778 in April 2027,</text>
+      <text x="${X0 + 10}" y="${Y(1778) - 72}" fill="#56565B">the lowest point with outside money</text>
+      <line x1="${X(3) - 4}" y1="${Y(1778) - 10}" x2="${X(3) - 4}" y2="${Y(1778) - 62}" stroke="rgba(29,29,31,.25)"/>
+      <text x="${X(6) + 14}" y="${Y(0) + 26}" fill="#56565B">Above zero from July 2027</text></g>`;
+})();
+
+// ---- the sensor: on the opener and the close only --------------------------------------------------------------------
+const SPOT = { 0: [400, 40, 800, 600] }; SPOT[document.querySelectorAll('.slide').length - 1] = [400, 40, 800, 600];
+function placeSensor(i) { const c = $('#sensor3d'), p = SPOT[i]; c.classList.toggle('on', !!p); if (!p) return;
+  Object.assign(c.style, { left: `${p[0]}px`, top: `${p[1]}px`, width: `${p[2]}px`, height: `${p[3]}px` }); }
+
+addEventListener('click', (e) => { if (e.button === 0 && !e.target.closest('button, a') && slides[cur].id !== 'bkslide') next(); });
+addEventListener('contextmenu', (e) => { e.preventDefault(); back(); });
+
+// Present: the whole screen, no browser chrome; Esc leaves it as usual
+const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement;
+$('#present').addEventListener('click', () => { const d = document.documentElement; try { const r = (d.requestFullscreen || d.webkitRequestFullscreen)?.call(d); r?.catch?.(() => {}); } catch (e) { /* full screen is optional */ } });
+['fullscreenchange', 'webkitfullscreenchange'].forEach((ev) => document.addEventListener(ev, () => { document.body.classList.toggle('fs', !!fsEl()); fit(); }));
+let idleT; addEventListener('pointermove', () => { document.body.classList.remove('idle'); clearTimeout(idleT); if (fsEl()) idleT = setTimeout(() => document.body.classList.add('idle'), 2000); });
+
+// ---- the sensor, in brushed graphite, turning slowly --------------------------------------------------------------------
+(async function sensor() {
+  if (!window.SENSOR) return;
+  const THREE = await import('three');
+  const { mergeVertices, toCreasedNormals } = await import('three/addons/utils/BufferGeometryUtils.js');
+  const { RoomEnvironment } = await import('three/addons/environments/RoomEnvironment.js');
+  const canvas = $('#sensor3d');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(2, devicePixelRatio * 1.5)); renderer.setSize(800, 600, false);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.outputColorSpace = THREE.SRGBColorSpace;
+  const scene = new THREE.Scene();
+  scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture; scene.environmentIntensity = 1.0;
+  const stl = (b64) => { const bin = atob(b64), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+    const v = new DataView(u.buffer), n = v.getUint32(80, true), p = new Float32Array(n * 9);
+    for (let t = 0, o = 84; t < n; t++, o += 50) for (let k = 0; k < 9; k++) p[t * 9 + k] = v.getFloat32(o + 12 + k * 4, true);
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(p, 3)); return toCreasedNormals(mergeVertices(g, 1e-4), THREE.MathUtils.degToRad(32)); };
+  const mat = new THREE.MeshPhysicalMaterial({ color: '#2B2C31', roughness: 0.42, metalness: 0.2, clearcoat: 0.6, clearcoatRoughness: 0.25 });
+  const pod = new THREE.Group(), inner = new THREE.Group(); inner.rotation.x = -Math.PI / 2;
+  inner.add(new THREE.Mesh(stl(window.SENSOR.pod), mat), new THREE.Mesh(stl(window.SENSOR.lid), mat));
+  const box = new THREE.Box3().setFromObject(inner), c = box.getCenter(new THREE.Vector3()); inner.position.sub(c); pod.add(inner); scene.add(pod);
+  const light = (col, i, p) => { const l = new THREE.DirectionalLight(col, i); l.position.set(...p); scene.add(l); };
+  light('#ffffff', 2.4, [-60, 90, 80]); light('#E8ECF5', 2.2, [80, 40, -60]); light('#ffffff', .8, [0, -60, 80]);
+  const camera = new THREE.PerspectiveCamera(22, 800 / 600, 1, 2000); camera.position.set(0, 52, 210); camera.lookAt(0, -4, 0);
+  let yaw = -0.75;
+  (function frame() { yaw += 0.0012; pod.rotation.set(0.28, yaw, 0); if (cur in SPOT) renderer.render(scene, camera); requestAnimationFrame(frame); })();
+})();
+
+const h0 = parseInt(location.hash.slice(1), 10);
+go(Number.isFinite(h0) ? h0 - 1 : 0);
+</script>
+</body>
+</html>
