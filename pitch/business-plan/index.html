@@ -270,6 +270,8 @@
   .d-calc { position:absolute; left:120px; top:300px; width:1360px; display:grid; grid-template-columns:1fr 60px 1fr 60px 1fr; align-items:start; }
   .d-calc .n { font-size:96px; font-weight:600; letter-spacing:-.045em; line-height:1; font-variant-numeric:tabular-nums; }
   .d-calc .t { font-size:23px; line-height:1.32; margin-top:16px; color:var(--ink2); text-wrap:balance; max-width:380px; }
+  .d-calc .k { font-size:16px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:var(--ink3); margin-bottom:12px; }
+  .d-calc .t b { color:var(--ink); font-weight:600; }
   .d-calc .opx { font-size:64px; font-weight:300; color:var(--ink3); text-align:center; line-height:1.3; }
   .d-wider { position:absolute; left:120px; top:640px; width:1360px; display:flex; flex-direction:column; gap:12px; font-size:21px; color:var(--ink2); padding-top:24px; border-top:1px solid var(--hair); }
   .d-wider b { color:var(--ink); }
@@ -309,6 +311,14 @@
   .d-road .h { font-size:26px; font-weight:600; letter-spacing:-.015em; line-height:1.2; }
   .d-road .x { font-size:20px; color:var(--ink2); margin-top:8px; line-height:1.3; }
   .d-risk { position:absolute; left:120px; top:560px; width:1360px; display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .d-rev { position:absolute; left:120px; top:300px; width:1360px; display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+  .d-rev .glass { position:relative; height:470px; padding:32px 38px; display:flex; flex-direction:column; }
+  .d-rev .k2 { font-size:16px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:var(--ink3); }
+  .d-rev .big { font-size:72px; font-weight:600; letter-spacing:-.045em; line-height:1; margin-top:26px; font-variant-numeric:tabular-nums; }
+  .d-rev .t { font-size:22px; margin-top:8px; margin-bottom:14px; color:var(--ink2); }
+  .d-rev .r { display:grid; grid-template-columns:1fr auto; gap:16px; padding:12px 0; border-top:1px solid var(--hair); font-size:21px; align-items:baseline; }
+  .d-rev .r span:last-child { font-weight:600; font-variant-numeric:tabular-nums; text-align:right; }
+  .d-revsrc { position:absolute; left:120px; top:800px; width:1360px; font-size:16px; color:var(--ink3); }
   .d-risk .glass { position:relative; padding:28px 32px; height:240px; }
   .d-risk .h { font-size:27px; font-weight:600; letter-spacing:-.02em; }
   .d-risk .x { font-size:21px; line-height:1.35; color:var(--ink2); margin-top:12px; }
@@ -394,13 +404,13 @@
     <div class="d-lab st" data-s="0">Customers</div>
     <h2 class="d-say st" data-s="0">We start with independent gyms with 10 or more machines.</h2>
     <div class="d-calc st" data-s="0">
-      <div><div class="n">724</div><div class="t">German independents within a day trip of Baden-Württemberg (estimate)</div></div>
+      <div><div class="k">TAM, Europe</div><div class="n">40,965</div><div class="t">gyms with 10 or more machines: <b>€393.3 m a year</b> in fees at our price</div></div>
       <div></div>
-      <div><div class="n">~755</div><div class="t">Dutch independents, 45 of them researched first (estimate)</div></div>
+      <div><div class="k">SAM, five countries</div><div class="n">9,511</div><div class="t">in Germany, Austria, Switzerland, the Netherlands and Belgium: <b>€91.3 m a year</b></div></div>
       <div></div>
-      <div><div class="n">348</div><div class="t">gyms, our target for January 2031 in the planning case; 26 in the conservative case</div></div>
+      <div><div class="k">SOM, January 2030</div><div class="n">264</div><div class="t">gyms in our planning case, 2.78&nbsp;% of the SAM: <b>about €2.5 m a year</b></div></div>
     </div>
-    <div class="d-wider st" data-s="0"><span><b>9,511</b> gyms in Germany, Austria, Switzerland, the Netherlands and Belgium: <b>5,121</b> independents, <b>4,390</b> chain sites (€91.3 m a year)</span><span><b>40,965</b> in Europe (€393.3 m a year)</span><span>Estimates, with 40 sensors a gym, our standard offer (Tables 3.1, 3.2, 8.5). Chains come later.</span></div>
+    <div class="d-wider st" data-s="0"><span>First: <b>724</b> German independents within a day trip of Baden-Württemberg, and about <b>755</b> Dutch independents, 45 of them researched first. Chains come later.</span><span>Estimates, each gym at 40 sensors and €20 a sensor a month (Tables 3.1, 3.2, 8.5); the SOM's euros computed from them.</span></div>
   </section>
 
   <!-- 7 competitors -->
@@ -478,6 +488,27 @@
         <div class="src">Planning case: our targets, not yet measured. Conservative case: published figures where they exist, our estimates elsewhere. Published: 25.2&nbsp;%, 88.1&nbsp;%, 80.6&nbsp;% (Bailyn, 2025; ChartMogul, 2023). All other rates are our estimates.</div>
       </div>
     </div>
+  </section>
+
+  <!-- 13b revenue (19 Oct, Adam: what the costs bring) -->
+  <section class="slide">
+    <div class="d-lab st" data-s="0">Revenue</div>
+    <h2 class="d-say long st" data-s="0">What it brings: about €3.1 m turnover in Year 3 in our planning case, €0.32 m in the conservative one. Both break even in 2027.</h2>
+    <div class="d-rev">
+      <div class="glass st" data-s="0"><div class="k2">Planning case: our targets</div><div class="big">€3,132,529</div><div class="t">turnover in Year 3</div>
+        <div class="r"><span>Turnover, Year 1</span><span>€585,618</span></div>
+        <div class="r"><span>Result after tax, Years 1–3</span><span>€2,562,401</span></div>
+        <div class="r"><span>Break-even</span><span>Oct 2027</span></div>
+        <div class="r"><span>Gyms under contract, Jan 2028 to 2031</span><span>44, 167, 264, 348</span></div>
+      </div>
+      <div class="glass st" data-s="0"><div class="k2">Conservative case: published rates where they exist</div><div class="big">€323,870</div><div class="t">turnover in Year 3</div>
+        <div class="r"><span>Turnover, Year 1</span><span>€140,246</span></div>
+        <div class="r"><span>Result after tax, Years 1–3</span><span>€176,497</span></div>
+        <div class="r"><span>Break-even</span><span>Nov 2027</span></div>
+        <div class="r"><span>Gyms under contract, Jan 2028 to 2031</span><span>10, 18, 26, 26</span></div>
+      </div>
+    </div>
+    <div class="d-revsrc st" data-s="0">Computed, net of VAT; Year 1 is February 2027 to January 2028 (Table 10.11). Break-even: the month from which the result over the last twelve months stays at or above zero. No gym has signed or paid yet.</div>
   </section>
 
   <!-- 14 feasibility and risks -->
