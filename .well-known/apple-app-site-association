@@ -17,6 +17,10 @@
           {
             "/": "/staff",
             "comment": "a team link that turns on staff mode in the app"
+          },
+          {
+            "/": "/join",
+            "comment": "a trainer's invite code opens Your trainer in the app with the code filled"
           }
         ]
       }
