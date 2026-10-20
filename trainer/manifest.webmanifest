@@ -1,6 +1,6 @@
 {
-  "name": "Trainer Hub",
-  "short_name": "Trainer Hub",
+  "name": "Sedulo for trainers",
+  "short_name": "Sedulo",
   "description": "Your clients' workouts as the sensors counted them, and the plans you send to their app.",
   "start_url": "./#/clients",
   "scope": "./",
