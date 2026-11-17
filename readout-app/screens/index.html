@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="readout, the app: today, the set, rest, finish, score and progress. A concept, not a product yet.">
+<meta name="theme-color" content="#E7E7E5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="readout">
+<title>readout · app</title>
+<style>
+  :root {
+    --page: #E7E7E5;
+    --ink: #151617;
+    --mute: #76787B;
+    --t: max(16px, env(safe-area-inset-top));
+    --b: calc(84px + env(safe-area-inset-bottom));
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; overscroll-behavior: none; }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font: 13px/1.2 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .track {
+    display: flex;
+    height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  @supports (height: 100svh) { .track { height: 100svh; } }
+  .track::-webkit-scrollbar { display: none; }
+  .slide {
+    flex: 0 0 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--t) 16px var(--b);
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+  .slide img {
+    display: block;
+    height: min(calc(100vh - var(--t) - var(--b)), calc((100vw - 32px) * 2.1679), 920px);
+    width: auto;
+    aspect-ratio: 393 / 852;
+    border-radius: 14% / 6.46%;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .06), 0 30px 70px -28px rgba(0, 0, 0, .35);
+    background: #F6F6F5;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    pointer-events: none;
+  }
+  @supports (height: 100svh) {
+    .slide img { height: min(calc(100svh - var(--t) - var(--b)), calc((100vw - 32px) * 2.1679), 920px); }
+  }
+  .bar {
+    position: fixed;
+    left: 50%;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .72);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    backdrop-filter: blur(18px) saturate(1.4);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .06), 0 10px 30px -12px rgba(0, 0, 0, .25);
+  }
+  .bar button {
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background-color .15s ease, opacity .15s ease, transform .1s ease;
+  }
+  .bar button:active { transform: scale(.94); }
+  .bar button:disabled { opacity: .28; cursor: default; }
+  .bar button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  @media (hover: hover) { .bar button:not(:disabled):hover { background: rgba(0, 0, 0, .06); } }
+  .bar svg { width: 18px; height: 18px; }
+  .lab { min-width: 118px; text-align: center; white-space: nowrap; }
+  .lab b { font-weight: 600; }
+  .lab i { font-style: normal; color: var(--mute); font-variant-numeric: tabular-nums; margin-left: 6px; }
+  @media (prefers-reduced-motion: reduce) { .bar button { transition: none; } }
+</style>
+</head>
+<body>
+<main class="track" aria-roledescription="carousel" aria-label="readout, the app">
+  <section class="slide" data-name="today" data-label="today" aria-label="1 of 6, today">
+    <img src="img/home.jpg" decoding="async" width="1179" height="2556" alt="Today: the readout wordmark over the wave of your last set, Go up. Workout 78, week 84, rest 62. Next: leg press, 3 by 10 at 85 kg, with a Start leg press button.">
+  </section>
+  <section class="slide" data-name="set" data-label="the set" aria-label="2 of 6, the set">
+    <img src="img/live.jpg" decoding="async" width="1179" height="2556" alt="The set: leg press 85 kg, set 2 of 3. 8 of 10, counted by the box, with the wave of the weight stack. Last time 10 reps, rest before 1 minute 42.">
+  </section>
+  <section class="slide" data-name="rest" data-label="rest" aria-label="3 of 6, rest">
+    <img src="img/rest.jpg" decoding="async" width="1179" height="2556" alt="Rest: 1:12 of 2:00 on the scale. Next: set 3, aim for 10.">
+  </section>
+  <section class="slide" data-name="finish" data-label="finish" aria-label="4 of 6, finish">
+    <img src="img/finish.jpg" decoding="async" width="1179" height="2556" alt="Finish: workout score 78, best leg day in 4 weeks. Well done, Emma. 12 sets counted, plan followed, and a Done button.">
+  </section>
+  <section class="slide" data-name="score" data-label="score" aria-label="5 of 6, score">
+    <img src="img/score.jpg" decoding="async" width="1179" height="2556" alt="Score 78, best in 4 weeks. What made it: progress plus 4 percent, effort 12 sets and 141 reps, rest 3:24 on average against a plan of 2:00, consistency 3 of 4 this week. Next time: leg press at 85 kg.">
+  </section>
+  <section class="slide" data-name="progress" data-label="progress" aria-label="6 of 6, progress">
+    <img src="img/progress.jpg" decoding="async" width="1179" height="2556" alt="Progress: 8,650 kg lifted this week, your average 7,400 kg. Day by day, plus 3,950 kg against last week.">
+  </section>
+</main>
+<nav class="bar" aria-label="screens">
+  <button class="prev" type="button" aria-label="previous screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <span class="lab" aria-live="polite"><b></b><i></i></span>
+  <button class="next" type="button" aria-label="next screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+</nav>
+<script>
+  (function () {
+    var track = document.querySelector('.track');
+    var slides = Array.prototype.slice.call(track.children);
+    var lab = document.querySelector('.lab b');
+    var num = document.querySelector('.lab i');
+    var prev = document.querySelector('.prev');
+    var next = document.querySelector('.next');
+    var names = slides.map(function (s) { return s.dataset.name; });
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var cur = -1;
+    var queued = false;
+
+    function go(i, smooth) {
+      i = Math.max(0, Math.min(slides.length - 1, i));
+      track.scrollTo({ left: i * track.clientWidth, behavior: smooth === false || reduce ? 'auto' : 'smooth' });
+    }
+
+    function sync() {
+      queued = false;
+      var i = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+      i = Math.max(0, Math.min(slides.length - 1, i));
+      if (i === cur) return;
+      cur = i;
+      lab.textContent = slides[i].dataset.label;
+      num.textContent = (i + 1) + ' / ' + slides.length;
+      prev.disabled = i === 0;
+      next.disabled = i === slides.length - 1;
+      try { history.replaceState(null, '', '#' + names[i]); } catch (e) {}
+    }
+
+    track.addEventListener('scroll', function () {
+      if (!queued) { queued = true; requestAnimationFrame(sync); }
+    }, { passive: true });
+    prev.addEventListener('click', function () { go(cur - 1); });
+    next.addEventListener('click', function () { go(cur + 1); });
+    track.addEventListener('click', function (e) {
+      var x = e.clientX / window.innerWidth;
+      if (x > 0.66) go(cur + 1);
+      else if (x < 0.34) go(cur - 1);
+    });
+    window.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); }
+    });
+    window.addEventListener('resize', function () { go(cur < 0 ? 0 : cur, false); });
+
+    var start = names.indexOf(location.hash.slice(1));
+    if (start > 0) go(start, false);
+    sync();
+  })();
+</script>
+</body>
+</html>
