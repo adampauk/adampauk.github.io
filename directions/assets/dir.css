@@ -154,5 +154,52 @@ body{background:var(--bg);color:var(--ink);font:16.5px/1.55 var(--tx)}
 .t-at.t-hold .hold h1{text-transform:lowercase}
 @media (max-width:900px){.two,.open,.kitgrid,.harry,.cards,.mails{grid-template-columns:1fr}.gifs{grid-template-columns:repeat(2,minmax(0,1fr))}.tiles6{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:520px){.phones{grid-template-columns:1fr 1fr}.say{grid-template-columns:1fr}.rows > div{grid-template-columns:1fr;gap:2px}}
+/* visuals instead of words */
+.bigshot,.b-dev,.mimg{position:relative;overflow:hidden;background:#141414}
+.bigshot{border-radius:18px;aspect-ratio:16/8}
+.bigshot img,.b-dev img,.mimg img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05)}
+.subs2{position:absolute;left:5%;right:5%;bottom:8%;text-align:center;font:700 clamp(1.1rem,2.6vw,2.2rem)/1.5 Arial,Helvetica,sans-serif;color:#fff;text-transform:lowercase}
+.subs2 span{background:#000;padding:.05em .45em .1em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.subs2 span.r{background:#D7201B}
+.subs2.sm{font-size:1rem}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:26px 0 0}
+.three p{margin:0;font:400 clamp(1.4rem,2.4vw,2rem)/1.15 var(--hd);text-transform:lowercase}
+.three em{font-style:normal;color:var(--acc)}
+.board{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
+.board > *{min-width:0;border-radius:16px}
+.b-wm{grid-column:span 3;background:radial-gradient(120% 130% at 32% 12%,#C21A1B 0%,#8C0D10 50%,#350405 100%);display:grid;place-items:center;min-height:240px}
+.b-wm span{font:italic 400 clamp(3rem,7vw,5.6rem)/1 var(--hd);color:#fff}
+.b-sw{grid-column:span 3;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.b-sw div{border-radius:14px;padding:12px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.b-sw b{font:400 1.4rem/1 var(--hd)}.b-sw small{font-size:.74rem;opacity:.75}
+.b-type{grid-column:span 2;background:var(--card);padding:22px}
+.b-dev{grid-column:span 4;aspect-ratio:16/9}
+.b-say{grid-column:span 2;background:var(--card);padding:18px;display:grid;gap:8px;align-content:start}
+.b-say p{margin:0;font:400 1.25rem/1.2 var(--hd);text-transform:lowercase}
+.b-say .ok::before{content:"say ";font:600 .7rem/1 system-ui;color:var(--acc);text-transform:uppercase;letter-spacing:.06em}
+.b-say .no{color:var(--mute);text-decoration:line-through}
+.b-pics{grid-column:span 4;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.b-pics figure{margin:0}.b-pics img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:12px;filter:grayscale(1)}
+.b-pics figure:nth-child(2) img{filter:none}
+.b-pics figcaption{font-size:.84rem;color:var(--mute);margin-top:6px;text-transform:lowercase}
+.plans3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.plans3 .plan{grid-template-columns:1fr}
+.mails2{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:start}
+.em2{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 24px 50px -28px rgba(0,0,0,.4),0 0 0 1px var(--rule)}
+.inbox{display:grid;gap:2px;padding:12px 16px;background:#F4F3F0;font-size:.82rem;border-bottom:1px solid var(--rule)}
+.inbox b{font-size:.86rem}.inbox .s{font-weight:600;color:#0A0A0A}.inbox .pv{color:var(--mute)}
+.mhead{background:#D7201B;color:#fff;text-align:center;font:italic 400 1.5rem/1 var(--hd);padding:12px}
+.mimg{aspect-ratio:4/3}
+.mcopy{padding:18px 18px 20px;text-align:center}
+.mcopy h4{margin:0;font:400 1.9rem/1 var(--hd);text-transform:lowercase}
+.mcopy p{margin:10px 0 0;font-size:.92rem;color:#2A2826;text-transform:lowercase}
+.mbtn{display:inline-block;margin-top:14px;background:#D7201B;color:#fff;border-radius:999px;padding:10px 18px;font-weight:600;font-size:.86rem;text-transform:lowercase}
+.mfoot{background:#000;color:#fff;font-size:.72rem;padding:10px 16px;text-align:center;opacity:.95;text-transform:lowercase}
+/* readout: the visuals stay, the long explanations go */
+.t-ro #kit .ro-kr p:not([class]),.t-ro #kit .ro-rules,.t-ro #social .ro-grid3,.t-ro #social .ro-rows,.t-ro #social .ro-mk ~ *{display:none}
+.t-ro #emails .ro-mails{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;max-width:none}
+.t-ro #emails .ro-em{border-radius:28px;box-shadow:0 30px 60px -34px rgba(0,0,0,.35),0 0 0 1px rgba(0,0,0,.04)}
+.t-ro #emails .ro-meta{background:#F1F1F0}
+@media (max-width:900px){.board > *{grid-column:1 / -1}.three,.plans3{grid-template-columns:1fr}.plans3 .plan{grid-template-columns:repeat(2,minmax(0,1fr))}.mails2{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:82%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}.em2{scroll-snap-align:start}.bigshot{aspect-ratio:4/3}}
 :focus-visible{outline:2px solid var(--acc);outline-offset:3px}
 .t-at .tb :focus-visible{outline-color:#fff}
