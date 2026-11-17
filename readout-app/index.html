@@ -235,7 +235,7 @@ svg.wave .wglow{animation:breathe 4.5s ease-in-out infinite}
 .lastset{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding:0 6px}
 .cap{font-family:var(--m);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;padding:6px 10px;border-radius:999px;border:1px solid var(--chipline);background:#fff}
 .boxart{position:relative;display:grid;place-items:center;margin-top:clamp(10px,4vh,40px);height:clamp(170px,30vh,250px)}
-.boxart img{position:relative;width:min(80%,310px);height:auto;animation:bob 3.6s ease-in-out infinite;filter:drop-shadow(0 30px 30px rgba(20,22,40,.18))}
+.boxart img{position:relative;width:min(88%,340px);height:auto;mix-blend-mode:multiply}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1deg)}}
 .ring{position:absolute;left:50%;top:50%;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;border:1.5px solid rgba(39,71,214,.35);animation:ring 2.4s ease-out infinite;opacity:0}
 .ring.b{animation-delay:.8s}.ring.c{animation-delay:1.6s}
@@ -268,7 +268,7 @@ svg.wave .wglow{animation:breathe 4.5s ease-in-out infinite}
     <div class="sbar" aria-hidden="true"><span>9:41</span><span class="ic"><svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="#151617"/><rect x="5" y="5.5" width="3" height="6.5" rx="1" fill="#151617"/><rect x="10" y="3" width="3" height="9" rx="1" fill="#151617"/><rect x="15" y="0" width="3" height="12" rx="1" fill="#151617"/></svg><svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 11.5 L5.6 9 a3.4 3.4 0 0 1 4.8 0 Z" fill="#151617"/><path d="M3.3 6.7 a6.6 6.6 0 0 1 9.4 0 l-1.5 1.5 a4.5 4.5 0 0 0 -6.4 0 Z" fill="#151617"/><path d="M1 4.4 a9.9 9.9 0 0 1 14 0 l-1.5 1.5 a7.8 7.8 0 0 0 -11 0 Z" fill="#151617"/></svg><svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.5" fill="none" stroke="#151617" opacity=".4"/><rect x="2" y="2" width="18" height="9" rx="2" fill="#151617"/><rect x="24.5" y="4.5" width="1.6" height="4" rx=".8" fill="#151617" opacity=".4"/></svg></span></div>
     <i class="homeind" aria-hidden="true"></i>
   </div>
-  <p class="caption">readout · concept app · sample data · the box is simulated</p>
+  <p class="caption">readout, a concept app with sample data. The sensor is simulated.</p>
 </div>
 <script>
 (function () {
@@ -405,7 +405,7 @@ function status(c, k) {
 function named(w) {
   const d = DAYS[w.type].s;
   if (w.bestDay) return 'Best ' + d + ' in 4 weeks';
-  if (w.bests.length) return 'New best · ' + MX[w.bests[0]].n;
+  if (w.bests.length) return 'New best on ' + MX[w.bests[0]].n.toLowerCase();
   if (w.c.prev && w.sc > w.c.prev.sc) return '+' + (w.sc - w.c.prev.sc) + ' vs last ' + d;
   return w.c.n + ' of ' + w.goal + ' this week';
 }
@@ -510,7 +510,7 @@ function todayHTML() {
   const nd = DAYS[S.next], first = nd.ex[0], p = S.plan[first], lastFirst = lastEx(first, Infinity);
   const delta = lastFirst ? p.w - lastFirst.w : 0;
   const tag = delta > 0 ? `<span class="st good">Up ${wt(delta)}</span>` : `<span class="st inkc">Same weight</span>`;
-  const label = done ? 'Today · your last set, as the box saw it' : DAYS[ref.type].n + ' · your last set, as the box saw it';
+  const label = done ? 'Today, your last set, as the sensor saw it' : DAYS[ref.type].n + ', your last set, as the sensor saw it';
   let html = `<div class="wm" aria-label="readout"><b>readout</b><span>${Array.from({ length: 11 }, (_, i) => `<i class="${i === 8 ? 'r' : ''}"></i>`).join('')}</span></div>
   <div class="hero"><div class="glow"></div>${waveSVG({ amps: setAmps(main), draw: true })}</div>
   <div class="say"><p class="lab">${esc(label)}</p><h1>${esc(advice(ref))}</h1></div>
@@ -519,8 +519,8 @@ function todayHTML() {
     <button type="button" data-act="stat" data-k="week" aria-label="week score"><p class="lab">Week</p><p class="n num"><span data-count="${weekSc}">${weekSc}</span><i class="tri ${tri(weekSc, weekPrev)}"></i></p></button>
     <button type="button" data-act="stat" data-k="rest" aria-label="rest score"><p class="lab">Rest</p><p class="n num"><span data-count="${restSc}">${restSc}</span><i class="tri ${tri(restSc, restAvg4)}"></i></p></button>
   </div><div class="stack">`;
-  if (done) html += `<button type="button" class="card donec" data-act="score" data-id="${done.id}"><span class="dot">${done.sc}</span><span style="flex:1;min-width:0;text-align:left"><span class="lab">Done today</span><span style="display:block;font-size:17px;font-weight:500;letter-spacing:-.02em;margin-top:4px">${esc(DAYS[done.type].n)} · ${esc(named(done))}</span></span>${ICON.right}</button>`;
-  html += `<div class="card nextc"><div class="hd"><p class="lab">${done ? 'Next time' : 'Next'}</p>${tag}</div><h2>${esc(MX[first].n)}</h2><p class="val">${p.sets} × ${p.t} · ${wt(p.w)}</p>
+  if (done) html += `<button type="button" class="card donec" data-act="score" data-id="${done.id}"><span class="dot">${done.sc}</span><span style="flex:1;min-width:0;text-align:left"><span class="lab">Done today</span><span style="display:block;font-size:17px;font-weight:500;letter-spacing:-.02em;margin-top:4px">${esc(DAYS[done.type].n)}, ${esc(named(done))}</span></span>${ICON.right}</button>`;
+  html += `<div class="card nextc"><div class="hd"><p class="lab">${done ? 'Next time' : 'Next'}</p>${tag}</div><h2>${esc(MX[first].n)}</h2><p class="val">${p.sets} × ${p.t}, ${wt(p.w)}</p>
     <div style="margin-top:16px"><button type="button" class="btn" data-act="start" data-day="${S.next}">Start ${esc(MX[first].n.toLowerCase())}</button></div>
     <button type="button" class="then" data-act="plan" data-day="${S.next}">then ${nd.ex.slice(1).map(k => MX[k].n.toLowerCase()).join(', ')} ›</button></div>`;
   const items = nbas();
@@ -537,7 +537,7 @@ function nbas() {
     if (e && hitAll(e) && p.w === e.w) out.push({ c: '', icon: ICON.up, t: 'One more to go up on ' + MX[k].n.toLowerCase() + '.', d: e.t + ' in every set at ' + wt(e.w) + ' last time. Do it again and it goes up to ' + wt(e.w + MX[k].step) + '.' });
   });
   const L = lastW();
-  if (out.length < 2 && L.bests.length) out.push({ c: 'a', icon: ICON.star, t: 'New best on ' + MX[L.bests[0]].n.toLowerCase() + '.', d: 'Your heaviest set so far, counted by the box on ' + dname(L.date) + '.' });
+  if (out.length < 2 && L.bests.length) out.push({ c: 'a', icon: ICON.star, t: 'New best on ' + MX[L.bests[0]].n.toLowerCase() + '.', d: 'Your heaviest set so far, counted by the sensor on ' + dname(L.date) + '.' });
   return out.slice(0, 2);
 }
 
@@ -558,14 +558,14 @@ function progressHTML() {
   } else chart = weeksSVG(weeks, avg);
   const sc = S.hist.slice(-8);
   const best = Object.keys(MX).map(k => { let b = null; S.hist.forEach(w => w.ex.forEach(e => { if (e.k === k) e.sets.forEach(s => { const v = e1(e.w, s.r); if (!b || v > b.v + .01) b = { v, kg: e.w, r: s.r, date: w.date }; }); })); return b && { k, ...b }; }).filter(Boolean);
-  return `<div class="head"><p class="lab">Last 7 days · weight lifted</p><p class="big2 num"><span data-count="${Math.round(S.unit === 'kg' ? total : total * LB)}" data-fmt="big">${big(total)}</span><small>${U()}</small></p>
+  return `<div class="head"><p class="lab">Last 7 days, weight lifted</p><p class="big2 num"><span data-count="${Math.round(S.unit === 'kg' ? total : total * LB)}" data-fmt="big">${big(total)}</span><small>${U()}</small></p>
   <div style="margin-top:26px">${scaleHTML({ v: total, max: mx, g: G.prog, labels: ['0', kk(mx / 2), kk(mx)] })}</div><p class="lab" style="margin-top:4px">Your average: ${big(avg)} ${U()}</p></div>
   <div class="stack" style="margin-top:22px">
   <div class="card cardp"><div class="ch"><p class="ttl">Day by day <span class="chip" style="margin-left:6px;vertical-align:2px">sample</span></p><div class="seg" role="group" aria-label="period"><button type="button" class="${seg ? 'on' : ''}" data-act="pmode" data-v="7d">7 days</button><button type="button" class="${seg ? '' : 'on'}" data-act="pmode" data-v="4w">4 weeks</button></div></div>
   <p class="delta ${seg ? (d >= 0 ? 'good' : 'warn') : (total >= avg ? 'good' : 'warn')}">${(seg ? d >= 0 : total >= avg) ? ICON.arrowUp : ICON.arrowDn}${seg ? (d >= 0 ? '+' : '−') + big(Math.abs(d)) + ' ' + U() + ' <span style="color:var(--mute)">vs the 7 days before</span>' : (total >= avg ? '+' : '−') + big(Math.abs(total - avg)) + ' ' + U() + ' <span style="color:var(--mute)">vs your average</span>'}</p>
   <div class="chart">${chart}</div><div class="legend">${seg ? '<span><i style="background:var(--amber)"></i>Last 7 days</span><span><i style="background:#B9BBBE"></i>7 days before</span>' : '<span><i style="background:var(--amber)"></i>Week</span><span><i style="background:#B9BBBE"></i>Average</span>'}</div></div>
   <div class="card cardp"><div class="ch"><p class="ttl">Workout score</p><span class="lab">last ${sc.length}</span></div><div class="bars">${sc.map((w, i) => `<button type="button" class="${i === sc.length - 1 ? 'on' : ''}" data-act="score" data-id="${w.id}" aria-label="${esc(DAYS[w.type].n + ' ' + dname(w.date) + ', score ' + w.sc)}"><b style="height:${Math.max(26, (w.sc - 40) / 60 * 100)}%">${w.sc}</b><span>${esc(dname(w.date) === 'today' ? 'today' : WD[new Date(w.date).getDay()])}</span></button>`).join('')}</div></div>
-  <div class="card cardp"><div class="ch"><p class="ttl">Workouts</p><span class="lab">${S.hist.length} in 4 weeks</span></div>${[...S.hist].reverse().slice(0, 6).map(w => `<button type="button" class="wkrow" data-act="score" data-id="${w.id}"><span style="text-align:left"><span style="display:block;font-size:15px;font-weight:500">${esc(DAYS[w.type].n)}</span><span class="lab" style="display:block;margin-top:3px">${esc(dname(w.date))} · ${big(vol(w))} ${U()}</span></span><span style="display:flex;align-items:center;gap:10px"><span class="sc num">${w.sc}</span>${ICON.right}</span></button>`).join('')}</div>
+  <div class="card cardp"><div class="ch"><p class="ttl">Workouts</p><span class="lab">${S.hist.length} in 4 weeks</span></div>${[...S.hist].reverse().slice(0, 6).map(w => `<button type="button" class="wkrow" data-act="score" data-id="${w.id}"><span style="text-align:left"><span style="display:block;font-size:15px;font-weight:500">${esc(DAYS[w.type].n)}</span><span class="lab" style="display:block;margin-top:3px">${esc(dname(w.date))}, ${big(vol(w))} ${U()}</span></span><span style="display:flex;align-items:center;gap:10px"><span class="sc num">${w.sc}</span>${ICON.right}</span></button>`).join('')}</div>
   <div class="card cardp"><div class="ch"><p class="ttl">Bests</p><span class="lab">heaviest set, counted</span></div>${best.map(b => `<div class="wkrow"><span style="text-align:left"><span style="display:block;font-size:15px;font-weight:500">${esc(MX[b.k].n)}</span><span class="lab" style="display:block;margin-top:3px">${esc(dname(b.date))}</span></span><span class="val" style="margin:0">${b.r} × ${wt(b.kg)}${daysAgo(b.date) === 0 ? ' <span class="good">new</span>' : ''}</span></div>`).join('')}</div>
   </div>`;
 }
@@ -597,34 +597,34 @@ function scoreHTML(w) {
   const c = w.c, d = DAYS[w.type];
   const rows = [
     ['progress', 'Progress', (c.pct >= 0 ? '+' : '−') + Math.abs(Math.round(c.pct)) + '% vs last ' + d.s, c.prev ? big(c.v) + ' ' + S.unit + ' lifted against ' + big(c.pv) + ' ' + S.unit + ' on ' + dname(c.prev.date) + '. ' + (c.pct >= 2 ? 'More weight moved for the same plan.' : c.pct >= -2 ? 'About the same work as last time.' : 'Less work than last time; fewer reps or a skipped machine.') : 'Your first ' + d.s + ' here, so it sets the baseline.'],
-    ['effort', 'Effort', setsDone(w) + ' sets · ' + c.rp + ' reps', c.rp + ' of ' + c.pl + ' planned reps in ' + setsDone(w) + ' of ' + plannedSets(w) + ' sets. The box counted every one; nothing here was typed in.'],
-    ['rest', 'Rest', mmss(c.ra) + ' avg · plan ' + mmss(w.restPlan), c.q > 1.2 ? 'Long rests cost points without making the sets better. Try to start the next set within ' + mmss(w.restPlan * 1.2) + '.' : c.q < .6 ? 'Short rests leave less in the tank for the next set. The plan is ' + mmss(w.restPlan) + '.' : 'Your rests stayed close to the plan of ' + mmss(w.restPlan) + '.'],
+    ['effort', 'Effort', setsDone(w) + ' sets, ' + c.rp + ' reps', c.rp + ' of ' + c.pl + ' planned reps in ' + setsDone(w) + ' of ' + plannedSets(w) + ' sets. The sensor counted every one; nothing here was typed in.'],
+    ['rest', 'Rest', mmss(c.ra) + ' avg, plan ' + mmss(w.restPlan), c.q > 1.2 ? 'Long rests cost points without making the sets better. Try to start the next set within ' + mmss(w.restPlan * 1.2) + '.' : c.q < .6 ? 'Short rests leave less in the tank for the next set. The plan is ' + mmss(w.restPlan) + '.' : 'Your rests stayed close to the plan of ' + mmss(w.restPlan) + '.'],
     ['consistency', 'Consistency', c.n + ' of ' + w.goal + ' this week', c.n + ' workouts in the 7 days to this one. Your goal is ' + w.goal + ' a week.']
   ];
   const mk = w.ex[0].k, upK = w.ups.includes(mk) ? mk : (w.firsts.includes(mk) ? null : w.ups[0]);
   const nextE = upK ? w.ex.find(e => e.k === upK) : w.ex[0];
   const nextT = upK ? [MX[nextE.k].n + ' at ' + wt(nextE.w + MX[nextE.k].step), nextE.t + ' at ' + wt(nextE.w) + ' in every set, twice in a row.', 'Up'] : w.firsts.includes(mk) ? [MX[nextE.k].n + ' at ' + wt(nextE.w), 'First time at ' + wt(nextE.w) + ': ' + repList(nextE) + '. Stay until every set hits ' + nextE.t + '.', 'Hold'] : ['Same weights', 'Hit every target once more and they go up.', 'Set'];
-  return `<div class="head" style="margin-top:8px"><p class="lab">Workout score · ${esc(d.n)} · ${esc(dname(w.date))}</p><div style="display:flex;align-items:baseline;gap:12px;margin-top:4px;flex-wrap:wrap"><p class="num" style="font-size:72px;font-weight:400;letter-spacing:-.05em;line-height:1"><span data-count="${w.sc}">${w.sc}</span></p><span class="pill" style="margin-bottom:10px">${esc(named(w))}</span></div><div style="margin-top:26px">${scaleHTML({ v: w.sc })}</div></div>
+  return `<div class="head" style="margin-top:8px"><p class="lab">Workout score, ${esc(d.n)}, ${esc(dname(w.date))}</p><div style="display:flex;align-items:baseline;gap:12px;margin-top:4px;flex-wrap:wrap"><p class="num" style="font-size:72px;font-weight:400;letter-spacing:-.05em;line-height:1"><span data-count="${w.sc}">${w.sc}</span></p><span class="pill" style="margin-bottom:10px">${esc(named(w))}</span></div><div style="margin-top:26px">${scaleHTML({ v: w.sc })}</div></div>
   <div class="stack" style="margin-top:20px">
   <div class="card" style="padding:18px 18px 4px"><div class="ch"><p class="ttl">What made it</p><button type="button" class="ib" data-act="how" aria-label="how the score works">i</button></div><div class="rows">${rows.map(([k, l, v, more]) => { const [sw, sc] = status(c, k); return `<button type="button" class="r" data-act="row" aria-expanded="false"><span style="text-align:left"><span class="lab" style="display:block">${l}</span><span class="val" style="display:block">${esc(v)}</span></span><span class="st ${sc}">${sw}${ICON.chev}</span></button><div class="x"><div><p>${esc(more)}</p></div></div>`; }).join('')}</div></div>
   <div class="card cardp"><div style="display:flex;justify-content:space-between;align-items:baseline"><p class="lab">Next time</p><span class="st ${nextT[2] === 'Hold' ? 'inkc' : 'good'}">${nextT[2]}</span></div><p style="font-size:20px;font-weight:500;letter-spacing:-.02em;margin-top:6px">${esc(nextT[0])}</p><p style="font-size:13.5px;color:var(--mute);margin-top:4px">${esc(nextT[1])}</p></div>
-  <div class="card cardp"><div class="ch"><p class="ttl">The sets</p><span class="lab">${Math.round(dur(w) / 60)} min · ${big(vol(w))} ${U()}</span></div>${w.ex.map(e => `<div class="ex"><div class="t"><span style="font-size:15px;font-weight:500">${esc(MX[e.k].n)}</span><span class="val" style="margin:0">${wt(e.w)}${w.bests.includes(e.k) ? ' · <span class="good">best</span>' : ''}</span></div><div class="reps">${e.sets.map(s => `<span><i class="${s.r < e.t ? 'short' : ''}" style="height:${Math.max(6, s.r / e.t * 34)}px"></i>${s.r}</span>`).join('')}<span class="lab" style="margin-left:auto;align-self:center">rest ${e.sets.slice(1).map(s => mmss(s.rest)).join(' · ') || '—'}</span></div></div>`).join('')}</div>
+  <div class="card cardp"><div class="ch"><p class="ttl">The sets</p><span class="lab">${Math.round(dur(w) / 60)} min, ${big(vol(w))} ${U()}</span></div>${w.ex.map(e => `<div class="ex"><div class="t"><span style="font-size:15px;font-weight:500">${esc(MX[e.k].n)}</span><span class="val" style="margin:0">${wt(e.w)}${w.bests.includes(e.k) ? ', <span class="good">best</span>' : ''}</span></div><div class="reps">${e.sets.map(s => `<span><i class="${s.r < e.t ? 'short' : ''}" style="height:${Math.max(6, s.r / e.t * 34)}px"></i>${s.r}</span>`).join('')}<span class="lab" style="margin-left:auto;align-self:center">rest ${e.sets.slice(1).map(s => mmss(s.rest)).join(', ') || '—'}</span></div></div>`).join('')}</div>
   </div>`;
 }
 
 // ------------------------------------------------------------------ you
 function youHTML() {
   const segs = (act, cur, opts) => `<div class="seg" role="group">${opts.map(([v, l]) => `<button type="button" class="${String(cur) === String(v) ? 'on' : ''}" data-act="${act}" data-v="${v}">${l}</button>`).join('')}</div>`;
-  return `<div class="head" style="display:flex;align-items:center;gap:16px;margin-top:14px"><div class="avatar">${esc(S.name[0])}</div><div><p style="font-size:28px;font-weight:500;letter-spacing:-.03em">${esc(S.name)}</p><p class="lab" style="margin-top:4px">Sample member · ${S.hist.length} workouts in 4 weeks</p></div></div>
+  return `<div class="head" style="display:flex;align-items:center;gap:16px;margin-top:14px"><div class="avatar">${esc(S.name[0])}</div><div><p style="font-size:28px;font-weight:500;letter-spacing:-.03em">${esc(S.name)}</p><p class="lab" style="margin-top:4px">Sample member, ${S.hist.length} workouts in 4 weeks</p></div></div>
   <div class="stack" style="margin-top:24px">
   <div class="card cardp"><p class="ttl" style="padding-bottom:6px">Your plan</p>
-    ${['legs', 'upper'].map(t => `<button type="button" class="setrow" style="width:100%" data-act="plan" data-day="${t}"><span style="text-align:left"><span style="display:block;font-size:15px;font-weight:500">${DAYS[t].n}</span><span class="lab" style="display:block;margin-top:3px">${DAYS[t].ex.map(k => MX[k].n).join(' · ')}</span></span>${ICON.right}</button>`).join('')}
+    ${['legs', 'upper'].map(t => `<button type="button" class="setrow" style="width:100%" data-act="plan" data-day="${t}"><span style="text-align:left"><span style="display:block;font-size:15px;font-weight:500">${DAYS[t].n}</span><span class="lab" style="display:block;margin-top:3px">${DAYS[t].ex.map(k => MX[k].n).join(', ')}</span></span>${ICON.right}</button>`).join('')}
     <div class="setrow"><span><span style="display:block;font-size:15px;font-weight:500">Workouts a week</span><span class="lab" style="display:block;margin-top:3px">sets the consistency goal</span></span><span class="stepper"><button type="button" data-act="goal" data-v="-1" aria-label="fewer">−</button><b class="num">${S.goal}</b><button type="button" data-act="goal" data-v="1" aria-label="more">+</button></span></div></div>
   <div class="card cardp"><div class="setrow" style="border:0;padding-top:0"><span style="font-size:15px;font-weight:500">Rest between sets</span></div>${segs('restplan', S.rest, [[90, '1:30'], [120, '2:00'], [150, '2:30'], [180, '3:00']])}
     <div class="setrow" style="margin-top:12px"><span style="font-size:15px;font-weight:500">Units</span>${segs('unit', S.unit, [['kg', 'kg'], ['lb', 'lb']])}</div>
     <div class="setrow"><span><span style="display:block;font-size:15px;font-weight:500">Motion</span><span class="lab" style="display:block;margin-top:3px">its own switch, so the demo moves</span></span><button type="button" class="sw" role="switch" aria-checked="${S.motion}" aria-label="motion" data-act="motion"></button></div></div>
-  <div class="card cardp"><p class="ttl">The box</p><p class="note" style="margin-top:8px">readout counts with a box on each machine’s weight stack: tap in with your phone, lift, and it counts every rep and times every rest. In this concept the box is simulated. Reps come in on their own, rests run ${REST_X}× faster, and Emma’s four weeks are sample data.</p><div style="margin-top:16px"><button type="button" class="btn light" data-act="reset">Reset sample data</button></div></div>
-  <p class="lab" style="text-align:center;margin:10px 0 0">readout · concept · not a product yet</p>
+  <div class="card cardp"><p class="ttl">The sensor</p><p class="note" style="margin-top:8px">readout counts with a sensor on each machine’s weight stack: tap in with your phone, lift, and it counts every rep and times every rest. In this concept the sensor is simulated. Reps come in on their own, rests run ${REST_X}× faster, and Emma’s four weeks are sample data.</p><div style="margin-top:16px"><button type="button" class="btn light" data-act="reset">Reset sample data</button></div></div>
+  <p class="lab" style="text-align:center;margin:10px 0 0">readout, a concept, not a product yet</p>
   </div>`;
 }
 
@@ -689,20 +689,20 @@ function closeSheet(now) {
 function statSheet(k) {
   const L = lastW();
   if (k === 'workout') {
-    sheet(`<h3>Workout score</h3><p class="lab sub">${esc(DAYS[L.type].n)} · ${esc(dname(L.date))}</p><p class="num" style="text-align:center;font-size:66px;letter-spacing:-.05em;margin-top:14px">${L.sc}</p><div style="margin-top:22px">${scaleHTML({ v: L.sc })}</div><p class="p">Your last workout, out of 100. It adds up progress against your last ${DAYS[L.type].s} (30 %), effort (30 %), rest against your plan (20 %) and consistency (20 %).</p><div class="acts"><button type="button" class="btn" data-act="score" data-id="${L.id}" data-from="sheet">See what made it</button></div>`);
+    sheet(`<h3>Workout score</h3><p class="lab sub">${esc(DAYS[L.type].n)}, ${esc(dname(L.date))}</p><p class="num" style="text-align:center;font-size:66px;letter-spacing:-.05em;margin-top:14px">${L.sc}</p><div style="margin-top:22px">${scaleHTML({ v: L.sc })}</div><p class="p">Your last workout, out of 100. It adds up progress against your last ${DAYS[L.type].s} (30 %), effort (30 %), rest against your plan (20 %) and consistency (20 %).</p><div class="acts"><button type="button" class="btn" data-act="score" data-id="${L.id}" data-from="sheet">See what made it</button></div>`);
   } else if (k === 'week') {
     const wk = inWindow(0, 6), pr = inWindow(7, 13), a = x => x.length ? Math.round(x.reduce((s, w) => s + w.sc, 0) / x.length) : 0;
     sheet(`<h3>Week</h3><p class="lab sub">the last 7 days</p><p class="num" style="text-align:center;font-size:66px;letter-spacing:-.05em;margin-top:14px">${a(wk)}</p><div class="bars" style="height:96px">${Array.from({ length: 7 }, (_, i) => { const day = 6 - i, w = wk.find(x => daysAgo(x.date) === day); const d = new Date(NOW - day * DAY); return `<button type="button" class="${w ? 'on' : ''}" ${w ? `data-act="score" data-id="${w.id}" data-from="sheet"` : 'disabled'}><b style="height:${w ? Math.max(26, (w.sc - 40) / 60 * 100) : 8}%">${w ? w.sc : ''}</b><span>${day === 0 ? 'today' : WD[d.getDay()]}</span></button>`; }).join('')}</div><p class="p">The average score of your ${wk.length} workouts in the last 7 days. The 7 days before: ${a(pr)} from ${pr.length} workouts.</p><div class="acts"><button type="button" class="btn light" data-act="sheetclose">Done</button></div>`);
   } else {
-    sheet(`<h3>Rest</h3><p class="lab sub">${esc(DAYS[L.type].n)} · ${esc(dname(L.date))}</p><p class="num" style="text-align:center;font-size:66px;letter-spacing:-.05em;margin-top:14px">${Math.round(L.c.pR)}</p><div style="margin-top:22px">${scaleHTML({ n: 61, v: Math.min(L.c.ra, L.restPlan * 1.5), max: L.restPlan * 1.5, g: G.rest, labels: ['0:00', mmss(L.restPlan * .75), mmss(L.restPlan * 1.5)] })}</div><p class="p">How close your rests stayed to the plan. Last workout: ${mmss(L.c.ra)} on average against ${mmss(L.restPlan)}. The box times every rest from the end of one set to the first rep of the next.</p><div class="acts"><button type="button" class="btn light" data-act="sheetclose">Done</button></div>`);
+    sheet(`<h3>Rest</h3><p class="lab sub">${esc(DAYS[L.type].n)}, ${esc(dname(L.date))}</p><p class="num" style="text-align:center;font-size:66px;letter-spacing:-.05em;margin-top:14px">${Math.round(L.c.pR)}</p><div style="margin-top:22px">${scaleHTML({ n: 61, v: Math.min(L.c.ra, L.restPlan * 1.5), max: L.restPlan * 1.5, g: G.rest, labels: ['0:00', mmss(L.restPlan * .75), mmss(L.restPlan * 1.5)] })}</div><p class="p">How close your rests stayed to the plan. Last workout: ${mmss(L.c.ra)} on average against ${mmss(L.restPlan)}. The sensor times every rest from the end of one set to the first rep of the next.</p><div class="acts"><button type="button" class="btn light" data-act="sheetclose">Done</button></div>`);
   }
 }
 function howSheet() {
-  sheet(`<h3>How the score works</h3><p class="p" style="margin-top:8px">Four things the box knows, against your own last ${'workout'}:</p><div class="rows" style="margin-top:6px">${[['Progress', '30 %', 'weight × reps, against your last workout of the same day'], ['Effort', '30 %', 'reps and sets done, against the plan'], ['Rest', '20 %', 'the time between sets, against your rest plan'], ['Consistency', '20 %', 'workouts in 7 days, against your goal']].map(([a, b, c]) => `<div class="r"><span><span class="lab" style="display:block">${a}</span><span style="display:block;font-size:14px;color:var(--soft);margin-top:4px">${c}</span></span><span class="st inkc">${b}</span></div>`).join('')}</div><p class="p">What it can’t see: your form, your sleep, how you feel. A good trainer still beats any box.</p><div class="acts"><button type="button" class="btn light" data-act="sheetclose">Got it</button></div>`);
+  sheet(`<h3>How the score works</h3><p class="p" style="margin-top:8px">Four things the sensor knows, against your own last ${'workout'}:</p><div class="rows" style="margin-top:6px">${[['Progress', '30 %', 'weight × reps, against your last workout of the same day'], ['Effort', '30 %', 'reps and sets done, against the plan'], ['Rest', '20 %', 'the time between sets, against your rest plan'], ['Consistency', '20 %', 'workouts in 7 days, against your goal']].map(([a, b, c]) => `<div class="r"><span><span class="lab" style="display:block">${a}</span><span style="display:block;font-size:14px;color:var(--soft);margin-top:4px">${c}</span></span><span class="st inkc">${b}</span></div>`).join('')}</div><p class="p">What it can’t see: your form, your sleep, how you feel. A good trainer still beats any sensor.</p><div class="acts"><button type="button" class="btn light" data-act="sheetclose">Got it</button></div>`);
 }
 function planSheet(day) {
   const d = DAYS[day];
-  sheet(`<h3>${d.n}</h3><div style="display:flex;justify-content:center;margin-top:10px"><div class="seg" role="group">${['legs', 'upper'].map(t => `<button type="button" class="${t === day ? 'on' : ''}" data-act="plansw" data-day="${t}">${DAYS[t].n}</button>`).join('')}</div></div><div class="rows" style="margin-top:8px">${d.ex.map(k => { const p = S.plan[k], e = lastEx(k, Infinity), up = e && p.w > e.w; return `<div class="r"><span><span style="display:block;font-size:15px;font-weight:500">${MX[k].n}</span><span class="val" style="display:block">${p.sets} × ${p.t} · ${wt(p.w)}</span></span><span class="st ${up ? 'good' : 'inkc'}">${up ? 'Up ' + wt(p.w - e.w) : 'Same'}</span></div>`; }).join('')}</div><div class="acts"><button type="button" class="btn" data-act="start" data-day="${day}" data-from="sheet">Start ${MX[d.ex[0]].n.toLowerCase()}</button></div>`);
+  sheet(`<h3>${d.n}</h3><div style="display:flex;justify-content:center;margin-top:10px"><div class="seg" role="group">${['legs', 'upper'].map(t => `<button type="button" class="${t === day ? 'on' : ''}" data-act="plansw" data-day="${t}">${DAYS[t].n}</button>`).join('')}</div></div><div class="rows" style="margin-top:8px">${d.ex.map(k => { const p = S.plan[k], e = lastEx(k, Infinity), up = e && p.w > e.w; return `<div class="r"><span><span style="display:block;font-size:15px;font-weight:500">${MX[k].n}</span><span class="val" style="display:block">${p.sets} × ${p.t}, ${wt(p.w)}</span></span><span class="st ${up ? 'good' : 'inkc'}">${up ? 'Up ' + wt(p.w - e.w) : 'Same'}</span></div>`; }).join('')}</div><div class="acts"><button type="button" class="btn" data-act="start" data-day="${day}" data-from="sheet">Start ${MX[d.ex[0]].n.toLowerCase()}</button></div>`);
 }
 
 // ------------------------------------------------------------------ the workout
@@ -740,15 +740,15 @@ function tapIn() {
   const p = curP(), n = WK.w.plan.length;
   screen(`<div class="wglow" style="top:80px;height:340px;background:radial-gradient(55% 50% at 50% 50%,rgba(39,71,214,.12) 0%,rgba(246,246,245,0) 70%)"></div>
   <div id="bn" style="min-height:84px"></div>
-  <button type="button" class="boxart" data-act="tapbox" aria-label="tap your phone to the box"><i class="ring"></i><i class="ring b"></i><i class="ring c"></i><img src="box.webp" alt="the readout box, matte black, a USB-C port in its end, readout printed on the lid" width="720" height="389" draggable="false"></button>
-  <div class="tapt"><p class="lab">Machine ${WK.i + 1} of ${n} · ${esc(DAYS[WK.w.type].n)}</p><h2>${esc(MX[p.k].n)}</h2><p>Hold your phone to the box on the weight stack.</p></div>
+  <button type="button" class="boxart" data-act="tapbox" aria-label="tap your phone to the sensor"><i class="ring"></i><i class="ring b"></i><i class="ring c"></i><img src="box.jpg" alt="the readout sensor, matte black, a USB-C port in its end, readout printed on the lid" width="1000" height="548" draggable="false"></button>
+  <div class="tapt"><p class="lab">Machine ${WK.i + 1} of ${n}, ${esc(DAYS[WK.w.type].n)}</p><h2>${esc(MX[p.k].n)}</h2><p>Hold your phone to the sensor on the weight stack.</p></div>
   <div class="bottom"><button type="button" class="tlink" data-act="endwk">${WK.w.ex.some(e => e.sets.length) ? 'End workout' : 'Cancel'}</button></div>`, 'tapin');
   WK.timers.push(setTimeout(showBanner, 1500 / SPEED));
 }
 function showBanner() {
   if (WK.phase !== 'tapin') return; const host = $('.wscr.cur #bn', wkEl()); if (!host || host.firstChild) return;
   const p = curP(), e = WK.w.ex.find(x => x.k === p.k), done = e ? e.sets.length : 0;
-  host.innerHTML = `<div class="card banner drop" role="group" aria-label="confirm machine"><div class="ic">${ICON.box}</div><div style="flex:1;min-width:0"><p class="t">${esc(MX[p.k].n)} · ${wt(p.w)}?</p><p class="s">Set ${done + 1} of ${p.sets} · ${p.sets} × ${p.t}</p></div><button type="button" class="rb" data-act="deny" aria-label="change the weight">${ICON.x}</button><button type="button" class="rb y" data-act="confirm" aria-label="yes, start counting">${ICON.check('#2747D6')}</button></div>`;
+  host.innerHTML = `<div class="card banner drop" role="group" aria-label="confirm machine"><div class="ic">${ICON.box}</div><div style="flex:1;min-width:0"><p class="t">${esc(MX[p.k].n)}, ${wt(p.w)}?</p><p class="s">Set ${done + 1} of ${p.sets}, ${p.sets} × ${p.t}</p></div><button type="button" class="rb" data-act="deny" aria-label="change the weight">${ICON.x}</button><button type="button" class="rb y" data-act="confirm" aria-label="yes, start counting">${ICON.check('#2747D6')}</button></div>`;
 }
 function planReps(k, kg, si, t) {
   const prev = lastEx(k, Infinity);
@@ -766,7 +766,7 @@ function startSet() {
   for (let r = 0; r < pr; r++) { const c = 1.72 + r * .045 + si * .12 + (prng(WK.w.id.length * 97 + si * 13 + r)() - .5) * .3; cad.push([t, c]); t += c; }
   WK.sim = { pr, cad, t: 0, reps: 0, end: t, idle: 1.7, rest: WK.restT || 0, amps: Array.from({ length: Math.max(pr, p.t) }, (_, i) => .74 * (1 - i * .028)) };
   const prev = lastEx(p.k, Infinity), prevSet = prev && prev.sets[si];
-  const s = screen(`<div class="card banner" role="group"><div class="ic">${ICON.box}</div><div style="flex:1;min-width:0"><p class="t">${esc(MX[p.k].n)} · ${wt(e.w)}</p><p class="s">Set ${si + 1} of ${p.sets}</p></div><button type="button" class="rb y" data-act="endset" aria-label="end this set">${ICON.check('#2747D6')}</button></div>
+  const s = screen(`<div class="card banner" role="group"><div class="ic">${ICON.box}</div><div style="flex:1;min-width:0"><p class="t">${esc(MX[p.k].n)}, ${wt(e.w)}</p><p class="s">Set ${si + 1} of ${p.sets}</p></div><button type="button" class="rb y" data-act="endset" aria-label="end this set">${ICON.check('#2747D6')}</button></div>
   <div class="cnt"><p class="n num" id="rn">0</p><p class="z" id="rz">waiting for the first rep</p></div>
   <div class="wpad" style="margin-top:clamp(18px,4vh,40px)">${scaleHTML({ n: p.t, v: -1, max: p.t - 1, h: 40, labels: ['1', String(Math.round(p.t / 2)), String(p.t)] })}</div>
   <div class="livewave" id="lw"></div>
@@ -791,7 +791,7 @@ function stepLive(dt) {
   let fr = 0;
   for (let r = 0; r < m.cad.length; r++) { const [t0, c] = m.cad[r]; if (m.t >= t0 + c) fr = r + 1; else if (m.t >= t0) { fr = r + (m.t - t0) / c; break; } else break; }
   const whole = Math.floor(fr);
-  if (whole > m.reps) { m.reps = whole; const n = $('#rn'); if (n) { n.textContent = whole; n.classList.remove('pop'); void n.offsetWidth; n.classList.add('pop'); } const z = $('#rz'); if (z) z.textContent = 'of ' + curP().t + ' · counted by the box'; setScale($('.wscr.cur .scale', wkEl()), whole - 1); if (navigator.vibrate && navigator.userActivation && navigator.userActivation.hasBeenActive) try { navigator.vibrate(8); } catch (_) {} }
+  if (whole > m.reps) { m.reps = whole; const n = $('#rn'); if (n) { n.textContent = whole; n.classList.remove('pop'); void n.offsetWidth; n.classList.add('pop'); } const z = $('#rz'); if (z) z.textContent = 'of ' + curP().t + ', counted by the sensor'; setScale($('.wscr.cur .scale', wkEl()), whole - 1); if (navigator.vibrate && navigator.userActivation && navigator.userActivation.hasBeenActive) try { navigator.vibrate(8); } catch (_) {} }
   drawLive(fr);
   if (m.t >= m.end + m.idle) endSet();
 }
@@ -807,12 +807,12 @@ function endSet() {
 function rest(newMachine) {
   clearTimers(); WK.phase = 'rest'; WK.restT = 0; WK.newMachine = newMachine; WK.auto = 8 + prng(WK.w.ex.length * 31 + WK.i)() * 22;
   const p = curP(), e = WK.w.ex[WK.w.ex.length - 1], last = e.sets[e.sets.length - 1], si = newMachine ? 0 : e.sets.length;
-  const nextLine = newMachine ? `<p style="font-size:22px;font-weight:500;letter-spacing:-.03em;margin-top:6px">${esc(MX[p.k].n)}</p><p style="font-size:13.5px;color:var(--mute);margin-top:4px">${p.sets} × ${p.t} · ${wt(p.w)}. Move to the ${esc(MX[p.k].n.toLowerCase())} and tap in.</p>` : `<p style="font-size:22px;font-weight:500;letter-spacing:-.03em;margin-top:6px">Set ${si + 1} · aim for ${p.t}</p><p style="font-size:13.5px;color:var(--mute);margin-top:4px">${esc(MX[p.k].n)}, ${wt(e.w)}. Lift when you’re ready; the rest ends by itself.</p>`;
+  const nextLine = newMachine ? `<p style="font-size:22px;font-weight:500;letter-spacing:-.03em;margin-top:6px">${esc(MX[p.k].n)}</p><p style="font-size:13.5px;color:var(--mute);margin-top:4px">${p.sets} × ${p.t}, ${wt(p.w)}. Move to the ${esc(MX[p.k].n.toLowerCase())} and tap in.</p>` : `<p style="font-size:22px;font-weight:500;letter-spacing:-.03em;margin-top:6px">Set ${si + 1}, aim for ${p.t}</p><p style="font-size:13.5px;color:var(--mute);margin-top:4px">${esc(MX[p.k].n)}, ${wt(e.w)}. Lift when you’re ready; the rest ends by itself.</p>`;
   screen(`<div class="wglow" style="top:70px;height:330px;background:radial-gradient(55% 50% at 50% 50%,rgba(43,156,143,.15) 0%,rgba(246,246,245,0) 70%)"></div>
-  <div style="text-align:center;margin-top:clamp(26px,8vh,92px);position:relative"><p class="lab">Rest <span class="ready" id="rdy">· ready</span></p><p class="timer num" id="rt">0:00</p><p class="lab" style="margin-top:8px">of ${mmss(WK.w.restPlan)} · demo time ${REST_X}×</p></div>
+  <div style="text-align:center;margin-top:clamp(26px,8vh,92px);position:relative"><p class="lab">Rest <span class="ready" id="rdy">ready</span></p><p class="timer num" id="rt">0:00</p><p class="lab" style="margin-top:8px">of ${mmss(WK.w.restPlan)}, demo time ${REST_X}×</p></div>
   <div class="wpad" style="margin-top:clamp(20px,4vh,40px)">${scaleHTML({ n: 61, v: -1, max: WK.w.restPlan, g: G.rest, labels: ['0:00', mmss(WK.w.restPlan / 2), mmss(WK.w.restPlan)] })}</div>
   <div style="padding:0 12px;margin-top:clamp(18px,4vh,48px)"><div class="card cardp"><div style="display:flex;justify-content:space-between;align-items:baseline"><p class="lab">Next</p>${newMachine ? `<span class="st inkc">Machine ${WK.i + 1} of ${WK.w.plan.length}</span>` : ''}</div>${nextLine}</div>
-  <div class="lastset"><span class="lab">${esc(MX[e.k].n)} · set ${e.sets.length} · <span class="inkc" id="lr">${last.r}</span> reps</span><button type="button" class="cap" data-act="fix">Fix</button></div></div>
+  <div class="lastset"><span class="lab">${esc(MX[e.k].n)}, set ${e.sets.length}, <span class="inkc" id="lr">${last.r}</span> reps</span><button type="button" class="cap" data-act="fix">Fix</button></div></div>
   <div class="bottom">${newMachine ? `<button type="button" class="btn" data-act="lift">Tap in at the ${esc(MX[p.k].n.toLowerCase())}</button>` : `<button type="button" class="btn light" data-act="lift">Lift now</button>`}<button type="button" class="tlink" data-act="endwk">End workout</button></div>`, 'rest');
 }
 function stepRest(dt) {
@@ -863,20 +863,20 @@ function loop() {
 function weightSheet() {
   const p = curP(), prev = lastEx(p.k, Infinity); let kg = p.w; const st = MX[p.k].step;
   const draw = () => { const b = $('#wv'); if (b) b.innerHTML = `${wtn(kg)}<small>${U()}</small>`; const u = $('#wu'); if (u) u.textContent = 'Use ' + wt(kg); };
-  const sh = sheet(`<h3>${esc(MX[p.k].n)}</h3><p class="lab sub">${prev ? 'last time ' + wt(prev.w) + ' · ' + repList(prev) : 'first time on this machine'}</p><div class="bigstep"><button type="button" id="wm" aria-label="lighter">−</button><b class="num" id="wv"></b><button type="button" id="wp" aria-label="heavier">+</button></div><p class="p" style="text-align:center">The box reads the stack moving. The weight is the one thing you tell it, once per machine.</p><div class="acts"><button type="button" class="btn" id="wu"></button></div>`);
+  const sh = sheet(`<h3>${esc(MX[p.k].n)}</h3><p class="lab sub">${prev ? 'last time ' + wt(prev.w) + ', ' + repList(prev) : 'first time on this machine'}</p><div class="bigstep"><button type="button" id="wm" aria-label="lighter">−</button><b class="num" id="wv"></b><button type="button" id="wp" aria-label="heavier">+</button></div><p class="p" style="text-align:center">The sensor reads the stack moving. The weight is the one thing you tell it, once per machine.</p><div class="acts"><button type="button" class="btn" id="wu"></button></div>`);
   draw();
   $('#wm', sh).onclick = () => { kg = Math.max(st, kg - st); draw(); };
   $('#wp', sh).onclick = () => { kg = kg + st; draw(); };
-  $('#wu', sh).onclick = () => { p.w = kg; const e = WK.w.ex.find(x => x.k === p.k); if (e && !e.sets.length) e.w = kg; closeSheet(); const t = $('.wscr.cur .banner .t', wkEl()); if (t) t.textContent = MX[p.k].n + ' · ' + wt(kg) + '?'; };
+  $('#wu', sh).onclick = () => { p.w = kg; const e = WK.w.ex.find(x => x.k === p.k); if (e && !e.sets.length) e.w = kg; closeSheet(); const t = $('.wscr.cur .banner .t', wkEl()); if (t) t.textContent = MX[p.k].n + ', ' + wt(kg) + '?'; };
 }
 function fixSheet() {
   const e = WK.w.ex[WK.w.ex.length - 1], s = e.sets[e.sets.length - 1]; let r = s.r;
   const draw = () => { const b = $('#fv'); if (b) b.innerHTML = r + '<small>REPS</small>'; const u = $('#fu'); if (u) u.textContent = 'Save ' + r + ' reps'; };
-  const sh = sheet(`<h3>Set ${e.sets.length}</h3><p class="lab sub">${esc(MX[e.k].n)} · the box counted ${s.r}</p><div class="bigstep"><button type="button" id="fm" aria-label="one less">−</button><b class="num" id="fv"></b><button type="button" id="fp" aria-label="one more">+</button></div><p class="p" style="text-align:center">If the box got it wrong, tell it. It learns how this machine moves.</p><div class="acts"><button type="button" class="btn" id="fu"></button></div>`);
+  const sh = sheet(`<h3>Set ${e.sets.length}</h3><p class="lab sub">${esc(MX[e.k].n)}, the sensor counted ${s.r}</p><div class="bigstep"><button type="button" id="fm" aria-label="one less">−</button><b class="num" id="fv"></b><button type="button" id="fp" aria-label="one more">+</button></div><p class="p" style="text-align:center">If the sensor got it wrong, tell it. It learns how this machine moves.</p><div class="acts"><button type="button" class="btn" id="fu"></button></div>`);
   draw();
   $('#fm', sh).onclick = () => { r = Math.max(0, r - 1); draw(); };
   $('#fp', sh).onclick = () => { r = Math.min(40, r + 1); draw(); };
-  $('#fu', sh).onclick = () => { s.r = r; closeSheet(); const l = $('#lr'); if (l) l.textContent = r; toast('Saved · ' + r + ' reps'); };
+  $('#fu', sh).onclick = () => { s.r = r; closeSheet(); const l = $('#lr'); if (l) l.textContent = r; toast('Saved, ' + r + ' reps'); };
 }
 function endSheet() {
   const w = WK.w, n = setsDone(w);
@@ -901,7 +901,7 @@ const ACT = {
   row: b => { const open = b.getAttribute('aria-expanded') !== 'true'; b.setAttribute('aria-expanded', open); b.nextElementSibling.classList.toggle('open', open); },
   pmode: b => { S.pmode = b.dataset.v; const pg = $('#tab-progress .page[data-root]'); const y = pg.scrollTop; render('progress', false); pg.scrollTop = y; },
   goal: b => { S.goal = clamp(S.goal + +b.dataset.v, 2, 6); render('you', false); render('today', false); },
-  restplan: b => { S.rest = +b.dataset.v; render('you', false); render('today', false); toast('Rest plan · ' + mmss(S.rest)); },
+  restplan: b => { S.rest = +b.dataset.v; render('you', false); render('today', false); toast('Rest plan ' + mmss(S.rest)); },
   unit: b => { S.unit = b.dataset.v; renderAll(false); },
   motion: () => { S.motion = !S.motion; DEV.classList.toggle('still', !S.motion); render('you', false); toast(S.motion ? 'Motion on' : 'Motion off'); },
   reset: () => { const m = S.motion; seed(); S.motion = m; renderAll(false); toast('Sample data reset'); },
