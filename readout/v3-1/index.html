@@ -1,0 +1,1213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>readout · your training, measured</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#ffffff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:ital,wght@1,500;1,600&display=swap">
+<style>
+/* readout website v3 (17 Nov 2026): a faithful copy of Ultrahuman's website (structure, type scale, spacing, components,
+   motion) carrying readout's own words, product and pictures. Their name, text and photos are not used.
+   Pages: #home #box #how #gyms #lab. Photos are FitPods' own (our first gym); product shots are marked "to come". */
+:root{
+  color-scheme:light;
+  --ink:#000;--ink2:#111;--mute:rgba(0,0,0,.6);--mute2:rgba(0,0,0,.5);--line:#E6E6E6;
+  --g1:#EDEDED;--g2:#F9F9F9;--g3:#F2F2F2;--g4:#DEE0E2;--beige:#C4BEB1;--dark:#101010;--card:#1A1A1A;
+  --blue:#112BAF;--blue2:#1539F5;--acc:#2747D6;
+  --s:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --m:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --d:"Barlow Condensed","Arial Narrow",sans-serif;
+  --pad:48px;--ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
+body{margin:0;background:#fff;color:var(--ink);font-family:var(--s);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+@supports (overflow:clip){body{overflow-x:clip}}
+/* motion copied from their site: content fades up as it arrives */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rvo{opacity:0;transition:opacity 1.1s var(--ease)}
+.rvo.in{opacity:1}
+.pc.pop.rv.in{transform:translateY(-14px)}
+.stat .big path{transition:stroke-dashoffset 2.8s cubic-bezier(.3,.6,.2,1)}
+.zero p span{opacity:.16;transition:opacity .35s}
+.zero p span.lit{opacity:1}
+@media (min-width:1101px){
+  .stage{--cw:min(770px,80vw,calc((100vh - 330px)*1.79));height:330vh;padding:0}
+  .stage .pin{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;padding:64px 0 24px;overflow:hidden}
+  .stage .rail{overflow-x:hidden;scroll-snap-type:none;scroll-behavior:auto;padding:0 calc((100vw - var(--cw))/2)}
+  .stage .rc{width:var(--cw)}
+  .stage .tabs{margin:30px auto 28px}
+  .stage .fine{margin-top:26px}
+}
+.snap .stage,.snap .zero{height:auto!important}
+.snap .stage .pin,.snap .zero .zs{position:relative!important;height:900px}
+body.dark-page{background:#000}
+img{display:block;max-width:100%}
+a{color:inherit}
+p,h1,h2,h3,h4{margin:0;font-weight:400}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--blue2);outline-offset:3px}
+.dark :focus-visible,.dark-page .hdr :focus-visible{outline-color:#fff}
+.mono{font-family:var(--m);text-transform:uppercase}
+.pg{display:none}.pg.on{display:block}
+.wrap{padding-left:var(--pad);padding-right:var(--pad)}
+.tag{position:absolute;z-index:4;left:12px;bottom:10px;font-family:var(--m);font-size:10px;letter-spacing:.02em;text-transform:uppercase;color:rgba(255,255,255,.72);background:rgba(0,0,0,.28);padding:2px 7px;border-radius:6px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.tag.d{color:rgba(0,0,0,.55);background:rgba(255,255,255,.6)}
+
+/* ---------- announcement bar + floating header ---------- */
+.ann{height:32px;display:flex;align-items:center;justify-content:center;font-size:12px;letter-spacing:-.01em;background:#fff;color:#000;position:relative;z-index:61;padding:0 16px;text-align:center;white-space:nowrap;overflow:hidden}
+.ann a{text-decoration:underline;text-underline-offset:2px;margin-left:6px}
+.ann .as{display:none}
+@media (max-width:760px){.ann .al{display:none}.ann .as{display:inline}}
+.rc .tag{top:12px;bottom:auto}
+.dark-page .ann{background:#000;color:#fff}
+.hdr{position:fixed;left:0;right:0;top:32px;z-index:60;padding:0 var(--pad);transition:top .4s var(--ease)}
+.hdr .bar{height:56px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 18px;border-radius:999px;transition:background .4s,box-shadow .4s,height .4s var(--ease)}
+.hdr.on{top:10px}
+.hdr.on .bar{height:48px;background:rgba(255,255,255,.9);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 1px 0 rgba(0,0,0,.04),0 10px 34px rgba(0,0,0,.09)}
+.dark-page .hdr .bar{color:#fff}
+.dark-page .hdr.on .bar{background:rgba(40,40,40,.78);box-shadow:0 10px 34px rgba(0,0,0,.45)}
+.hl{display:flex;align-items:center;gap:22px;min-width:0}
+.burger{width:36px;height:36px;display:grid;place-items:center;border:0;background:none;cursor:pointer;margin-left:-8px;border-radius:50%}
+.burger i{display:block;width:16px;height:1.5px;background:currentColor;box-shadow:0 5px 0 currentColor;transform:translateY(-2.5px)}
+.nav{display:flex;gap:26px;font-size:13px;letter-spacing:-.01em;white-space:nowrap}
+.nav a{text-decoration:none;opacity:.92}.nav a:hover{opacity:1}
+.nav a[aria-current="page"]{text-decoration:underline;text-underline-offset:5px}
+.logo{display:inline-flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;line-height:1}
+.logo b{font-weight:600;font-size:21px;letter-spacing:-.05em}
+.ticks{display:flex;gap:3px;align-items:flex-end;height:9px}
+.ticks i{display:block;width:1.5px;height:4.5px;background:currentColor;opacity:.35;border-radius:1px}
+.ticks i.on{height:9px;background:var(--acc);opacity:1}
+.dark-page .ticks i.on,.dark .ticks i.on{background:#8CA2FF}
+.hr{display:flex;justify-content:flex-end;align-items:center;gap:12px}
+.lang{font-size:12px;border:1px solid rgba(0,0,0,.12);border-radius:999px;padding:4px 11px;display:flex;gap:6px;align-items:center;letter-spacing:-.01em}
+.dark-page .lang{border-color:rgba(255,255,255,.22)}
+.lang i{width:13px;height:13px;border-radius:50%;border:1.3px solid currentColor;display:inline-block;opacity:.75;background:linear-gradient(currentColor,currentColor) center/1.3px 100% no-repeat,linear-gradient(currentColor,currentColor) center/100% 1.3px no-repeat}
+.mtry{display:none;font-size:15px;text-decoration:none;letter-spacing:-.01em}
+
+/* menu drawer */
+.drawer{position:fixed;inset:0;z-index:80;background:#fff;color:#000;display:flex;flex-direction:column;padding:22px var(--pad) 40px;transform:translateY(-102%);transition:transform .5s var(--ease);overflow:auto}
+.drawer.on{transform:none}
+.drawer .top{display:flex;justify-content:space-between;align-items:center;height:48px}
+.drawer .x{width:40px;height:40px;border-radius:50%;border:1px solid #E2E2E2;background:#fff;cursor:pointer;font-size:18px}
+.drawer nav{display:grid;margin-top:40px}
+.drawer nav a{font-size:clamp(34px,5vw,56px);letter-spacing:-.04em;line-height:1.18;text-decoration:none;padding:6px 0;border-bottom:1px solid #EFEFEF}
+.drawer .foot{margin-top:auto;padding-top:30px;display:flex;flex-wrap:wrap;gap:10px}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--s);font-size:13px;letter-spacing:-.008em;line-height:24px;padding:6px 26px;border-radius:50px;text-decoration:none;cursor:pointer;border:1px solid transparent;white-space:nowrap;transition:transform .18s var(--ease),background .25s,opacity .25s;-webkit-tap-highlight-color:transparent}
+.btn:active{transform:scale(.97)}
+.btn.b{background:var(--blue);color:#fff}.btn.b:hover{background:#0D2496}
+.btn.b2{background:var(--blue2);color:#fff}
+.btn.k{background:#000;color:#fff}
+.btn.w{background:#fff;color:#000}
+.btn.l{background:rgba(255,255,255,.5);color:#000;border-color:rgba(0,0,0,.07)}
+.btn.o{background:transparent;color:inherit;border-color:currentColor}
+.btn.og{background:transparent;color:#000;border-color:rgba(0,0,0,.16)}
+.btn.ow{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
+.btn.m{font-family:var(--m);text-transform:uppercase;font-size:12px;letter-spacing:.01em}
+.btn.lg{font-size:16px;font-weight:500;padding:10px 34px}
+
+/* ---------- HOME ---------- */
+.hero{position:relative;margin:56px 10px 0;height:min(700px,calc(100svh - 108px));min-height:520px;border-radius:16px;overflow:hidden;background:#111;color:#fff}
+.hero .sl{position:absolute;inset:0;opacity:0;transition:opacity 1s ease;pointer-events:none}
+.hero .sl.on{opacity:1;pointer-events:auto}
+.hero .sl img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:transform 7s linear}
+.hero .sl.on img{transform:scale(1)}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.05) 32%,rgba(0,0,0,.05) 52%,rgba(0,0,0,.62) 100%)}
+.hero .art{position:absolute;left:4%;right:4%;top:15%;text-align:center;font-family:var(--d);font-style:italic;font-weight:600;font-size:clamp(66px,10.4vw,160px);line-height:.84;letter-spacing:-.005em;text-transform:uppercase;background:linear-gradient(180deg,#fff 0%,#fff 46%,#D9DCE2 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 30px rgba(0,0,0,.25))}
+.hero .cap{position:absolute;left:16px;right:16px;bottom:64px;text-align:center;display:grid;justify-items:center;gap:16px}
+.hero .cap p{font-size:18px;line-height:22.5px;letter-spacing:-.02em;text-shadow:0 1px 18px rgba(0,0,0,.3)}
+.hero .cap div{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.hero .cap .btn{min-width:150px}
+.hero .dots{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:flex;gap:6px;z-index:3}
+.hero .dots button{width:6px;height:6px;border-radius:3px;border:0;background:rgba(255,255,255,.45);padding:0;cursor:pointer;transition:width .4s var(--ease),background .3s}
+.hero .dots button.on{background:#fff;width:20px}
+
+.camp{position:relative;margin:10px;height:890px;border-radius:16px;overflow:hidden;background:radial-gradient(90% 80% at 62% 42%,#DCD7CC 0%,#C9C3B6 48%,#BDB6A8 100%)}
+.camp::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(180deg,rgba(196,190,177,0) 0%,rgba(208,203,193,.65) 60%,rgba(232,229,223,.95) 100%)}
+.camp .txt{position:absolute;z-index:3;left:96px;top:50%;transform:translateY(-50%);max-width:440px}
+.camp .lab{font-size:18px;line-height:21.6px;text-transform:uppercase;letter-spacing:-.01em}
+.camp h2{font-size:46px;line-height:1.2;letter-spacing:-2.07px;margin:2px 0 4px}
+.camp .s{font-size:16px;line-height:1.7;letter-spacing:-.6px}
+.camp .ctas{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+.camp .ctas .btn{min-width:156px}
+.shot{position:absolute;z-index:2;display:grid;place-items:center;text-align:center}
+.shot .frame{border:1.5px dashed rgba(0,0,0,.22);border-radius:22px;display:grid;place-content:center;gap:8px;padding:20px;width:100%;height:100%}
+.shot .frame b{font-family:var(--m);font-weight:500;font-size:12px;letter-spacing:.02em;text-transform:uppercase;color:rgba(0,0,0,.55)}
+.shot .frame span{font-size:14px;color:rgba(0,0,0,.5);max-width:30ch;margin:0 auto}
+.dark .shot .frame,.shot.dk .frame{border-color:rgba(255,255,255,.22)}
+.dark .shot .frame b,.shot.dk .frame b{color:rgba(255,255,255,.6)}
+.dark .shot .frame span,.shot.dk .frame span{color:rgba(255,255,255,.5)}
+.camp .shot{left:52%;top:20%;width:min(520px,36%);height:52%}
+.camp .floor{position:absolute;z-index:1;left:50%;top:68%;width:44%;height:60px;transform:translateX(-12%);background:radial-gradient(50% 50% at 50% 50%,rgba(70,60,45,.22),rgba(70,60,45,0));filter:blur(6px)}
+.camp .wv{position:absolute;z-index:1;left:44%;right:0;top:33%;opacity:.5}
+
+.coll{position:relative;height:900px;overflow:hidden}
+.coll .mid{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;display:grid;justify-items:center;gap:10px;width:min(560px,90%);z-index:3}
+.coll h2{font-size:36px;line-height:1.2;letter-spacing:-1px}
+.coll .mid p{font-size:16px;line-height:1.1;letter-spacing:-.6px;color:var(--mute);margin-bottom:12px}
+.coll .c{position:absolute;border-radius:14px;overflow:hidden;box-shadow:0 18px 40px -26px rgba(0,0,0,.35);will-change:transform}
+.coll .c img{width:100%;height:100%;object-fit:cover}
+.c1{left:6.5%;top:15%;width:9.5%;aspect-ratio:4/5;z-index:1}.c2{left:10%;top:10%;width:14.5%;aspect-ratio:16/10;z-index:2}
+.c3{right:7.5%;top:7%;width:12.5%;aspect-ratio:4/3}.c4{left:7%;bottom:12%;width:14.5%;aspect-ratio:16/10}
+.c5{right:5%;bottom:22%;width:14.5%;aspect-ratio:16/10;z-index:2}.c6{right:12%;bottom:9%;width:10%;aspect-ratio:4/5;z-index:1}
+
+.stat{position:relative;height:900px;overflow:hidden;text-align:center}
+.stat h2{font-size:36px;line-height:1.2;letter-spacing:-1px;padding-top:96px}
+.stat .row{display:flex;justify-content:center;align-items:center;gap:44px;margin-top:62px}
+.stat .row span{font-size:16px;color:var(--mute2);text-transform:uppercase;letter-spacing:.02em}
+.stat .row b{font-weight:400;font-size:56px;letter-spacing:-2.4px;line-height:1}
+.stat .big{position:absolute;left:-12%;right:-12%;bottom:-40px;height:560px}
+.stat .big .glow{position:absolute;left:0;right:0;top:10%;height:56%;background:radial-gradient(50% 60% at 50% 50%,rgba(39,71,214,.32),rgba(39,71,214,0) 70%);filter:blur(10px)}
+.stat .big svg{position:absolute;left:0;top:0;width:100%;height:100%}
+.stat .fine{position:absolute;left:0;right:0;bottom:24px;font-size:10px;color:#000;opacity:.8}
+
+.stage{background:#000;color:#fff;padding:120px 0 110px}
+.stage .head{text-align:center;padding:0 var(--pad)}
+.stage h2{font-size:40px;line-height:1.2;letter-spacing:-1px}
+.stage .head p{font-size:15px;line-height:1.1;letter-spacing:-.6px;color:rgba(255,255,255,.6);margin-top:12px}
+.tabs{display:flex;justify-content:center;gap:6px;margin:58px auto 40px;flex-wrap:wrap;padding:0 var(--pad)}
+.tabs button{border:0;background:none;color:rgba(255,255,255,.6);font-size:13px;line-height:24px;padding:6px 22px;border-radius:50px;cursor:pointer;transition:background .3s,color .3s}
+.tabs button[aria-selected="true"]{background:rgba(255,255,255,.14);color:#fff}
+.rail{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 calc((100vw - min(770px,80vw))/2);scrollbar-width:none;scroll-behavior:smooth}
+.rail::-webkit-scrollbar{display:none}
+.rc{flex:none;width:min(770px,80vw);scroll-snap-align:center;opacity:.5;transition:opacity .5s}
+.rc.on{opacity:1}
+.rc .ph{position:relative;aspect-ratio:770/430;border-radius:16px;overflow:hidden;background:#1a1a1a}
+.rc .ph img{width:100%;height:100%;object-fit:cover}
+.rc h3{font-size:20px;letter-spacing:-.6px;margin-top:22px}
+.rc p{font-size:15px;color:rgba(255,255,255,.55);margin-top:4px;letter-spacing:-.3px}
+.note{position:absolute;z-index:3;left:50%;top:50%;transform:translate(-36%,-10%);display:flex;align-items:center;gap:12px;background:rgba(28,28,30,.72);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:12px 12px 12px 14px;min-width:300px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.note .ni{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;flex:none}
+.note div{flex:1;min-width:0}
+.note b{display:block;font-weight:500;font-size:13px;letter-spacing:-.2px}
+.note i{display:block;font-style:normal;font-family:var(--m);font-size:11px;letter-spacing:.02em;color:rgba(255,255,255,.7);margin-top:2px;text-transform:uppercase}
+.note .nb{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.12);flex:none}
+.note .nb.ok{background:#fff;color:#000}
+.stage .fine{text-align:center;font-size:12px;color:rgba(255,255,255,.4);margin-top:44px}
+
+.pair{padding:110px var(--pad) 70px}
+.pair.dark{background:#000;color:#fff}
+.pair .ttl h3{font-size:32px;letter-spacing:-1.2px;line-height:1.15}
+.pair .ttl p{font-size:32px;letter-spacing:-1.2px;line-height:1.15;color:rgba(0,0,0,.42)}
+.pair.dark .ttl p{color:rgba(255,255,255,.42)}
+.pg2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:40px}
+.pg2 > *{min-width:0}
+.pimg{position:relative;aspect-ratio:632/462;border-radius:16px;overflow:hidden;background:#141414}
+.pair:not(.dark) .pimg{background:linear-gradient(160deg,#F3F3F1,#E4E4E1)}
+.pimg img{width:100%;height:100%;object-fit:cover}
+.ptxt{border-radius:16px;background:#1C1C1C;padding:40px;font-size:20px;line-height:1.55;letter-spacing:-.4px}
+.pair:not(.dark) .ptxt{background:#F0F0F0}
+.ptxt .fl{display:grid;margin-top:30px}
+.ptxt .fl div{display:grid;grid-template-columns:36px 1fr;gap:6px 14px;padding:20px 0;border-top:1px solid rgba(0,0,0,.08);align-items:start}
+.ptxt .fl div:first-child{border-top:0}
+.ptxt .fl b{font-weight:400;font-size:20px;letter-spacing:-.5px}
+.ptxt .fl p{grid-column:2;font-size:13px;line-height:1.5;color:var(--mute);letter-spacing:-.1px}
+.ptxt .fl svg{grid-row:span 2;margin-top:4px}
+.pname{display:flex;align-items:center;gap:10px;margin-top:18px;flex-wrap:wrap}
+.pname h4{font-size:24px;letter-spacing:-.8px;margin-right:auto}
+.pname .btn{min-width:140px}
+.pstat{border-radius:16px;background:#1C1C1C;padding:44px 30px;text-align:center;display:grid;gap:6px;align-content:center;margin-top:18px;min-height:260px}
+.pstat .mono{font-size:13px;color:rgba(255,255,255,.6)}
+.pstat b{font-weight:400;font-size:84px;letter-spacing:-4px;line-height:1}
+.pstat p{font-size:17px;color:rgba(255,255,255,.75);max-width:24ch;margin:6px auto 0}
+
+.appi{padding:120px var(--pad) 120px;text-align:center}
+.appi h2{font-size:40px;line-height:1.2;letter-spacing:-1px}
+.appi > p{font-size:16px;line-height:1.4;color:var(--mute);max-width:440px;margin:12px auto 0}
+.appi .st{display:flex;justify-content:center;gap:10px;margin-top:26px}
+.appi .vid{position:relative;max-width:800px;aspect-ratio:16/9;margin:80px auto 0;border-radius:16px;overflow:hidden;background:radial-gradient(80% 90% at 50% 40%,#FAFAFA,#E9E9E9);display:grid;place-items:center}
+.appi .vid .mono{font-size:14px;letter-spacing:.04em}
+.appi .vid small{display:block;font-size:12px;color:var(--mute2);margin-top:6px;font-family:var(--s);text-transform:none}
+.play{position:absolute;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;background:#fff;box-shadow:0 4px 18px rgba(0,0,0,.12);display:grid;place-items:center}
+
+.floorsec{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;padding:60px var(--pad) 90px;min-height:820px;border-bottom:1px solid var(--line)}
+.floorsec > *{min-width:0}
+.floorsec h2{font-size:48px;line-height:1.2;letter-spacing:-2px;max-width:12ch}
+.floorsec .t > p{font-size:14px;line-height:1.4;color:var(--mute);max-width:36ch;margin-top:14px;letter-spacing:-.14px}
+.nums{display:flex;gap:40px;margin-top:70px}
+.nums > div + div{border-left:1px solid var(--line);padding-left:40px}
+.nums b{display:block;font-weight:400;font-size:40px;line-height:1.2;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.nums span{font-size:14px;color:var(--mute)}
+.globe{position:relative;justify-self:center;width:min(620px,100%);aspect-ratio:1}
+.globe .disc{position:absolute;inset:0;border-radius:50%;overflow:hidden;box-shadow:inset 0 0 120px 40px rgba(0,0,0,.9)}
+.globe .disc img{width:100%;height:100%;object-fit:cover;filter:brightness(.62) saturate(.9)}
+.globe .disc::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(70% 70% at 38% 34%,rgba(255,255,255,0) 40%,rgba(255,255,255,.95) 100%)}
+.gc{position:absolute;z-index:2;background:rgba(40,40,44,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);border-radius:12px;color:#fff;padding:10px 14px;min-width:150px}
+.gc .mono{font-size:9px;letter-spacing:.04em;color:rgba(255,255,255,.65)}
+.gc b{display:block;font-weight:400;font-size:20px;letter-spacing:-.5px;margin-top:2px}
+.gc span{font-size:10.5px;color:rgba(255,255,255,.72)}
+
+.partners{padding:56px var(--pad) 80px;text-align:center}
+.partners .mono{font-size:16px;letter-spacing:.02em}
+.plogos{display:flex;justify-content:center;align-items:center;gap:56px;margin-top:42px;flex-wrap:wrap;color:#8A8A8A}
+.plogos .fp{font-weight:600;font-size:30px;letter-spacing:-1.2px;color:#6F6F6F;display:flex;flex-direction:column;align-items:center;line-height:1}
+.plogos .fp small{font-family:var(--m);font-weight:400;font-size:10px;letter-spacing:.08em;margin-top:6px;text-transform:uppercase}
+.plogos .slot{border:1.5px dashed #CFCFCF;border-radius:999px;padding:12px 28px;font-family:var(--m);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#A6A6A6}
+
+/* ---------- footer ---------- */
+.foot{background:#fff;color:#000;border-top:1px solid var(--line)}
+.dark-page .foot{border-top:0}
+.fcols{display:grid;grid-template-columns:repeat(4,1fr);padding:0 var(--pad)}
+.fcols > div{padding:40px 26px 34px;border-left:1px solid var(--line)}
+.fcols > div:first-child{border-left:0;padding-left:0}
+.fh{font-family:var(--m);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:#7A7A7A;margin:0 0 16px}
+.fcols a{display:block;font-size:13px;letter-spacing:-.1px;text-decoration:none;margin-bottom:12px;opacity:.92}
+.fcols a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
+.fcols .fh + a{margin-top:0}
+.fcols div > .fh:not(:first-child){margin-top:34px}
+.new{font-family:var(--m);font-size:9px;border:1px solid #CFCFCF;border-radius:4px;padding:0 4px;margin-left:6px;vertical-align:1px}
+.frow{display:grid;grid-template-columns:repeat(3,1fr);padding:0 var(--pad);border-top:1px solid var(--line)}
+.frow > div{padding:24px 26px;border-left:1px solid var(--line)}
+.frow > div:first-child{border-left:0;padding-left:0}
+.frow p{font-size:13px;margin-top:4px}
+.soc{display:flex;gap:16px;margin-top:4px}
+.badges{display:flex;gap:8px;margin-top:4px;flex-wrap:wrap}
+.badges span{display:inline-flex;align-items:center;gap:6px;background:#000;color:#fff;border-radius:7px;padding:6px 11px;font-size:11px;line-height:1.1}
+.badges small{display:block;font-size:8px;opacity:.75}
+.fcopy{padding:20px var(--pad) 0;border-top:1px solid var(--line);font-size:11px;color:#7A7A7A;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.fcopy .lang{color:#000}
+.giant{padding:0 var(--pad);overflow:hidden;line-height:.78;margin-top:34px;user-select:none}
+.giant span{display:block;text-align:center;font-weight:600;font-size:min(26.4vw,410px);letter-spacing:-.075em;color:#F1F1F1;white-space:nowrap;transform:translateY(8%)}
+
+/* ---------- THE BOX (dark product page) ---------- */
+.dark{background:#000;color:#fff}
+.bhero{position:relative;height:min(900px,100svh);min-height:600px;overflow:hidden;background:#000;color:#fff}
+.bhero > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.42) contrast(1.05)}
+.bhero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,.2) 60%,#000 100%)}
+.bhero .in{position:absolute;z-index:2;left:0;right:0;bottom:70px;text-align:center;display:grid;justify-items:center;gap:12px;padding:0 20px}
+.bhero h1{font-weight:500;font-size:clamp(64px,10vw,150px);letter-spacing:-.06em;line-height:.9}
+.bhero .k{font-size:14px;letter-spacing:.04em;text-transform:uppercase}
+.bhero p{font-size:16px;color:rgba(255,255,255,.75);max-width:44ch}
+.bhero .btn{margin-top:10px}
+.acc{background:#101010;padding:130px 0 110px}
+.acc .hd{display:flex;align-items:flex-end;justify-content:space-between;padding:0 var(--pad);gap:20px}
+.acc h2{font-weight:500;font-size:80px;letter-spacing:-3.6px;line-height:1}
+.arrows{display:flex;gap:10px}
+.arrows button{width:44px;height:44px;border-radius:50%;border:0;background:#2A2A2A;color:#fff;cursor:pointer;display:grid;place-items:center}
+.arrows button:hover{background:#383838}
+.accr{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:var(--pad);padding:56px var(--pad) 10px;scrollbar-width:none;scroll-behavior:smooth}
+.accr::-webkit-scrollbar{display:none}
+.ac{flex:none;width:min(520px,82vw);height:600px;border-radius:20px;background:#1C1C1C;overflow:hidden;position:relative;scroll-snap-align:start;display:flex;flex-direction:column}
+.ac .tx{padding:34px 34px 0}
+.ac h3{font-weight:500;font-size:32px;letter-spacing:-1.2px;line-height:1.15}
+.ac p{font-size:16px;color:rgba(255,255,255,.62);margin-top:12px;max-width:40ch}
+.ac .im{position:relative;flex:1;margin-top:28px;overflow:hidden}
+.ac .im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mask-image:linear-gradient(180deg,transparent 0,#000 30%);-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 30%)}
+.ac .im .wv{position:absolute;left:-6%;right:-6%;bottom:24%}
+.light{position:relative;background:#fff;color:#000;height:1100px;display:grid;place-items:center;overflow:hidden}
+.light .shot{left:50%;top:50%;width:min(880px,82vw);height:620px;transform:translate(-50%,-50%)}
+.light .shot .frame{background:radial-gradient(70% 70% at 50% 45%,#FAFAFA,#ECECEC);border-color:rgba(0,0,0,.12)}
+.light .say{position:relative;z-index:3;text-align:center;font-size:24px;line-height:1.3;letter-spacing:-.6px;font-weight:500;background:rgba(255,255,255,.75);padding:10px 18px;border-radius:12px}
+.full{position:relative;height:min(1000px,110vh);min-height:640px;overflow:hidden;color:#fff}
+.full > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.full::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,.05) 70%)}
+.full .in{position:absolute;z-index:2;left:var(--pad);top:50%;transform:translateY(-35%);max-width:760px}
+.full h2{font-weight:500;font-size:clamp(56px,7.4vw,108px);letter-spacing:-.05em;line-height:.98}
+.full p{font-size:20px;margin-top:18px;color:rgba(255,255,255,.88);max-width:40ch}
+.zero{position:relative;height:210vh;background:#000;color:#fff}
+.zero .zs{position:sticky;top:0;height:100vh;min-height:600px;display:grid;place-items:center;overflow:hidden}
+.zero svg.rings{position:absolute;left:50%;top:50%;width:1500px;height:1500px;transform:translate(-50%,-50%) scale(var(--rs,1));transition:transform .2s linear}
+.zero .in{position:relative;z-index:2;text-align:center}
+.zero b{display:block;font-weight:500;font-size:clamp(160px,22vw,300px);letter-spacing:-.07em;line-height:.85}
+.zero p{font-size:24px;letter-spacing:-.4px;max-width:20ch;margin:20px auto 0;color:rgba(255,255,255,.85)}
+.bento{background:#000;color:#fff;padding:120px var(--pad) 120px}
+.bento .hd h2{font-weight:500;font-size:80px;letter-spacing:-3.6px;line-height:1;max-width:12ch}
+.bento .hd p{font-size:20px;color:rgba(255,255,255,.6);margin-top:18px;max-width:46ch}
+.bg{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:60px}
+.bc{border-radius:24px;background:#141414;padding:40px 40px 34px;min-height:520px;display:flex;flex-direction:column;overflow:hidden;position:relative;min-width:0}
+.bc.wide{grid-column:1 / -1;min-height:440px}
+.bc.lt{background:#F4F4F2;color:#000}
+.bc h4{font-weight:500;font-size:44px;letter-spacing:-1.8px;line-height:1.05;max-width:13ch}
+.bc > p{font-size:15px;color:rgba(255,255,255,.6);margin-top:12px;max-width:44ch}
+.bc.lt > p{color:var(--mute)}
+.bc .vis{margin-top:auto;padding-top:30px}
+.bc .k{font-family:var(--m);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.bc.lt .k{color:var(--mute2)}
+.restbars{display:flex;align-items:flex-end;gap:12px;height:190px;position:relative;border-bottom:1px solid rgba(255,255,255,.15)}
+.restbars i{flex:1;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,#7FD6C8,#2B9C8F);position:relative}
+.restbars i.long{background:linear-gradient(180deg,#F2A04A,#C26616)}
+.restbars i span{position:absolute;left:0;right:0;top:-22px;text-align:center;font-family:var(--m);font-size:11px;color:rgba(255,255,255,.7)}
+.restbars .tgt{position:absolute;left:0;right:0;border-top:1.5px dashed rgba(255,255,255,.45)}
+.restbars .tgt span{position:absolute;right:0;top:-20px;font-family:var(--m);font-size:10.5px;color:rgba(255,255,255,.6)}
+.goup{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:end}
+.goup > div{border-top:1px solid rgba(0,0,0,.12);padding-top:14px}
+.goup b{display:block;font-weight:400;font-size:44px;letter-spacing:-1.8px;line-height:1.1}
+.goup .nx b{color:var(--acc)}
+.phones{background:#000;padding:120px var(--pad) 140px;text-align:center;overflow:hidden}
+.phones h2{font-weight:500;font-size:80px;letter-spacing:-3.6px;line-height:1}
+.phones > p{font-size:20px;color:rgba(255,255,255,.6);margin:18px auto 0;max-width:52ch}
+.pp{display:flex;justify-content:center;gap:28px;margin-top:80px;perspective:1600px}
+.ph9{width:min(330px,40vw);border-radius:54px;border:10px solid #2B2B2D;background:#000;overflow:hidden;box-shadow:0 0 0 1.5px #4A4A4C,0 40px 90px -30px rgba(80,110,255,.35)}
+.ph9 img{width:100%}
+.pp .ph9:first-child{transform:rotateY(10deg) rotateZ(-3deg) translateY(30px)}
+.pp .ph9:last-child{transform:rotateY(-10deg) rotateZ(3deg)}
+.specs{background:#000;color:#fff;padding:20px var(--pad) 120px}
+.specs h3{font-weight:500;font-size:40px;letter-spacing:-1.2px}
+.sg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:36px;border-top:1px solid rgba(255,255,255,.14)}
+.sg > div{padding:26px 26px 26px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.sg .mono{font-size:12px;color:rgba(255,255,255,.5);letter-spacing:.04em}
+.sg p{font-size:18px;margin-top:8px;letter-spacing:-.3px;max-width:28ch}
+.cta{background:#000;color:#fff;text-align:center;padding:40px var(--pad) 140px}
+.cta h2{font-weight:500;font-size:56px;letter-spacing:-2.4px}
+.cta p{font-size:18px;color:rgba(255,255,255,.6);margin-top:10px}
+.cta div{display:flex;gap:10px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+
+/* ---------- HOW IT WORKS ---------- */
+.dsp{font-family:var(--d);font-style:italic;font-weight:600;text-transform:uppercase;letter-spacing:-.005em}
+.hwh{position:relative;margin-top:88px;height:540px;background:#C4C4C4;overflow:hidden}
+.hwh h1{position:absolute;z-index:2;left:var(--pad);bottom:44px;font-size:clamp(64px,7.4vw,112px);line-height:.86;max-width:9ch;color:#000}
+.hwh .m{position:absolute;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px -28px rgba(0,0,0,.5)}
+.hwh .m img{width:100%;height:100%;object-fit:cover}
+.hwh .m1{right:30%;top:16%;width:17%;aspect-ratio:3/4}.hwh .m2{right:9%;top:9%;width:19%;aspect-ratio:4/5}.hwh .m3{right:20%;bottom:-8%;width:14%;aspect-ratio:1}
+.words{padding:150px var(--pad);max-width:1240px;margin:0 auto;font-size:40px;line-height:1.3;letter-spacing:-1.2px;color:rgba(0,0,0,.28)}
+.words span{color:#000}
+.fr{background:#121212;color:#fff;padding:120px var(--pad) 130px;text-align:center}
+.fr .lab{font-size:18px;color:rgba(255,255,255,.6);text-transform:uppercase}
+.fr h2{font-size:40px;letter-spacing:-1px;margin-top:10px}
+.fr > p{font-size:16px;color:rgba(255,255,255,.6);max-width:52ch;margin:12px auto 0}
+.fr3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:64px;text-align:left}
+.fr3 figure{margin:0;position:relative;border-radius:16px;overflow:hidden;aspect-ratio:3/4;background:#222}
+.fr3 img{width:100%;height:100%;object-fit:cover}
+.chip{position:absolute;z-index:3;font-family:var(--m);font-weight:500;font-size:13px;letter-spacing:.02em;background:rgba(255,255,255,.92);color:#000;border-radius:999px;padding:6px 14px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.fr3 figcaption{position:absolute;z-index:3;left:20px;right:20px;bottom:18px;font-size:16px;line-height:1.35;color:#fff;text-shadow:0 1px 14px rgba(0,0,0,.5)}
+.fr3 figure::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.6))}
+.meas{display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;padding:140px var(--pad) 120px}
+.meas > *{min-width:0}
+.meas .stk{position:sticky;top:120px;align-self:start}
+.meas .stk h2{font-size:40px;letter-spacing:-1px;line-height:1.15}
+.meas .stk p{font-size:16px;color:var(--mute);margin:14px 0 24px;max-width:38ch}
+.mi{padding:0 0 70px}
+.mi + .mi{border-top:1px solid var(--line);padding-top:60px}
+.mi .vis{border-radius:20px;background:var(--g3);padding:30px;overflow:hidden;min-height:250px;display:grid;align-items:center}
+.mi h3{font-size:32px;letter-spacing:-1.2px;margin-top:28px}
+.mi p{font-size:16px;color:var(--mute);margin-top:10px;max-width:56ch}
+.start{text-align:center;padding:110px var(--pad) 130px;border-top:1px solid var(--line)}
+.start h2{font-size:40px;letter-spacing:-1px}
+.start p{font-size:16px;color:var(--mute);margin-top:10px}
+.start div{display:flex;gap:10px;justify-content:center;margin-top:26px;flex-wrap:wrap}
+.faq{background:var(--g2);padding:110px var(--pad) 120px;display:grid;grid-template-columns:.8fr 1.2fr;gap:60px}
+.faq > *{min-width:0}
+.faq h2{font-size:40px;letter-spacing:-1px;line-height:1.15}
+.faq details{border-bottom:1px solid #E2E2E2}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;padding:22px 0;font-size:20px;letter-spacing:-.5px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:14px;height:14px;margin-top:6px;background:linear-gradient(#000,#000) center/14px 1.5px no-repeat,linear-gradient(#000,#000) center/1.5px 14px no-repeat;transition:transform .3s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{font-size:16px;color:var(--mute);padding:0 40px 24px 0;max-width:70ch}
+
+/* ---------- FOR GYMS ---------- */
+.gy{background:#000;color:#fff;padding:180px var(--pad) 140px;text-align:center}
+.gy h1{font-weight:500;font-size:44px;letter-spacing:-1.6px;line-height:1.15;max-width:22ch;margin:0 auto}
+.gy .sub{font-size:20px;color:rgba(255,255,255,.62);margin:16px auto 0;max-width:50ch}
+.gylogos{display:flex;justify-content:center;align-items:center;gap:48px;margin:90px auto 120px;flex-wrap:wrap;color:rgba(255,255,255,.55)}
+.gylogos .fp{font-weight:600;font-size:28px;letter-spacing:-1px;display:flex;flex-direction:column;align-items:center;line-height:1}
+.gylogos .fp small{font-family:var(--m);font-weight:400;font-size:10px;letter-spacing:.08em;margin-top:6px}
+.gylogos .slot{border:1.5px dashed rgba(255,255,255,.25);border-radius:999px;padding:12px 26px;font-family:var(--m);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.gy h2{font-weight:500;font-size:48px;letter-spacing:-1.8px}
+.gy .big{font-size:32px;line-height:1.38;letter-spacing:-.8px;color:rgba(255,255,255,.55);max-width:1020px;margin:22px auto 0}
+.gy .big b{font-weight:400;color:#fff}
+.gy .ctas{display:flex;gap:12px;justify-content:center;margin-top:48px;flex-wrap:wrap}
+.gy3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:120px auto 0;max-width:1200px;text-align:left}
+.gy3 > div{border-radius:20px;background:#141414;padding:30px}
+.gy3 .mono{font-size:12px;color:rgba(255,255,255,.5);letter-spacing:.04em}
+.gy3 b{display:block;font-weight:400;font-size:44px;letter-spacing:-1.8px;margin-top:14px}
+.gy3 p{font-size:15px;color:rgba(255,255,255,.62);margin-top:6px}
+.gy .fine{font-size:12px;color:rgba(255,255,255,.4);margin-top:22px}
+
+/* ---------- THE OPEN LAB ---------- */
+.lsub{position:fixed;left:0;right:0;top:0;z-index:62;height:69px;display:none;align-items:center;justify-content:space-between;padding:0 var(--pad);color:#fff;transition:background .35s}
+.lsub.on{background:rgba(0,0,0,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.lsub nav{display:flex;gap:28px;font-size:12px}
+.lsub nav a{text-decoration:none;opacity:.8}.lsub nav a:first-child{opacity:1}
+.lsub nav a:first-child::before{content:"● ";font-size:8px;vertical-align:2px}
+body.on-lab .lsub{display:flex}
+body.on-lab .hdr,body.on-lab .ann{display:none}
+.lhero{position:relative;margin:10px;height:calc(100svh - 20px);min-height:640px;max-height:900px;border-radius:16px;overflow:hidden;background:#111;color:#fff}
+.lhero > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.5)}
+.lhero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,0) 65%),linear-gradient(180deg,rgba(0,0,0,0) 60%,rgba(0,0,0,.7))}
+.lhero .in{position:absolute;z-index:2;left:44px;top:32%}
+.lhero .mono{font-size:16px;font-weight:500;letter-spacing:.02em}
+.lhero h1{font-size:clamp(70px,8.2vw,124px);line-height:.85;margin:16px 0 14px}
+.lhero p{font-size:16px;color:rgba(255,255,255,.85)}
+.lhero .btn{margin-top:22px}
+.lstats{position:absolute;z-index:2;left:44px;right:44px;bottom:70px;display:grid;grid-template-columns:repeat(3,max-content);gap:0}
+.lstats > div{padding:0 44px;border-left:1px solid rgba(255,255,255,.3)}
+.lstats > div:first-child{padding-left:0;border-left:0}
+.lstats b{display:block;font-family:var(--d);font-style:italic;font-weight:600;font-size:46px;line-height:1;text-transform:uppercase}
+.lstats span{font-size:13px;color:rgba(255,255,255,.75)}
+.ticker{position:absolute;z-index:2;left:0;right:0;bottom:0;height:36px;border-top:1px solid rgba(255,255,255,.18);overflow:hidden;display:flex;align-items:center}
+.ticker div{display:flex;gap:64px;white-space:nowrap;font-family:var(--m);font-size:11px;letter-spacing:.06em;color:rgba(255,255,255,.75);animation:tick 40s linear infinite;padding-left:24px}
+@keyframes tick{to{transform:translateX(-50%)}}
+.reveal{background:#000;color:#fff;height:2200px;position:relative}
+.reveal .stick{position:sticky;top:0;height:100svh;display:grid;place-items:center;padding:0 var(--pad)}
+.reveal p{font-size:32px;line-height:1.38;letter-spacing:-.6px;font-weight:500;max-width:1000px;text-align:center}
+.reveal p span{color:rgba(255,255,255,.28);transition:color .25s}
+.reveal p span.lit{color:#fff}
+.wwd{background:var(--g4);padding:110px var(--pad) 120px;text-align:center;position:relative;overflow:hidden}
+.wwd .mono{font-size:14px;font-weight:500}
+.wwd h2{font-size:clamp(48px,5vw,72px);line-height:.95;margin:10px 0 22px}
+.tab{position:relative;z-index:2;width:min(860px,92%);margin:70px auto 0;border-radius:30px;background:#0E0E0E;padding:14px;box-shadow:0 40px 80px -36px rgba(0,0,0,.5)}
+.tab .scr{border-radius:18px;background:#F7F7F6;padding:26px;text-align:left;display:grid;grid-template-columns:1fr 1.2fr;gap:22px}
+.tab .scr > *{min-width:0}
+.tab .t1{font-weight:500;font-size:20px;letter-spacing:-.6px}
+.tab .t2{font-family:var(--m);font-size:10.5px;color:var(--mute2);letter-spacing:.04em;margin-top:2px;text-transform:uppercase}
+.kp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}
+.kp div{background:#fff;border-radius:12px;padding:10px 12px;border:1px solid #EEE}
+.kp b{display:block;font-weight:400;font-size:24px;letter-spacing:-1px}
+.kp span{font-size:11px;color:var(--mute)}
+.hb{margin-top:14px}
+.hb .k{font-family:var(--m);font-size:10px;color:var(--mute2);letter-spacing:.04em;margin-bottom:6px}
+.hbars{display:grid;grid-template-columns:repeat(17,1fr);gap:3px;align-items:end;height:70px}
+.hbars i{display:block;border-radius:3px;background:var(--acc)}
+.mu{background:#fff;border-radius:14px;border:1px solid #EEE;padding:14px 16px}
+.mu .k{font-family:var(--m);font-size:10px;color:var(--mute2);letter-spacing:.04em}
+.mu div{display:grid;grid-template-columns:110px 1fr 40px;gap:10px;align-items:center;font-size:12px;padding:6px 0}
+.mu i{height:8px;border-radius:4px;background:#ECECEC;position:relative;overflow:hidden}
+.mu i u{position:absolute;inset:0 auto 0 0;background:var(--acc);border-radius:4px}
+.mu em{font-style:normal;text-align:right;font-family:var(--m);font-size:11px}
+.pills{position:absolute;inset:0;z-index:1;pointer-events:none}
+.pills span{position:absolute;font-family:var(--m);font-size:11px;letter-spacing:.06em;border:1px solid rgba(0,0,0,.12);background:rgba(255,255,255,.55);border-radius:999px;padding:9px 16px;color:rgba(0,0,0,.6)}
+.fw{background:#000;color:#fff;padding:120px var(--pad)}
+.fw .mono{font-size:14px;font-weight:500;color:rgba(255,255,255,.7)}
+.fw h2{font-size:clamp(48px,5vw,72px);line-height:.95;margin-top:10px}
+.fw3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:56px}
+.fw3 > div{border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:28px;min-height:280px;display:flex;flex-direction:column}
+.fw3 .mono{font-size:22px;color:#fff}
+.fw3 h3{font-size:30px;line-height:1;margin-top:auto}
+.fw3 p{font-size:14px;color:rgba(255,255,255,.62);margin-top:10px}
+.cmp{background:var(--g1);padding:110px var(--pad) 120px}
+.cmp .hd{text-align:center}
+.cmp .mono{font-size:14px;font-weight:500}
+.cmp h2{font-size:clamp(48px,5vw,72px);line-height:.95;margin-top:10px}
+.ct{max-width:1100px;margin:56px auto 0;border-top:1px solid #D6D6D6}
+.ct > div{display:grid;grid-template-columns:1.5fr 1fr 1fr;align-items:center;border-bottom:1px solid #D6D6D6;padding:14px 0;font-size:14px}
+.ct > div > span:not(:first-child){text-align:center}
+.ct .th{font-family:var(--m);font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:rgba(0,0,0,.65)}
+.ct .ok{color:#0F7B3E;font-size:16px}.ct .no{color:#C2271C;font-size:16px}
+.ct .lbl{display:flex;align-items:center;gap:10px}
+.ct .lbl i{width:22px;height:22px;border-radius:6px;background:#fff;border:1px solid #DDD;display:grid;place-items:center;font-style:normal;font-size:11px;color:var(--acc)}
+.plans{background:var(--g1);padding:40px var(--pad) 130px;text-align:center}
+.plans h2{font-size:clamp(48px,5vw,72px);line-height:.95;margin:10px 0 22px}
+.p3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:64px;text-align:left;align-items:start}
+.pc{background:#fff;border-radius:20px;padding:30px;border:1px solid #E3E3E3}
+.pc.pop{border:2px solid var(--blue2);transform:translateY(-14px);box-shadow:0 30px 60px -36px rgba(21,57,245,.4)}
+.pc .h{display:flex;justify-content:space-between;align-items:center}
+.pc h3{font-size:40px;line-height:1}
+.pc .badge{font-family:var(--m);font-size:10px;letter-spacing:.04em;color:var(--blue2);border:1px solid var(--blue2);border-radius:999px;padding:3px 8px}
+.pc .price{font-family:var(--m);font-weight:500;font-size:16px;margin-top:14px}
+.pc .ds{font-size:14px;color:var(--mute);margin-top:10px;min-height:66px}
+.pc .btn{width:100%;margin-top:18px}
+.pc ul{list-style:none;padding:0;margin:26px 0 0;border-top:1px solid #EEE}
+.pc li{display:flex;gap:10px;align-items:center;font-size:14px;padding:11px 0;border-bottom:1px solid #F2F2F2}
+.pc li::before{content:"";width:18px;height:18px;border-radius:5px;flex:none;background:#EEF1FE url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.5l2.6 2.6L13 6.6' fill='none' stroke='%231539F5' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/18px no-repeat}
+.pc .inc{font-weight:500;font-size:14px;margin-top:26px}
+.proc{display:grid;grid-template-columns:1fr 1fr;gap:60px;padding:120px var(--pad) 120px;background:var(--g1)}
+.proc > *{min-width:0}
+.proc .stk{position:sticky;top:140px;align-self:start}
+.proc .mono{font-size:14px;font-weight:500}
+.proc h2{font-size:clamp(48px,4.6vw,66px);line-height:.95;margin-top:12px}
+.step{background:#fff;border-radius:20px;border:1px solid #E3E3E3;padding:28px 30px 30px;margin-bottom:16px}
+.step .n{font-family:var(--m);font-size:22px;font-weight:500;color:var(--blue2)}
+.step h3{font-size:32px;line-height:1;margin-top:14px}
+.step p{font-size:14px;color:var(--mute);margin-top:8px;max-width:48ch}
+.step .btn{margin-top:16px}
+.stories{background:#000;color:#fff;padding:110px 0 120px}
+.stories .hd{padding:0 var(--pad);text-align:center}
+.stories .mono{font-size:14px;font-weight:500;color:rgba(255,255,255,.7)}
+.stories h2{font-size:clamp(48px,5vw,72px);line-height:.95;margin-top:10px}
+.st4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:56px;padding:0 var(--pad)}
+.st4 figure{margin:0;position:relative;border-radius:16px;overflow:hidden;aspect-ratio:9/14;background:#1a1a1a}
+.st4 img{width:100%;height:100%;object-fit:cover;filter:brightness(.6) grayscale(.2)}
+.st4 .ep{position:absolute;z-index:2;left:16px;top:16px;font-family:var(--m);font-size:11px;letter-spacing:.04em;background:rgba(255,255,255,.92);color:#000;border-radius:999px;padding:4px 10px}
+.st4 figcaption{position:absolute;z-index:2;left:16px;right:16px;bottom:16px}
+.st4 figcaption b{display:block;font-weight:500;font-size:20px;letter-spacing:-.5px}
+.st4 figcaption span{font-size:13px;color:rgba(255,255,255,.7)}
+.loc{position:relative;height:720px;overflow:hidden;color:#fff;display:grid;place-items:center;text-align:center;background:#737373}
+.loc > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55)}
+.loc .in{position:relative;z-index:2;display:grid;justify-items:center;gap:12px}
+.loc .mono{font-size:16px;font-weight:500}
+.loc h2{font-weight:500;font-size:32px;letter-spacing:-.8px}
+.find{background:var(--g1);display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:110px var(--pad) 120px}
+.find h3{font-size:36px;line-height:1}
+.find p{font-size:16px;margin-top:14px;max-width:34ch}
+.find .mono{font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--mute);margin-top:22px}
+.find .mono + p{margin-top:4px}
+
+/* ---------- the box, photographed (his iPhone shots of the printed prototype, cut out) ---------- */
+.prod{position:absolute;z-index:2}
+.prod img{display:block;width:100%;height:auto}
+.camp .cprod{left:50%;top:23%;width:min(580px,39%)}
+.camp .cprod img{filter:drop-shadow(0 38px 30px rgba(70,56,36,.34)) drop-shadow(0 8px 10px rgba(40,30,20,.3))}
+.camp .floor{left:51%;top:69%;width:38%;transform:none}
+.pscene{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(62% 58% at 50% 44%,#2C3039 0%,#15171B 52%,#0B0B0C 100%)}
+.pscene img{width:58%;height:auto;filter:brightness(1.22) contrast(1.02) drop-shadow(0 34px 40px rgba(0,0,0,.65))}
+.bhero .bscene{position:absolute;inset:0;background:radial-gradient(48% 44% at 50% 38%,#2B2F38 0%,#111216 58%,#000 100%)}
+.bhero::after{z-index:1}
+.bhero > img.bprod{position:absolute;z-index:2;inset:auto;left:50%;top:37%;width:min(520px,50vw);height:auto;object-fit:contain;transform:translate(-50%,-50%);filter:brightness(1.25) contrast(1.02) drop-shadow(0 60px 60px rgba(0,0,0,.8));animation:bfloat 7s ease-in-out infinite}
+@keyframes bfloat{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-50%,-52.5%)}}
+.light{background:radial-gradient(70% 60% at 50% 42%,#FFFFFF 0%,#F3F3F1 70%,#ECECEA 100%)}
+.light .lprod{left:50%;top:43%;width:min(760px,64vw);transform:translate(-50%,-50%)}
+.light .lprod img{filter:drop-shadow(0 50px 40px rgba(0,0,0,.28)) drop-shadow(0 10px 12px rgba(0,0,0,.25))}
+.light .say{position:absolute;left:0;right:0;bottom:11%;background:none;padding:0}
+.hwh .mb{background:radial-gradient(70% 70% at 50% 40%,#F4F2EE,#D6D1C7)}
+.hwh .mb img{object-fit:contain!important;padding:12%;filter:drop-shadow(0 18px 18px rgba(0,0,0,.3))}
+.angles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:36px}
+.angles figure{margin:0;position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;display:grid;place-items:center;background:radial-gradient(70% 70% at 50% 42%,#2A2D34,#121316)}
+.angles img{width:64%;height:auto;filter:brightness(1.22) contrast(1.02) drop-shadow(0 24px 26px rgba(0,0,0,.6))}
+.angles figcaption{position:absolute;left:18px;bottom:14px;font-family:var(--m);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.anote{font-size:13px;color:rgba(255,255,255,.45);margin-top:12px}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  :root{--pad:28px}
+  .nav{display:none}
+  .camp .txt{left:56px}
+  .pg2,.bg,.fr3,.meas,.faq,.proc,.find{grid-template-columns:1fr}
+  .meas .stk,.proc .stk{position:static}
+  .st4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .p3,.fw3,.gy3{grid-template-columns:1fr}
+  .pc.pop{transform:none}
+  .fcols{grid-template-columns:repeat(2,1fr)}
+  .fcols > div:nth-child(3){border-left:0;padding-left:0}
+  .floorsec{grid-template-columns:1fr}
+  .pstat{min-height:0}
+}
+@media (max-width:760px){
+  :root{--pad:16px}
+  .ann{font-size:11.5px}
+  .hdr{top:32px;padding:0 12px}
+  .hdr .bar{grid-template-columns:auto 1fr;padding:0 6px 0 12px}
+  .hdr .logo{justify-self:start;order:-1}
+  .hl{order:3}
+  .hl .burger{margin:0}
+  .hr{order:2;gap:10px}
+  .hr .btn.b{display:none}
+  .mtry{display:inline}
+  .hdr .bar{display:flex}
+  .hdr .hr{margin-left:auto}
+  .hero{margin:52px 8px 0;height:calc(100svh - 100px);min-height:520px}
+  .hero .art{top:18%;font-size:clamp(58px,19vw,96px)}
+  .hero .cap{bottom:58px}
+  .hero .cap p{font-size:16px;line-height:1.35}
+  .camp{height:auto;min-height:760px;margin:8px}
+  .camp .txt{position:relative;left:auto;top:auto;transform:none;max-width:none;text-align:center;padding:56px 22px 0}
+  .camp h2{font-size:36px;letter-spacing:-1.4px}
+  .camp .ctas{justify-content:center}
+  .camp .ctas .btn{min-width:0;flex:1;max-width:170px}
+  .camp .shot{left:8%;right:8%;width:auto;top:auto;bottom:90px;height:300px}
+  .camp .floor{left:50%;top:auto;bottom:70px;transform:translateX(-50%);width:70%}
+  .camp .wv{left:0;top:auto;bottom:240px}
+  .coll{height:auto;padding:110px 0 120px}
+  .coll .mid{position:relative;left:auto;top:auto;transform:none;margin:0 auto}
+  .coll h2{font-size:32px}
+  .coll .c{position:relative;left:auto;right:auto;top:auto;bottom:auto;display:none}
+  .coll .c2,.coll .c4,.coll .c5{display:block;width:46%}
+  .coll .c2{margin:0 0 50px 4%}
+  .coll .c4{margin:56px 0 0 0}
+  .coll .c5{margin:-40px 0 0 52%}
+  .stat{height:700px}
+  .stat h2{font-size:32px;padding:80px 16px 0}
+  .stat .row{gap:14px;margin-top:40px}
+  .stat .row span{font-size:12px}
+  .stat .row b{font-size:40px}
+  .stat .big{left:-40%;right:-40%;height:380px}
+  .stage{padding:90px 0}
+  .stage h2{font-size:32px}
+  .tabs{margin:36px auto 28px;flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tabs button{flex:none;padding:6px 16px}
+  .rc .ph{aspect-ratio:4/5}
+  .note{left:12px;right:12px;top:auto;bottom:14px;transform:none;min-width:0}
+  .pair{padding:80px 16px 50px}
+  .pair .ttl h3,.pair .ttl p{font-size:26px}
+  .ptxt{padding:26px;font-size:17px}
+  .pstat b{font-size:64px}
+  .appi{padding:90px 16px}
+  .appi h2{font-size:32px}
+  .appi .vid{margin-top:50px}
+  .floorsec{padding:70px 16px 80px;min-height:0}
+  .floorsec h2{font-size:36px}
+  .nums{gap:24px;margin-top:40px}
+  .nums > div + div{padding-left:24px}
+  .plogos{gap:18px}
+  .fcols{grid-template-columns:1fr}
+  .fcols > div{border-left:0;padding-left:0;padding-right:0;border-bottom:1px solid var(--line)}
+  .frow{grid-template-columns:1fr}
+  .frow > div{border-left:0;padding-left:0}
+  .bhero h1{font-size:72px}
+  .acc{padding:90px 0}
+  .acc h2,.bento .hd h2,.phones h2{font-size:44px;letter-spacing:-1.8px}
+  .ac{height:540px}
+  .ac h3{font-size:26px}
+  .light{height:760px}
+  .light .shot{height:440px}
+  .full .in{left:16px;right:16px}
+  .zero{height:180vh}
+  .zero svg.rings{width:1000px;height:1000px}
+  .bento{padding:90px 16px}
+  .bc{padding:28px 24px;min-height:440px}
+  .bc h4{font-size:32px;letter-spacing:-1.2px}
+  .goup b{font-size:28px}
+  .phones{padding:90px 16px}
+  .pp{gap:10px}
+  .ph9{border-width:6px;border-radius:34px}
+  .sg{grid-template-columns:1fr}
+  .cta h2{font-size:36px}
+  .hwh{margin-top:84px;height:520px}
+  .hwh h1{font-size:64px;bottom:30px}
+  .hwh .m1{right:6%;top:8%;width:36%}.hwh .m2{display:none}.hwh .m3{right:46%;top:12%;bottom:auto;width:30%}
+  .words{font-size:28px;padding:90px 16px}
+  .fr{padding:90px 16px}
+  .fr h2,.meas .stk h2,.start h2,.faq h2{font-size:32px}
+  .meas{padding:90px 16px}
+  .mi h3{font-size:26px}
+  .faq{padding:80px 16px}
+  .faq summary{font-size:17px}
+  .gy{padding:150px 16px 100px}
+  .gy h1{font-size:34px}
+  .gy h2{font-size:34px}
+  .gy .big{font-size:22px}
+  .lsub nav{display:none}
+  .lhero .in{left:22px;right:22px;top:20%}
+  .lstats{left:22px;right:22px;bottom:60px;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .lstats > div{padding:0 12px}
+  .lstats b{font-size:26px;white-space:nowrap}
+  .lstats span{font-size:11px;display:block;line-height:1.3;margin-top:4px}
+  .lhero .tag{top:80px;bottom:auto!important}
+  .pc .ds{min-height:0}
+  .reveal p{font-size:24px}
+  .tab .scr{grid-template-columns:1fr}
+  .pills{display:none}
+  .ct > div{grid-template-columns:1.3fr .8fr .8fr;font-size:13px}
+  .st4{grid-template-columns:1fr 1fr;gap:10px}
+  .loc{height:560px}
+  .camp .cprod{left:14%;right:14%;width:auto;top:auto;bottom:150px}
+  .camp .floor{left:50%;top:auto;bottom:126px;transform:translateX(-50%);width:66%}
+  .bhero > img.bprod{width:76vw;top:33%}
+  .light .lprod{width:86vw;top:42%}
+  .angles{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+
+<div class="ann"><span class="al">Introducing First set: real people, their first workout with the box.</span><span class="as">Introducing First set.</span><a href="#lab">See the series</a></div>
+
+<header class="hdr" id="hdr">
+  <div class="bar">
+    <div class="hl">
+      <button class="burger" type="button" aria-label="Open menu" data-open><i></i></button>
+      <nav class="nav" aria-label="Main">
+        <a href="#box">The box</a><a href="#how">How it works</a><a href="#gyms">For gyms</a><a href="#lab">The open lab</a>
+      </nav>
+    </div>
+    <a class="logo" href="#home" aria-label="readout home"><b>readout</b><span class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></span></a>
+    <div class="hr">
+      <a class="mtry" href="#lab">Try it free</a>
+      <span class="lang"><i aria-hidden="true"></i>EN</span>
+      <a class="btn b" href="#lab">Try it free</a>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="top"><a class="logo" href="#home"><b>readout</b><span class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></span></a><button class="x" type="button" aria-label="Close menu" data-close>✕</button></div>
+  <nav aria-label="Menu"><a href="#home">Home</a><a href="#box">The box</a><a href="#how">How it works</a><a href="#gyms">For gyms</a><a href="#lab">The open lab</a></nav>
+  <div class="foot"><a class="btn b lg" href="#lab">Try it free</a><a class="btn og lg" href="#gyms">Run a pilot</a></div>
+</div>
+
+<!-- =================================== HOME =================================== -->
+<main class="pg" data-p="home">
+  <section class="hero" aria-roledescription="carousel" aria-label="Highlights">
+    <div class="sl on">
+      <picture><source media="(max-width:760px)" srcset="fp/first-workout-tall.jpg"><img src="fp/first-workout.jpg" alt="A trainer beside a woman on a leg machine at FitPods, both smiling" style="object-position:50% 40%"></picture>
+      <div class="shade"></div>
+      <p class="art" aria-hidden="true">First set</p>
+      <div class="cap"><p>A new series: real people, their first workout with the box.</p><div><a class="btn ow" href="#how">How it works</a><a class="btn w" href="#lab">Be in episode 1</a></div></div>
+    </div>
+    <div class="sl">
+      <img src="fp/pod09-machines.jpg" alt="Pod 09 at FitPods: a row of machines with weight stacks" style="object-position:50% 55%">
+      <div class="shade"></div>
+      <p class="art" aria-hidden="true">Your gym, measured</p>
+      <div class="cap"><p>For gym owners: every machine, every hour, every member who got stronger.</p><div><a class="btn ow" href="#gyms">For gyms</a><a class="btn w" href="#gyms">Run a pilot</a></div></div>
+    </div>
+    <div class="sl">
+      <img src="fp/pod-numbers.jpg" alt="The FitPods corridor with the pod numbers on the wall" style="object-position:30% 50%">
+      <div class="shade"></div>
+      <p class="art" aria-hidden="true">The open lab</p>
+      <div class="cap"><p>FitPods, Brno: fourteen pods, every rep counted in public.</p><div><a class="btn ow" href="#lab">Visit the lab</a><a class="btn w" href="#lab">Book a free workout</a></div></div>
+    </div>
+    <div class="dots" role="tablist" aria-label="Slides"><button class="on" aria-label="Slide 1"></button><button aria-label="Slide 2"></button><button aria-label="Slide 3"></button></div>
+  </section>
+
+  <section class="camp" aria-label="The box">
+    <div class="txt">
+      <p class="lab">The box</p>
+      <h2>Counts every rep.</h2>
+      <p class="s">A small box on the weight stack. Reps, sets and rest, without a single tap.</p>
+      <div class="ctas"><a class="btn b" href="#lab">Try it free</a><a class="btn l" href="#box">Explore</a></div>
+    </div>
+    <div class="wv" data-wave='{"w":900,"h":220,"reps":10,"amp":0.7,"id":"cw"}'></div>
+    <div class="floor"></div>
+    <div class="prod cprod"><img src="box/box-top.webp" alt="The readout box, the printed prototype" width="1100" height="776"></div>
+  </section>
+
+  <section class="coll" aria-label="How we test">
+    <div class="c c1"><img src="fp/cable-fly.jpg" alt="" style="object-position:40% 30%"></div>
+    <div class="c c2"><img src="fp/leg-press.jpg" alt="" style="object-position:70% 50%"></div>
+    <div class="c c3"><img src="fp/lat-pulldown.jpg" alt=""></div>
+    <div class="mid">
+      <h2>Every count, checked by hand.</h2>
+      <p>Our test: a thousand reps, filmed and counted by people. The results go up here.</p>
+      <a class="btn k" href="#how">How we test</a>
+    </div>
+    <div class="c c4"><img src="fp/coach-machine.jpg" alt=""></div>
+    <div class="c c5"><img src="fp/07-trenink-cinka.jpg" alt="" style="object-position:60% 40%"></div>
+    <div class="c c6"><img src="fp/18-detail-kotouce.jpg" alt=""></div>
+  </section>
+
+  <section class="stat" aria-label="Nothing to type">
+    <h2>Nothing to type between sets.</h2>
+    <div class="row"><span>You tap</span><b>0 times</b><span>during a set</span></div>
+    <div class="big"><div class="glow"></div><div data-wave='{"w":1700,"h":560,"reps":10,"amp":0.82,"id":"bw","strands":5}'></div></div>
+    <p class="fine">The box counts from the weight stack. The app shows the set when you look.</p>
+  </section>
+
+  <section class="stage" aria-label="Every set, measured"><div class="pin">
+    <div class="head"><h2>Every set, measured</h2><p>What the box counts, and what each number tells you about the next set.</p></div>
+    <div class="tabs" role="tablist" aria-label="What it measures">
+      <button role="tab" aria-selected="true" data-i="0">Reps</button><button role="tab" aria-selected="false" data-i="1">Rest</button><button role="tab" aria-selected="false" data-i="2">Next step</button><button role="tab" aria-selected="false" data-i="3">Progress</button><button role="tab" aria-selected="false" data-i="4">For gyms</button>
+    </div>
+    <div class="rail" id="rail">
+      <article class="rc on"><div class="ph"><img src="fp/leg-press.jpg" alt="A man on the leg press at FitPods" style="object-position:72% 50%"><div class="note"><span class="ni"><svg width="16" height="16" viewBox="0 0 22 22"><rect x="4" y="5" width="14" height="12" rx="3" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="11" cy="11" r="2.2" fill="#8CA2FF"/></svg></span><div><b>Leg press · 85 kg</b><i>8 of 10 reps</i></div><span class="nb">✕</span><span class="nb ok">✓</span></div></div><h3>Counts while you lift</h3><p>The box counts every rep from the stack. Your phone stays in your pocket.</p></article>
+      <article class="rc"><div class="ph"><img src="fp/rest-chat.jpg" alt="Two people talking between sets, one holding a shaker"><div class="note"><span class="ni"><svg width="16" height="16" viewBox="0 0 22 22"><circle cx="11" cy="12" r="7" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M11 8v4l2.5 2" stroke="#7FD6C8" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span><div><b>Rest 1:12</b><i>Next set in 0:48</i></div><span class="nb ok">✓</span></div></div><h3>Rest that times itself</h3><p>The clock starts when the stack lands and stops when you lift again.</p></article>
+      <article class="rc"><div class="ph"><img src="fp/18-detail-kotouce.jpg" alt="Weight plates, ready for the next step up"><div class="note"><span class="ni"><svg width="16" height="16" viewBox="0 0 22 22"><path d="M11 17V5M6 10l5-5 5 5" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Next time: 90 kg</b><i>10 · 10 · 10, twice in a row</i></div><span class="nb ok">✓</span></div></div><h3>Knows when to go up</h3><p>Every set at the top of your range, twice in a row. Then it adds the smallest step.</p></article>
+      <article class="rc"><div class="ph"><img src="fp/high-five.jpg" alt="A high five after a workout at FitPods" style="object-position:50% 35%"><div class="note"><span class="ni"><svg width="16" height="16" viewBox="0 0 22 22"><path d="M4 16l5-5 3 3 6-7" stroke="#F2A04A" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>This month: 8,650 kg</b><i>+12% on October</i></div><span class="nb ok">✓</span></div></div><h3>Progress you can see</h3><p>Every set is kept, so the months add up to a line that goes somewhere.</p></article>
+      <article class="rc"><div class="ph"><img src="fp/pod09-machines.jpg" alt="Pod 09 at FitPods: machines with weight stacks"><div class="note"><span class="ni"><svg width="16" height="16" viewBox="0 0 22 22"><rect x="4" y="11" width="3" height="6" rx="1" fill="#fff"/><rect x="9.5" y="7" width="3" height="10" rx="1" fill="#fff"/><rect x="15" y="4" width="3" height="13" rx="1" fill="#8CA2FF"/></svg></span><div><b>Hip thrust: the busiest machine</b><i>Pod 09 · this week</i></div><span class="nb ok">✓</span></div></div><h3>Your gym floor, measured</h3><p>For owners: which machines earn their space, and when the gym is full.</p></article>
+    </div>
+    <p class="fine">Numbers in the pictures are samples until the pilot runs.</p>
+  </div></section>
+
+  <section class="pair dark" aria-label="The box">
+    <div class="ttl"><h3>The box</h3><p>Counts every rep, set and rest.</p></div>
+    <div class="pg2">
+      <div>
+        <div class="pimg"><div class="pscene"><img src="box/box-end.webp" alt="The readout box from the end, with the USB slot" width="1100" height="883"></div></div>
+        <div class="pname"><h4>The box</h4><a class="btn b" href="#lab">Try it free</a><a class="btn ow" href="#box">Learn more</a></div>
+      </div>
+      <div>
+        <div class="ptxt">A small box that clips onto the weight stack. It counts every rep, every set and every rest by itself, so nothing gets typed and nothing gets guessed.</div>
+        <div class="pstat"><span class="mono">To fit it</span><b>2 magnets</b><p>No screws, no tools. On the stack in seconds.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pair" aria-label="The app">
+    <div class="ttl"><h3>The app</h3><p>Your training, measured.</p></div>
+    <div class="pg2">
+      <div>
+        <div class="pimg" style="display:grid;place-items:center"><div class="ph9" style="width:min(220px,46%);border-width:7px;border-radius:36px;box-shadow:0 30px 60px -30px rgba(0,0,0,.35)"><img src="ro5/own-home.jpg" alt="The readout app, today screen"></div></div>
+        <div class="pname"><h4>The app</h4><a class="btn b" href="#lab">Try it free</a><a class="btn og" href="#how">Learn more</a></div>
+      </div>
+      <div class="ptxt">The app opens on one thing: what to do next. Everything else waits until you ask for it.
+        <div class="fl">
+          <div><svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="10" fill="none" stroke="#000" stroke-width="1.6"/><path d="M9 13h8M14 9.5l3.5 3.5L14 16.5" stroke="#000" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><b>One next step</b><p>Open it and see the next machine, the weight and the reps.</p></div>
+          <div><svg width="26" height="26" viewBox="0 0 26 26"><path d="M4 18a9 9 0 0 1 18 0" fill="none" stroke="#000" stroke-width="1.6"/><path d="M13 18l4-5" stroke="#2747D6" stroke-width="1.8" stroke-linecap="round"/></svg><b>A score after every workout</b><p>From 0 to 100, with what made it and what would raise it.</p></div>
+          <div><svg width="26" height="26" viewBox="0 0 26 26"><path d="M4 19l6-6 4 4 8-9" stroke="#000" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Progress you can see</b><p>Every set kept, every week compared, no notebook.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="appi" aria-label="The app">
+    <h2>The app, built around your next step.</h2>
+    <p>Made to make every number clearer and every next set obvious.</p>
+    <div class="st"><span class="btn og">App Store · soon</span><span class="btn og">Google Play · soon</span></div>
+    <div class="vid"><div><p class="mono">Introducing First set</p><small>Film to come: episode 1, shot at FitPods.</small></div><span class="play" aria-hidden="true"><svg width="12" height="14" viewBox="0 0 12 14"><path d="M1 1l10 6-10 6z" fill="#000"/></svg></span></div>
+  </section>
+
+  <section class="floorsec" aria-label="One gym, one system">
+    <div class="t">
+      <h2>Every rep at FitPods, on one system.</h2>
+      <p>Fourteen private training pods in Brno, one box on each machine. The first gym on readout.</p>
+      <div class="nums"><div><b data-count="14">14</b><span>Pods at FitPods</span></div><div><b data-count="1">1</b><span>Gym so far</span></div></div>
+    </div>
+    <div class="globe">
+      <div class="disc"><img src="fp/pod-numbers.jpg" alt="The FitPods corridor with the pod numbers on the wall" style="object-position:22% 50%"></div>
+      <div class="gc" style="left:52%;top:22%"><p class="mono">Most used · sample</p><b>Leg press</b><span>Pod 08, Brno</span></div>
+      <div class="gc" style="left:40%;top:44%"><p class="mono">Busiest · sample</p><b>6 to 8 pm</b><span>Weekdays</span></div>
+    </div>
+  </section>
+
+  <section class="partners" aria-label="First gyms">
+    <p class="mono">First gyms</p>
+    <div class="plogos"><span class="fp">FitPods<small>Brno</small></span><span class="slot">Your gym</span><span class="slot">Your gym</span><span class="slot">Your gym</span></div>
+  </section>
+</main>
+
+<!-- =================================== THE BOX =================================== -->
+<main class="pg" data-p="box">
+  <section class="bhero">
+    <div class="bscene" aria-hidden="true"></div>
+    <img class="bprod" src="box/box-front.webp" alt="The readout box, the printed prototype, from the front" width="1240" height="981">
+    <div class="in"><h1>the box</h1><p class="k">A small box on every gym machine.</p><p>It counts reps, sets and rest by itself, so your phone stays in your pocket.</p><a class="btn b lg" href="#lab">Try it free</a></div>
+  </section>
+
+  <section class="acc dark" aria-label="Built for the weight stack">
+    <div class="hd"><h2>Built for the weight stack</h2><div class="arrows"><button type="button" aria-label="Previous" data-acc="-1">←</button><button type="button" aria-label="Next" data-acc="1">→</button></div></div>
+    <div class="accr" id="accr">
+      <article class="ac"><div class="tx"><h3>Clips onto the stack</h3><p>Two magnets hold it on the weight stack. It goes on in seconds and comes off just as fast.</p></div><div class="im"><img src="fp/14-pod-fitpods-pytel.jpg" alt=""></div></article>
+      <article class="ac"><div class="tx"><h3>Counts from the movement</h3><p>Every rep moves the stack. The box feels each one and counts it, set by set.</p></div><div class="im" style="background:#141414"><div class="wv" data-wave='{"w":600,"h":220,"reps":8,"amp":0.78,"id":"aw"}'></div></div></article>
+      <article class="ac"><div class="tx"><h3>Made in a real gym</h3><p>We build it and test it at FitPods: fourteen training pods in Brno.</p></div><div class="im"><img src="fp/pod-numbers.jpg" alt="" style="object-position:20% 50%"></div></article>
+      <article class="ac"><div class="tx"><h3>Nothing to press</h3><p>No screen and no buttons on the box. The numbers show up in the app.</p></div><div class="im"><img src="fp/cable-fly.jpg" alt="" style="object-position:50% 25%"></div></article>
+    </div>
+  </section>
+
+  <section class="light" aria-label="Two magnets">
+    <div class="prod lprod"><img src="box/box-top2.webp" alt="The readout box from above" width="1200" height="847"></div>
+    <p class="say">Two magnets. No screws.<br>On the stack in seconds.</p>
+  </section>
+
+  <section class="full" aria-label="Clip it on">
+    <img src="fp/lat-pulldown.jpg" alt="A man pulling down on a cable machine at FitPods" style="object-position:60% 40%">
+    <div class="in"><h2>Clip it on. Lift.</h2><p>Your phone stays in your pocket. The box does the counting.</p></div>
+  </section>
+
+  <section class="zero" aria-label="Zero taps"><div class="zs">
+    <svg class="rings" viewBox="0 0 1500 1500" aria-hidden="true"><g fill="none" stroke="#5B78FF"><circle cx="750" cy="750" r="200" stroke-width="2" opacity=".9"/><circle cx="750" cy="750" r="420" stroke-width="2.5"/><circle cx="750" cy="750" r="440" stroke-width="1.5" opacity=".5"/><circle cx="750" cy="750" r="690" stroke-width="3"/></g></svg>
+    <div class="in"><b>0</b><p data-words>taps during a set, so your head stays in the lift.</p></div>
+  </div></section>
+
+  <section class="bento" aria-label="What the box tells the app">
+    <div class="hd"><h2>What the box tells the app</h2><p>Four readings from every workout, each with a plain sentence that says what it means.</p></div>
+    <div class="bg">
+      <div class="bc"><p class="k">Workout score</p><h4>A score for every workout</h4><p>From 0 to 100: full sets, steady rests and progress add up to one number.</p><div class="vis" data-scale='{"v":78,"w":520,"h":70,"id":"s1"}'></div></div>
+      <div class="bc"><p class="k">Rest</p><h4>Rest, measured</h4><p>Long rests are fine on heavy sets. On light ones they only make the workout longer.</p>
+        <div class="vis"><div class="restbars" aria-label="Rest per set, sample"><span class="tgt" style="bottom:56%"><span>plan 2:00</span></span><i style="height:48%"><span>1:46</span></i><i style="height:55%"><span>2:02</span></i><i class="long" style="height:86%"><span>3:24</span></i><i style="height:52%"><span>1:58</span></i><i style="height:60%"><span>2:12</span></i><i class="long" style="height:78%"><span>3:02</span></i></div></div></div>
+      <div class="bc wide lt"><p class="k">Next step</p><h4>When to go up</h4><p>Every set at the top of your range, twice in a row. Then the smallest step up.</p>
+        <div class="vis"><div class="goup"><div><p class="k">Monday · 80 kg</p><b>10 · 10 · 10</b></div><div><p class="k">Thursday · 80 kg</p><b>10 · 10 · 10</b></div><div class="nx"><p class="k">Next time</p><b>85 kg</b></div></div></div></div>
+      <div class="bc wide"><p class="k">This month · sample</p><h4>8,650 kg lifted</h4><p>Every set kept, so the months add up.</p><div class="vis" data-scale='{"v":8650,"max":10000,"w":1100,"h":80,"g":"prog","labels":["0","5,000","10,000 kg"],"id":"s2","num":false}'></div></div>
+    </div>
+  </section>
+
+  <section class="phones dark" aria-label="Box and app">
+    <h2>The box and the app, together</h2>
+    <p>The box counts in the gym. The app explains it afterwards and sets up your next workout.</p>
+    <div class="pp"><div class="ph9"><img src="ro5/own-live.jpg" alt="The app during a set"></div><div class="ph9"><img src="ro5/own-finish.jpg" alt="The app after a workout"></div></div>
+  </section>
+
+  <section class="specs" aria-label="In the box">
+    <h3>In the box</h3>
+    <div class="angles"><figure><img src="box/box-top.webp" alt="The box from above" loading="lazy"><figcaption>From above</figcaption></figure><figure><img src="box/box-face.webp" alt="The side of the box with the slots" loading="lazy"><figcaption>The side</figcaption></figure><figure><img src="box/box-end.webp" alt="The end of the box with the USB slot" loading="lazy"><figcaption>The USB end</figcaption></figure></div>
+    <p class="anote">Shown: the 3D-printed prototype, photographed on an iPhone.</p>
+    <div class="sg">
+      <div><p class="mono">The box</p><p>A small, solid box for the weight stack. No screen, no buttons.</p></div>
+      <div><p class="mono">Holder</p><p>Shaped to the box, with two magnets.</p></div>
+      <div><p class="mono">Power</p><p>A CR2477 coin cell, inside the lid.</p></div>
+      <div><p class="mono">Updates</p><p>A USB slot under the lid.</p></div>
+      <div><p class="mono">Fits</p><p>Machines with a weight stack first.</p></div>
+      <div><p class="mono">Works with</p><p>The readout app, on iPhone and Android (coming).</p></div>
+    </div>
+  </section>
+
+  <section class="cta"><h2>Try it free at FitPods.</h2><p>One workout in Brno, with the box on the machines.</p><div><a class="btn b lg" href="#lab">Book a free workout</a><a class="btn ow lg" href="#gyms">For gyms</a></div></section>
+</main>
+
+<!-- =================================== HOW IT WORKS =================================== -->
+<main class="pg" data-p="how">
+  <section class="hwh">
+    <h1 class="dsp">How the readout box works</h1>
+    <div class="m m1"><img src="fp/first-workout-tall.jpg" alt="" style="object-position:55% 40%"></div>
+    <div class="m m2"><img src="fp/pod09-machines.jpg" alt=""></div>
+    <div class="m m3 mb"><img src="box/box-end.webp" alt="The readout box"></div>
+  </section>
+
+  <p class="words">The box reads <span>reps, sets and rest</span> straight from the weight stack. The app turns them into <span>a score</span>, <span>your progress</span> and <span>one next step</span>, in words anyone can read.</p>
+
+  <section class="fr">
+    <p class="lab">How it works</p>
+    <h2>From set to next step</h2>
+    <p>The box counts while you train. Every reading is held against your own last workout, so you see what changed and why.</p>
+    <div class="fr3">
+      <figure><img src="fp/leg-press.jpg" alt="A man on the leg press" style="object-position:74% 50%"><span class="chip" style="left:20px;top:20px">8 of 10</span><figcaption>The box counts the set.</figcaption></figure>
+      <figure><img src="fp/rest-chat.jpg" alt="Two people talking between sets" style="object-position:45% 50%"><span class="chip" style="right:20px;top:20px">Rest 1:12</span><figcaption>The rest times itself.</figcaption></figure>
+      <figure><img src="fp/18-detail-kotouce.jpg" alt="Weight plates on a rack"><span class="chip" style="left:20px;top:20px">Next: 90 kg</span><figcaption>The app sets up next time.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="meas">
+    <div class="stk"><h2>What the box measures</h2><p>Four readings from the stack, each explained in one plain sentence.</p><a class="btn k" href="#lab">See the open lab</a></div>
+    <div>
+      <div class="mi"><div class="vis" data-wave='{"w":640,"h":200,"reps":10,"amp":0.8,"id":"mw1"}'></div><h3>Reps and tempo</h3><p>Each rep is one rise and fall of the stack. The last ones get slower and shorter, and the box sees that too.</p></div>
+      <div class="mi"><div class="vis" data-scale='{"v":72,"max":180,"w":600,"h":70,"g":"rest","labels":["0:00","1:30","3:00"],"id":"ms1"}'></div><h3>Rest</h3><p>The time between the stack landing and the next lift. Shown against the rest your plan asked for.</p></div>
+      <div class="mi"><div class="vis"><div class="goup" style="color:#000"><div><p class="k" style="font-family:var(--m);font-size:12px;color:var(--mute2)">Set 1</p><b>10</b></div><div><p class="k" style="font-family:var(--m);font-size:12px;color:var(--mute2)">Set 2</p><b>10</b></div><div class="nx"><p class="k" style="font-family:var(--m);font-size:12px;color:var(--mute2)">Set 3</p><b>9</b></div></div></div><h3>Sets and weight</h3><p>Sets are counted for you. The weight comes from your plan, and the app tells you when to change it.</p></div>
+      <div class="mi"><div class="vis" data-scale='{"v":78,"w":600,"h":70,"id":"ms2"}'></div><h3>Your workout score</h3><p>One number from 0 to 100 for each workout, with the parts that made it, so the next one can be better.</p></div>
+    </div>
+  </section>
+
+  <section class="start"><h2>Start now</h2><p>A free first workout at FitPods in Brno. Nothing to set up before you come.</p><div><a class="btn b" href="#lab">Book a free workout</a><a class="btn og" href="#gyms">For gyms</a></div></section>
+
+  <section class="faq">
+    <h2>Frequently asked questions</h2>
+    <div>
+      <details><summary>Do I need my phone during a set?</summary><p>No. The box counts on its own. Look at the app before the workout for the plan and after it for the numbers.</p></details>
+      <details><summary>Who pays for it?</summary><p>The gym. Members use the box and the app at gyms that run readout.</p></details>
+      <details><summary>Which machines does it fit?</summary><p>Machines with a weight stack come first: leg press, chest press, lat pulldown and the like. Free weights come later.</p></details>
+      <details><summary>Does the box count right?</summary><p>That is the test we are running now: a thousand reps, filmed and counted by people. The results go up on the open lab page.</p></details>
+      <details><summary>What happens to my data?</summary><p>Your workouts are yours. Gyms see their floor as totals, never one member's sets.</p></details>
+      <details><summary>When can my gym get it?</summary><p>Pilots start at FitPods in Brno. Gyms can ask for a four-week pilot on the For gyms page.</p></details>
+    </div>
+  </section>
+</main>
+
+<!-- =================================== FOR GYMS =================================== -->
+<main class="pg" data-p="gyms">
+  <section class="gy">
+    <h1>The workout data your gym never had</h1>
+    <p class="sub">Which machines earn their space, which hours are full, which members get stronger. Counted, not guessed.</p>
+    <div class="gylogos"><span class="fp">FitPods<small>BRNO · FIRST GYM</small></span><span class="slot">Your gym</span><span class="slot">Your gym</span></div>
+    <h2>readout for gyms</h2>
+    <p class="big">Members train with a small box on every machine and an app that tells them what to do next. <b>You get the floor, measured: which machines earn their space, when the gym is full, and who is getting stronger.</b> Start with a four-week pilot on up to ten machines.</p>
+    <div class="ctas"><a class="btn b2 m" href="#lab">Run a pilot</a><a class="btn ow m" href="#lab">Request a call</a></div>
+    <div class="gy3">
+      <div><p class="mono">Machine use · sample</p><b>4× more</b><p>Leg press against hack squat, this week.</p></div>
+      <div><p class="mono">Busy hours · sample</p><b>6 to 8 pm</b><p>Full on weekdays. 2 to 4 pm is empty.</p></div>
+      <div><p class="mono">Members · sample</p><b>31%</b><p>Lifted more than last month.</p></div>
+    </div>
+    <p class="fine">Sample numbers. A four-week pilot shows yours.</p>
+  </section>
+</main>
+
+<!-- =================================== THE OPEN LAB =================================== -->
+<div class="lsub" id="lsub"><a class="logo" href="#home" style="color:#fff"><b>readout</b><span class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></span></a><nav aria-label="The open lab"><a href="#lab">The lab</a><a href="#lab-plans">For gyms</a><a href="#lab-stories">First set</a><a href="#lab-find">Visit</a></nav><a class="btn b2 m" href="#lab-process">Book a free workout</a></div>
+<main class="pg" data-p="lab">
+  <section class="lhero">
+    <img src="fp/coach-machine.jpg" alt="A trainer next to a member on a machine at FitPods" style="object-position:60% 40%">
+    <div class="in"><p class="mono">FitPods, Brno</p><h1 class="dsp">The open lab</h1><p>One real gym, every rep measured in public.</p><a class="btn b2 m" href="#lab-process">Book a free workout</a></div>
+    <div class="lstats"><div><b>14 pods</b><span>With a box on the machines</span></div><div><b>90 days</b><span>Of counting</span></div><div><b>1 report</b><span>Out in public</span></div></div>
+    <div class="ticker" aria-hidden="true"><div><span>REPS</span><span>SETS</span><span>REST</span><span>TEMPO</span><span>WEIGHT</span><span>PROGRESS</span><span>MACHINE USE</span><span>BUSY HOURS</span><span>PERSONAL BESTS</span><span>WORKOUT SCORE</span><span>REPS</span><span>SETS</span><span>REST</span><span>TEMPO</span><span>WEIGHT</span><span>PROGRESS</span><span>MACHINE USE</span><span>BUSY HOURS</span><span>PERSONAL BESTS</span><span>WORKOUT SCORE</span></div></div>
+  </section>
+
+  <section class="reveal" id="reveal"><div class="stick"><p data-reveal>For ninety days, every set at FitPods is counted by the box, and the numbers go public: which machines people use, how long they rest, who gets stronger. No guessing, at the size of a whole gym.</p></div></section>
+
+  <section class="wwd">
+    <p class="mono">What we do</p>
+    <h2 class="dsp">Every set. One complete picture.</h2>
+    <a class="btn b2 m" href="#lab-plans">View a sample report</a>
+    <div class="pills" aria-hidden="true">
+      <span style="left:5%;top:52%">Leg press</span><span style="left:9%;top:64%">Rest time</span><span style="left:3%;top:76%">Hip thrust</span><span style="left:12%;top:86%">Tempo</span>
+      <span style="right:5%;top:50%">Chest press</span><span style="right:10%;top:62%">Busy hours</span><span style="right:3%;top:74%">Lat pulldown</span><span style="right:11%;top:86%">Personal bests</span>
+    </div>
+    <div class="tab">
+      <div class="scr">
+        <div>
+          <p class="t1">FitPods · week 46</p><p class="t2">Sample report</p>
+          <div class="kp"><div><b>4,812</b><span>reps</span></div><div><b>61</b><span>members</span></div><div><b>1:54</b><span>average rest</span></div></div>
+          <div class="hb"><p class="k">BUSY HOURS · 6:00 TO 23:00</p><div class="hbars" aria-label="Busy hours, sample"><i style="height:12%"></i><i style="height:22%"></i><i style="height:30%"></i><i style="height:24%"></i><i style="height:18%"></i><i style="height:20%"></i><i style="height:26%"></i><i style="height:22%"></i><i style="height:16%"></i><i style="height:14%"></i><i style="height:30%"></i><i style="height:52%"></i><i style="height:88%"></i><i style="height:100%"></i><i style="height:74%"></i><i style="height:40%"></i><i style="height:18%"></i></div></div>
+        </div>
+        <div class="mu"><p class="k">MACHINE USE · SETS THIS WEEK</p>
+          <div><span>Leg press</span><i><u style="width:92%"></u></i><em>412</em></div>
+          <div><span>Chest press</span><i><u style="width:71%"></u></i><em>318</em></div>
+          <div><span>Lat pulldown</span><i><u style="width:64%"></u></i><em>287</em></div>
+          <div><span>Hip thrust</span><i><u style="width:47%"></u></i><em>210</em></div>
+          <div><span>Cable row</span><i><u style="width:38%"></u></i><em>171</em></div>
+          <div><span>Hack squat</span><i><u style="width:23%"></u></i><em>103</em></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fw">
+    <p class="mono">The framework</p>
+    <h2 class="dsp">Count. Explain. Next step.</h2>
+    <div class="fw3">
+      <div><p class="mono">01</p><h3 class="dsp">Count</h3><p>The box counts reps, sets and rest on every machine, with no one typing anything.</p></div>
+      <div><p class="mono">02</p><h3 class="dsp">Explain</h3><p>The app says what each number means in one plain sentence, held against your last workout.</p></div>
+      <div><p class="mono">03</p><h3 class="dsp">Next step</h3><p>Every workout ends with the next one set up: the machine, the weight, the reps.</p></div>
+    </div>
+  </section>
+
+  <section class="cmp">
+    <div class="hd"><p class="mono">How it compares</p><h2 class="dsp">Beyond the notebook</h2></div>
+    <div class="ct" role="table" aria-label="readout compared with a notebook or phone app">
+      <div class="th" role="row"><span>What you get</span><span>readout</span><span>Notebook or phone</span></div>
+      <div role="row"><span class="lbl"><i>1</i>Counts reps by itself</span><span class="ok">✓</span><span class="no">✕</span></div>
+      <div role="row"><span class="lbl"><i>2</i>Times your rest by itself</span><span class="ok">✓</span><span class="no">✕</span></div>
+      <div role="row"><span class="lbl"><i>3</i>Phone stays in your pocket</span><span class="ok">✓</span><span>Notebook only</span></div>
+      <div role="row"><span class="lbl"><i>4</i>A score after every workout</span><span class="ok">✓</span><span class="no">✕</span></div>
+      <div role="row"><span class="lbl"><i>5</i>Tells you when to go up</span><span class="ok">✓</span><span>If you work it out</span></div>
+      <div role="row"><span class="lbl"><i>6</i>Progress over months</span><span class="ok">✓</span><span>If you write it all</span></div>
+      <div role="row"><span class="lbl"><i>7</i>Same method on every machine</span><span class="ok">✓</span><span class="no">✕</span></div>
+      <div role="row"><span class="lbl"><i>8</i>A floor report for the gym</span><span class="ok">✓</span><span class="no">✕</span></div>
+    </div>
+  </section>
+
+  <section class="plans" id="lab-plans">
+    <p class="mono" style="font-size:14px;font-weight:500">For gyms</p>
+    <h2 class="dsp">Choose how your gym starts</h2>
+    <a class="btn b2 m" href="#gyms">See for gyms</a>
+    <div class="p3">
+      <div class="pc"><div class="h"><h3 class="dsp">Pilot</h3></div><p class="price">4 weeks · price on request</p><p class="ds">Boxes on up to ten machines and a report at the end.</p><a class="btn og m" href="#gyms">Choose pilot</a><p class="inc">Includes</p><ul><li>Boxes and holders</li><li>The member app</li><li>Setup at your gym</li><li>A four-week floor report</li></ul></div>
+      <div class="pc pop"><div class="h"><h3 class="dsp">Gym</h3><span class="badge">MOST ASKED</span></div><p class="price">Monthly · price on request</p><p class="ds">Every machine with a weight stack, the member app, and a report every month.</p><a class="btn b2 m" href="#gyms">Choose gym</a><p class="inc">Everything in Pilot, plus</p><ul><li>Every stack machine</li><li>Monthly floor report</li><li>Member progress, as totals</li><li>Busy hours and machine use</li></ul></div>
+      <div class="pc"><div class="h"><h3 class="dsp">Group</h3></div><p class="price">Several gyms · price on request</p><p class="ds">For chains: the same floor report across every location.</p><a class="btn og m" href="#gyms">Choose group</a><p class="inc">Everything in Gym, plus</p><ul><li>All locations side by side</li><li>One shared report</li><li>Rollout plan</li></ul></div>
+    </div>
+  </section>
+
+  <section class="proc" id="lab-process">
+    <div class="stk"><p class="mono">The process</p><h2 class="dsp">One hour. One workout.<br>Your numbers.</h2></div>
+    <div>
+      <div class="step"><p class="n">01</p><h3 class="dsp">Book a free workout</h3><p>Pick a time at FitPods in Brno. Nothing to install before you come.</p><a class="btn b2 m" href="#lab-find">Get in touch</a></div>
+      <div class="step"><p class="n">02</p><h3 class="dsp">Train as usual</h3><p>The boxes are already on the machines. Lift, rest, lift again.</p></div>
+      <div class="step"><p class="n">03</p><h3 class="dsp">See your first set</h3><p>After the workout, the app shows every set, every rest and your score.</p></div>
+      <div class="step"><p class="n">04</p><h3 class="dsp">Keep your numbers</h3><p>Your workout stays in the app, with the next one set up.</p></div>
+    </div>
+  </section>
+
+  <section class="stories" id="lab-stories">
+    <div class="hd"><p class="mono">From the lab</p><h2 class="dsp">Real people. First sets.</h2></div>
+    <div class="st4">
+      <figure><img src="fp/first-workout-tall.jpg" alt="" style="object-position:58% 40%"><span class="ep">EP 01 · to be filmed</span><figcaption><b>The first workout</b><span>Said twelve. The box counted nine.</span></figcaption></figure>
+      <figure><img src="fp/rest-chat.jpg" alt="" style="object-position:42% 50%"><span class="ep">EP 02 · to be filmed</span><figcaption><b>The rest that ran long</b><span>Two minutes, said the plan.</span></figcaption></figure>
+      <figure><img src="fp/leg-press.jpg" alt="" style="object-position:78% 50%"><span class="ep">EP 03 · to be filmed</span><figcaption><b>Going up</b><span>Ten, ten, ten. Twice.</span></figcaption></figure>
+      <figure><img src="fp/high-five.jpg" alt="" style="object-position:50% 40%"><span class="ep">EP 04 · to be filmed</span><figcaption><b>Month one</b><span>What the numbers said.</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="loc">
+    <img src="fp/03-chodba-pody.jpg" alt="">
+    <div class="in"><p class="mono">FitPods, Brno</p><h2>The first gym that counts.</h2><a class="btn w m" href="#lab-find">Book a tour</a></div>
+  </section>
+
+  <section class="find" id="lab-find">
+    <div><h3 class="dsp">Find us</h3><p>FitPods, Heršpická 814/5a, M-Palác, 1st floor, Brno</p><p class="mono">Web</p><p>fitpods.cz</p></div>
+    <div><h3 class="dsp">Opening hours</h3><p class="mono">Reception</p><p>Monday to Friday, 15:00 to 19:00</p><p class="mono">Free first workout</p><p>By appointment, during the pilot</p></div>
+  </section>
+</main>
+
+<!-- =================================== FOOTER =================================== -->
+<footer class="foot">
+  <div class="fcols">
+    <div><p class="fh">The box</p><a href="#box">The box <span class="new">NEW</span></a><a href="#how">How it works</a><a href="#box">In the box</a><p class="fh">The app</p><a href="#how">Today</a><a href="#how">Workout score</a><a href="#how">Progress</a></div>
+    <div><p class="fh">For gyms</p><a href="#gyms">readout for gyms</a><a href="#lab-plans">Pilot</a><a href="#lab">The open lab</a><p class="fh">Learn</p><a href="#how">How we test</a><a href="#lab-stories">First set</a></div>
+    <div><p class="fh">Company</p><a href="#home">Our story</a><a href="#lab-find">Contact</a><a href="#gyms">Partners</a></div>
+    <div><p class="fh">Legal</p><a href="#home">Privacy</a><a href="#home">Terms</a></div>
+  </div>
+  <div class="frow">
+    <div><p class="fh">Contact</p><p>Through the open lab page</p></div>
+    <div><p class="fh">Follow us</p><div class="soc" aria-label="Social links (to come)"><svg width="16" height="16" viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="4" fill="none" stroke="#000" stroke-width="1.4"/><circle cx="8" cy="8" r="3" fill="none" stroke="#000" stroke-width="1.4"/></svg><svg width="16" height="16" viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2" fill="#000"/><path d="M5 7v4M5 5v.01M8 11V7m0 1.6c0-1 .8-1.6 1.7-1.6s1.3.6 1.3 1.6V11" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/></svg><svg width="18" height="16" viewBox="0 0 18 16"><rect x="1" y="2.5" width="16" height="11" rx="3" fill="#000"/><path d="M7.5 5.5v5l4-2.5z" fill="#fff"/></svg></div></div>
+    <div><p class="fh">Download the app</p><div class="badges"><span><svg width="11" height="13" viewBox="0 0 11 13"><path d="M9 7c0-1.4 1.1-2 1.2-2.1C9.5 3.9 8.5 3.8 8.1 3.8c-.9-.1-1.7.5-2.1.5s-1.1-.5-1.8-.5C3.2 3.8 2.3 4.4 1.8 5.3.8 7.1 1.5 9.8 2.5 11.2c.5.7 1 1.4 1.7 1.4s1-.4 1.8-.4 1.1.4 1.8.4 1.2-.7 1.6-1.4c.5-.8.7-1.5.7-1.6C10.1 9.6 9 9 9 7zM7.6 2.6c.4-.5.7-1.1.6-1.8-.6 0-1.3.4-1.7.9-.4.4-.7 1.1-.6 1.7.6.1 1.3-.3 1.7-.8z" fill="#fff"/></svg><span><small>Soon on the</small>App Store</span></span><span><svg width="12" height="13" viewBox="0 0 12 13"><path d="M1 .8l6.4 5.7L1 12.2z" fill="#3BCCFF"/><path d="M1 .8l8.4 4.7-2 1z" fill="#48FF48"/><path d="M1 12.2l8.4-4.7-2-1z" fill="#FF3A44"/><path d="M9.4 5.5L11 6.5 9.4 7.5 7.4 6.5z" fill="#FFD400"/></svg><span><small>Soon on</small>Google Play</span></span></div></div>
+  </div>
+  <div class="fcopy"><span>© 2026 readout (working name). A concept site: product shots and episodes are still to come; numbers marked sample are samples. Photos: FitPods, Brno, our first gym. The box is the 3D-printed prototype, shot on an iPhone and cut out.</span><span class="lang"><i aria-hidden="true"></i>Czechia</span></div>
+  <div class="giant" aria-hidden="true"><span>readout</span></div>
+</footer>
+
+<script>
+(function(){
+  // the readout signatures, as in the app: the wave (the weight stack moving) and the scale (tick ruler)
+  var G={score:['#13235E','#2747D6','#8CA2FF'],prog:['#5A2A08','#C26616','#F2A04A'],rest:['#0E4D4A','#2B9C8F','#7FD6C8']};
+  function mix(a,b,t){var p=function(x){return [1,3,5].map(function(i){return parseInt(x.slice(i,i+2),16)})};var A=p(a),B=p(b);return '#'+A.map(function(v,i){return Math.round(v+(B[i]-v)*t).toString(16).padStart(2,'0')}).join('')}
+  function wave(o){var w=o.w||800,h=o.h||200,reps=o.reps||10,amp=o.amp||.72,g=G[o.g]||G.score,strands=o.strands||3,id=o.id||'wv',fade=o.fade==null?.04:o.fade;var paths='';
+    for(var k=0;k<strands;k++){var d='',off=(k-(strands-1)/2)*Math.max(4,h/50),ph=k*.035;
+      for(var i=0;i<=480;i++){var t=i/480,p=t*(reps+.4)-.2+ph,y=0;
+        if(p>0&&p<reps){var r=Math.floor(p),f=p-r,a=amp*(1-r*fade);y=a*(f<.5?(1-Math.cos(f/.5*Math.PI))/2:(1+Math.cos((f-.5)/.5*Math.PI))/2)}
+        var x=t*w,yy=h-18-y*(h-40)+off;d+=(i?'L':'M')+x.toFixed(1)+' '+yy.toFixed(1)}
+      var mid=k==Math.floor(strands/2);paths+='<path d="'+d+'" fill="none" stroke="url(#'+id+')" stroke-width="'+(mid?Math.max(2.4,h/170):1.2)+'" opacity="'+(mid?1:.3)+'" stroke-linejoin="round"/>'}
+    return '<svg viewBox="0 0 '+w+' '+h+'" width="100%" preserveAspectRatio="none" style="display:block;overflow:visible" aria-hidden="true"><defs><linearGradient id="'+id+'" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="'+g[2]+'" stop-opacity=".1"/><stop offset=".2" stop-color="'+g[2]+'"/><stop offset=".5" stop-color="'+g[1]+'"/><stop offset=".8" stop-color="'+g[2]+'"/><stop offset="1" stop-color="'+g[2]+'" stop-opacity=".1"/></linearGradient><filter id="'+id+'f" x="-5%" y="-30%" width="110%" height="160%"><feGaussianBlur stdDeviation="'+Math.max(3.5,h/60)+'"/></filter></defs><g filter="url(#'+id+'f)" opacity=".45">'+paths+'</g>'+paths+'</svg>'}
+  function scale(v,o){var n=o.n||51,w=o.w||520,h=o.h||60,g=G[o.g]||G.score,labels=o.labels||['0','50','100'],max=o.max||100;var s='',step=w/(n-1),lit=Math.round(v/max*(n-1));
+    var col=function(i){var t=i/(n-1);return t<.5?mix(g[0],g[1],t*2):mix(g[1],g[2],(t-.5)*2)};
+    var dark=o.dark;for(var i=0;i<n;i++){var x=i*step+1.5,on=i<=lit,major=i%5==0,read=i==lit,hh=read?h:(major?h*.62:h*.42);
+      s+='<rect x="'+(x-1.4)+'" y="'+(h-hh)+'" width="2.8" height="'+hh+'" rx="1.4" fill="'+(on?col(i):(dark?'#3A3A3A':'#D6D6D4'))+'"/>'}
+    var rx=lit*step+1.5;s+='<circle cx="'+rx+'" cy="-9" r="7" fill="#fff" stroke="'+(dark?'#fff':'#151617')+'" stroke-width="2.8"/>';
+    var lab=labels.map(function(l,k){return '<text x="'+(k==0?0:(k==labels.length-1?w:w/2))+'" y="'+(h+24)+'" text-anchor="'+(k==0?'start':(k==labels.length-1?'end':'middle'))+'" font-family="JetBrains Mono" font-size="12" fill="'+(dark?'rgba(255,255,255,.55)':'#8B8D90')+'">'+l+'</text>'}).join('');
+    return '<svg viewBox="-2 -20 '+(w+6)+' '+(h+50)+'" width="100%" style="display:block;overflow:visible" aria-hidden="true">'+s+lab+'</svg>'}
+  document.querySelectorAll('[data-wave]').forEach(function(el){el.innerHTML=wave(JSON.parse(el.getAttribute('data-wave')))});
+  document.querySelectorAll('[data-scale]').forEach(function(el){var o=JSON.parse(el.getAttribute('data-scale'));o.dark=!el.closest('.lt,.mi');el.innerHTML=(o.num===false?'':'<div style="font-weight:400;font-size:'+(o.w>700?64:88)+'px;letter-spacing:-.05em;line-height:1;margin-bottom:26px">'+(o.max&&o.max!==100?(o.g==='rest'?Math.floor(o.v/60)+':'+String(o.v%60).padStart(2,'0'):o.v.toLocaleString('en-US')+' kg'):o.v)+'</div>')+scale(o.v,o)});
+
+  // router: #home #box #how #gyms #lab, plus in-page anchors on the lab page
+  var pages=['home','box','how','gyms','lab'],hdr=document.getElementById('hdr'),lsub=document.getElementById('lsub');
+  function route(){var h=(location.hash||'#home').slice(1);var p=h.split('-')[0];if(pages.indexOf(p)<0)p='home';
+    document.querySelectorAll('.pg').forEach(function(m){m.classList.toggle('on',m.getAttribute('data-p')===p)});
+    document.body.classList.toggle('dark-page',p==='box'||p==='gyms');document.body.classList.toggle('on-lab',p==='lab');
+    document.querySelectorAll('.nav a').forEach(function(a){a.toggleAttribute('aria-current',a.getAttribute('href')==='#'+p);if(a.getAttribute('href')==='#'+p)a.setAttribute('aria-current','page')});
+    closeMenu();var t=h!==p&&document.getElementById(h);if(t){setTimeout(function(){t.scrollIntoView({behavior:'smooth'})},30)}else{window.scrollTo(0,0)}onScroll();revealUpdate()}
+  window.addEventListener('hashchange',route);
+
+  function onScroll(){var y=window.scrollY;hdr.classList.toggle('on',y>8);lsub.classList.toggle('on',y>40)}
+  window.addEventListener('scroll',function(){onScroll();revealUpdate()},{passive:true});
+
+  // menu
+  var drawer=document.getElementById('drawer');function closeMenu(){drawer.classList.remove('on')}
+  document.querySelector('[data-open]').addEventListener('click',function(){drawer.classList.add('on')});
+  document.querySelector('[data-close]').addEventListener('click',closeMenu);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu()});
+
+  // hero carousel
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var slides=document.querySelectorAll('.hero .sl'),dots=document.querySelectorAll('.hero .dots button'),cur=0,timer;
+  function show(i){cur=(i+slides.length)%slides.length;slides.forEach(function(s,k){s.classList.toggle('on',k===cur)});dots.forEach(function(d,k){d.classList.toggle('on',k===cur)})}
+  dots.forEach(function(d,k){d.addEventListener('click',function(){show(k);clearInterval(timer)})});
+  if(!reduce&&!/shot/.test(location.search))timer=setInterval(function(){show(cur+1)},6500);
+
+  // stage tabs + rail
+  var rail=document.getElementById('rail'),cards=rail.querySelectorAll('.rc'),tabs=document.querySelectorAll('.tabs button');
+  function setTab(i){tabs.forEach(function(t,k){t.setAttribute('aria-selected',k===i?'true':'false')});cards.forEach(function(c,k){c.classList.toggle('on',k===i)})}
+  // smooth scroll where the browser animates it; jump straight there where it doesn't (throttled or older browsers)
+  function glide(el,left){var start=el.scrollLeft;el.scrollTo({left:left,behavior:reduce?'auto':'smooth'});setTimeout(function(){if(Math.abs(el.scrollLeft-start)<2&&Math.abs(left-start)>2){el.style.scrollBehavior='auto';el.style.scrollSnapType='none';el.scrollLeft=left;el.style.scrollSnapType='';el.style.scrollBehavior=''}},700)}
+  var stage=document.querySelector('.stage');
+  function pinned(){return window.innerWidth>=1101&&!document.body.classList.contains('snap')}
+  tabs.forEach(function(t,k){t.addEventListener('click',function(){
+    if(pinned()){var top=stage.getBoundingClientRect().top+window.scrollY,span=stage.offsetHeight-innerHeight,to=top+span*k/(cards.length-1)+2,from=window.scrollY;window.scrollTo({top:to,behavior:reduce?'auto':'smooth'});setTab(k);setTimeout(function(){if(Math.abs(window.scrollY-from)<2&&Math.abs(to-from)>2){window.scrollTo(0,to);motion()}},700);return}
+    var c=cards[k];glide(rail,c.offsetLeft-(rail.clientWidth-c.clientWidth)/2);setTab(k)})});
+  // their stage: the section pins and the cards slide sideways as you scroll down
+  function stageUpdate(){if(!pinned()||!stage.offsetParent)return;var r=stage.getBoundingClientRect(),span=stage.offsetHeight-innerHeight;var p=Math.min(1,Math.max(0,-r.top/span));rail.scrollLeft=p*(rail.scrollWidth-rail.clientWidth);setTab(Math.round(p*(cards.length-1)))}
+  var rt;rail.addEventListener('scroll',function(){clearTimeout(rt);rt=setTimeout(function(){var mid=rail.scrollLeft+rail.clientWidth/2,best=0,bd=1e9;cards.forEach(function(c,k){var d=Math.abs(c.offsetLeft+c.clientWidth/2-mid);if(d<bd){bd=d;best=k}});setTab(best)},60)},{passive:true});
+
+  // product page carousel arrows
+  var accr=document.getElementById('accr');document.querySelectorAll('[data-acc]').forEach(function(b){b.addEventListener('click',function(){var card=accr.querySelector('.ac');var step=card?card.offsetWidth+20:540;var max=accr.scrollWidth-accr.clientWidth;glide(accr,Math.max(0,Math.min(max,Math.round((accr.scrollLeft+(+b.getAttribute('data-acc'))*step)/step)*step)))})});
+
+  // scroll-lit paragraph on the lab page
+  var rp=document.querySelector('[data-reveal]');rp.innerHTML=rp.textContent.split(' ').map(function(w){return '<span>'+w+'</span>'}).join(' ');var rw=rp.querySelectorAll('span');var rs=document.getElementById('reveal');
+  function revealUpdate(){if(!rs.offsetParent&&!document.body.classList.contains('on-lab'))return;var r=rs.getBoundingClientRect();var prog=Math.min(1,Math.max(0,(-r.top+innerHeight*.15)/(r.height-innerHeight*.9)));if(/shot/.test(location.search)||reduce)prog=1;var n=Math.round(prog*rw.length);rw.forEach(function(s,k){s.classList.toggle('lit',k<n)})}
+
+  var shot=/[?&]shot/.test(location.search);if(shot)document.body.classList.add('snap');
+  // fade-up reveals, as on their pages (opacity only where the element is already positioned with a transform)
+  var rvSel='.stat h2,.stat .row,.stage .head,.pair .ttl,.pg2 > div,.appi h2,.appi > p,.appi .st,.appi .vid,.floorsec .t,.globe,.partners,.acc .hd,.ac,.bento .hd,.bc,.phones h2,.phones > p,.pp,.specs h3,.sg > div,.cta,.words,.fr .lab,.fr h2,.fr > p,.fr3 figure,.mi,.start,.faq h2,.faq details,.gy h1,.gy .sub,.gylogos,.gy h2,.gy .big,.gy .ctas,.gy3 > div,.wwd h2,.tab,.fw .mono,.fw h2,.fw3 > div,.cmp .hd,.ct > div,.plans h2,.pc,.proc .stk,.step,.stories .hd,.st4 figure,.loc .in,.find > div';
+  var rvoSel='.camp .txt,.coll .mid,.full .in,.light .say,.cprod,.lprod';
+  var rvEls=[].slice.call(document.querySelectorAll(rvSel)),rvoEls=[].slice.call(document.querySelectorAll(rvoSel));
+  rvEls.forEach(function(e){e.classList.add('rv');var i=[].indexOf.call(e.parentNode.children,e);if(i>0&&i<6&&!e.matches('.ct > div'))e.style.transitionDelay=(i*.07)+'s'});rvoEls.forEach(function(e){e.classList.add('rvo')});
+  var allRv=rvEls.concat(rvoEls);
+  if(shot||reduce||!('IntersectionObserver' in window)){allRv.forEach(function(e){e.classList.add('in')})}
+  else{var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.1,rootMargin:'0px 0px -5% 0px'});allRv.forEach(function(e){io.observe(e)})}
+  // the big wave draws itself in when the section arrives
+  var statEl=document.querySelector('.stat');
+  statEl.querySelectorAll('.big path').forEach(function(p){var L=Math.ceil(p.getTotalLength());p.style.strokeDasharray=L;p.style.strokeDashoffset=(shot||reduce)?0:L});
+  function statUpdate(){if(!statEl.offsetParent)return;if(statEl.getBoundingClientRect().top<innerHeight*.72)statEl.querySelectorAll('.big path').forEach(function(p){p.style.strokeDashoffset=0})}
+  // the "0" section: the rings open and the sentence lights up word by word
+  var zero=document.querySelector('.zero'),zp=document.querySelector('[data-words]'),rings=document.querySelector('.zero svg.rings');
+  zp.innerHTML=zp.textContent.split(' ').map(function(w){return '<span>'+w+'</span>'}).join(' ');var zw=zp.querySelectorAll('span');
+  function zeroUpdate(){if(!zero.offsetParent)return;var r=zero.getBoundingClientRect(),span=Math.max(1,zero.offsetHeight-innerHeight);var p=Math.min(1,Math.max(0,-r.top/span));if(shot||reduce)p=1;var n=Math.round(p*1.15*zw.length);zw.forEach(function(s,i){s.classList.toggle('lit',i<n)});rings.style.setProperty('--rs',(.8+.28*p).toFixed(3))}
+  // the light product block: the black above fades to white as it comes in, as their dark stage turns white
+  var lite=document.querySelector('.pg[data-p="home"] .pair:not(.dark)');
+  function liteUpdate(){if(!lite.offsetParent)return;var r=lite.getBoundingClientRect();var t=Math.min(1,Math.max(0,(innerHeight-r.top)/(innerHeight*.55)));if(shot||reduce)t=1;var v=Math.round(255*t);lite.style.background='rgb('+v+','+v+','+v+')'}
+  // safety net: anything on screen is shown even if the observer never fires (throttled tabs, old browsers)
+  function showVisible(){var h=innerHeight;for(var i=0;i<allRv.length;i++){var e=allRv[i];if(e.classList.contains('in')||!e.offsetParent)continue;var r=e.getBoundingClientRect();if(r.top<h*.96&&r.bottom>0)e.classList.add('in')}}
+  setTimeout(showVisible,1200);setTimeout(function(){allRv.forEach(function(e){if(e.offsetParent&&e.getBoundingClientRect().top<innerHeight)e.classList.add('in')})},2600);
+  function motion(){stageUpdate();zeroUpdate();liteUpdate();statUpdate();showVisible()}
+  window.addEventListener('scroll',motion,{passive:true});window.addEventListener('resize',motion);window.addEventListener('hashchange',function(){setTimeout(motion,60)});
+  route();motion();
+  // review helper: ?shot&y=1800#box opens the page already scrolled (used for the side-by-side checks)
+  var ym=location.search.match(/[?&]y=(\d+)/);if(ym&&+ym[1]>0){document.body.style.marginTop=(-ym[1])+'px';hdr.classList.add('on');lsub.classList.add('on');document.querySelectorAll('.reveal').forEach(function(r){r.style.height='auto'});document.querySelectorAll('.reveal .stick').forEach(function(s){s.style.position='relative';s.style.height='900px'})}
+})();
+</script>
+</body>
+</html>
