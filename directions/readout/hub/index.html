@@ -182,7 +182,8 @@ tbody tr.click{cursor:pointer;transition:background-color .12s ease}
 
 /* the iPad frame for the app view */
 .ipad-stage{min-height:100vh;display:grid;place-items:center;padding:28px;background:radial-gradient(90% 80% at 50% 30%,#FFFFFF,var(--bg))}
-.ipad{position:relative;width:min(1180px,calc((100vh - 120px) * 1.44),100%);aspect-ratio:1180/820;border-radius:44px;padding:16px;background:linear-gradient(155deg,#dcdcdf,#a9abb0 30%,#e8e8ea 55%,#9fa1a6 80%,#cfd0d3);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7),inset 0 0 0 5px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.18),0 40px 90px -30px rgba(0,0,0,.45)}
+.ipad-stage > div{width:100%;display:grid;justify-items:center}
+.ipad{position:relative;width:min(1180px,calc((100vh - 120px) * 1.44),calc(100vw - 56px));aspect-ratio:1180/820;border-radius:44px;padding:16px;background:linear-gradient(155deg,#dcdcdf,#a9abb0 30%,#e8e8ea 55%,#9fa1a6 80%,#cfd0d3);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7),inset 0 0 0 5px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.18),0 40px 90px -30px rgba(0,0,0,.45)}
 .ipad::before{content:"";position:absolute;inset:6px;border-radius:38px;background:#08090a}
 .ipad iframe{position:relative;z-index:1;width:100%;height:100%;border:0;border-radius:26px;background:var(--bg);display:block}
 .ipad .cam{position:absolute;z-index:2;left:50%;top:9px;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#2b3550,#05070c)}
@@ -204,7 +205,9 @@ tbody tr.click{cursor:pointer;transition:background-color .12s ease}
   .drawer{width:100%;top:auto;height:92vh;border-radius:22px 22px 0 0;transform:translateY(102%)}
   .g2,.g3{grid-template-columns:1fr}.span2,.span3{grid-column:auto}
 }
-@media (max-width:560px){.g4,.figs{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.fig .num{font-size:1.9rem}.ttl{font-size:1.7rem}[data-brand="abten"] .ttl{font-size:2.3rem}.card{padding:16px}.hide-s{display:none}}
+@media (max-width:900px){.hero > .grid{grid-template-columns:1fr!important}}
+@media (max-width:560px){.hero .figs{grid-template-columns:repeat(2,minmax(0,1fr))!important}.hero .fig.big .num,[data-brand="abten"] .hero .fig.big .num{font-size:2.1rem}
+.g4,.figs{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.fig .num{font-size:1.9rem}.ttl{font-size:1.7rem}[data-brand="abten"] .ttl{font-size:2.3rem}.card{padding:16px}.hide-s{display:none!important}}
 /* the app mode: big touch targets, a tab bar, no sidebar, the way it sits on an iPad */
 [data-mode="app"] .app{grid-template-columns:1fr}
 [data-mode="app"] .side{display:none}
@@ -348,7 +351,7 @@ function mount(o){CFG=o;var ticks='<span class="ticks" aria-hidden="true">'+'<i>
   initFloating();window.addEventListener('hashchange',function(){closeDrawer();render(true)});render(true)}
 function chrome(){var o=CFG;document.getElementById('sidex').innerHTML=o.sidex?o.sidex():'';document.getElementById('topx').innerHTML=o.topx?o.topx():'';
   document.getElementById('sidefoot').innerHTML=o.foot?o.foot():'<span class="smp">Sample data</span>';
-  var nav=function(tab){return o.nav.filter(function(n){return !tab||!n[3]}).map(function(n){var b=o.badge?o.badge(n[0]):0;return '<a href="#'+n[0]+'"'+(cur===n[0]?' aria-current="page"':'')+'>'+ic(n[2],tab?22:20)+'<span>'+T(n[1])+'</span>'+(!tab&&b?'<span class="badge">'+b+'</span>':'')+'</a>'}).join('')};
+  var on=(o.parent&&o.parent[cur])||cur;var nav=function(tab){return o.nav.filter(function(n){return !n[3]}).map(function(n){var b=o.badge?o.badge(n[0]):0;return '<a href="#'+n[0]+'"'+(on===n[0]?' aria-current="page"':'')+'>'+ic(n[2],tab?22:20)+'<span>'+T(n[1])+'</span>'+(!tab&&b?'<span class="badge">'+b+'</span>':'')+'</a>'}).join('')};
   document.getElementById('nav').innerHTML=nav(false);document.getElementById('tabbar').innerHTML=nav(true)}
 function render(animated,keep){var o=CFG,r=(location.hash||'#'+o.def).slice(1).split('/'),k=o.views[r[0]]?r[0]:o.def,y=scrollY;cur=k;
   var v=document.getElementById('view');v.innerHTML='<div'+(animated?' class="m-in"':'')+'>'+o.views[k](r.slice(1))+'</div>';chrome();
