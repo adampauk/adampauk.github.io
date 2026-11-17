@@ -137,11 +137,11 @@ svg.chart{display:block;width:100%;height:auto;overflow:visible}
 .legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:.76rem;color:var(--mute)}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
 .hb{display:grid;gap:9px}
-.hb div{display:grid;grid-template-columns:minmax(0,1fr) minmax(60px,1.4fr) 44px;gap:10px;align-items:center;font-size:.86rem}
+.hb div{display:grid;grid-template-columns:minmax(0,1fr) minmax(60px,1.4fr) minmax(44px,auto);gap:10px;align-items:center;font-size:.86rem}
 .hb span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hb i{height:8px;border-radius:4px;background:var(--soft);position:relative;overflow:hidden}
 .hb i u{position:absolute;inset:0 auto 0 0;background:var(--acc);border-radius:4px;transform-origin:left}
-.hb em{font-style:normal;text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.hb em{font-style:normal;text-align:right;font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
 
 /* motion: things arrive once, then numbers and bars move when the week changes */
 .m-in{animation:min .6s var(--ease) both}
