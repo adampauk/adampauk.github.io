@@ -4758,7 +4758,7 @@ html.framed.narrow .proto.open { height: auto; max-height: calc(100dvh - 60px); 
       '</section>' +
       (best
         ? '<section class="sec s-best" data-go="exercise:' + best.id + '" role="button" tabindex="0" aria-label="New best, ' + S.esc(UI.name(best.id)) + ', ' + best.reps + ' reps at ' + S.wNum(best.w) + ' ' + S.unit() + '">' +
-            '<span class="eyebrow acc">new best. a real one.</span><p class="hl2">' + S.esc(UI.name(best.id)) + '</p><span class="num"><b>' + best.reps + '</b><i>' + (best.reps === 1 ? 'rep' : 'reps') + ' at ' + S.wNum(best.w) + '\u2009' + S.unit() + '</i></span>' +
+            '<span class="eyebrow acc">new best.</span><p class="hl2">' + S.esc(UI.name(best.id)) + '</p><span class="num"><b>' + best.reps + '</b><i>' + (best.reps === 1 ? 'rep' : 'reps') + ' at ' + S.wNum(best.w) + '\u2009' + S.unit() + '</i></span>' +
           '</section>'
         : '') +
       '<section class="sec s-box" data-go="sensor" role="button" tabindex="0" aria-label="The box, battery 82 percent">' +
@@ -5297,7 +5297,7 @@ html.framed.narrow .proto.open { height: auto; max-height: calc(100dvh - 60px); 
     if (sg && sg.gain > 0) {
       const recDates = new Set(S.records().filter((r) => r.id === sg.id).map((r) => r.date));
       stronger = sec('s-strong', 'exercise:' + sg.id, 'Stronger on ' + UI.name(sg.id) + ', ' + S.wNum(sg.gain) + ' ' + S.unit() + ' more',
-        '<span class="eyebrow">stronger. not a guess.</span><p class="hl2">' + esc(UI.name(sg.id)) + '</p><div class="pair">' + num('+' + S.wNum(sg.gain), S.unit()) + '<span class="lnchart">' + line(sg.series, 190, 70, recDates) + '</span></div>');
+        '<span class="eyebrow">stronger</span><p class="hl2">' + esc(UI.name(sg.id)) + '</p><div class="pair">' + num('+' + S.wNum(sg.gain), S.unit()) + '<span class="lnchart">' + line(sg.series, 190, 70, recDates) + '</span></div>');
     } else {
       const v = Math.min(3, S.mostVisits());
       stronger = sec('s-strong ghost', '', '',
@@ -5443,17 +5443,17 @@ html.framed.narrow .proto.open { height: auto; max-height: calc(100dvh - 60px); 
     const card =
       '<div class="shcard sh-type">' +
       '<span class="sh-d">' + esc(name) + '. ' + esc(S.dayName(w.date) + ' ' + S.dayMonth(w.date)) + '</span>' +
-      '<span class="sh-q">you&rsquo;d have said about ten.</span><span class="sh-big">' + repsAll + '.</span><span class="sh-r">reps, counted. exactly.</span>' +
+      '<span class="sh-q">reps</span><span class="sh-big">' + repsAll + '</span><span class="sh-r">every one counted.</span>' +
       '<span class="sh-n"><span><b>' + tm + '</b><em>time</em></span><span><b>' + sets + '</b><em>sets</em></span><span><b>' + tonnes(vol) + '<i>' + tUnit() + '</i></b><em>lifted</em></span></span>' +
-      (nb ? '<span class="sh-b"><i class="mk"></i>' + nb + (nb === 1 ? ' new best. a real one.' : ' new bests. real ones.') + '</span>' : '') +
+      (nb ? '<span class="sh-b"><i class="mk"></i>' + nb + (nb === 1 ? ' new best.' : ' new bests.') + '</span>' : '') +
       '<span class="sh-m">about ten.</span></div>';
-    UI.sheet('share the real number', card + LG('button', 'capsule pro wide-btn sh-go', '', '<span>share</span>'), function (sh) {
+    UI.sheet('share this workout', card + LG('button', 'capsule pro wide-btn sh-go', '', '<span>share</span>'), function (sh) {
       // v24: the card rises and turns toward you; Share sends it up and away
       const cd = sh.querySelector('.shcard');
       // choreograph: the sheet carries the card (one entrance); the card only settles its tilt with the sheet's timing
       if (cd && !S.reduced()) cd.animate([{ transform: 'perspective(900px) rotateX(12deg)' }, { transform: 'none' }], { duration: 500, easing: S.UI.EASE.drawer });
       sh.querySelector('.sh-go').addEventListener('click', function () {
-        const text = 'you\'d have said about ten. it was ' + repsAll + '. ' + name.toLowerCase() + ', ' + S.dayMonth(w.date).toLowerCase() + '. counted by about ten.';
+        const text = repsAll + ' reps. ' + name.toLowerCase() + ', ' + S.dayMonth(w.date).toLowerCase() + '. counted by about ten.';
         UI.snd.whoosh(true);
         if (cd && !S.reduced()) cd.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-60px) scale(0.92)' }], { duration: 260, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'forwards' });
         setTimeout(function () {
@@ -5514,7 +5514,7 @@ html.framed.narrow .proto.open { height: auto; max-height: calc(100dvh - 60px); 
     const band = S.M.band(sc.value);
     const hero = '<section class="card sum-hero' + (fresh ? '' : ' quiet') + '">' + (fresh ? '<span class="eyebrow">' + esc(pname) + '. ' + S.dayName(w.date) + ' ' + S.dayMonth(w.date) + '</span>' : '') +
       '<div class="sh-ring">' + UI.ring(sc.value / 100, '<b>' + sc.value + '</b><i>' + band + '</i>', 'xl') + '</div>' +
-      (fresh ? '<h2 class="hl">exactly.</h2><p class="sum-line">you\'d have said about ten. it was ' + repsAll + '.</p>' : '<p class="sum-line q">' + repsAll + ' reps, counted. ' + (recs.length ? recs.length + (recs.length === 1 ? ' new best.' : ' new bests.') : '') + '</p>') + '</section>';
+      (fresh ? '<h2 class="hl">workout done.</h2><p class="sum-line">' + repsAll + ' reps, counted.' + (recs.length ? ' ' + recs.length + (recs.length === 1 ? ' new best.' : ' new bests.') : '') + '</p>' : '<p class="sum-line q">' + repsAll + ' reps, counted. ' + (recs.length ? recs.length + (recs.length === 1 ? ' new best.' : ' new bests.') : '') + '</p>') + '</section>';
     const head = '<section class="card sum-stats">' + stat(tm[0], tm[1], 'time') + stat(sets, '', sets === 1 ? 'set' : 'sets') + stat(repsAll, '', 'reps') + stat(tonnes(vol), tUnit(), 'lifted') + '</section>';
     const WT = [40, 35, 25];
     const parts = '<section class="card sum-parts"><span class="eyebrow">what made the ' + sc.value + '</span><ul>' + sc.parts.map(function (q, k) {
@@ -5522,7 +5522,7 @@ html.framed.narrow .proto.open { height: auto; max-height: calc(100dvh - 60px); 
       return '<li><span class="pn">' + q.name.toLowerCase() + '</span><span class="pb"><i style="width:' + Math.round(q.p * 100) + '%"></i></span><span class="po">' + q.of[0] + ' of ' + q.of[1] + '</span><b>' + pts + '<em>/' + WT[k] + '</em></b></li>';
     }).join('') + '</ul></section>';
     const ins = UI.insights(w, { like: like, pctL: pctL, recs: recs });
-    const insights = ins.length ? '<section class="card sum-ins"><span class="eyebrow">what a guess wouldn\'t tell you</span><ul class="ins">' + ins.map((x) => '<li class="' + (x.acc ? 'acc' : '') + '"><b>' + x.t + '</b><span>' + x.d + '</span></li>').join('') + '</ul></section>' : '';
+    const insights = ins.length ? '<section class="card sum-ins"><span class="eyebrow">what changed</span><ul class="ins">' + ins.map((x) => '<li class="' + (x.acc ? 'acc' : '') + '"><b>' + x.t + '</b><span>' + x.d + '</span></li>').join('') + '</ul></section>' : '';
     const machBars = function (e) {
       const l = lastWith(w, e.id);
       const prev = l ? l.e.sets : [];
@@ -5563,7 +5563,7 @@ html.framed.narrow .proto.open { height: auto; max-height: calc(100dvh - 60px); 
         const firstEver = S.HISTORY.length === 1;
         if (firstEver) {
           const hd = el.querySelector('.sum-line');
-          if (hd) hd.textContent = 'your first one. counted, not guessed.';
+          if (hd) hd.textContent = 'your first workout, saved.';
           setTimeout(() => UI.snd.fanfare(), 260);
         } else UI.snd.chime();
         if (S.reduced()) return;
@@ -5593,7 +5593,7 @@ html.framed.narrow .proto.open { height: auto; max-height: calc(100dvh - 60px); 
       const nw = S.nextWeight(e);
       if (nw != null && out.length < 4) out.push({ t: nm(e.id) + ': go up.', d: e.sets.map((q) => q.reps).join(' ') + ' at ' + kg(Math.max.apply(null, e.sets.map((q) => q.w))) + '. try ' + kg(nw) + ' next time.', acc: true });
     });
-    (o.recs || []).slice(0, 2).forEach((r) => out.push({ t: 'new best. a real one.', d: nm(r.id) + ', ' + r.reps + ' at ' + kg(r.w) + '.', acc: true }));
+    (o.recs || []).slice(0, 2).forEach((r) => out.push({ t: 'new best.', d: nm(r.id) + ', ' + r.reps + ' at ' + kg(r.w) + '.', acc: true }));
     let flat = 0; // v34: one stalled machine is enough to say it
     w.exercises.forEach(function (e) {
       if (out.length >= 5 || flat) return;
@@ -5617,7 +5617,7 @@ html.framed.narrow .proto.open { height: auto; max-height: calc(100dvh - 60px); 
     const m = S.monday(w.date);
     const thisW = S.inWeek(m).length, lastW = S.inWeek(S.addDays(m, -7)).length;
     if (thisW >= 2 && thisW > lastW) out.push({ t: thisW + ' workouts this week.', d: (lastW ? lastW + ' last week.' : 'none last week.') + ' that\'s how it adds up.' });
-    if (!out.length) out.push({ t: 'counted, not guessed.', d: 'come back to the same machines and the next one will tell you more.' });
+    if (!out.length) out.push({ t: 'first workout saved.', d: 'come back to the same machines and the next one will tell you more.' });
     return out.slice(0, 6);
   };
 
@@ -6010,7 +6010,7 @@ html.framed.narrow .proto.open { height: auto; max-height: calc(100dvh - 60px); 
       '<header class="title"><h1>you.</h1></header>' + me +
       grp('the box', row({ go: 'sensor', nm: 'wt-f9de', val: '<i class="live"></i>82 %', cls: 'sensor-set' }) + row({ go: 'mode', nm: 'mode', val: mine ? 'my own box' : 'the gym\'s boxes' }) + (mine ? '' : row({ go: 'gym', nm: 'your gym', val: 'sample gym' }))) +
       grp('training', row({ go: 'training', nm: 'training', val: 'rest ' + S.clock(S.keep('restDefault') || 90) + ' ' + S.unit() }) + row({ go: 'notifications', nm: 'notifications', val: 'on' }) + row({ go: 'health', nm: 'apple health', val: 'off' })) +
-      grp('about ten.', row({ go: 'account', nm: 'account' }) + row({ go: 'help', nm: 'questions', val: 'ask barry' }) + row({ go: 'about', nm: 'about', val: '0.33' }));
+      grp('about ten.', row({ go: 'account', nm: 'account' }) + row({ go: 'help', nm: 'help' }) + row({ go: 'about', nm: 'about', val: '0.35' }));
     return { html: html };
   };
   UI.PAGES.profile = function () {
@@ -6210,21 +6210,22 @@ html.framed.narrow .proto.open { height: auto; max-height: calc(100dvh - 60px); 
     // v31: the website's questions, answered by Barry (a gym rat, the first regular; a black-and-white photograph, a
     // stand-in until our own). Only here: he answers questions, he is never on the workout screens.
     const QA = [
-      ['who is barry?', 'a gym rat. the first regular. he answers the questions here. he has never guessed a number in his life.'],
-      ['does it round up?', 'no. that was you.'],
-      ['so what does the app do?', 'the plan before, the real numbers after, and what to do next time.'],
-      ['can it see my form?', 'no. it counts. ask a human.'],
-      ['does it know the weight?', 'you type it once. it remembers.'],
-      ['what if it miscounts?', 'it happens. tell it. it takes it better than most people.'],
-      ['how do i get one?', 'ask your gym. or tell us which gym, and we\'ll ask for you.'],
+      ['how does it count?', 'one rise and fall of the weight stack is one rep. the box feels the stack move, so there is nothing to press.'],
+      ['do i need my phone during a set?', 'no. tap in once at the machine, then put the phone away. look at the app when you want to.'],
+      ['what does the app do?', 'it shows the plan before your workout, every set after it, and what to do next time.'],
+      ['does it know the weight?', 'you enter it once per machine. it stays until you change it.'],
+      ['can it see my form?', 'no. it counts reps, sets and rest. for form, ask a trainer.'],
+      ['what if it miscounts?', 'correct the set with one tap. the correction is saved with the workout.'],
+      ['who sees my workouts?', 'you. your gym sees totals for the whole floor, never your sets.'],
+      ['how do i get one?', 'ask your gym. or tell us which gym, and we will ask for you.'],
     ];
     return {
-      title: 'ask barry anything.',
+      title: 'help',
       sub: 'questions',
       html:
         '<div class="qa">' + QA.map((q, k) => '<details' + (k === 0 ? ' open' : '') + '><summary>' + q[0] + '</summary><p>' + q[1] + '</p></details>').join('') + '</div>' +
         '<h3 class="gl">still stuck</h3><div class="grid">' +
-        tile('wide rows', '', row({ act: 'how', icon: IC.help, nm: 'how it counts' }) + row({ act: 'report', icon: IC.tag, nm: 'report a problem' }) + row({ go: 'about', icon: IC.info, nm: 'about', val: '0.31' })) +
+        tile('wide rows', '', row({ act: 'how', icon: IC.help, nm: 'how it counts' }) + row({ act: 'report', icon: IC.tag, nm: 'report a problem' }) + row({ go: 'about', icon: IC.info, nm: 'about', val: '0.35' })) +
         '</div>',
       bind: function (el) {
         el.querySelector('[data-act="how"]').addEventListener('click', () =>
@@ -6417,11 +6418,11 @@ html.framed.narrow .proto.open { height: auto; max-height: calc(100dvh - 60px); 
     // v31: the brand's story in its own four lines, the wordmark as the app's mark, the version; privacy and terms
     return {
       title: 'about ten.',
-      sub: 'version 0.31, a prototype',
+      sub: 'version 0.35, a prototype',
       html:
-        '<section class="sec abt-story"><p>ask anyone how many they did. &ldquo;about ten.&rdquo;</p><p>nobody counts. we guess. and a guess can&rsquo;t tell you if you&rsquo;re getting stronger.</p><p>so we put a small box on every machine. it counts every rep. the app shows the real number, and what to do next time.</p><p class="last">no more about. welcome to exactly.</p></section>' +
+        '<section class="sec abt-story"><p>a small box on each machine counts every rep, set and rest.</p><p>the app keeps every workout, shows your progress and sets up the next one.</p></section>' +
         '<div class="grid">' + H.tile('wide rows', '', H.row({ act: 'priv', nm: 'privacy', chev: true }) + H.row({ act: 'terms', nm: 'terms', chev: true })) + '</div>' +
-        '<p class="abt-note">about ten is a working name. every photograph is a stand-in until our own shoot.</p>',
+        '<p class="abt-note">about ten is a working name. the numbers in this prototype are samples.</p>',
       bind: (el) => el.querySelectorAll('[data-act]').forEach((b) => b.addEventListener('click', () => UI.toast(b.dataset.act === 'priv' ? 'the privacy page opens here.' : 'the terms open here.'))),
     };
   };
@@ -6466,8 +6467,8 @@ html.framed.narrow .proto.open { height: auto; max-height: calc(100dvh - 60px); 
   const STEPS = {
     welcome: {
       dot: 0,
-      html: () => '<div class="ob-red ob-first"><span class="eyebrow">about ten.</span><h1>how many did you do?</h1><p>everyone says about ten. nobody counts. so we put a box on the machine that does.</p></div>',
-      bar: () => cta('<span>count me in</span>', 'pro', ' data-next="mode"'),
+      html: () => '<div class="ob-red ob-first"><span class="eyebrow">about ten.</span><h1>every rep, counted.</h1><p>a box on each machine counts your reps, sets and rest. the app shows what you did and what to do next.</p></div>',
+      bar: () => cta('<span>get started</span>', 'pro', ' data-next="mode"'),
     },
     mode: {
       dot: 1,
@@ -6484,7 +6485,7 @@ html.framed.narrow .proto.open { height: auto; max-height: calc(100dvh - 60px); 
     },
     tag: {
       dot: 2,
-      html: () => '<div class="ob-tx top">' + num('01') + '<h1>tap in.</h1><p>phone to the tag on the machine. then it goes in your pocket. the box counts. you don\'t.</p></div>',
+      html: () => '<div class="ob-tx top">' + num('01') + '<h1>tap in.</h1><p>hold your phone to the tag on the machine, then put it away. the box counts every rep and times every rest.</p></div>',
       bar: () => cta('<span>got it</span>', 'pro', ' data-next="notify"'),
     },
     pair: {
@@ -6505,7 +6506,7 @@ html.framed.narrow .proto.open { height: auto; max-height: calc(100dvh - 60px); 
     },
     notify: {
       dot: 3,
-      html: () => '<div class="ob-tx top">' + num('02') + '<h1>rest&rsquo;s over. we&rsquo;ll say so.</h1><p>even with the phone in your pocket.</p>' + note + '</div>',
+      html: () => '<div class="ob-tx top">' + num('02') + '<h1>we&rsquo;ll tell you when rest is over.</h1><p>even with your phone in your pocket.</p>' + note + '</div>',
       bar: () => cta('<span>allow notifications</span>', 'pro', ' data-next="account"') + '<button class="ob-alt" data-next="account">not now</button>',
     },
     account: {
@@ -6515,7 +6516,7 @@ html.framed.narrow .proto.open { height: auto; max-height: calc(100dvh - 60px); 
     },
     done: {
       dot: 4,
-      html: () => '<div class="ob-red"><span class="eyebrow">no more about.</span><h1>welcome to exactly.</h1></div>',
+      html: () => '<div class="ob-red"><span class="eyebrow">ready</span><h1>tap in at any machine with a box.</h1></div>',
       bar: () => cta('<span>start</span>', 'pro', ' data-finish="1"'),
       bind: () => setTimeout(() => UI.snd.chime(), 350),
     },
@@ -6714,7 +6715,7 @@ html.framed.narrow .proto.open { height: auto; max-height: calc(100dvh - 60px); 
       out.push({ k: 2, t: push < pull ? 'more pull than push.' : 'more push than pull.', d: 'chest and shoulders ' + push + ' sets, back ' + pull + ', in two weeks. ' + (push < pull ? 'one more push machine next time.' : 'one more pull machine next time.') });
     const recs = S.records();
     const r = recs.length && recs[recs.length - 1].date >= S.addDays(S.TODAY, -7) ? recs[recs.length - 1] : null;
-    if (r) out.push({ k: 3, t: 'new best. a real one.', d: nm(r.id) + ', ' + r.reps + ' at ' + kgs(r.w) + '. keep the weight, add a rep.', acc: true });
+    if (r) out.push({ k: 3, t: 'new best.', d: nm(r.id) + ', ' + r.reps + ' at ' + kgs(r.w) + '. keep the weight, add a rep.', acc: true });
     // at most two of a kind, so the list stays varied: two to go up, one that stalled, the balance, a best
     const cap = { 0: 2, 1: 1, 2: 1, 3: 1 };
     const seen = {};
@@ -6784,7 +6785,7 @@ html.framed.narrow .proto.open { height: auto; max-height: calc(100dvh - 60px); 
         '<div class="u-cell"' + go('month', 'Load, ' + (ld.pct == null ? 'first weeks' : ld.pct + ' percent of usual')) + '>' + UI.ring(ld.frac, '<b>' + (ld.pct == null ? tonnes(ld.now) : ld.pct) + '</b><i>' + (ld.pct == null ? tU() : '%') + '</i>') + '<span class="u-k">load</span><em>' + ld.word + '</em></div>') +
       (acts.length ? card('u-acts', '', '<span class="eyebrow">next time</span><ul class="ins">' + acts.map((x) => '<li class="' + (x.acc ? 'acc' : '') + '"><b>' + x.t + '</b><span>' + x.d + '</span></li>').join('') + '</ul>') : '') +
       (st.pts.length > 1
-        ? card('u-chart', ' role="button" tabindex="0" data-tab-go="progress" aria-label="Strength trend"', '<span class="eyebrow">strength, every machine</span><div class="u-big"><b>' + (st.change > 0 ? '+' : '') + st.change + '</b><i>%</i><span>in 8 weeks. not a guess.</span></div>' + UI.lineChart(st.pts, { h: 80 }) + axis(st.pts[0].date, st.pts[st.pts.length - 1].date))
+        ? card('u-chart', ' role="button" tabindex="0" data-tab-go="progress" aria-label="Strength trend"', '<span class="eyebrow">strength, every machine</span><div class="u-big"><b>' + (st.change > 0 ? '+' : '') + st.change + '</b><i>%</i><span>in 8 weeks.</span></div>' + UI.lineChart(st.pts, { h: 80 }) + axis(st.pts[0].date, st.pts[st.pts.length - 1].date))
         : '') +
       card('u-musc', '', '<span class="eyebrow">muscles, last 14 days</span><ul>' + M.GROUPS.map((g) => '<li><span class="mn">' + g + '</span><span class="mb"><i style="width:' + Math.round((mus[g].sets / musMax) * 100) + '%"></i></span><span class="ms">' + mus[g].sets + ' sets</span><span class="mr">' + (mus[g].rested == null ? 'not yet' : mus[g].rested === 0 ? 'today' : mus[g].rested + ' d rest') + '</span></li>').join('') + '</ul>') +
       (last
@@ -7121,7 +7122,7 @@ html.framed.narrow .proto.open { height: auto; max-height: calc(100dvh - 60px); 
     if (((st.best != null && st.count > st.best) || (st.heavier && st.count === 1)) && !st.pr) {
       st.pr = true;
       SND.beat();
-      UI.toast('new best. a real one.', true);
+      UI.toast('new best.', true);
       st.anyPr = true;
       if (plain()) S.PLAIN.record();
       else if (!clean()) S.LENS.record();
