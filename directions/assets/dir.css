@@ -201,5 +201,11 @@ body{background:var(--bg);color:var(--ink);font:16.5px/1.55 var(--tx)}
 .t-ro #emails .ro-em{border-radius:28px;box-shadow:0 30px 60px -34px rgba(0,0,0,.35),0 0 0 1px rgba(0,0,0,.04)}
 .t-ro #emails .ro-meta{background:#F1F1F0}
 @media (max-width:900px){.board > *{grid-column:1 / -1}.three,.plans3{grid-template-columns:1fr}.plans3 .plan{grid-template-columns:repeat(2,minmax(0,1fr))}.mails2{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:82%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}.em2{scroll-snap-align:start}.bigshot{aspect-ratio:4/3}}
+.pkg{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.pk{display:grid;gap:10px;align-content:start;text-decoration:none;background:var(--card);border-radius:16px;padding:12px;min-width:0}
+.pk img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;background:#fff}
+.pkn{display:grid;place-items:center;aspect-ratio:1/1;border-radius:10px;background:var(--acc);color:#fff;font:400 1.6rem/1 var(--hd)}
+.pk b{font-weight:500;font-size:.95rem}
+@media (max-width:900px){.pkg{grid-template-columns:repeat(2,minmax(0,1fr))}}
 :focus-visible{outline:2px solid var(--acc);outline-offset:3px}
 .t-at .tb :focus-visible{outline-color:#fff}
