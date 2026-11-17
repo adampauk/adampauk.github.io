@@ -235,7 +235,7 @@ svg.wave .wglow{animation:breathe 4.5s ease-in-out infinite}
 .lastset{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding:0 6px}
 .cap{font-family:var(--m);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;padding:6px 10px;border-radius:999px;border:1px solid var(--chipline);background:#fff}
 .boxart{position:relative;display:grid;place-items:center;margin-top:clamp(10px,4vh,40px);height:clamp(170px,30vh,250px)}
-.boxart img{position:relative;width:min(70%,270px);height:auto;animation:bob 3.6s ease-in-out infinite;filter:drop-shadow(0 30px 30px rgba(20,22,40,.18))}
+.boxart img{position:relative;width:min(80%,310px);height:auto;animation:bob 3.6s ease-in-out infinite;filter:drop-shadow(0 30px 30px rgba(20,22,40,.18))}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1deg)}}
 .ring{position:absolute;left:50%;top:50%;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;border:1.5px solid rgba(39,71,214,.35);animation:ring 2.4s ease-out infinite;opacity:0}
 .ring.b{animation-delay:.8s}.ring.c{animation-delay:1.6s}
@@ -740,7 +740,7 @@ function tapIn() {
   const p = curP(), n = WK.w.plan.length;
   screen(`<div class="wglow" style="top:80px;height:340px;background:radial-gradient(55% 50% at 50% 50%,rgba(39,71,214,.12) 0%,rgba(246,246,245,0) 70%)"></div>
   <div id="bn" style="min-height:84px"></div>
-  <button type="button" class="boxart" data-act="tapbox" aria-label="tap your phone to the box"><i class="ring"></i><i class="ring b"></i><i class="ring c"></i><img src="box.webp" alt="the readout box" width="640" height="527" draggable="false"></button>
+  <button type="button" class="boxart" data-act="tapbox" aria-label="tap your phone to the box"><i class="ring"></i><i class="ring b"></i><i class="ring c"></i><img src="box.webp" alt="the readout box, matte black, a USB-C port in its end, readout printed on the lid" width="720" height="389" draggable="false"></button>
   <div class="tapt"><p class="lab">Machine ${WK.i + 1} of ${n} · ${esc(DAYS[WK.w.type].n)}</p><h2>${esc(MX[p.k].n)}</h2><p>Hold your phone to the box on the weight stack.</p></div>
   <div class="bottom"><button type="button" class="tlink" data-act="endwk">${WK.w.ex.some(e => e.sets.length) ? 'End workout' : 'Cancel'}</button></div>`, 'tapin');
   WK.timers.push(setTimeout(showBanner, 1500 / SPEED));
