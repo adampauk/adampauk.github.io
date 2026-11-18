@@ -210,6 +210,7 @@ body{background:var(--bg);color:var(--ink);font:16.5px/1.55 var(--tx)}
 /* readout: the visuals stay, the long explanations go */
 .t-ro #kit .ro-kr p:not([class]),.t-ro #kit .ro-rules,.t-ro #social .ro-grid3,.t-ro #social .ro-rows,.t-ro #social .ro-mk ~ *{display:none}
 .rm-intro{max-width:60ch;color:#555;margin:0 0 22px}
+.camp{margin:0 0 18px;display:flex;flex-wrap:wrap;gap:8px 28px}
 .sp-h{font:600 1.25rem/1.2 Geist,system-ui,sans-serif;margin:34px 0 14px;letter-spacing:-.01em}
 .sp-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .sp-grid figure{margin:0;min-width:0}.sp-grid img{width:100%;height:auto;display:block;border-radius:14px;box-shadow:0 0 0 1px rgba(0,0,0,.06)}
