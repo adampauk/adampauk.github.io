@@ -274,6 +274,9 @@ a{color:var(--blue)}
 .loginf input{flex:1 1 220px;min-width:0;border:1px solid var(--line-2);background:var(--card);border-radius:999px;padding:11px 16px;font-size:15px}
 .loginf input:focus{outline:none;border-color:var(--blue)}
 .state .linkish{margin-top:6px}
+.linkbox{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:61;width:min(92vw,520px);background:var(--card);border-radius:20px;box-shadow:var(--lift);padding:16px 18px;display:grid;gap:8px;animation:rise 300ms var(--ease-out) both}
+.lb-row{display:flex;gap:8px}
+.lb-row input{flex:1;min-width:0;border:1px solid var(--line);background:var(--card-2);border-radius:999px;padding:10px 14px;font:500 12.5px/1.2 var(--mono);color:var(--ink-2)}
 
 /* side panel */
 .scrim{position:fixed;inset:0;background:var(--scrim);z-index:40;opacity:0;transition:opacity 300ms ease}
@@ -370,7 +373,7 @@ a{color:var(--blue)}
 <div class="wrap">
   <header class="top">
     <div><h1>Sedulo on one page</h1><span class="label" id="asof"></span></div>
-    <div class="me" id="meWrap" hidden><span id="meAva"></span><span id="meName" style="font-size:13.5px;font-weight:500"></span><button type="button" class="btn2" data-act="signout" style="padding:7px 12px;font-size:13px">Sign out</button></div>
+    <div class="me" id="meWrap" hidden><span id="meAva"></span><span id="meName" style="font-size:13.5px;font-weight:500"></span><button type="button" class="btn2" data-act="invite" id="inviteBtn" style="padding:7px 12px;font-size:13px"></button><button type="button" class="btn2" data-act="signout" style="padding:7px 12px;font-size:13px">Log out</button></div>
   </header>
 
   <section class="hero card" id="hero" hidden>
@@ -434,6 +437,12 @@ a{color:var(--blue)}
   <div class="dw-foot" id="dwFoot"></div>
 </aside>
 <div class="toast off" id="toast" role="status" aria-live="polite"></div>
+<div class="linkbox" id="linkBox" role="dialog" aria-labelledby="lbTitle" hidden>
+  <b id="lbTitle"></b>
+  <p class="hint" style="margin:0">Send it to him now. It works once, for about an hour.</p>
+  <div class="lb-row"><label for="lbLink" hidden>Login link</label><input id="lbLink" readonly><button type="button" class="primary" data-act="lbcopy">Copy</button></div>
+  <button type="button" class="danger" data-act="lbclose" style="justify-self:start">Close</button>
+</div>
 
 <script>
 (function () {
@@ -1049,7 +1058,7 @@ a{color:var(--blue)}
     var email = S.session && S.session.user ? S.session.user.email : "";
     if (msg === "login" && S.sentTo) return LOCK + "<h2>Check your email</h2><p>We sent a login link to <b>" + esc(S.sentTo) + "</b>. Open it on this device.</p>" +
       '<button type="button" class="linkish" data-act="relogin">Use another email</button>';
-    if (msg === "login") return LOCK + "<h2>Log in to the board</h2><p>For Adam and Justus. We email you a link.</p>" +
+    if (msg === "login") return LOCK + "<h2>Log in to the board</h2><p>For Adam and Justus. Adam gets a login link by email; Justus gets his from Adam.</p>" +
       '<form class="loginf" id="loginForm"><label for="loginEmail" hidden>Email</label><input type="email" id="loginEmail" required autocomplete="email" placeholder="Your email">' +
       '<button class="primary" type="submit">Send login link</button></form><p class="hint" id="loginMsg"></p>';
     if (msg === "notmember") return LOCK + "<h2>This email isn't on the board</h2><p>Only Adam and Justus can open it. You are logged in as <b>" + esc(email) + "</b>.</p>" +
@@ -1068,7 +1077,10 @@ a{color:var(--blue)}
     else if (!S.tasks.length || !depts().length) msg = ["", "No tasks yet", "Ask Claude to fill the board."];
     ["#hero", "#next", "#bar"].forEach(function (s) { $(s).hidden = !!msg; });
     $("#meWrap").hidden = !(S.session && S.auth === "in");
-    if (S.session && S.auth === "in") { $("#meAva").innerHTML = ava(S.me === "Adam" || S.me === "Justus" ? S.me : "Not set", true); $("#meName").textContent = S.me || ""; }
+    if (S.session && S.auth === "in") {
+      $("#meAva").innerHTML = ava(S.me === "Adam" || S.me === "Justus" ? S.me : "Not set", true); $("#meName").textContent = S.me || "";
+      $("#inviteBtn").textContent = "Login link for " + (S.me === "Justus" ? "Adam" : "Justus");
+    }
     if (msg) {
       ["board", "focus", "matrix", "calendar"].forEach(function (v) { $("#v-" + v).hidden = true; });
       st.hidden = false;
@@ -1109,6 +1121,31 @@ a{color:var(--blue)}
     else if (act === "who") { S.who = id; store("sedulo-board-who", id); render(); }
     else if (act === "signout") { sb.auth.signOut().then(function () { S.auth = "out"; S.loaded = false; S.tasks = []; S.notes = []; S.me = null; S.session = null; closePanel(); render(); }); }
     else if (act === "relogin") { S.sentTo = null; render(); }
+    else if (act === "invite") {
+      var other = S.me === "Justus" ? "Adam" : "Justus";
+      b.disabled = true;
+      sb.auth.getSession().then(function (r) {
+        var tok = r.data && r.data.session && r.data.session.access_token;
+        if (!tok) throw { error: "not_signed_in" };
+        return fetch(SB_URL + "/functions/v1/team-board-link", {
+          method: "POST", headers: { "Authorization": "Bearer " + tok, "apikey": SB_KEY, "Content-Type": "application/json" }, body: JSON.stringify({ name: other })
+        }).then(function (x) { return x.json(); });
+      }).then(function (j) {
+        b.disabled = false;
+        if (!j || !j.ok) { toast("No link this time (" + ((j && j.error) || "error") + "). Try again in a minute."); return; }
+        $("#lbTitle").textContent = "Login link for " + other;
+        $("#lbLink").value = j.link;
+        $("#linkBox").hidden = false;
+        $("#lbLink").focus(); $("#lbLink").select();
+      }).catch(function () { b.disabled = false; toast("No link this time. Check the connection and try again."); });
+    }
+    else if (act === "lbcopy") {
+      var v = $("#lbLink").value;
+      var done = function () { toast("Copied. Paste it to " + ($("#lbTitle").textContent.replace("Login link for ", "")) + " on WhatsApp."); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(v).then(done, function () { $("#lbLink").select(); });
+      else $("#lbLink").select();
+    }
+    else if (act === "lbclose") { $("#linkBox").hidden = true; $("#lbLink").value = ""; }
     else if (act === "showdone") { S.showDone[id] = !S.showDone[id]; render(); }
     else if (act === "focus") openDept(id, b.closest(".dept"));
     else if (act === "unfocus") closeDept();
@@ -1137,7 +1174,7 @@ a{color:var(--blue)}
         bt.disabled = false;
         if (r.error) {
           var m2 = String(r.error.message || "");
-          lm.textContent = /not authorized/i.test(m2) ? "Supabase can't email this address yet: it has to be on Adam's Supabase team." :
+          lm.textContent = /not authorized/i.test(m2) ? "Supabase can't email this address. Ask Adam for a login link: it's a button on his board." :
             /rate limit|security purposes/i.test(m2) ? "Too many login emails just now. Wait a minute and try again." : "The email wasn't sent: " + m2;
           return;
         }
