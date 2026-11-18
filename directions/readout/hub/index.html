@@ -624,6 +624,42 @@ button.r4:active,a.r4:active{transform:scale(.98)}
   .mi6{grid-template-columns:minmax(0,1fr) 50px 64px;gap:10px}.mi6 i,.mi6 .bt6{display:none}}
 @media (max-width:640px){.four6{grid-template-columns:1fr}.r3{gap:6px}.hr6.ab{padding:22px}.c6{padding:18px}.tri6 b .num,.tri6 b.num{font-size:1.8rem}}
 
+/* owner hub v7: the top bar (one pill of tabs, a marker that slides to the chosen tab), entrance choreography after
+   Emil Kowalski (object first, then the cards with shrinking gaps, the hero word sharpening into place), press feedback */
+.n7{position:sticky;top:0;z-index:30;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:14px 28px;background:color-mix(in srgb,var(--bg) 86%,transparent);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.n7 .lo6{justify-self:start;align-items:flex-start;text-decoration:none}
+.tb7{position:relative;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));padding:4px;border-radius:999px;background:var(--card);box-shadow:0 1px 2px rgba(0,0,0,.05),0 8px 22px -12px rgba(0,0,0,.22)}
+.ind7{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px) / var(--n));border-radius:999px;background:var(--ink);transform:translateX(calc(var(--i) * 100%));transition:transform .32s var(--ease)}
+[data-brand="abten"] .ind7{background:var(--acc)}
+.tb7 a{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:9px 18px;border-radius:999px;font-size:.88rem;font-weight:500;color:var(--mute);text-decoration:none;white-space:nowrap;transition:color .25s ease,transform .16s var(--ease)}
+.tb7 a[aria-current="page"]{color:#fff}
+.tb7 a:active{transform:scale(.96)}
+[data-brand="abten"] .tb7 a{text-transform:lowercase}
+@media (hover:hover) and (pointer:fine){.tb7 a:not([aria-current]):hover{color:var(--ink)}}
+.nr7{justify-self:end;display:flex;gap:8px}
+.ib7{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:0;padding:0;background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.05),0 6px 16px -10px rgba(0,0,0,.22);cursor:pointer;text-decoration:none;transition:transform .16s var(--ease),background-color .2s ease,color .2s ease}
+.ib7:active{transform:scale(.94)}
+.ib7[aria-current="page"]{background:var(--ink);color:#fff}
+.ib7[data-snd][aria-pressed="false"]{color:var(--mute2)}
+.lo7b{color:#B45309;font-weight:600}
+[data-v7] .ft6 .lo7b{color:#B45309}
+[data-v7] #view>.m-in{animation:none}
+[data-v7] .m-in .hr6{animation:in7 .5s var(--ease) both}
+[data-v7] .m-in .hr6 h1{animation:word7 .75s var(--ease) .1s both}
+[data-v7] .m-in .hr6 p,[data-v7] .m-in .hr6 .tri6,[data-v7] .m-in .hr6 .pill6{animation:in7 .5s var(--ease) .2s both}
+[data-v7] .m-in .rg6{animation:in7 .5s var(--ease) .07s both}
+[data-v7] .m-in .four6>*,[data-v7] .m-in .two6>*,[data-v7] .m-in .ph6,[data-v7] .m-in .pg6>section,[data-v7] .m-in .pg6>.tv,[data-v7] .m-in .pg6>.mail{animation:in7 .5s var(--ease) both}
+[data-v7] .m-in .four6>:nth-child(1),[data-v7] .m-in .two6>:nth-child(1),[data-v7] .m-in .pg6>section,[data-v7] .m-in .pg6>.tv,[data-v7] .m-in .pg6>.mail{animation-delay:.12s}
+[data-v7] .m-in .four6>:nth-child(2),[data-v7] .m-in .two6>:nth-child(2){animation-delay:.16s}
+[data-v7] .m-in .four6>:nth-child(3){animation-delay:.19s}
+[data-v7] .m-in .four6>:nth-child(4){animation-delay:.21s}
+@keyframes in7{from{opacity:0;transform:translateY(10px)}}
+@keyframes word7{from{opacity:0;filter:blur(10px);transform:translateY(12px)}}
+[data-v7] .li6,[data-v7] .mi6{transition:transform .16s var(--ease),background-color .12s ease}
+[data-v7] .li6:active,[data-v7] .mi6:active{transform:scale(.985)}
+[data-v7] a.gy6:active{transform:scale(.98)}
+@media (max-width:900px){.n7{grid-template-columns:auto 1fr;padding:10px 14px}.tb7{display:none}}
+
 </style>
 </head>
 <body>
@@ -842,14 +878,17 @@ return {AB:AB,RED:RED,T:T,fmt:fmt,fmtN:fmtN,esc:esc,DAYS:DAYS,DAYL:DAYL,MON:MON,
 
 </script>
 <script>
-/* The owner hub, version 6: the members' app on a laptop. Same type, cards, toggles and hero as each direction's app,
+/* Version 7 (on top of 6): a new top bar with a sliding tab, entrance choreography and press feedback after Emil
+   Kowalski, the about ten. app's sound kit (soft synthesised tones, a mute switch), the battery only when it is low,
+   no period switch.
+   The owner hub, version 6: the members' app on a laptop. Same type, cards, toggles and hero as each direction's app,
    the website's nav, and the website's gym cards (a label, one big figure, one short line). readout: the week as the
    sensors saw it (a waveform) and tick scales. about ten.: a red card with one serif word, red rings, ten dots.
    No 3D, no glass, no week picker: "this week" or "4 weeks", like the app. No names on the overview or today.
    Battery as a state (a coin cell gives no honest percentage). Data: the sample gym (gym.js), made up. */
 (function(){
 'use strict';
-document.documentElement.setAttribute('data-hub','6');
+document.documentElement.setAttribute('data-hub','6');document.documentElement.setAttribute('data-v7','');
 var G=window.GYM,WKS=window.HUB.weeks,T=K.T,fmt=K.fmt,N=K.N,esc=K.esc,AB=K.AB,M=G.machines,NM=M.length,LAST=G.nwk-1,LOGO='readout';
 var S={per:'week',sort:'most',grp:'all',nf:'all',mail:true},QMIN=14,QMAX=49,TVT=null,TVS=null,E=LAST;
 var DEF=innerWidth<900?'today':'week';
@@ -885,11 +924,32 @@ function stronger(e){var o={up:0,same:0,dn:0,n:0,top:[]};G.members.forEach(funct
   o.n=o.up+o.same+o.dn;o.p=o.n?Math.round(o.up/o.n*100):0;o.top.sort(function(a,b){return b.c-a.c});return o}
 
 /* ---- the frame: the website's nav ---- */
-function nav(k){var L=[['week','Overview'],['today','Today'],['members','Members'],['machines','Machines']];
-  return '<nav class="n6"><div class="nl6">'+L.map(function(x){return '<a href="#'+x[0]+'"'+(k===x[0]?' aria-current="page"':'')+'>'+T(x[1])+'</a>'}).join('')+'</div>'
-   +'<a class="lo6" href="#week"><b>'+esc(LOGO)+'</b>'+(AB?'':'<span class="tk6">'+'<i></i>'.repeat(8)+'<i class="on"></i><i></i><i></i></span>')+'</a>'
-   +'<div class="nr6"><a href="#email"'+(k==='email'?' aria-current="page"':'')+'>'+T('Monday e-mail')+'</a><a class="pill6" href="#tv">'+T('Gym TV')+'</a></div></nav>'}
-function page(inner,k){var lowN=M.filter(function(m,i){return low(i)}).length;return nav(k)+'<div class="pg6">'+inner+'</div><footer class="ft6"><span>'+NM+' '+T('sensors counting')+(lowN?', '+lowN+' '+T('low battery'):'')+'</span><span class="vers"><span>'+T('Earlier')+'</span><a href="v1/">v1</a><a href="v2/">v2</a><a href="v3/">v3</a><a href="v4/">v4</a><a href="v5/">v5</a></span>'+smp()+'</footer>'}
+/* ---- sound: the about ten. app's kit (synthesised, soft, short); only for what earns it: a panel, a switch, a filter.
+   Never on a tab or a page. Silent until the first click (browsers require it); a switch in the top bar mutes it. ---- */
+var SND=(function(){var ctx=null,master=null,KEY='hub.sounds';
+  function on(){try{return localStorage.getItem(KEY)!=='off'}catch(e){return true}}
+  function set(v){try{localStorage.setItem(KEY,v?'on':'off')}catch(e){}}
+  function unlock(){try{if(!ctx){var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;ctx=new AC();master=ctx.createGain();master.gain.value=.9;master.connect(ctx.destination)}if(ctx.state!=='running')ctx.resume()}catch(e){}}
+  function ok(){return ctx&&ctx.state==='running'&&on()}
+  function tone(f,t0,dur,gain,f2,type){var o=ctx.createOscillator();o.type=type||'sine';o.frequency.setValueAtTime(f,t0);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t0+dur);
+    var g=ctx.createGain();g.gain.setValueAtTime(.0001,t0);g.gain.exponentialRampToValueAtTime(gain,t0+.006);g.gain.exponentialRampToValueAtTime(.0001,t0+dur);o.connect(g);g.connect(master);o.start(t0);o.stop(t0+dur+.03)}
+  return {on:on,set:set,unlock:unlock,
+    open:function(){ok()&&tone(660,ctx.currentTime,.12,.014,990)},
+    close:function(){ok()&&(tone(1318.5,ctx.currentTime,.24,.028),tone(987.8,ctx.currentTime+.08,.34,.025))},
+    toggle:function(v){ok()&&(tone(v?1320:1760,ctx.currentTime,.05,.018),tone(v?1760:1320,ctx.currentTime+.045,.06,.016))},
+    tick:function(up){ok()&&tone(up?1975:1661,ctx.currentTime,.05,.02)}}})();
+document.addEventListener('pointerdown',SND.unlock,{passive:true});document.addEventListener('keydown',SND.unlock);
+function spk(v){return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z" stroke-linejoin="round"/>'+(v?'<path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" stroke-linecap="round"/>':'<path d="M16 9.5l5 5M21 9.5l-5 5" stroke-linecap="round"/>')+'</svg>'}
+
+/* ---- the top bar: the logo, one pill of tabs with a sliding marker, three round buttons ---- */
+var TABS=[['week','Overview','overview'],['today','Today','today'],['members','Members','clients'],['machines','Machines','machines']],PREVI=-1;
+function nav(k){var i=-1;TABS.forEach(function(x,j){if(x[0]===k)i=j});
+  return '<nav class="n7"><a class="lo6" href="#week"><b>'+esc(LOGO)+'</b>'+(AB?'':'<span class="tk6">'+'<i></i>'.repeat(8)+'<i class="on"></i><i></i><i></i></span>')+'</a>'
+   +'<div class="tb7" style="--n:4;--i:'+(i<0?0:i)+'">'+(i<0?'':'<span class="ind7" aria-hidden="true"></span>')+TABS.map(function(x){return '<a href="#'+x[0]+'"'+(k===x[0]?' aria-current="page"':'')+'>'+K.ic(x[2],17)+'<span>'+T(x[1])+'</span></a>'}).join('')+'</div>'
+   +'<div class="nr7"><button type="button" class="ib7" data-snd aria-pressed="'+SND.on()+'" aria-label="Sounds" data-tip="'+esc(T('Sounds'))+'">'+spk(SND.on())+'</button><a class="ib7" href="#tv" aria-label="Gym TV" data-tip="'+esc(T('Gym TV'))+'"'+(k==='tv'?' aria-current="page"':'')+'>'+K.ic('tv',18)+'</a><a class="ib7" href="#email" aria-label="Monday e-mail" data-tip="'+esc(T('Monday e-mail'))+'"'+(k==='email'?' aria-current="page"':'')+'>'+K.ic('mail',18)+'</a></div></nav>'}
+function slide(k){var el=document.querySelector('.tb7'),ind=el&&el.querySelector('.ind7'),i=-1;TABS.forEach(function(x,j){if(x[0]===k)i=j});if(!ind||i<0){PREVI=i;return}
+  if(PREVI>=0&&PREVI!==i&&!K.RED){ind.style.transition='none';el.style.setProperty('--i',PREVI);void ind.offsetWidth;ind.style.transition='';el.style.setProperty('--i',i)}PREVI=i}
+function page(inner,k){var lowN=M.filter(function(m,i){return low(i)}).length;return nav(k)+'<div class="pg6">'+inner+'</div><footer class="ft6"><span>'+NM+' '+T('sensors counting')+'</span>'+(lowN?'<span class="lo7b">'+lowN+' '+T('low on battery')+'</span>':'')+'<span class="vers"><span>'+T('Earlier')+'</span><a href="v1/">v1</a><a href="v2/">v2</a><a href="v3/">v3</a><a href="v4/">v4</a><a href="v5/">v5</a><a href="v6/">v6</a></span>'+smp()+'</footer>'}
 function seg(){return '<div class="seg s6" role="group" aria-label="Period">'+[['week','This week'],['month','4 weeks']].map(function(x){return '<button type="button" data-per="'+x[0]+'" aria-pressed="'+(S.per===x[0])+'">'+T(x[1])+'</button>'}).join('')+'</div>'}
 document.addEventListener('click',function(e){var t;
   if((t=e.target.closest('[data-per]'))){S.per=t.getAttribute('data-per');K.render(false,true);return}
@@ -919,8 +979,8 @@ function gyCard(label,big,line,extra,href){return '<'+(href?'a href="'+href+'"':
 /* ---- overview ---- */
 function week(){var p=P(E,n()),pp=prev(),g=heatP(p.ws),pk=peakOf(g),bw=busyWindow(weekdayCurve(g)),st=stronger(E),q=quiet(E*7+6),co=cohort(E),k=kept(co.slice(-24)),r=M.map(function(m,i){return i}).sort(function(a,b){return p.mu[b]-p.mu[a]});
   var ch=pct(p.ses,pp.ses),w1=ch>3?'Busier':ch<-3?'Quieter':'Steady',flat=[];g.forEach(function(row){flat=flat.concat(row)});
-  var hero=AB?'<section class="hr6 ab"><div class="glow"></div><div class="ht6"><span class="lab">'+(n()===1?T('this week'):T('the last 4 weeks'))+'</span>'+seg()+'</div><h1>'+word(w1)+'</h1><p>'+fmt(p.mem)+' '+T('members')+', '+T('peak')+' '+K.DAYL[pk.d].toLowerCase()+' '+hr(pk.h+6)+'.</p><a class="pill6 w" href="#members">'+T('see members')+'</a></section>'
-   :'<section class="hr6 ro c6"><div class="ht6"><span class="lab">'+(n()===1?'This week, as the sensors saw it':'The last 4 weeks, as the sensors saw it')+'</span>'+seg()+'</div>'+waveform(flat,{mark:pk.d*17+pk.h,ticks:K.DAYS.map(function(d,i){return [i*17+8,d.toUpperCase()]}),label:'Machines in use, hour by hour'})+'<h1>'+w1+'.</h1>'
+  var hero=AB?'<section class="hr6 ab"><div class="glow"></div><div class="ht6"><span class="lab">'+(n()===1?T('this week'):T('the last 4 weeks'))+'</span>'+'</div><h1>'+word(w1)+'</h1><p>'+fmt(p.mem)+' '+T('members')+', '+T('peak')+' '+K.DAYL[pk.d].toLowerCase()+' '+hr(pk.h+6)+'.</p><a class="pill6 w" href="#members">'+T('see members')+'</a></section>'
+   :'<section class="hr6 ro c6"><div class="ht6"><span class="lab">'+(n()===1?'This week, as the sensors saw it':'The last 4 weeks, as the sensors saw it')+'</span>'+'</div>'+waveform(flat,{mark:pk.d*17+pk.h,ticks:K.DAYS.map(function(d,i){return [i*17+8,d.toUpperCase()]}),label:'Machines in use, hour by hour'})+'<h1>'+w1+'.</h1>'
      +'<div class="tri6">'+[['Members',p.mem,pct(p.mem,pp.mem)],['Workouts',p.ses,ch],['Records',p.recs,p.recs-pp.recs,1]].map(function(x){return '<div><span class="lab">'+x[0]+'</span><b>'+N(x[1],{k:'h6'+x[0],cls:'num'})+'</b>'+arrow(x[2],x[3])+'</div>'}).join('')+'</div></section>';
   var rings='<section class="c6 rg6"><div class="r3">'+[[st.p/100,st.p+'%',T('stronger'),T('vs 4 weeks ago')],[k.reached?k.kept/k.reached:0,k.kept+'/'+k.reached,T('new members'),T('still training in week 4')],[pk.v/NM,Math.round(pk.v)+'/'+NM,T('at the peak'),T('machines in use')]].map(function(x,i){
     return '<div class="ri6">'+meter(x[0],{text:AB?x[1]:'',fs:24,dl:i*120})+(AB?'':'<b class="num">'+x[1]+'</b>')+'<span class="rl6">'+x[2]+'</span><span class="mute">'+x[3]+'</span></div>'}).join('')+'</div></section>';
@@ -958,17 +1018,17 @@ function members(){var co=cohort(E),k=kept(co),st=stronger(E),q=quiet(E*7+6),ws=
   return page(h,'members')}
 function memberDrawer(id){var m=G.members[id];if(!m||!m.consent)return;var since=m.ds.length?G.today-m.ds[m.ds.length-1]:0,from=Math.max(0,wkOf(m.joinD)),wk=[],labs=[];for(var w=from;w<=G.nwk;w++){wk.push(m.cnt[w]);labs.push(w===G.nwk?T('Now'):'W'+WKS[w].n)}
   var fav=m.mc.map(function(v,i){return {i:i,v:v}}).sort(function(a,b){return b.v-a.v}).slice(0,5);
-  K.openDrawer(K.dhead(T('Member'),m.name,null,'<span class="chip">'+(m.isNew?T('Joined')+' '+dm(m.joinD):T('Long-time member'))+'</span>'+smp())+'<div class="dbody"><div class="grid g3"><div class="card fig"><span class="lab">'+T('Workouts')+'</span>'+N(m.ds.length)+'</div><div class="card fig"><span class="lab">'+T('Last seen')+'</span><span class="num">'+since+' '+T('d')+'</span></div><div class="card fig"><span class="lab">'+T('Records')+'</span>'+N(m.recs)+'</div></div>'
+  SND.open();K.openDrawer(K.dhead(T('Member'),m.name,null,'<span class="chip">'+(m.isNew?T('Joined')+' '+dm(m.joinD):T('Long-time member'))+'</span>'+smp())+'<div class="dbody"><div class="grid g3"><div class="card fig"><span class="lab">'+T('Workouts')+'</span>'+N(m.ds.length)+'</div><div class="card fig"><span class="lab">'+T('Last seen')+'</span><span class="num">'+since+' '+T('d')+'</span></div><div class="card fig"><span class="lab">'+T('Records')+'</span>'+N(m.recs)+'</div></div>'
    +'<div class="card"><div class="ch"><h3>'+T('Workouts a week')+'</h3></div>'+K.bars(wk,labs.map(function(l,i){return i%3===0||i===labs.length-1?l:''}),{h:150,gap:4,label:'Workouts a week'})+'</div><div class="card"><div class="ch"><h3>'+T('Favourite machines')+'</h3></div>'+K.hbars(fav.map(function(x){return {label:M[x.i].name,v:x.v}}))+'</div></div>')}
 
 /* ---- machines: like the app's "strength, every machine" list ---- */
 function machines(){var p=P(E,n()),pp=prev(),list=M.map(function(m,i){return i}).filter(function(i){return S.grp==='all'||M[i].group===S.grp}),max=Math.max.apply(null,p.mu);
   if(S.sort==='most')list.sort(function(a,b){return p.mu[b]-p.mu[a]});else if(S.sort==='least')list.sort(function(a,b){return p.mu[a]-p.mu[b]});else list.sort(function(a,b){return M[a].name<M[b].name?-1:1});
-  var h='<div class="ph6"><h1>'+word('Machines')+'</h1>'+seg()+'</div><section class="c6"><div class="h6"><div class="tools">'+[['all','All']].concat(GROUPS).map(function(g){return '<button class="chip'+(S.grp===g[0]?' on':'')+'" type="button" data-grp="'+g[0]+'" style="border:0;cursor:pointer;padding:6px 12px">'+T(g[1])+'</button>'}).join('')+'</div><div class="seg s6" role="group" aria-label="Sort">'+[['most','Most'],['least','Least'],['az','A–Z']].map(function(x){return '<button type="button" data-sort="'+x[0]+'" aria-pressed="'+(S.sort===x[0])+'">'+T(x[1])+'</button>'}).join('')+'</div></div>'
-   +'<div class="mr6">'+list.map(function(i,j){var v=p.mu[i];return '<button type="button" class="mi6" data-m="'+i+'"><b>'+esc(T(M[i].name))+'</b><i><u class="gx" style="width:'+(v/max*100).toFixed(1)+'%;--dl:'+K.sd(Math.min(j,11))+'ms"></u></i><span class="num">'+fmt(v)+'</span>'+arrow(pct(v,pp.mu[i]))+'<span class="bt6'+(low(i)?' lo':'')+'">'+(low(i)?T('battery low'):T('battery ok'))+'</span></button>'}).join('')+'</div></section>';
+  var h='<div class="ph6"><h1>'+word('Machines')+'</h1>'+'</div><section class="c6"><div class="h6"><div class="tools">'+[['all','All']].concat(GROUPS).map(function(g){return '<button class="chip'+(S.grp===g[0]?' on':'')+'" type="button" data-grp="'+g[0]+'" style="border:0;cursor:pointer;padding:6px 12px">'+T(g[1])+'</button>'}).join('')+'</div><div class="seg s6" role="group" aria-label="Sort">'+[['most','Most'],['least','Least'],['az','A–Z']].map(function(x){return '<button type="button" data-sort="'+x[0]+'" aria-pressed="'+(S.sort===x[0])+'">'+T(x[1])+'</button>'}).join('')+'</div></div>'
+   +'<div class="mr6">'+list.map(function(i,j){var v=p.mu[i];return '<button type="button" class="mi6" data-m="'+i+'"><b>'+esc(T(M[i].name))+'</b><i><u class="gx" style="width:'+(v/max*100).toFixed(1)+'%;--dl:'+K.sd(Math.min(j,11))+'ms"></u></i><span class="num">'+fmt(v)+'</span>'+arrow(pct(v,pp.mu[i]))+(low(i)?'<span class="bt6 lo">'+T('battery low')+'</span>':'<span class="bt6"></span>')+'</button>'}).join('')+'</div></section>';
   return page(h,'machines')}
-function machineDrawer(i){var m=M[i],p=P(E,n()),vals=[],labs=[];for(var w=0;w<=LAST;w++){vals.push(G.weeks[w].mu[i]);labs.push('W'+WKS[w].n)}
-  K.openDrawer(K.dhead(T('Machine'),m.name,m.model,'<span class="chip">'+T(m.group)+'</span>'+smp())+'<div class="dbody"><div class="grid g3"><div class="card fig"><span class="lab">'+T('Uses')+'</span>'+N(p.mu[i])+'</div><div class="card fig"><span class="lab">'+T('Sensor')+'</span><span class="num" style="font-size:1.6rem">'+(low(i)?T('Battery low'):T('Battery ok'))+'</span></div><div class="card fig"><span class="lab">'+T('Coin cell')+'</span><span class="num" style="font-size:1.6rem">CR2477</span></div></div>'
+function machineDrawer(i){var m=M[i],p=P(E,n()),vals=[],labs=[],rank=M.map(function(x,j){return j}).sort(function(a,b){return p.mu[b]-p.mu[a]}).indexOf(i)+1;for(var w=0;w<=LAST;w++){vals.push(G.weeks[w].mu[i]);labs.push('W'+WKS[w].n)}
+  SND.open();K.openDrawer(K.dhead(T('Machine'),m.name,m.model,'<span class="chip">'+T(m.group)+'</span>'+smp())+'<div class="dbody"><div class="grid g3"><div class="card fig"><span class="lab">'+T('Uses')+'</span>'+N(p.mu[i])+'</div><div class="card fig"><span class="lab">'+T('Rank')+'</span><span class="num">#'+rank+'</span></div>'+(low(i)?'<div class="card fig"><span class="lab">'+T('Battery')+'</span><span class="num lo7b" style="font-size:1.6rem">'+T('Low')+'</span></div>':'')+'</div>'
    +'<div class="card"><div class="ch"><h3>'+T('16 weeks')+'</h3></div>'+K.line([{vals:vals,area:true,dots:true}],labs,{hi:E,h:200,label:m.name+', 16 weeks'})+'</div><div class="card"><div class="ch"><h3>'+T('Hours')+'</h3><span class="lab">'+T('Last 4 weeks')+'</span></div>'+K.heat(G.machineHours[i],K.DAYS,HOURCOLS,{cw:20,ch:16,label:'Uses by hour'})+'</div></div>')}
 
 /* ---- the gym TV and the Monday e-mail ---- */
@@ -986,9 +1046,15 @@ function email(){var p=P(LAST,1),pp=P(LAST-1,1),k=kept(cohort(LAST)),st=stronger
    +'<div class="mail"><div class="mhead"><span class="mlogo">'+esc(LOGO)+'</span><span class="mute">'+T('Week')+' '+WKS[LAST].n+'</span></div><div class="mbody"><div class="mfig">'+mf('Members',fmt(p.mem),arrow(pct(p.mem,pp.mem)))+mf('Workouts',fmt(p.ses),arrow(pct(p.ses,pp.ses)))+mf('Busy hours',hr(bw.a).replace(/ (am|pm)$/,'')+'–'+hr(bw.b))+mf('New, week 4',k.kept+'/'+k.reached)+mf('Stronger',st.p+'%')+'</div>'
    +'<div class="mfig m2"><div><span class="lab">'+T('Busiest machine')+'</span><b class="num">'+esc(M[r[0]].name)+'</b></div><div><span class="lab">'+T('Gone quiet')+'</span><b class="num">'+q.length+'</b></div></div><a class="btn p" href="#week" style="justify-self:start">'+T('Open the hub')+'</a></div><div class="mfoot"><span>'+T('Sample gym')+'</span><span>'+T('Unsubscribe')+'</span></div></div>','email')}
 
+document.addEventListener('click',function(e){var t;
+  if((t=e.target.closest('[data-sort],[data-grp],[data-nf]')))SND.tick(true);
+  else if((t=e.target.closest('[data-mail]')))SND.toggle(t.getAttribute('aria-pressed')==='true');
+  else if(e.target.closest('[data-close]')||e.target.id==='scrim')SND.close();
+  else if((t=e.target.closest('[data-snd]'))){var v=!SND.on();if(!v)SND.toggle(false);SND.set(v);if(v){SND.unlock();SND.toggle(true)}t.setAttribute('aria-pressed',String(v));t.innerHTML=spk(v)}});
+document.addEventListener('keydown',function(e){var d=document.getElementById('drawer');if(e.key==='Escape'&&d&&d.classList.contains('on'))SND.close()});
 K.mount({logo:LOGO,sub:'Hub for gyms',def:DEF,
   nav:[['week','Overview','overview'],['today','Today','today'],['members','Members','clients'],['machines','Machines','machines'],['tv','Gym TV','tv',1],['email','Monday e-mail','mail',1]],
-  after:function(k){clearInterval(TVT);TVT=null;if(k==='tv'&&!K.RED)TVT=setInterval(tick,3000)},
+  after:function(k){clearInterval(TVT);TVT=null;if(k==='tv'&&!K.RED)TVT=setInterval(tick,3000);slide(k)},
   views:{week:week,today:today,members:members,machines:machines,tv:tv,email:email}});
 })();
 
