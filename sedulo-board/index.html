@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,500;1,600&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <style>
 /* Sedulo on one page: the team's overview. A readout up top (one tick per task, the road as five stations),
    five departments that open into their own view, a matrix and a calendar; any task opens in a side panel.
@@ -269,6 +270,10 @@ a{color:var(--blue)}
 .state h2{margin:0;font:600 18px/1.3 var(--sans)}
 .state p{margin:0;max-width:46ch;color:var(--ink-2)}
 .lock-ico{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--blue-tint);color:var(--blue);margin-bottom:6px}
+.loginf{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:10px;width:min(420px,100%)}
+.loginf input{flex:1 1 220px;min-width:0;border:1px solid var(--line-2);background:var(--card);border-radius:999px;padding:11px 16px;font-size:15px}
+.loginf input:focus{outline:none;border-color:var(--blue)}
+.state .linkish{margin-top:6px}
 
 /* side panel */
 .scrim{position:fixed;inset:0;background:var(--scrim);z-index:40;opacity:0;transition:opacity 300ms ease}
@@ -365,7 +370,7 @@ a{color:var(--blue)}
 <div class="wrap">
   <header class="top">
     <div><h1>Sedulo on one page</h1><span class="label" id="asof"></span></div>
-    <div class="me" id="meWrap" hidden><span class="label">I am</span><div class="seg sm" id="meSeg" role="group" aria-label="Who is using the board"></div></div>
+    <div class="me" id="meWrap" hidden><span id="meAva"></span><span id="meName" style="font-size:13.5px;font-weight:500"></span><button type="button" class="btn2" data-act="signout" style="padding:7px 12px;font-size:13px">Sign out</button></div>
   </header>
 
   <section class="hero card" id="hero" hidden>
@@ -434,7 +439,11 @@ a{color:var(--blue)}
 (function () {
   "use strict";
   var SB_URL = "https://ydtwixzngzwfkfweodba.supabase.co";
-  var SB_KEY = "sb_publishable_gF5dTrsvMrz0E_4IqBz6AA_LHho9Js7";   /* public by design: it only reaches the four board functions, which need the link's key */
+  var SB_KEY = "sb_publishable_gF5dTrsvMrz0E_4IqBz6AA_LHho9Js7";   /* public by design: the board's functions answer only Adam's and Justus's logins */
+  var PAGE_URL = "https://adampauk.github.io/sedulo-board/";
+  var sb = window.supabase && window.supabase.createClient ? window.supabase.createClient(SB_URL, SB_KEY, {
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: "implicit", storageKey: "sedulo-board-auth" }
+  }) : null;
   var POLL_MS = 20000;
   var $ = function (s, el) { return (el || document).querySelector(s); };
   var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
@@ -521,18 +530,16 @@ a{color:var(--blue)}
       '<circle class="fg" cx="19" cy="19" r="' + r + '" stroke-dasharray="' + c.toFixed(2) + '" stroke-dashoffset="' + off.toFixed(2) + '"/></svg><span>' + done + '</span></div>';
   }
 
-  /* ---------- the store: four functions behind the link's key ---------- */
+  /* ---------- the store: the board's functions, answered only for Adam's and Justus's logins ---------- */
   function rpc(fn, body) {
-    return fetch(SB_URL + "/rest/v1/rpc/" + fn, {
-      method: "POST", headers: { "apikey": SB_KEY, "Content-Type": "application/json" }, body: JSON.stringify(body), cache: "no-store"
-    }).then(function (r) {
-      if (!r.ok) throw { code: "http", status: r.status };
-      return r.json();
+    return sb.rpc(fn, body || {}).then(function (r) {
+      if (r.error) throw { code: "http", message: r.error.message };
+      return r.data;
     });
   }
   function fetchAll() {
-    return rpc("team_board_get", { p_key: S.key }).then(function (res) {
-      if (!res || res.ok !== true) { S.failed = res && res.error === "key" ? "badkey" : "error"; return; }
+    return rpc("team_board_get", {}).then(function (res) {
+      if (!res || res.ok !== true) { S.failed = res && res.error === "not_member" ? "notmember" : "error"; return; }
       var tasks = [], notes = [], stages = [], meta = null, ver = {};
       (res.docs || []).forEach(function (x) {
         var d = Object.assign({}, x.d || {}); d.id = x.id;
@@ -554,7 +561,7 @@ a{color:var(--blue)}
     }, POLL_MS);
   }
   document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "visible" && S.key && S.busy === 0) fetchAll().then(render).catch(function () { });
+    if (document.visibilityState === "visible" && S.auth === "in" && S.busy === 0) fetchAll().then(render).catch(function () { });
   });
 
   var queue = {};
@@ -563,13 +570,13 @@ a{color:var(--blue)}
     var path = coll + "/" + doc.id;
     S.busy++;
     var run = function () {
-      return rpc("team_board_put", { p_key: S.key, p_coll: coll, p_id: doc.id, p_data: clean(doc), p_version: S.ver[path] == null ? null : S.ver[path] })
+      return rpc("team_board_put", { p_coll: coll, p_id: doc.id, p_data: clean(doc), p_version: S.ver[path] == null ? null : S.ver[path] })
         .then(function (res) {
           if (res && res.ok) { S.ver[path] = res.v; return true; }
           if (res && res.error === "conflict" && res.d) {
             /* someone changed it meanwhile: keep their version, lay our change over it */
             var merged = Object.assign({}, res.d, clean(doc));
-            return rpc("team_board_put", { p_key: S.key, p_coll: coll, p_id: doc.id, p_data: merged, p_version: res.v }).then(function (r2) {
+            return rpc("team_board_put", { p_coll: coll, p_id: doc.id, p_data: merged, p_version: res.v }).then(function (r2) {
               if (r2 && r2.ok) { S.ver[path] = r2.v; return true; }
               throw { code: "conflict" };
             });
@@ -583,12 +590,12 @@ a{color:var(--blue)}
   }
   function del(coll, id) {
     S.busy++;
-    return rpc("team_board_delete", { p_key: S.key, p_coll: coll, p_id: id }).then(function (r) {
+    return rpc("team_board_delete", { p_coll: coll, p_id: id }).then(function (r) {
       S.busy--; if (!r || !r.ok) throw { code: "error" }; delete S.ver[coll + "/" + id]; return true;
     }, function (e) { S.busy--; throw e; });
   }
   function failSave(e) {
-    toast(e && e.code === "key" ? "This link's key no longer opens the board." : "That change was not saved. Check the connection and try again.");
+    toast(e && e.code === "not_member" ? "This login can't change the board." : "That change was not saved. Check the connection and try again.");
   }
   function stamp(t) { t.updatedAt = new Date().toISOString(); t.updatedBy = S.me || null; }
   function patchTask(t, patch) {
@@ -705,9 +712,8 @@ a{color:var(--blue)}
     $("#who").innerHTML = WHO.map(function (w2) {
       return '<button type="button" data-act="who" data-id="' + w2.id + '" aria-pressed="' + (S.who === w2.id) + '">' + esc(w2.label) + '</button>';
     }).join("");
-    $("#meSeg").innerHTML = ["Adam", "Justus"].map(function (m) {
-      return '<button type="button" data-act="me" data-id="' + m + '" aria-pressed="' + (S.me === m) + '">' + m + '</button>';
-    }).join("");
+    $("#meAva").innerHTML = ava(S.me === "Adam" || S.me === "Justus" ? S.me : "Not set", true);
+    $("#meName").textContent = S.me || "";
   }
 
   /* ---------- rows and cards ---------- */
@@ -1038,22 +1044,39 @@ a{color:var(--blue)}
     if (target === "board") renderBoard(); else if (target === "matrix") renderMatrix(); else if (target === "calendar") renderCalendar();
     if (animate && !reduced) { var el = $("#v-" + target); el.classList.remove("swap"); void el.offsetWidth; el.classList.add("swap"); }
   }
+  var LOCK = '<div class="lock-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>';
+  function stateHTML(msg) {
+    var email = S.session && S.session.user ? S.session.user.email : "";
+    if (msg === "login" && S.sentTo) return LOCK + "<h2>Check your email</h2><p>We sent a login link to <b>" + esc(S.sentTo) + "</b>. Open it on this device.</p>" +
+      '<button type="button" class="linkish" data-act="relogin">Use another email</button>';
+    if (msg === "login") return LOCK + "<h2>Log in to the board</h2><p>For Adam and Justus. We email you a link.</p>" +
+      '<form class="loginf" id="loginForm"><label for="loginEmail" hidden>Email</label><input type="email" id="loginEmail" required autocomplete="email" placeholder="Your email">' +
+      '<button class="primary" type="submit">Send login link</button></form><p class="hint" id="loginMsg"></p>';
+    if (msg === "notmember") return LOCK + "<h2>This email isn't on the board</h2><p>Only Adam and Justus can open it. You are logged in as <b>" + esc(email) + "</b>.</p>" +
+      '<button type="button" class="btn2" data-act="signout">Log out</button>';
+    return (msg[0] === "lock" ? LOCK : "") + "<h2>" + esc(msg[1]) + "</h2>" + (msg[2] ? "<p>" + esc(msg[2]) + "</p>" : "");
+  }
   function render() {
     var st = $("#state"), msg = null;
-    if (!S.key) msg = ["lock", "This board is private", "Open it with your link. Adam has it."];
-    else if (S.failed === "badkey") msg = ["lock", "This link doesn't open the board", "Ask Adam for the current link."];
+    if (!sb) msg = ["", "The board could not start", "Reload the page. If it keeps happening, tell your Claude."];
+    else if (S.auth === "checking") msg = ["", "Loading the board", ""];
+    else if (S.auth === "out") msg = "login";
+    else if (S.auth === "notmember") msg = "notmember";
+    else if (S.failed === "notmember") msg = "notmember";
     else if (S.failed === "error" && !S.loaded) msg = ["", "The board did not load", "Check the connection. It tries again by itself."];
     else if (!S.loaded) msg = ["", "Loading the board", "Departments, tasks and the road appear here in a moment."];
     else if (!S.tasks.length || !depts().length) msg = ["", "No tasks yet", "Ask Claude to fill the board."];
-    var showAll = !msg;
-    ["#hero", "#next", "#bar", "#meWrap"].forEach(function (s) { $(s).hidden = !showAll; });
+    ["#hero", "#next", "#bar"].forEach(function (s) { $(s).hidden = !!msg; });
+    $("#meWrap").hidden = !(S.session && S.auth === "in");
+    if (S.session && S.auth === "in") { $("#meAva").innerHTML = ava(S.me === "Adam" || S.me === "Justus" ? S.me : "Not set", true); $("#meName").textContent = S.me || ""; }
     if (msg) {
       ["board", "focus", "matrix", "calendar"].forEach(function (v) { $("#v-" + v).hidden = true; });
       st.hidden = false;
-      st.innerHTML = (msg[0] === "lock" ? '<div class="lock-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>' : "") +
-        "<h2>" + esc(msg[1]) + "</h2><p>" + esc(msg[2]) + "</p>";
+      var key = typeof msg === "string" ? msg + "|" + (S.sentTo || "") : msg.join("|");
+      if (S.stateKey !== key) { S.stateKey = key; st.innerHTML = stateHTML(msg); }
       return;
     }
+    S.stateKey = null;
     st.hidden = true;
     renderTop();
     if (S.firstPaint && !reduced) {
@@ -1084,7 +1107,8 @@ a{color:var(--blue)}
     else if (act === "owner" && S.open) { var to = task(S.open.id); if (to) patchTask(to, { owner: id }); }
     else if (act === "quad" && S.open) { var tq = task(S.open.id); if (tq) patchTask(tq, { quadrant: id }); }
     else if (act === "who") { S.who = id; store("sedulo-board-who", id); render(); }
-    else if (act === "me") { S.me = S.me === id ? null : id; store("sedulo-board-me", S.me); render(); }
+    else if (act === "signout") { sb.auth.signOut().then(function () { S.auth = "out"; S.loaded = false; S.tasks = []; S.notes = []; S.me = null; S.session = null; closePanel(); render(); }); }
+    else if (act === "relogin") { S.sentTo = null; render(); }
     else if (act === "showdone") { S.showDone[id] = !S.showDone[id]; render(); }
     else if (act === "focus") openDept(id, b.closest(".dept"));
     else if (act === "unfocus") closeDept();
@@ -1104,6 +1128,21 @@ a{color:var(--blue)}
       e.preventDefault();
       var si = $("#subText"), st = (si.value || "").trim(), t = S.open && task(S.open.id);
       if (st && t) { si.value = ""; addSub(t, st.slice(0, 80)); }
+    } else if (f.id === "loginForm") {
+      e.preventDefault();
+      var em = ($("#loginEmail").value || "").trim(), bt = $("button", f), lm = $("#loginMsg");
+      if (!em) return;
+      bt.disabled = true; lm.textContent = "";
+      sb.auth.signInWithOtp({ email: em, options: { emailRedirectTo: PAGE_URL, shouldCreateUser: true } }).then(function (r) {
+        bt.disabled = false;
+        if (r.error) {
+          var m2 = String(r.error.message || "");
+          lm.textContent = /not authorized/i.test(m2) ? "Supabase can't email this address yet: it has to be on Adam's Supabase team." :
+            /rate limit|security purposes/i.test(m2) ? "Too many login emails just now. Wait a minute and try again." : "The email wasn't sent: " + m2;
+          return;
+        }
+        S.sentTo = em; render();
+      });
     } else if (f.id === "noteForm") {
       e.preventDefault();
       var ta = $("#noteText"), text = (ta.value || "").trim();
@@ -1127,23 +1166,60 @@ a{color:var(--blue)}
     clearTimeout(toastTimer); toastTimer = setTimeout(function () { el.classList.add("off"); }, 4200);
   }
 
-  /* ---------- start: the key comes once in the link, then lives in this browser ---------- */
-  (function start() {
-    var m = (location.hash || "").match(/(?:^#|&)k=([A-Za-z0-9_-]{24,200})/);
-    if (m) { store("sedulo-board-key", m[1]); history.replaceState(null, "", location.pathname + location.search + "#board"); }
-    S.key = load("sedulo-board-key");
-    S.me = load("sedulo-board-me");
-    var w = load("sedulo-board-who"); if (w && WHO.some(function (x) { return x.id === w; })) S.who = w;
-    routeFromHash();
-    render();
-    if (!S.key) return;
+  /* ---------- start: log in by email; the old key link only lets Adam's first login join the board ---------- */
+  var authRun = 0, boardLoading = false;
+  function loadBoard() {
+    if (boardLoading) return;
+    boardLoading = true;
     var tries = 0;
     (function first() {
-      fetchAll().then(function () { render(); poll(); }).catch(function () {
+      fetchAll().then(function () { boardLoading = false; render(); poll(); }).catch(function () {
         S.failed = "error"; render();
-        if (++tries < 30) setTimeout(first, 10000);
+        if (++tries < 30) setTimeout(first, 10000); else boardLoading = false;
       });
     })();
+  }
+  function afterAuth() {
+    var run = ++authRun;
+    sb.auth.getSession().then(function (r) {
+      if (run !== authRun) return;
+      S.session = (r.data && r.data.session) || null;
+      if (!S.session) { S.auth = "out"; render(); return; }
+      return rpc("team_board_whoami", {}).then(function (w) {
+        if (w && w.member) return w.name;
+        var k = load("sedulo-board-key");
+        if (!k) return null;
+        return rpc("team_board_join", { p_key: k }).then(function (j) {
+          if (j && j.ok) { store("sedulo-board-key", null); return j.name; }
+          return null;
+        });
+      }).then(function (name) {
+        if (run !== authRun) return;
+        if (!name) { S.auth = "notmember"; render(); return; }
+        S.me = name; S.auth = "in"; S.sentTo = null; S.failed = null; render();
+        loadBoard();
+      });
+    }).catch(function () { S.auth = "in"; S.failed = "error"; render(); });
+  }
+  (function start() {
+    var h = location.hash || "";
+    var m = h.match(/(?:^#|&)k=([A-Za-z0-9_-]{24,200})/);
+    if (m) { store("sedulo-board-key", m[1]); history.replaceState(null, "", location.pathname + location.search + "#board"); }
+    var err = h.match(/error_description=([^&]+)/);
+    var w = load("sedulo-board-who"); if (w && WHO.some(function (x) { return x.id === w; })) S.who = w;
+    S.auth = "checking";
+    routeFromHash();
+    render();
+    if (!sb) return;
+    if (err) {
+      setTimeout(function () { toast("That login link didn't work (" + decodeURIComponent(err[1].replace(/\+/g, " ")) + "). Send a new one."); }, 300);
+      history.replaceState(null, "", location.pathname + "#board");
+    }
+    sb.auth.onAuthStateChange(function (event) {
+      /* other Supabase calls must not run inside this callback, so they start right after it */
+      if (event === "SIGNED_OUT") { setTimeout(function () { S.auth = "out"; S.loaded = false; S.me = null; S.session = null; render(); }, 0); }
+      else if (event === "SIGNED_IN" || event === "INITIAL_SESSION") { setTimeout(afterAuth, 0); }
+    });
   })();
 })();
 </script>
