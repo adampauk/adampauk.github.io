@@ -67,7 +67,12 @@ a{color:var(--blue)}
 .top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 20px}
 .top h1{margin:0;font:600 24px/1.15 var(--sans);letter-spacing:-.015em}
 .top .label{display:block;margin-top:3px}
-.me{display:flex;align-items:center;gap:8px}
+.me{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.me .btn2{white-space:nowrap}
+.me-who{display:flex;align-items:center;gap:8px}
+.btn2.icon{width:34px;height:34px;padding:0;display:grid;place-items:center;color:var(--ink-2)}
+.btn2.icon[aria-pressed="true"]{color:var(--blue)}
+.btn2.icon svg{width:17px;height:17px;animation:pop 200ms var(--ease-out)}
 
 /* people */
 .ava{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;font:600 11px/1 var(--sans);color:var(--on-blue);background:var(--blue);flex:none}
@@ -211,6 +216,8 @@ a{color:var(--blue)}
 .tc-next b{color:var(--ink);font-weight:500}
 .subs{list-style:none;margin:0 0 0 32px;padding:0;display:grid;gap:2px}
 .sub{display:grid;grid-template-columns:18px minmax(0,1fr);gap:9px;align-items:start;padding:4px 0;font-size:13.5px}
+.bul{width:18px;height:18px;display:grid;place-items:center}
+.bul::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--blue)}
 .sub.on span{color:var(--ink-3);text-decoration:line-through;text-decoration-color:var(--line-2)}
 .sbx{appearance:none;width:18px;height:18px;border-radius:6px;border:1.5px solid var(--line-2);background:var(--card);padding:0;display:grid;place-items:center;margin-top:1px;transition:transform 160ms var(--ease-out),background-color 200ms ease,border-color 200ms ease}
 .sbx:active:not([disabled]){transform:scale(.88)}
@@ -328,6 +335,31 @@ a{color:var(--blue)}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:60;background:var(--btn);color:var(--btn-ink);padding:10px 16px;border-radius:999px;font-size:14px;max-width:min(92vw,520px);text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.18);transform:translate(-50%,0);transition:transform 400ms ease,opacity 400ms ease}
 .toast.off{opacity:0;transform:translate(-50%,120%)}
 
+/* roadmap: the big milestones, one selected at a time */
+.road{display:grid;gap:14px}
+.road-track{padding:20px 16px 16px;overflow-x:auto}
+.ms-row{position:relative;display:grid;grid-template-columns:repeat(var(--n),minmax(134px,1fr));gap:0;min-width:670px}
+.ms-row::before{content:"";position:absolute;left:calc(100%/var(--n)/2);right:calc(100%/var(--n)/2);top:46px;height:3px;border-radius:3px;background:var(--line)}
+.ms-fill{position:absolute;left:calc(100%/var(--n)/2);right:calc(100%/var(--n)/2);top:46px;height:3px;border-radius:3px;background:var(--blue);transform:scaleX(var(--k,0));transform-origin:left center;transition:transform 900ms var(--ease-out)}
+.ms{all:unset;cursor:pointer;position:relative;z-index:1;display:grid;justify-items:center;align-content:start;gap:8px;margin:0 4px;padding:12px 6px 14px;border-radius:18px;text-align:center;transition:background-color 220ms ease,transform 160ms var(--ease-out)}
+.ms:active{transform:scale(.97)}
+.ms:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media (hover:hover) and (pointer:fine){.ms:hover{background:var(--card-2)}}
+.ms.sel{background:var(--blue-tint)}
+.ms-dot{width:26px;height:26px;display:grid;place-items:center}
+.ms-dot::after{content:"";width:16px;height:16px;border-radius:50%;background:var(--card);box-shadow:0 0 0 2.5px var(--line-2) inset;transition:transform 300ms var(--ease-out)}
+.ms.past .ms-dot::after{background:var(--blue);box-shadow:none}
+.ms.now .ms-dot::after{width:22px;height:22px;background:var(--blue);box-shadow:0 0 0 6px var(--blue-tint)}
+.ms.sel .ms-dot::after{transform:scale(1.2)}
+.ms-t{font:600 14.5px/1.25 var(--sans)}
+.road-detail{padding:18px 16px}
+.msd-h h3{margin:3px 0 10px;font:600 italic 34px/1 var(--display)}
+.ms-items{margin:6px 0 14px 0}
+.tabs{position:relative}
+.tabs a{position:relative;z-index:1}
+.tabs a[aria-current="page"]{background:transparent;box-shadow:none}
+.tabs .pill{position:absolute;top:0;left:0;width:0;height:0;border-radius:10px;background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.08);z-index:0;pointer-events:none}
+.tabs .pill.ready{transition:transform 280ms var(--ease-out),width 280ms var(--ease-out),height 280ms var(--ease-out)}
 @media (max-width:1180px){
   .depts{grid-template-columns:repeat(6,minmax(0,1fr))}
   .dept{grid-column:span 2}
@@ -354,8 +386,23 @@ a{color:var(--blue)}
   .grid2{grid-template-columns:1fr}
   .drawer{top:auto;left:0;width:100%;height:92%;border-radius:22px 22px 0 0;transform:translateY(104%);padding-left:env(safe-area-inset-left,0px)}
 }
+@media (max-width:760px){
+  .bar .tabs{display:flex;flex-wrap:nowrap;width:100%}
+  .bar .tabs a{flex:1 1 auto;text-align:center;padding:8px 6px}
+  .road-track{padding:8px;overflow:visible}
+  .ms-row{grid-template-columns:minmax(0,1fr);grid-auto-rows:1fr;min-width:0}
+  .ms-row::before,.ms-fill{left:21.5px;right:auto;top:calc(100%/var(--n)/2);bottom:calc(100%/var(--n)/2);width:3px;height:auto}
+  .ms-fill{transform:scaleY(var(--k,0));transform-origin:center top}
+  .ms{margin:2px 0;padding:10px 12px 10px 10px;grid-template-columns:26px minmax(0,1fr) auto;grid-template-areas:"dot t pr" "dot l pr";justify-items:start;align-items:center;column-gap:12px;row-gap:2px;text-align:left}
+  .ms .label{grid-area:l}
+  .ms-dot{grid-area:dot}
+  .ms-t{grid-area:t}
+  .ms .pr{grid-area:pr}
+  .msd-h h3{font-size:30px}
+}
 @media (prefers-reduced-motion: reduce){
   .in,.swap{animation:fade 200ms ease both}
+  .tabs .pill.ready,.ms-fill,.ms-dot::after,
   .drawer,.drawer.on,.scrim,.scale i,.route .done-line,.pr .fg,.segbar i::after,.ring path,.sbx path{transition-duration:0ms}
   .ring.just{animation:none}
 }
@@ -365,7 +412,7 @@ a{color:var(--blue)}
 <div class="wrap">
   <header class="top">
     <div><h1>Sedulo on one page</h1><span class="label" id="asof"></span></div>
-    <div class="me" id="meWrap" hidden><button type="button" class="btn2" data-act="copylink" style="padding:7px 12px;font-size:13px">Copy link for Justus</button><span class="label">I am</span><div class="seg sm" id="meSeg" role="group" aria-label="Who is using the board"></div></div>
+    <div class="me" id="meWrap" hidden><button type="button" class="btn2 icon" data-act="sound" id="soundBtn" aria-pressed="true" aria-label="Sound on" title="Sound on"></button><button type="button" class="btn2" data-act="copylink" style="padding:7px 12px;font-size:13px">Copy link for Justus</button><span class="me-who"><span class="label">I am</span><div class="seg sm" id="meSeg" role="group" aria-label="Who is using the board"></div></span></div>
   </header>
 
   <section class="hero card" id="hero" hidden>
@@ -389,7 +436,9 @@ a{color:var(--blue)}
 
   <div class="bar" id="bar" hidden>
     <nav class="seg tabs" aria-label="Views">
+      <span class="pill" aria-hidden="true"></span>
       <a href="#board" data-view="board">Departments</a>
+      <a href="#roadmap" data-view="roadmap">Roadmap</a>
       <a href="#matrix" data-view="matrix">Matrix</a>
       <a href="#calendar" data-view="calendar">Calendar</a>
     </nav>
@@ -403,6 +452,7 @@ a{color:var(--blue)}
     </div>
     <section id="v-board" hidden><div class="depts" id="depts"></div></section>
     <section id="v-focus" hidden></section>
+    <section id="v-roadmap" hidden><div class="road" id="road"></div></section>
     <section id="v-matrix" hidden><div class="matrix" id="matrixGrid"></div></section>
     <section id="v-calendar" hidden>
       <div class="cal-card card"><div class="cal-scroll"><div class="cal" id="cal"></div></div></div>
@@ -690,7 +740,7 @@ a{color:var(--blue)}
     r.style.setProperty("--n", st.length || 5);
     r.innerHTML = '<span class="done-line" style="--w:0%"></span>' + st.map(function (s, i) {
       var cls = i < idx ? "past" : (i === idx ? "now" : "future");
-      return '<button type="button" class="stn ' + cls + '" data-act="stage" data-id="' + esc(s.id) + '" title="' + esc(s.title) + '"><span class="dot"></span><b>' +
+      return '<button type="button" class="stn ' + cls + '" data-act="road" data-id="' + esc(s.id) + '" title="' + esc(s.title) + '"><span class="dot"></span><b>' +
         esc(s.short || s.title) + '</b><small>' + esc(i === idx ? "Now" : (s.when || "")) + '</small></button>';
     }).join("");
     var w = st.length > 1 && idx > 0 ? (idx / (st.length - 1)) * (100 - 100 / st.length) : 0;
@@ -921,7 +971,7 @@ a{color:var(--blue)}
     $("#dwEyebrow").textContent = s.band ? "The whole time" : "Road, step " + s.order + (now && now.id === s.id ? ", now" : "");
     var h = '<div class="sec" style="gap:6px"><h2 class="dw-title" id="dwTitle">' + esc(s.title) + '</h2><p style="color:var(--ink-2)">' + esc(s.when || "") +
       (a && b && !s.band ? " (" + esc(fmtDay(a)) + " to " + esc(fmtDay(b)) + ")" : "") + '</p></div>';
-    if (s.items && s.items.length) h += '<div class="sec"><span class="label">What it takes</span><ul class="subs dw">' + s.items.map(function (x) { return '<li class="sub"><span class="sbx" aria-hidden="true"></span><span>' + esc(x) + '</span></li>'; }).join("") + '</ul></div>';
+    if (s.items && s.items.length) h += '<div class="sec"><span class="label">What it takes</span><ul class="subs dw">' + s.items.map(function (x) { return '<li class="sub"><span class="bul" aria-hidden="true"></span><span>' + esc(x) + '</span></li>'; }).join("") + '</ul></div>';
     h += '<div class="sec"><span class="label">Tasks</span>' + (list.length ? '<ul class="rows" style="margin:0 -8px">' + list.map(function (t) { return rowHTML(t, { dept: true }); }).join("") + '</ul>' : '<p class="none">None yet.</p>') + '</div>';
     $("#dwBody").innerHTML = '<div style="display:grid;gap:20px">' + h + '</div>';
     $("#dwNotesWrap").hidden = true; $("#dwFoot").innerHTML = "";
@@ -1020,22 +1070,118 @@ a{color:var(--blue)}
     }, 120);
   }
 
+  /* ---------- roadmap: the big milestones; click one, its tasks show below ---------- */
+  S.road = null;
+  function roadDetailHTML(sel) {
+    var a = parseDay(sel.start), b = parseDay(sel.end);
+    var list = sortRows(S.tasks.filter(function (t) { return t.stage === sel.id && shown(t); }));
+    return '<div class="msd-h"><span class="label">' + esc(sel.when || "") + (a && b ? " (" + esc(fmtDay(a)) + " to " + esc(fmtDay(b)) + ")" : "") + '</span><h3>' + esc(sel.title) + '</h3></div>' +
+      (sel.items && sel.items.length ? '<span class="label">What it takes</span><ul class="subs dw ms-items">' + sel.items.map(function (x) { return '<li class="sub"><span class="bul" aria-hidden="true"></span><span>' + esc(x) + '</span></li>'; }).join("") + '</ul>' : "") +
+      (list.length ? '<ul class="rows">' + list.map(function (t) { return rowHTML(t, { dept: true }); }).join("") + '</ul>' : '<p class="none">No tasks linked yet.</p>');
+  }
+  function renderRoadmap(mode) {
+    var st = S.stages.filter(function (s) { return !s.band; }).sort(byOrder), now = stageNow(), root = $("#road");
+    if (!st.length) { root.innerHTML = '<p class="none">No milestones yet.</p>'; return; }
+    if (!S.road || !stageById(S.road) || stageById(S.road).band) S.road = (now || st[0]).id;
+    var idx = now ? st.indexOf(now) : -1, n = st.length, sel = stageById(S.road);
+    var sig = st.map(function (s) { return s.id; }).join(",") + "|" + idx, track = $(".ms-row", root);
+    if (mode === "pick" && track && track.dataset.sig === sig) {
+      $$(".ms", track).forEach(function (m) { var on = m.dataset.id === S.road; m.classList.toggle("sel", on); m.setAttribute("aria-pressed", String(on)); });
+      var det = $(".road-detail", root);
+      det.innerHTML = roadDetailHTML(sel);
+      if (!reduced) { det.classList.remove("swap"); void det.offsetWidth; det.classList.add("swap"); }
+      return;
+    }
+    var cards = st.map(function (s, i) {
+      var list = S.tasks.filter(function (t) { return t.stage === s.id; }), done = list.filter(function (t) { return t.status === "done"; }).length;
+      var a = parseDay(s.start), cls = i < idx ? "past" : (i === idx ? "now" : "future");
+      return '<button type="button" class="ms ' + cls + (S.road === s.id ? " sel" : "") + '" data-act="ms" data-id="' + esc(s.id) + '" aria-pressed="' + (S.road === s.id) + '">' +
+        '<span class="label">' + esc(i === idx ? "Now" : (a ? fmtDay(a) : "")) + '</span><span class="ms-dot"></span><b class="ms-t">' + esc(s.title) + '</b>' + prRing(done, list.length) + '</button>';
+    }).join("");
+    root.innerHTML = '<div class="road-track card"><div class="ms-row" data-sig="' + esc(sig) + '" style="--n:' + n + '"><span class="ms-fill"></span>' + cards + '</div></div>' +
+      '<div class="road-detail card">' + roadDetailHTML(sel) + '</div>';
+    var fill = $(".ms-fill", root), k = idx > 0 && n > 1 ? idx / (n - 1) : 0;
+    if (mode === "enter" && !reduced) requestAnimationFrame(function () { requestAnimationFrame(function () { fill.style.setProperty("--k", k); }); });
+    else fill.style.setProperty("--k", k);
+  }
+  document.addEventListener("keydown", function (e) {
+    var m = document.activeElement && document.activeElement.closest && document.activeElement.closest(".ms");
+    if (!m || (e.key !== "ArrowRight" && e.key !== "ArrowLeft")) return;
+    var all = $$(".ms"), i = all.indexOf(m) + (e.key === "ArrowRight" ? 1 : -1);
+    if (i < 0 || i >= all.length) return;
+    e.preventDefault(); S.road = all[i].dataset.id; sfx.pick(); renderRoadmap("pick");
+    var nx = $('.ms[data-id="' + S.road + '"]'); if (nx) nx.focus({ preventScroll: true });
+  });
+
+  /* ---------- the sliding tab ---------- */
+  function positionPill() {
+    var pill = $(".tabs .pill"), a = $('.tabs a[aria-current="page"]');
+    if (!pill || !a) return;
+    pill.style.width = a.offsetWidth + "px"; pill.style.height = a.offsetHeight + "px";
+    pill.style.transform = "translate(" + a.offsetLeft + "px," + a.offsetTop + "px)";
+    if (!pill.classList.contains("ready")) requestAnimationFrame(function () { pill.classList.add("ready"); });
+  }
+  window.addEventListener("resize", function () { requestAnimationFrame(positionPill); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { requestAnimationFrame(positionPill); });
+
+  /* ---------- sound: tiny tones made in the browser, only after a click, with an off switch ---------- */
+  var SND = { on: load("sedulo-board-sound") !== "off", ctx: null };
+  function soundLabel() {
+    var b = $("#soundBtn"); if (!b) return;
+    var t = SND.on ? "Sound on" : "Sound off";
+    b.setAttribute("aria-pressed", String(SND.on)); b.setAttribute("aria-label", t); b.title = t;
+    b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/>' +
+      (SND.on ? '<path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/>' : '<path d="m16 9.5 5 5"/><path d="m21 9.5-5 5"/>') + '</svg>';
+  }
+  function audio() {
+    if (!SND.on) return null;
+    try {
+      if (!SND.ctx) SND.ctx = new (window.AudioContext || window.webkitAudioContext)();
+      if (SND.ctx.state === "suspended") SND.ctx.resume();
+      return SND.ctx;
+    } catch (e) { return null; }
+  }
+  function tone(freq, at, dur, type, gain) {
+    var c = audio(); if (!c) return;
+    var t = c.currentTime + at, o = c.createOscillator(), g = c.createGain();
+    o.type = type || "sine"; o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(gain || 0.06, t + 0.012); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(c.destination); o.start(t); o.stop(t + dur + 0.03);
+  }
+  var sfx = {
+    done: function () { tone(659, 0, 0.16, "sine", 0.06); tone(988, 0.075, 0.28, "sine", 0.05); },
+    undone: function () { tone(494, 0, 0.12, "sine", 0.04); },
+    sub: function () { tone(1320, 0, 0.05, "triangle", 0.03); },
+    pick: function () { tone(784, 0, 0.07, "triangle", 0.035); },
+    open: function () {
+      var c = audio(); if (!c) return;
+      var len = Math.floor(c.sampleRate * 0.42), buf = c.createBuffer(1, len, c.sampleRate), d = buf.getChannelData(0);
+      for (var i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len);
+      var src = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain(), t = c.currentTime;
+      src.buffer = buf; f.type = "bandpass"; f.Q.value = 0.9;
+      f.frequency.setValueAtTime(320, t); f.frequency.exponentialRampToValueAtTime(1900, t + 0.34);
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.08, t + 0.07); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.42);
+      src.connect(f); f.connect(g); g.connect(c.destination); src.start(t);
+    }
+  };
+
   /* ---------- routing and the whole page ---------- */
   function routeFromHash() {
     var h = (location.hash || "").slice(1);
     var m = h.match(/^dept-([a-z0-9_-]+)$/);
     if (m) { S.view = "board"; S.focus = m[1]; return; }
     S.focus = null;
-    S.view = ["board", "matrix", "calendar"].indexOf(h) >= 0 ? h : "board";
+    S.view = ["board", "roadmap", "matrix", "calendar"].indexOf(h) >= 0 ? h : "board";
   }
   function navigate(h) { location.hash = h; }
   function showView(animate) {
     var focus = S.view === "board" && S.focus && renderFocus();
     if (!focus) S.focus = null;
     var target = focus ? "focus" : S.view;
-    ["board", "focus", "matrix", "calendar"].forEach(function (v) { $("#v-" + v).hidden = v !== target; });
+    ["board", "focus", "roadmap", "matrix", "calendar"].forEach(function (v) { $("#v-" + v).hidden = v !== target; });
     $$(".tabs a").forEach(function (a) { a.setAttribute("aria-current", a.dataset.view === S.view ? "page" : "false"); });
-    if (target === "board") renderBoard(); else if (target === "matrix") renderMatrix(); else if (target === "calendar") renderCalendar();
+    if (target === "board") renderBoard(); else if (target === "roadmap") renderRoadmap(animate ? "enter" : ""); else if (target === "matrix") renderMatrix(); else if (target === "calendar") renderCalendar();
+    positionPill();
     if (animate && !reduced) { var el = $("#v-" + target); el.classList.remove("swap"); void el.offsetWidth; el.classList.add("swap"); }
   }
   function render() {
@@ -1048,7 +1194,7 @@ a{color:var(--blue)}
     var showAll = !msg;
     ["#hero", "#next", "#bar", "#meWrap"].forEach(function (s) { $(s).hidden = !showAll; });
     if (msg) {
-      ["board", "focus", "matrix", "calendar"].forEach(function (v) { $("#v-" + v).hidden = true; });
+      ["board", "focus", "roadmap", "matrix", "calendar"].forEach(function (v) { $("#v-" + v).hidden = true; });
       st.hidden = false;
       st.innerHTML = (msg[0] === "lock" ? '<div class="lock-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>' : "") +
         "<h2>" + esc(msg[1]) + "</h2><p>" + esc(msg[2]) + "</p>";
@@ -1076,14 +1222,18 @@ a{color:var(--blue)}
     else if (act === "tick" && t) {
       var wasDone = t.status === "done";
       toggleDone(t);
+      sfx[wasDone ? "undone" : "done"]();
       if (!wasDone && !reduced) $$('.ring[data-id="' + id + '"]').forEach(function (r) { r.classList.add("just"); });
     }
-    else if (act === "sub" && t) toggleSub(t, b.dataset.sub);
+    else if (act === "sub" && t) { toggleSub(t, b.dataset.sub); sfx.sub(); }
     else if (act === "subdel" && t) delSub(t, b.dataset.sub);
     else if (act === "status" && S.open) { var tt = task(S.open.id); if (tt) setStatus(tt, id); }
     else if (act === "owner" && S.open) { var to = task(S.open.id); if (to) patchTask(to, { owner: id }); }
     else if (act === "quad" && S.open) { var tq = task(S.open.id); if (tq) patchTask(tq, { quadrant: id }); }
     else if (act === "who") { S.who = id; store("sedulo-board-who", id); render(); }
+    else if (act === "ms") { if (S.road !== id) { S.road = id; sfx.pick(); renderRoadmap("pick"); } }
+    else if (act === "road") { S.road = id; sfx.pick(); if (S.view === "roadmap" && !S.focus) renderRoadmap("pick"); else navigate("roadmap"); }
+    else if (act === "sound") { SND.on = !SND.on; store("sedulo-board-sound", SND.on ? "on" : "off"); soundLabel(); if (SND.on) sfx.pick(); }
     else if (act === "copylink") {
       var link = location.origin + location.pathname + "#k=" + S.key;
       var ok = function () { toast("Link copied. Send it to Justus: it opens the board for him."); };
@@ -1097,7 +1247,7 @@ a{color:var(--blue)}
     }
     else if (act === "me") { S.me = S.me === id ? null : id; store("sedulo-board-me", S.me); render(); }
     else if (act === "showdone") { S.showDone[id] = !S.showDone[id]; render(); }
-    else if (act === "focus") openDept(id, b.closest(".dept"));
+    else if (act === "focus") { sfx.open(); openDept(id, b.closest(".dept")); }
     else if (act === "unfocus") closeDept();
     else if (act === "delete" && t) { if (S.armedDelete) deleteTask(t); else { S.armedDelete = true; renderPanel(); } }
   });
@@ -1132,6 +1282,7 @@ a{color:var(--blue)}
   window.addEventListener("hashchange", function () { stopMotion(); routeFromHash(); if (S.loaded) showView(true); });
   window.addEventListener("popstate", function () { stopMotion(); routeFromHash(); if (S.loaded) showView(true); });
 
+  soundLabel();
   var toastTimer = null;
   function toast(msg) {
     var el = $("#toast"); el.textContent = msg; el.classList.remove("off");
