@@ -531,6 +531,99 @@ button.r4:active,a.r4:active{transform:scale(.98)}
 @media (max-width:640px){.tl5,.tl5.f5{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.t5{min-height:136px;padding:14px;border-radius:22px}.bn5 .num{font-size:2.1rem}[data-brand="abten"] .bn5 .num{font-size:2.4rem}.hero5{height:330px}.l5 small{display:none}.sp5{width:64px}.pop5{width:min(320px,calc(100vw - 28px))}}
 @media (prefers-reduced-motion:reduce){.aur i,.hero5 canvas,.pop5{animation:none}}
 
+/* owner hub v6: the members' app on a laptop, with the website's nav and the website's gym cards */
+[data-hub="6"] body{background:var(--bg)}
+[data-brand="readout"][data-hub="6"] body{background:#F2F2F0}
+[data-hub="6"] .side,[data-hub="6"] .top{display:none!important}
+[data-hub="6"] .app{grid-template-columns:1fr}
+[data-hub="6"] main{max-width:none;padding:0 0 40px}
+[data-hub="6"] #view>.m-in{animation:none}
+.n6{position:sticky;top:0;z-index:30;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;height:64px;padding:0 28px;background:color-mix(in srgb,var(--card) 92%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nl6,.nr6{display:flex;align-items:center;gap:22px}
+.nr6{justify-self:end}
+.n6 a{font-size:.9rem;font-weight:500;color:var(--mute);text-decoration:none;transition:color .15s ease}
+.n6 a[aria-current="page"]{color:var(--ink)}
+[data-brand="abten"] .n6 a{text-transform:lowercase}
+@media (hover:hover) and (pointer:fine){.n6 a:hover{color:var(--ink)}}
+.lo6{display:inline-flex;flex-direction:column;align-items:center;gap:4px;color:var(--ink)!important}
+.lo6 b{font-weight:600;font-size:1.3rem;letter-spacing:-.045em;line-height:1}
+[data-brand="abten"] .lo6 b{font-family:var(--d);font-style:italic;font-weight:400;font-size:1.9rem;letter-spacing:-.01em}
+.tk6{display:flex;gap:3px;align-items:flex-end;height:8px}.tk6 i{width:1.5px;height:4px;background:#B9BBBE;border-radius:1px}.tk6 i.on{height:8px;background:var(--acc)}
+.pill6{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:9px 18px;background:var(--acc);color:#fff!important;font-weight:600;font-size:.86rem;text-decoration:none;transition:transform .16s var(--ease),filter .2s ease}
+[data-brand="readout"] .pill6{background:var(--acc2)}
+.pill6:active{transform:scale(.97)}
+.pill6.w{background:#fff;color:var(--ink)!important}
+[data-brand="abten"] .pill6{text-transform:lowercase}
+.pg6{max-width:1200px;margin:0 auto;padding:28px 28px 0}
+.g6{display:grid;gap:16px;margin-bottom:16px}
+.top6{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr)}
+.four6{grid-template-columns:repeat(4,minmax(0,1fr))}
+.two6{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-items:start}
+.c6{background:var(--card);border-radius:24px;padding:22px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px -12px rgba(0,0,0,.08);min-width:0;color:inherit;text-decoration:none;display:block}
+.hr6{position:relative;overflow:hidden;border-radius:28px;min-width:0}
+.hr6.ab{background:var(--hero);color:#fff;padding:26px 28px 30px;display:grid;align-content:start;gap:10px}
+.hr6.ab .lab{color:rgba(255,255,255,.8)}
+.hr6.ab h1{font-family:var(--d);font-weight:400;font-size:clamp(4rem,8vw,6.6rem);line-height:.88;letter-spacing:-.01em;margin-top:18px;position:relative}
+.hr6.ab p{font-size:1.02rem;color:rgba(255,255,255,.88);max-width:30em;position:relative}
+.hr6.ab .pill6{justify-self:start;margin-top:14px;position:relative}
+.hr6.ro h1{font-weight:400;font-size:clamp(3rem,5.4vw,4.4rem);letter-spacing:-.05em;line-height:1;margin:2px 0 18px}
+.ht6{display:flex;justify-content:space-between;align-items:center;gap:12px;position:relative;z-index:1}
+.hr6.ab .seg{background:rgba(255,255,255,.16)}.hr6.ab .seg button{color:rgba(255,255,255,.8)}.hr6.ab .seg button[aria-pressed="true"]{background:#fff;color:var(--ink)}
+.wf6{margin:14px 0 6px}
+.tri6{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;border-top:1px solid var(--line);padding-top:16px}
+.tri6 div{display:grid;gap:4px}.tri6 b .num,.tri6 b.num{font-size:2.2rem;font-weight:400;letter-spacing:-.04em}
+.ar6{font-size:.8rem;font-weight:600;color:var(--mute);font-variant-numeric:tabular-nums}.ar6.up{color:var(--good)}.ar6.dn{color:#C2410C}
+.rg6{display:grid;align-content:center}
+.r3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;text-align:center}
+.ri6{display:grid;justify-items:center;gap:6px;align-content:start}
+.ri6 > b.num{font-size:2rem;font-weight:400;letter-spacing:-.04em}
+.rl6{font-weight:600;font-size:.92rem}
+[data-brand="abten"] .rl6{text-transform:lowercase}
+.ri6 .mute{font-size:.78rem;line-height:1.3}
+.sc6{width:100%;max-width:200px;margin:4px auto 0}
+.gy6{display:grid;gap:6px;align-content:start}
+.gb6{font-family:var(--d);font-size:2.6rem;font-weight:400;letter-spacing:-.04em;line-height:1.05;margin-top:4px}
+[data-brand="abten"] .gb6{font-size:3rem;letter-spacing:-.01em;text-transform:lowercase}
+.gl6{color:var(--mute);font-size:.9rem;line-height:1.4}
+.gy6 svg.chart{margin-top:10px}
+.ml6{display:grid;gap:6px;margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+.ml6 span{display:flex;justify-content:space-between;gap:8px;font-size:.86rem;color:var(--mute);font-variant-numeric:tabular-nums}.ml6 b{color:var(--ink);font-weight:500}
+.dt6{display:flex;gap:6px;margin-top:10px}
+.dt6 i{width:15px;height:15px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--ink);display:block}
+.dt6 i.on{background:var(--acc);box-shadow:none}
+.ph6{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px 20px;margin-bottom:22px}
+.ph6 h1{font-family:var(--d);font-weight:400;font-size:3rem;letter-spacing:-.05em;line-height:1}
+[data-brand="abten"] .ph6 h1{font-size:3.6rem;letter-spacing:-.01em}
+.ph6 .mute{font-size:.95rem}
+.h6{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.h6 h3{font-weight:600;font-size:1.05rem}
+[data-brand="abten"] .h6 h3{font-family:var(--d);font-weight:400;font-size:1.7rem;text-transform:lowercase;line-height:1}
+.ls6{display:grid;margin-top:14px;border-top:1px solid var(--line)}
+.li6{display:flex;align-items:center;gap:12px;padding:10px 2px;border:0;border-bottom:1px solid var(--line);background:none;font:inherit;color:inherit;text-align:left;cursor:pointer;min-height:52px;transition:background-color .12s ease}
+@media (hover:hover) and (pointer:fine){.li6:hover{background:var(--soft)}}
+.li6 .av{width:34px;height:34px;font-size:.76rem}
+[data-brand="abten"] .li6 .av{font-size:.95rem}
+.li6 b{flex:1;min-width:0;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li6 .mute{font-size:.8rem;white-space:nowrap}
+.li6 em{font-style:normal;font-weight:600;font-size:.84rem;color:var(--acc);white-space:nowrap}
+.li6 .wks{width:96px;flex:none}
+.mr6{display:grid}
+.mi6{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(80px,1.4fr) 56px 70px 96px;align-items:center;gap:14px;padding:12px 2px;border:0;border-bottom:1px solid var(--line);background:none;font:inherit;color:inherit;text-align:left;cursor:pointer;transition:background-color .12s ease}
+@media (hover:hover) and (pointer:fine){.mi6:hover{background:var(--soft)}}
+.mi6 b{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-brand="abten"] .mi6 b{text-transform:lowercase}
+.mi6 i{height:8px;border-radius:4px;background:var(--soft);position:relative;overflow:hidden}.mi6 i u{position:absolute;inset:0 auto 0 0;background:var(--acc);border-radius:4px;transform-origin:left}
+.mi6 .num{text-align:right;font-size:1.2rem}
+.bt6{justify-self:end;font-size:.74rem;color:var(--mute);white-space:nowrap}.bt6.lo{color:#B45309;font-weight:600}
+.s6 button{padding:6px 12px}
+.ft6{max-width:1200px;margin:8px auto 0;padding:0 28px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;font-size:.8rem;color:var(--mute)}
+.ft6 .vers a{color:var(--mute)}
+[data-hub="6"] .mail{box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px -12px rgba(0,0,0,.08)}
+@media (max-width:1100px){.top6,.two6{grid-template-columns:1fr}.four6{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.n6{grid-template-columns:auto 1fr;padding:0 16px}.nl6{display:none}.lo6{justify-self:start;align-items:flex-start}.nr6 a:not(.pill6){display:none}.pg6{padding:18px 14px 0}.ft6{padding:0 14px 90px}
+  .mi6{grid-template-columns:minmax(0,1fr) 50px 64px;gap:10px}.mi6 i,.mi6 .bt6{display:none}}
+@media (max-width:640px){.four6{grid-template-columns:1fr}.r3{gap:6px}.hr6.ab{padding:22px}.c6{padding:18px}.tri6 b .num,.tri6 b.num{font-size:1.8rem}}
+
 </style>
 </head>
 <body>
@@ -749,69 +842,57 @@ return {AB:AB,RED:RED,T:T,fmt:fmt,fmtN:fmtN,esc:esc,DAYS:DAYS,DAYL:DAYL,MON:MON,
 
 </script>
 <script>
-/* The owner hub, version 5: calmer and in liquid glass. The hero is the gym's week as a glass sculpture (wave.js),
-   which works for every gym without a floor plan. Around it only five or six tiles. The week is picked from the title,
-   no arrows or toggles. No names on the overview or today; elsewhere only members who agreed, never a "no name" row.
-   No sentences, no advice. Data: the sample gym (gym.js), made up. */
+/* The owner hub, version 6: the members' app on a laptop. Same type, cards, toggles and hero as each direction's app,
+   the website's nav, and the website's gym cards (a label, one big figure, one short line). readout: the week as the
+   sensors saw it (a waveform) and tick scales. about ten.: a red card with one serif word, red rings, ten dots.
+   No 3D, no glass, no week picker: "this week" or "4 weeks", like the app. No names on the overview or today.
+   Battery as a state (a coin cell gives no honest percentage). Data: the sample gym (gym.js), made up. */
 (function(){
 'use strict';
-document.documentElement.setAttribute('data-hub','5');
-var G=window.GYM,WKS=window.HUB.weeks,T=K.T,fmt=K.fmt,N=K.N,esc=K.esc,M=G.machines,NM=M.length,LAST=G.nwk-1,LOGO='about ten.';
-var S={E:LAST,per:'week',sort:'most',grp:'all',nf:'all',mail:true,wp:false},QMIN=14,QMAX=49,TVT=null,TVS=null;
+document.documentElement.setAttribute('data-hub','6');
+var G=window.GYM,WKS=window.HUB.weeks,T=K.T,fmt=K.fmt,N=K.N,esc=K.esc,AB=K.AB,M=G.machines,NM=M.length,LAST=G.nwk-1,LOGO='about ten.';
+var S={per:'week',sort:'most',grp:'all',nf:'all',mail:true},QMIN=14,QMAX=49,TVT=null,TVS=null,E=LAST;
 var DEF=innerWidth<900?'today':'week';
 var GROUPS=[['upper push','Upper push'],['upper pull','Upper pull'],['lower push','Lower push'],['lower pull','Lower pull'],['core','Core']];
 var HOURCOLS=G.hours.map(function(h,j){return j%3===0?String(h).padStart(2,'0'):''});
+var LOWB=38;function low(i){return G.battery[i]<LOWB}
 function pct(a,b){return b?(a-b)/b*100:0}
 function hh(h){return String(h).padStart(2,'0')+':00'}
+function hr(h){var x=h%12||12;return x+(h<12?' am':' pm')}
 function dm(D){var d=G.dateOf(D);return d.getDate()+' '+K.MON[d.getMonth()]}
-function d2(s){var d=new Date(s+'T00:00:00');return d.getDate()+' '+K.MON[d.getMonth()]}
 function wkOf(D){return Math.floor(D/7)}
-function wkLabel(w){var x=WKS[w],a=new Date(x.start+'T00:00:00'),b=new Date(x.end+'T00:00:00');return (a.getMonth()===b.getMonth()?a.getDate():a.getDate()+' '+K.MON[a.getMonth()])+'–'+b.getDate()+' '+K.MON[b.getMonth()]}
-function rangeLabel(a,b){return d2(WKS[a].start)+'–'+d2(WKS[b].end)}
-function span(){return S.per==='month'?4:1}
-function range(E,n){var a=[];for(var w=Math.max(0,E-n+1);w<=E;w++)a.push(w);return a}
+function n(){return S.per==='month'?4:1}
+function range(e,k){var a=[];for(var w=Math.max(0,e-k+1);w<=e;w++)a.push(w);return a}
 function route(){return (location.hash||'#'+DEF).slice(1).split('/')[0]}
 function smp(){return '<span class="smp">Sample data</span>'}
+function word(r,a){return AB?T(r,a||r.toLowerCase()+'.'):r}
 
-/* ---- the numbers (as in version 3) ---- */
-function P(E,n){var ws=range(E,n),o={ws:ws,ses:0,reps:0,recs:0,newM:0,mem:0,mu:[]};for(var i=0;i<NM;i++)o.mu.push(0);
+/* ---- the numbers ---- */
+function P(e,k){var ws=range(e,k),o={ws:ws,ses:0,reps:0,recs:0,newM:0,mem:0,mu:[]};for(var i=0;i<NM;i++)o.mu.push(0);
   ws.forEach(function(w){var x=G.weeks[w];o.ses+=x.ses;o.reps+=x.reps;o.recs+=x.recs;o.newM+=x.newM;x.mu.forEach(function(v,i){o.mu[i]+=v})});
   o.mem=G.members.filter(function(m){return ws.some(function(w){return m.cnt[w]>0})}).length;return o}
-function prevP(){var n=span();return S.E-2*n+1>=0?P(S.E-n,n):null}
+function prev(){return P(E-n(),n())}
 function heatP(ws){var g=[];for(var d=0;d<7;d++){var row=[];for(var h=0;h<17;h++){var v=0;ws.forEach(function(w){v+=G.weeks[w].heat[d][h]});row.push(v/ws.length)}g.push(row)}return g}
-var HMAX=0;G.weeks.slice(0,G.nwk).forEach(function(w){w.heat.forEach(function(r){r.forEach(function(v){if(v>HMAX)HMAX=v})})});
 function peakOf(g){var hi={v:-1,d:0,h:0};g.forEach(function(r,d){r.forEach(function(v,h){if(v>hi.v)hi={v:v,d:d,h:h}})});return hi}
+function weekdayCurve(g){var c=[];for(var h=0;h<17;h++){var s=0;for(var d=0;d<5;d++)s+=g[d][h];c.push(s/5)}return c}
+function busyWindow(c){var best=0,bi=0;for(var h=0;h<16;h++){var s=c[h]+c[h+1];if(s>best){best=s;bi=h}}var lo=1e9,li=0;for(h=1;h<14;h++){var t=c[h]+c[h+1];if(t<lo){lo=t;li=h}}return {a:bi+6,b:bi+8,qa:li+6,qb:li+8}}
 function quiet(T0){var out=[];G.members.forEach(function(m){var i=m.ds.length-1;while(i>=0&&m.ds[i]>T0)i--;if(i<0)return;var last=m.ds[i],since=T0-last;if(since<QMIN||since>QMAX)return;
   var prior=0;for(var j=i;j>=0&&m.ds[j]>last-56;j--)prior++;if(prior>=6)out.push({m:m,since:since,last:last,per:prior/8})});return out.sort(function(a,b){return a.since-b.since})}
-function cohort(E){return G.members.filter(function(m){var jw=wkOf(m.joinD);return m.isNew&&jw>=E-5&&jw<=E}).sort(function(a,b){return a.joinD-b.joinD}).map(function(m){var jw=wkOf(m.joinD),c=[];
-  for(var k=0;k<4;k++){var w=jw+k;c.push(w>E?-1:Math.min(2,m.cnt[w]))}return {m:m,c:c}})}
+function cohort(e){return G.members.filter(function(m){var jw=wkOf(m.joinD);return m.isNew&&jw>=e-5&&jw<=e}).sort(function(a,b){return a.joinD-b.joinD}).map(function(m){var jw=wkOf(m.joinD),c=[];
+  for(var k=0;k<4;k++){var w=jw+k;c.push(w>e?-1:Math.min(2,m.cnt[w]))}return {m:m,c:c}})}
 function kept(cols){var r=cols.filter(function(x){return x.c[3]!==-1});return {reached:r.length,kept:r.filter(function(x){return x.c[3]>0}).length}}
-function stronger(E){var o={E:E,up:[],same:[],dn:[],n:0,two:0,g:0,gw:Math.min(12,E)};
-  if(E>=5)G.members.forEach(function(m){if(m.cnt[E]+m.cnt[E-1]>0&&m.cnt[E-4]+m.cnt[E-5]>0){var c=(m.sw[E]/m.sw[E-4]-1)*100;(c>1.5?o.up:c<-1.5?o.dn:o.same).push({m:m,c:c})}});
-  o.n=o.up.length+o.same.length+o.dn.length;o.up.sort(function(a,b){return b.c-a.c});
-  var ws=range(E,4),a4=G.members.filter(function(m){return ws.some(function(w){return m.cnt[w]>0})});
-  o.two=a4.length?a4.filter(function(m){return ws.reduce(function(a,w){return a+m.cnt[w]},0)/ws.length>=2}).length/a4.length*100:0;
-  var b=o.gw?G.members.filter(function(m){return m.cnt[E]+(E>0?m.cnt[E-1]:0)>0&&m.cnt[E-o.gw]>0}):[];
-  o.g=b.length?b.reduce(function(a,m){return a+(m.sw[E]/m.sw[E-o.gw]-1)},0)/b.length*100:0;return o}
-function series(f){var a=[];for(var w=Math.max(0,S.E-11);w<=S.E;w++)a.push(f(w));return a}
+function stronger(e){var o={up:0,same:0,dn:0,n:0,top:[]};G.members.forEach(function(m){if(m.cnt[e]+m.cnt[e-1]>0&&m.cnt[e-4]+m.cnt[e-5]>0){var c=(m.sw[e]/m.sw[e-4]-1)*100;if(c>1.5){o.up++;o.top.push({m:m,c:c})}else if(c<-1.5)o.dn++;else o.same++}});
+  o.n=o.up+o.same+o.dn;o.p=o.n?Math.round(o.up/o.n*100):0;o.top.sort(function(a,b){return b.c-a.c});return o}
 
-/* ---- the frame: logo, glass tabs, two round buttons ---- */
-function bar(k){var tabs=[['week','Overview'],['today','Today'],['members','Members'],['machines','Machines']];
-  return '<div class="b5"><a class="l5" href="#week"><b>'+esc(LOGO)+'</b><small>'+T('Hub for gyms')+'</small></a><nav class="tb5 lg" aria-label="Sections">'+tabs.map(function(t){return '<a href="#'+t[0]+'"'+(k===t[0]?' aria-current="page"':'')+'>'+T(t[1])+'</a>'}).join('')+'</nav>'
-   +'<div class="i5"><a class="ib5 lg" href="#tv" aria-label="Gym TV" data-tip="'+esc(T('Gym TV'))+'"'+(k==='tv'?' aria-current="page"':'')+'>'+K.ic('tv',18)+'</a><a class="ib5 lg" href="#email" aria-label="Monday e-mail" data-tip="'+esc(T('Monday e-mail'))+'"'+(k==='email'?' aria-current="page"':'')+'>'+K.ic('mail',18)+'</a></div></div>'}
-function frame(inner,k){return bar(k)+inner+'<div class="fx5"><span class="vers"><span class="lab">'+T('Earlier')+'</span><a href="v1/">v1</a><a href="v2/">v2</a><a href="v3/">v3</a><a href="v4/">v4</a></span>'+smp()+'<span class="mute">'+T('Data')+' 22 Feb 2027, 18:10</span></div>'}
-
-/* ---- the week is picked from the title ---- */
-function wkTitle(){return S.per==='month'?T('Last 4 weeks'):(S.E===LAST?T('This week'):T('Week')+' '+WKS[S.E].n)}
-function wkSub(){return S.per==='month'?rangeLabel(Math.max(0,S.E-3),S.E):wkLabel(S.E)}
-function picker(){var rows=[];for(var w=LAST;w>=Math.max(0,LAST-7);w--)rows.push('<button type="button" class="pr5'+(S.per==='week'&&S.E===w?' on':'')+'" data-wk="'+w+'"><b>'+(w===LAST?T('This week'):T('Week')+' '+WKS[w].n)+'</b><span>'+wkLabel(w)+'</span><em>'+fmt(G.weeks[w].ses)+'</em></button>');
-  return '<div class="pop5 lg" role="listbox" aria-label="Week"><button type="button" class="pr5'+(S.per==='month'?' on':'')+'" data-wk4><b>'+T('Last 4 weeks')+'</b><span>'+rangeLabel(LAST-3,LAST)+'</span><em>'+fmt(P(LAST,4).ses)+'</em></button>'+rows.join('')+'</div>'}
-function title(over,extra){return '<div class="tt5"><span class="lab">'+over+'</span><div class="wpw"><button type="button" class="wp5" data-wp aria-expanded="'+S.wp+'"><span class="ttl5">'+wkTitle()+'</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 10l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'+(S.wp?picker():'')+'</div><div class="st5"><span>'+wkSub()+'</span>'+(extra||'')+'</div></div>'}
+/* ---- the frame: the website's nav ---- */
+function nav(k){var L=[['week','Overview'],['today','Today'],['members','Members'],['machines','Machines']];
+  return '<nav class="n6"><div class="nl6">'+L.map(function(x){return '<a href="#'+x[0]+'"'+(k===x[0]?' aria-current="page"':'')+'>'+T(x[1])+'</a>'}).join('')+'</div>'
+   +'<a class="lo6" href="#week"><b>'+esc(LOGO)+'</b>'+(AB?'':'<span class="tk6">'+'<i></i>'.repeat(8)+'<i class="on"></i><i></i><i></i></span>')+'</a>'
+   +'<div class="nr6"><a href="#email"'+(k==='email'?' aria-current="page"':'')+'>'+T('Monday e-mail')+'</a><a class="pill6" href="#tv">'+T('Gym TV')+'</a></div></nav>'}
+function page(inner,k){var lowN=M.filter(function(m,i){return low(i)}).length;return nav(k)+'<div class="pg6">'+inner+'</div><footer class="ft6"><span>'+NM+' '+T('sensors counting')+(lowN?', '+lowN+' '+T('low battery'):'')+'</span><span class="vers"><span>'+T('Earlier')+'</span><a href="v1/">v1</a><a href="v2/">v2</a><a href="v3/">v3</a><a href="v4/">v4</a><a href="v5/">v5</a></span>'+smp()+'</footer>'}
+function seg(){return '<div class="seg s6" role="group" aria-label="Period">'+[['week','This week'],['month','4 weeks']].map(function(x){return '<button type="button" data-per="'+x[0]+'" aria-pressed="'+(S.per===x[0])+'">'+T(x[1])+'</button>'}).join('')+'</div>'}
 document.addEventListener('click',function(e){var t;
-  if((t=e.target.closest('[data-wp]'))){S.wp=!S.wp;K.render(false,true);return}
-  if((t=e.target.closest('[data-wk]'))){S.E=+t.getAttribute('data-wk');S.per='week';S.wp=false;K.render(false,true);return}
-  if((t=e.target.closest('[data-wk4]'))){S.E=LAST;S.per='month';S.wp=false;K.render(false,true);return}
-  if(S.wp&&!e.target.closest('.pop5')){S.wp=false;K.render(false,true)}
+  if((t=e.target.closest('[data-per]'))){S.per=t.getAttribute('data-per');K.render(false,true);return}
   if((t=e.target.closest('[data-sort]'))){S.sort=t.getAttribute('data-sort');K.render(false,true);return}
   if((t=e.target.closest('[data-grp]'))){S.grp=t.getAttribute('data-grp');K.render(false,true);return}
   if((t=e.target.closest('[data-nf]'))){S.nf=t.getAttribute('data-nf');K.render(false,true);return}
@@ -819,239 +900,97 @@ document.addEventListener('click',function(e){var t;
   if((t=e.target.closest('[data-fs]'))){var p=document.getElementById('tvp');if(p&&p.requestFullscreen)p.requestFullscreen();return}
   if((t=e.target.closest('[data-mem]'))){memberDrawer(+t.getAttribute('data-mem'));return}
   if((t=e.target.closest('[data-m]'))){machineDrawer(+t.getAttribute('data-m'))}});
-document.addEventListener('keydown',function(e){if(e.key==='Escape'&&S.wp){S.wp=false;K.render(false,true)}});
-/* the light on the glass follows the pointer */
-document.addEventListener('pointermove',function(e){var el=e.target.closest&&e.target.closest('.lg');if(!el)return;var r=el.getBoundingClientRect();el.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');el.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%')},{passive:true});
 
-/* ---- small parts ---- */
-function hb(items,max,k,col){return '<div class="hb">'+items.map(function(x,i){return '<div'+(x.attr||'')+'><span>'+esc(x.label)+'</span><i><u class="gx" style="width:'+(max?x.v/max*100:0).toFixed(1)+'%;--dl:'+K.sd(i)+'ms'+(col?';background:'+col:'')+'"></u></i><em>'+N(x.v,{cls:'',k:k?k+i:null})+'</em></div>'}).join('')+'</div>'}
-function bat(b){return '<span class="bat"><i><u style="width:'+Math.round(b*.155)+'px"></u></i>'+b+'%</span>'}
-function cell(v){return v===2?'f':v===1?'h':v===-1?'n':''}
-function tile(href,label,body,foot,cls){return '<a class="t5 lg'+(cls?' '+cls:'')+'" href="'+href+'"><span class="lab">'+label+'</span>'+body+'<div class="tf5">'+(foot||'')+'</div></a>'}
-function big(v,k,o){return '<div class="bn5">'+N(v,Object.assign({k:k},o||{}))+'</div>'}
-function ch(v,abs){return v===null||v===undefined?'':(abs?K.delta(v,{unit:'',dec:0}):K.delta(v))}
-function sp(vals){return '<div class="sp5">'+K.spark(vals,{w:150,h:30})+'</div>'}
+/* ---- pieces taken from the apps ---- */
+function arrow(v,abs){if(v===null||v===undefined||isNaN(v))return '';var u=v>.4,d=v<-.4;return '<span class="ar6 '+(u?'up':d?'dn':'')+'">'+(u?'▲':d?'▼':'')+' '+(abs?Math.abs(Math.round(v)):Math.abs(v).toFixed(1)+'%')+'</span>'}
+/* the readout hero: the week as the sensors saw it, many fine strokes like the app's rep trace */
+function waveform(vals,o){o=o||{};var w=1000,h=o.h||170,n2=vals.length,max=Math.max.apply(null,vals)||1,pts=vals.map(function(v,i){return [i*(w/(n2-1)),h-14-(h-40)*v/max]}),s='<defs><linearGradient id="wg6" x1="0" x2="1"><stop offset="0" stop-color="var(--r1)"/><stop offset=".55" stop-color="var(--acc)"/><stop offset="1" stop-color="var(--r2)"/></linearGradient></defs>';
+  var path=function(dy){var d='M'+pts[0][0].toFixed(1)+' '+(pts[0][1]+dy).toFixed(1);for(var i=0;i<n2-1;i++){var p0=pts[Math.max(0,i-1)],p1=pts[i],p2=pts[i+1],p3=pts[Math.min(n2-1,i+2)];
+    d+='C'+(p1[0]+(p2[0]-p0[0])/6).toFixed(1)+' '+(p1[1]+(p2[1]-p0[1])/6+dy).toFixed(1)+','+(p2[0]-(p3[0]-p1[0])/6).toFixed(1)+' '+(p2[1]-(p3[1]-p1[1])/6+dy).toFixed(1)+','+p2[0].toFixed(1)+' '+(p2[1]+dy).toFixed(1)}return d};
+  for(var k=0;k<9;k++)s+='<path class="dr" pathLength="1" style="--dl:'+(k*45)+'ms" d="'+path((k-4)*2.4)+'" fill="none" stroke="url(#wg6)" stroke-width="'+(k===4?2:1.1)+'" opacity="'+(1-Math.abs(k-4)*.2).toFixed(2)+'"/>';
+  if(o.mark!==undefined){var p=pts[o.mark];s+='<circle class="pop" style="--dl:700ms" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="7" fill="var(--card)" stroke="var(--ink)" stroke-width="2.5"/>'}
+  (o.ticks||[]).forEach(function(t){s+='<text x="'+(t[0]*(w/(n2-1))).toFixed(1)+'" y="'+(h+2)+'" text-anchor="middle" font-size="13" fill="var(--mute)" font-family="var(--m)">'+t[1]+'</text>'});
+  return '<svg class="chart wf6" viewBox="0 -10 '+w+' '+(h+24)+'" role="img" aria-label="'+esc(o.label||'')+'">'+s+'</svg>'}
+/* about ten.'s ten dots */
+function dots(f){var on=Math.round(Math.max(0,Math.min(1,f))*10),s='';for(var i=0;i<10;i++)s+='<i class="pop'+(i<on?' on':'')+'" style="--dl:'+(i*40)+'ms"></i>';return '<span class="dt6">'+s+'</span>'}
+function meter(f,o){return AB?K.ring(f,Object.assign({size:96,sw:8},o||{})):'<div class="sc6">'+K.scale(f)+'</div>'}
+function gyCard(label,big,line,extra,href){return '<'+(href?'a href="'+href+'"':'div')+' class="c6 gy6'+(href?' lift':'')+'"><span class="lab">'+label+'</span><div class="gb6">'+big+'</div><p class="gl6">'+line+'</p>'+(extra||'')+'</'+(href?'a':'div')+'>'}
 
-/* ---- the hero ---- */
-function hourLabel(g){return function(d,h){return '<b>'+K.DAYS[d]+' '+hh(h+6)+'</b><span>'+Math.round(g[d][h])+' '+T('of')+' '+NM+' '+T('machines')+'</span>'}}
-function waveCfg(k,glide){if(k==='today'){var g=heatP(range(LAST,4)),nowH=G.nowMin/60-6;
-    return {values:g,max:HMAX,glide:glide,hourLabel:hourLabel(g),today:{d:0,h:Math.round(nowH)},nowLabel:'<b>'+T('Now')+'</b><span>'+G.busy.length+' '+T('of')+' '+NM+' '+T('in use')+'</span>'}}
-  var g2=heatP(range(S.E,span())),pk=peakOf(g2);
-  return {values:g2,max:HMAX,glide:glide,hourLabel:hourLabel(g2),peak:{d:pk.d,h:pk.h},peakLabel:'<b>'+T('Peak')+', '+K.DAYS[pk.d]+' '+hh(pk.h+6)+'</b><span>'+Math.round(pk.v)+' '+T('of')+' '+NM+' '+T('machines')+'</span>'}}
-function mountWave(k,v){var el=document.getElementById('wv');if(!el||!window.WAVE)return;var glide=!!(v&&v.firstElementChild&&v.firstElementChild.classList.contains('m-in'));
-  try{window.WAVE.mount(el,waveCfg(k,glide))}catch(err){el.innerHTML='<div class="tw-off">'+T('3D needs WebGL')+'</div>'}}
-window.addEventListener('wave-ready',function(){mountWave(route(),null)});
-
-/* ---- overview: the week ---- */
-function week(){var n=span(),p=P(S.E,n),pp=prevP(),st=stronger(S.E),q=quiet(S.E*7+6),co=cohort(S.E),k=kept(co.slice(-24)),r=M.map(function(m,i){return i}).sort(function(a,b){return p.mu[b]-p.mu[a]}),u=st.n?Math.round(st.up.length/st.n*100):0;
-  var h='<section class="ov5">'+title(T('Sample gym'),'<span class="ch5">'+fmt(p.reps)+' '+T('reps')+'</span><span class="ch5">'+fmt(p.recs)+' '+T('records')+'</span>')+'<div class="hero5" id="wv"></div><div class="tl5">'
-   +tile('#members',T('Members training'),big(p.mem,'w-mem'),ch(pp&&pct(p.mem,pp.mem))+sp(series(function(w){return G.weeks[w].mem})))
-   +tile('#members',T('Workouts'),big(p.ses,'w-ses'),ch(pp&&pct(p.ses,pp.ses))+sp(series(function(w){return G.weeks[w].ses})))
-   +tile('#members',T('New members, week 4'),'<div class="bn5">'+N(k.kept,{k:'w-k'})+'<span class="of5">/ '+k.reached+'</span></div>','<span class="mute">+'+p.newM+' '+T('this week')+'</span>')
-   +tile('#members',T('Stronger'),'<div class="bn5 rg5">'+K.ring(u/100,{size:58,sw:6})+N(u,{k:'w-up',suf:'%'})+'</div>','<span class="mute">'+Math.round(st.two)+'% '+T('train 2+ a week')+'</span>')
-   +tile('#members',T('Gone quiet'),big(q.length,'w-q'),'<span class="mute">'+T('Regulars')+', '+QMIN+'+ '+T('days')+'</span>')
-   +tile('#machines',T('Busiest machine'),'<div class="bn5 nm5">'+esc(M[r[0]].name)+'</div>','<span class="mute">'+fmt(p.mu[r[0]])+' '+T('uses')+'</span>')
-   +'</div></section>';
-  return frame(h,'week')}
+/* ---- overview ---- */
+function week(){var p=P(E,n()),pp=prev(),g=heatP(p.ws),pk=peakOf(g),bw=busyWindow(weekdayCurve(g)),st=stronger(E),q=quiet(E*7+6),co=cohort(E),k=kept(co.slice(-24)),r=M.map(function(m,i){return i}).sort(function(a,b){return p.mu[b]-p.mu[a]});
+  var ch=pct(p.ses,pp.ses),w1=ch>3?'Busier':ch<-3?'Quieter':'Steady',flat=[];g.forEach(function(row){flat=flat.concat(row)});
+  var hero=AB?'<section class="hr6 ab"><div class="glow"></div><div class="ht6"><span class="lab">'+(n()===1?T('this week'):T('the last 4 weeks'))+'</span>'+seg()+'</div><h1>'+word(w1)+'</h1><p>'+fmt(p.mem)+' '+T('members')+', '+T('peak')+' '+K.DAYL[pk.d].toLowerCase()+' '+hr(pk.h+6)+'.</p><a class="pill6 w" href="#members">'+T('see members')+'</a></section>'
+   :'<section class="hr6 ro c6"><div class="ht6"><span class="lab">'+(n()===1?'This week, as the sensors saw it':'The last 4 weeks, as the sensors saw it')+'</span>'+seg()+'</div>'+waveform(flat,{mark:pk.d*17+pk.h,ticks:K.DAYS.map(function(d,i){return [i*17+8,d.toUpperCase()]}),label:'Machines in use, hour by hour'})+'<h1>'+w1+'.</h1>'
+     +'<div class="tri6">'+[['Members',p.mem,pct(p.mem,pp.mem)],['Workouts',p.ses,ch],['Records',p.recs,p.recs-pp.recs,1]].map(function(x){return '<div><span class="lab">'+x[0]+'</span><b>'+N(x[1],{k:'h6'+x[0],cls:'num'})+'</b>'+arrow(x[2],x[3])+'</div>'}).join('')+'</div></section>';
+  var rings='<section class="c6 rg6"><div class="r3">'+[[st.p/100,st.p+'%',T('stronger'),T('vs 4 weeks ago')],[k.reached?k.kept/k.reached:0,k.kept+'/'+k.reached,T('new members'),T('still training in week 4')],[pk.v/NM,Math.round(pk.v)+'/'+NM,T('at the peak'),T('machines in use')]].map(function(x,i){
+    return '<div class="ri6">'+meter(x[0],{text:AB?x[1]:'',fs:24,dl:i*120})+(AB?'':'<b class="num">'+x[1]+'</b>')+'<span class="rl6">'+x[2]+'</span><span class="mute">'+x[3]+'</span></div>'}).join('')+'</div></section>';
+  var cv=weekdayCurve(g),hb=K.bars(cv.map(function(v){return Math.round(v*10)/10}),HOURCOLS,{h:110,gap:4,hi:bw.a-6+1,label:'Weekday machines in use by hour',tips:cv.map(function(v,j){return hh(j+6)+': '+Math.round(v)+' / '+NM})});
+  var cards=gyCard(T('busy hours'),hr(bw.a).replace(/ (am|pm)$/,'')+' '+T('to')+' '+hr(bw.b),T('full on weekdays')+', '+hr(bw.qa).replace(/ (am|pm)$/,'')+' '+T('to')+' '+hr(bw.qb)+' '+T('is quiet'),hb)
+   +gyCard(T('busiest machine'),esc(T(M[r[0]].name)),fmt(p.mu[r[0]])+' '+T('uses')+', '+(p.mu[r[NM-1]]?Math.round(p.mu[r[0]]/p.mu[r[NM-1]]):0)+'× '+T('the quietest'),'<div class="ml6">'+r.slice(1,4).map(function(i){return '<span><b>'+esc(T(M[i].name))+'</b>'+fmt(p.mu[i])+'</span>'}).join('')+'</div>','#machines')
+   +gyCard(T('new members'),k.kept+' '+T('of')+' '+k.reached,T('still training in week 4')+', +'+p.newM+' '+T('joined'),AB?dots(k.reached?k.kept/k.reached:0):'<div class="sc6">'+K.scale(k.reached?k.kept/k.reached:0)+'</div>','#members')
+   +gyCard(T('gone quiet'),String(q.length),T('regulars, not seen for 14 days or more'),'','#members');
+  return page('<div class="g6 top6">'+hero+rings+'</div><div class="g6 four6">'+cards+'</div>','week')}
 
 /* ---- today ---- */
-function today(){var x=G.weeks[G.nwk],busy=G.busy.length,nowH=Math.floor(G.nowMin/60)-6,frac=(G.nowMin%60)/60,ub=0;G.usual.forEach(function(v,i){if(i<nowH)ub+=v;else if(i===nowH)ub+=v*frac});
-  var h='<section class="ov5">'+'<div class="tt5"><span class="lab"><i class="live"></i>'+T(K.DAYL[0])+' '+dm(G.today)+', 18:10</span><h1 class="ttl5">'+T('Today','today.')+'</h1><div class="st5"><span>'+T('Usual week behind')+'</span></div></div><div class="hero5" id="wv"></div><div class="tl5 f5">'
-   +tile('#today',T('In the gym now'),big(G.inNow.length,'t-in'),'<span class="mute">'+T('Members')+'</span>')
-   +tile('#machines',T('Machines in use'),'<div class="bn5 rg5">'+K.ring(busy/NM,{size:58,sw:6})+N(busy,{k:'t-busy'})+'<span class="of5">/ '+NM+'</span></div>','<span class="mute">'+(NM-busy)+' '+T('free')+'</span>')
-   +tile('#today',T('Workouts so far'),big(G.todays.length,'t-so'),'<span class="delta">'+T('Usual')+' '+Math.round(ub)+'</span>')
-   +tile('#today',T('Records today'),big(x.recs,'t-r'),'<span class="mute">'+T('Since 06:00')+'</span>')
-   +tile('#members',T('New members'),big(x.newM,'t-n'),'<span class="mute">'+T('Joined today')+'</span>')
-   +'</div></section>';
-  return frame(h,'today')}
+function today(){var x=G.weeks[G.nwk],busy=G.busy.length,nowH=Math.floor(G.nowMin/60)-6,frac=(G.nowMin%60)/60,ub=0,td=x.starts[0];G.usual.forEach(function(v,i){if(i<nowH)ub+=v;else if(i===nowH)ub+=v*frac});
+  var hero=AB?'<section class="hr6 ab"><div class="glow"></div><div class="ht6"><span class="lab"><i class="live"></i>'+T('right now')+', 18:10</span></div><h1>'+G.inNow.length+' '+T('in','in.')+'</h1><p>'+busy+' '+T('of')+' '+NM+' '+T('machines in use')+', '+G.todays.length+' '+T('workouts so far')+'.</p><a class="pill6 w" href="#machines">'+T('see machines')+'</a></section>'
+   :'<section class="hr6 ro c6"><div class="ht6"><span class="lab"><i class="live"></i>Today, as the sensors saw it</span></div>'+waveform(td.slice(0,nowH+1).concat([]).map(function(v){return v}),{mark:nowH,ticks:[[0,'06'],[3,'09'],[6,'12'],[9,'15'],[12,'18']].filter(function(t){return t[0]<=nowH}),label:'Workouts started by hour, today'})+'<h1>'+G.inNow.length+' in the gym.</h1>'
+     +'<div class="tri6">'+[['In use',busy+'/'+NM],['Workouts',G.todays.length],['Records',x.recs]].map(function(y){return '<div><span class="lab">'+y[0]+'</span><b class="num">'+y[1]+'</b></div>'}).join('')+'</div></section>';
+  var rings='<section class="c6 rg6"><div class="r3">'+[[busy/NM,busy+'/'+NM,T('machines in use'),(NM-busy)+' '+T('free')],[ub?Math.min(1,G.todays.length/ub):0,String(G.todays.length),T('workouts so far'),T('usual')+' '+Math.round(ub)],[Math.min(1,x.recs/20),String(x.recs),T('records today'),T('since 06:00')]].map(function(y,i){
+    return '<div class="ri6">'+meter(y[0],{text:AB?y[1]:'',fs:24,dl:i*120})+(AB?'':'<b class="num">'+y[1]+'</b>')+'<span class="rl6">'+y[2]+'</span><span class="mute">'+y[3]+'</span></div>'}).join('')+'</div></section>';
+  var hours=K.bars(G.usual.map(function(v,j){return j<=nowH?td[j]:Math.round(v)}),HOURCOLS,{h:120,gap:4,hi:nowH,label:'Workouts by hour',tips:G.usual.map(function(v,j){return hh(j+6)+': '+(j<=nowH?td[j]+' today, ':'')+Math.round(v)+' usual'})});
+  return page('<div class="g6 top6">'+hero+rings+'</div><div class="g6 two6">'+gyCard(T('by the hour'),T('now')+' '+hr(nowH+6),T('today until now, then a usual monday'),hours)+gyCard(T('new members'),String(x.newM),T('joined today'),'','#members')+'</div>','today')}
 
-/* ---- members: names only for members who agreed, no "no name" rows ---- */
-function strongCard(st){var all=st.up.concat(st.same,st.dn),bins=[0,0,0,0,0],lb=['−','±0','+2','+5','+8'],tl=['Less','Same','Up 1.5 to 4%','Up 4 to 8%','Up 8% or more'];
-  all.forEach(function(x){var c=x.c;bins[c<-1.5?0:c<=1.5?1:c<=4?2:c<=8?3:4]++});var top=st.up.filter(function(x){return x.m.consent}).slice(0,4);
-  return '<div class="c5 lg"><div class="h5"><h3>'+T('Stronger')+'</h3><span class="ch5">'+(st.n?Math.round(st.up.length/st.n*100):0)+'%</span></div>'+K.bars(bins,lb,{h:130,values:true,label:'Members by strength change',tips:bins.map(function(v,i){return tl[i]+': '+v})})
-   +'<div class="rw5">'+top.map(function(x){return '<button type="button" class="r5" data-mem="'+x.m.id+'"><span class="av">'+esc(x.m.init)+'</span><b>'+esc(x.m.name)+'</b><em>+'+K.fmtN(x.c,1)+'%</em></button>'}).join('')+'</div></div>'}
-function members(){var E=S.E,co=cohort(E),k=kept(co),st=stronger(E),q=quiet(E*7+6),ws=range(E,4),buck=[0,0,0,0,0];
+/* ---- members: names only for members who agreed, never a "no name" row ---- */
+function members(){var co=cohort(E),k=kept(co),st=stronger(E),q=quiet(E*7+6),ws=range(E,4),buck=[0,0,0,0,0];
   G.members.forEach(function(m){if(!ws.some(function(w){return m.cnt[w]>0}))return;var a=ws.reduce(function(s,w){return s+m.cnt[w]},0)/ws.length;buck[a<1?0:a<2?1:a<3?2:a<4?3:4]++});
   var latest=function(x){for(var j=3;j>=0;j--)if(x.c[j]!==-1)return x.c[j];return 0},named=co.slice().reverse().filter(function(x){return x.m.consent}),list=named.filter(function(x){var v=latest(x);return S.nf==='all'||(S.nf==='training'?v>0:v===0)});
-  var grid='<div class="coh" style="--n:'+co.length+'">';for(var r=0;r<4;r++)grid+='<div class="r"><span>'+T('Wk')+' '+(r+1)+'</span>'+co.map(function(x,j){var v=x.c[r];return '<i class="pop '+cell(v)+'" style="--dl:'+(K.sd(j)+r*40)+'ms" data-tip="'+(x.m.consent?'<b>'+esc(x.m.name)+'</b><br>':'')+T('Joined')+' '+dm(x.m.joinD)+'"></i>'}).join('')+'</div>';grid+='</div>';
-  var h='<section class="pg5">'+title(T('Members'),'<span class="ch5">'+G.members.length+' '+T('in the app')+'</span>');
-  h+='<div class="g5 two5"><div class="c5 lg"><div class="h5"><h3>'+T('New members')+'</h3><span class="ch5">'+co.length+' '+T('joined')+'</span></div><div class="bn5">'+N(k.kept,{k:'m-k'})+'<span class="of5">/ '+k.reached+'</span></div><span class="mute">'+T('Training in week 4')+'</span>'+grid
-   +'<div class="legend" style="margin:10px 0 14px"><span><i style="background:var(--acc)"></i>2+</span><span><i style="background:var(--r1)"></i>1</span><span><i style="background:var(--soft)"></i>0</span><span><i style="box-shadow:inset 0 0 0 1px var(--mute2)"></i>'+T('Not yet')+'</span></div>'
-   +'<div class="seg" role="group" aria-label="Filter" style="margin-bottom:10px">'+[['all','All'],['training','Training'],['quiet','Quiet']].map(function(x){return '<button type="button" data-nf="'+x[0]+'" aria-pressed="'+(S.nf===x[0])+'">'+T(x[1])+'</button>'}).join('')+'</div>'
-   +'<div class="rw5">'+list.map(function(x){return '<button type="button" class="r5" data-mem="'+x.m.id+'"><span class="av">'+esc(x.m.init)+'</span><b>'+esc(x.m.name)+'</b><span class="wks">'+x.c.map(function(v){return '<i class="'+cell(v)+'"></i>'}).join('')+'</span><em>'+dm(x.m.joinD)+'</em></button>'}).join('')+'</div></div>'
-   +'<div class="g5"><div class="c5 lg"><div class="h5"><h3>'+T('Gone quiet')+'</h3><span class="ch5">'+QMIN+'–'+QMAX+' '+T('days')+'</span></div><div class="bn5">'+N(q.length,{k:'m-q'})+'</div>'
-   +'<div class="rw5">'+q.filter(function(x){return x.m.consent}).map(function(x){return '<button type="button" class="r5" data-mem="'+x.m.id+'"><span class="av">'+esc(x.m.init)+'</span><b>'+esc(x.m.name)+'</b><span class="mute">'+K.fmtN(x.per,1)+' '+T('a week before')+'</span><em>'+x.since+' '+T('d')+'</em></button>'}).join('')+'</div></div>'
-   +strongCard(st)+'<div class="c5 lg"><div class="h5"><h3>'+T('How often')+'</h3><span class="ch5">'+T('A week')+'</span></div>'+K.bars(buck,['&lt;1','1','2','3','4+'],{h:130,values:true,label:'Members by workouts a week',tips:buck.map(function(v,i){return ['Under 1','1','2','3','4 or more'][i]+': '+v})})+'</div></div></div></section>';
-  return frame(h,'members')}
-function memberDrawer(id){var m=G.members[id];if(!m||!m.consent)return;var since=m.ds.length?G.today-m.ds[m.ds.length-1]:null,from=Math.max(0,wkOf(m.joinD)),wk=[],labs=[],str=[];
-  for(var w=from;w<=G.nwk;w++){wk.push(m.cnt[w]);labs.push(w===G.nwk?T('Now'):'W'+WKS[w].n);str.push(Math.round((m.sw[w]/m.sw[from]-1)*1000)/10)}
-  var fav=m.mc.map(function(v,i){return {i:i,v:v}}).sort(function(a,b){return b.v-a.v}).slice(0,5),lo=Math.min(0,Math.min.apply(null,str));
-  var h=K.dhead(T('Member'),m.name,null,'<span class="chip">'+(m.isNew?T('Joined')+' '+dm(m.joinD):T('Member before')+' '+d2(WKS[0].start))+'</span><span class="chip">'+T('Plan')+' '+m.f+'× '+T('a week')+'</span>'+smp())
-   +'<div class="dbody"><div class="grid g3"><div class="card fig"><span class="lab">'+T('Workouts')+'</span>'+N(m.ds.length)+'</div><div class="card fig"><span class="lab">'+T('Last seen')+'</span><span class="num">'+(since===null?'0':since)+'<span class="mute" style="font-size:.5em"> '+T('d')+'</span></span></div><div class="card fig"><span class="lab">'+T('Records')+'</span>'+N(m.recs)+'</div></div>'
-   +'<div class="card"><div class="ch"><h3>'+T('Workouts a week')+'</h3></div>'+K.bars(wk,labs.map(function(l,i){return i%3===0||i===labs.length-1?l:''}),{h:150,gap:4,label:'Workouts a week',tips:wk.map(function(v,i){return labs[i]+': '+v})})+'</div>'
-   +'<div class="card"><div class="ch"><h3>'+T('Strength')+'</h3><span class="lab">%</span></div>'+K.line([{vals:str,area:true}],labs,{h:170,min:lo,label:'Strength change',fy:function(v){return (v>0?'+':'')+K.fmtN(v,1)},ft:function(v){return (v>0?'+':'')+K.fmtN(v,1)+'%'}})+'</div>'
-   +'<div class="card"><div class="ch"><h3>'+T('Favourite machines')+'</h3></div>'+K.hbars(fav.map(function(x){return {label:M[x.i].name,v:x.v}}))+'</div></div>';
-  K.openDrawer(h)}
+  var cell=function(v){return v===2?'f':v===1?'h':v===-1?'n':''};
+  var h='<div class="ph6"><h1>'+word('Members')+'</h1><span class="mute">'+G.members.length+' '+T('in the app')+'</span></div><div class="g6 two6">'
+   +'<section class="c6"><div class="h6"><h3>'+T('New members')+'</h3><div class="seg s6" role="group" aria-label="Filter">'+[['all','All'],['training','Training'],['quiet','Quiet']].map(function(x){return '<button type="button" data-nf="'+x[0]+'" aria-pressed="'+(S.nf===x[0])+'">'+T(x[1])+'</button>'}).join('')+'</div></div>'
+   +'<div class="gb6">'+k.kept+' '+T('of')+' '+k.reached+'</div><p class="gl6">'+T('still training in week 4')+'</p>'+(AB?dots(k.reached?k.kept/k.reached:0):'<div class="sc6">'+K.scale(k.reached?k.kept/k.reached:0)+'</div>')
+   +'<div class="ls6">'+list.map(function(x){return '<button type="button" class="li6" data-mem="'+x.m.id+'"><span class="av">'+esc(x.m.init)+'</span><b>'+esc(x.m.name)+'</b><span class="wks">'+x.c.map(function(v){return '<i class="'+cell(v)+'"></i>'}).join('')+'</span><em>'+dm(x.m.joinD)+'</em></button>'}).join('')+'</div></section>'
+   +'<div class="g6"><section class="c6"><div class="h6"><h3>'+T('Gone quiet')+'</h3><span class="mute">'+QMIN+'–'+QMAX+' '+T('days')+'</span></div><div class="gb6">'+q.length+'</div><p class="gl6">'+T('regulars, not seen for 14 days or more')+'</p>'
+   +'<div class="ls6">'+q.filter(function(x){return x.m.consent}).map(function(x){return '<button type="button" class="li6" data-mem="'+x.m.id+'"><span class="av">'+esc(x.m.init)+'</span><b>'+esc(x.m.name)+'</b><span class="mute">'+K.fmtN(x.per,1)+' '+T('a week before')+'</span><em>'+x.since+' '+T('d')+'</em></button>'}).join('')+'</div></section>'
+   +'<section class="c6"><div class="h6"><h3>'+T('Stronger')+'</h3><span class="mute">'+T('vs 4 weeks ago')+'</span></div><div class="gb6">'+st.p+'%</div><p class="gl6">'+st.up+' '+T('stronger')+', '+st.same+' '+T('the same')+', '+st.dn+' '+T('less')+'</p>'
+   +'<div class="ls6">'+st.top.filter(function(x){return x.m.consent}).slice(0,4).map(function(x){return '<button type="button" class="li6" data-mem="'+x.m.id+'"><span class="av">'+esc(x.m.init)+'</span><b>'+esc(x.m.name)+'</b><em>+'+K.fmtN(x.c,1)+'%</em></button>'}).join('')+'</div></section>'
+   +'<section class="c6"><div class="h6"><h3>'+T('How often')+'</h3><span class="mute">'+T('workouts a week')+'</span></div>'+K.bars(buck,['&lt;1','1','2','3','4+'],{h:130,values:true,label:'Members by workouts a week'})+'</section></div></div>';
+  return page(h,'members')}
+function memberDrawer(id){var m=G.members[id];if(!m||!m.consent)return;var since=m.ds.length?G.today-m.ds[m.ds.length-1]:0,from=Math.max(0,wkOf(m.joinD)),wk=[],labs=[];for(var w=from;w<=G.nwk;w++){wk.push(m.cnt[w]);labs.push(w===G.nwk?T('Now'):'W'+WKS[w].n)}
+  var fav=m.mc.map(function(v,i){return {i:i,v:v}}).sort(function(a,b){return b.v-a.v}).slice(0,5);
+  K.openDrawer(K.dhead(T('Member'),m.name,null,'<span class="chip">'+(m.isNew?T('Joined')+' '+dm(m.joinD):T('Long-time member'))+'</span>'+smp())+'<div class="dbody"><div class="grid g3"><div class="card fig"><span class="lab">'+T('Workouts')+'</span>'+N(m.ds.length)+'</div><div class="card fig"><span class="lab">'+T('Last seen')+'</span><span class="num">'+since+' '+T('d')+'</span></div><div class="card fig"><span class="lab">'+T('Records')+'</span>'+N(m.recs)+'</div></div>'
+   +'<div class="card"><div class="ch"><h3>'+T('Workouts a week')+'</h3></div>'+K.bars(wk,labs.map(function(l,i){return i%3===0||i===labs.length-1?l:''}),{h:150,gap:4,label:'Workouts a week'})+'</div><div class="card"><div class="ch"><h3>'+T('Favourite machines')+'</h3></div>'+K.hbars(fav.map(function(x){return {label:M[x.i].name,v:x.v}}))+'</div></div>')}
 
-/* ---- machines ---- */
-function machines(){var n=span(),p=P(S.E,n),pp=prevP(),rk={};M.map(function(m,i){return i}).sort(function(a,b){return p.mu[b]-p.mu[a]}).forEach(function(i,j){rk[i]=j+1});
-  var list=M.map(function(m,i){return i}).filter(function(i){return S.grp==='all'||M[i].group===S.grp});
+/* ---- machines: like the app's "strength, every machine" list ---- */
+function machines(){var p=P(E,n()),pp=prev(),list=M.map(function(m,i){return i}).filter(function(i){return S.grp==='all'||M[i].group===S.grp}),max=Math.max.apply(null,p.mu);
   if(S.sort==='most')list.sort(function(a,b){return p.mu[b]-p.mu[a]});else if(S.sort==='least')list.sort(function(a,b){return p.mu[a]-p.mu[b]});else list.sort(function(a,b){return M[a].name<M[b].name?-1:1});
-  var h='<section class="pg5">'+title(T('Machines'),'')+'<div class="tools" style="margin-bottom:14px">'+[['all','All']].concat(GROUPS).map(function(g){return '<button class="chip'+(S.grp===g[0]?' on':'')+'" type="button" data-grp="'+g[0]+'" style="border:0;cursor:pointer;padding:6px 12px">'+T(g[1])+'</button>'}).join('')
-   +'<span style="flex:1"></span><div class="seg" role="group" aria-label="Sort">'+[['most','Most'],['least','Least'],['az','A–Z']].map(function(x){return '<button type="button" data-sort="'+x[0]+'" aria-pressed="'+(S.sort===x[0])+'">'+T(x[1])+'</button>'}).join('')+'</div></div>';
-  h+='<div class="mg5">'+list.map(function(i){var m=M[i],v=p.mu[i],pv=pp?pp.mu[i]:null,s=[];for(var w=0;w<=LAST;w++)s.push(G.weeks[w].mu[i]);
-    return '<button type="button" class="t5 lg" data-m="'+i+'"><span class="lab">#'+rk[i]+'</span><b class="mn5">'+esc(m.name)+'</b><div class="bn5 sm">'+N(v,{k:'mm'+i})+(pv!==null?K.delta(pct(v,pv),{dec:0}):'')+'</div>'+K.spark(s,{w:190,h:30})+'<div class="tf5">'+bat(G.battery[i])+'</div></button>'}).join('')+'</div></section>';
-  return frame(h,'machines')}
-function machineDrawer(i){var m=M[i],p=P(S.E,span()),rank=M.map(function(x,j){return j}).sort(function(a,b){return p.mu[b]-p.mu[a]}).indexOf(i)+1,vals=[],labs=[];
-  for(var w=0;w<=LAST;w++){vals.push(G.weeks[w].mu[i]);labs.push('W'+WKS[w].n)}
-  var avg=Math.round(vals.reduce(function(a,b){return a+b},0)/vals.length);
-  var h=K.dhead(T('Machine'),m.name,m.model,'<span class="chip">'+T(m.group)+'</span>'+smp())
-   +'<div class="dbody"><div class="grid g3"><div class="card fig"><span class="lab">'+T('Uses')+'</span>'+N(p.mu[i])+'</div><div class="card fig"><span class="lab">'+T('Rank')+'</span><span class="num">#'+rank+'</span></div><div class="card fig"><span class="lab">'+T('Battery')+'</span>'+N(G.battery[i],{suf:'%'})+'</div></div>'
-   +'<div class="card"><div class="ch"><h3>'+T('16 weeks')+'</h3><div class="legend"><span><i style="background:var(--ink);opacity:.5"></i>'+T('Average')+' '+avg+'</span></div></div>'+K.line([{vals:vals,area:true,dots:true}],labs,{hi:S.E,ref:avg,h:200,label:m.name+', 16 weeks'})+'</div>'
-   +'<div class="card"><div class="ch"><h3>'+T('Hours')+'</h3><span class="lab">'+T('Last 4 weeks')+'</span></div>'+K.heat(G.machineHours[i],K.DAYS,HOURCOLS,{cw:20,ch:16,label:'Uses by hour',tip:function(a,b,x){return K.DAYS[a]+' '+hh(b+6)+': '+x}})+'</div></div>';
-  K.openDrawer(h)}
+  var h='<div class="ph6"><h1>'+word('Machines')+'</h1>'+seg()+'</div><section class="c6"><div class="h6"><div class="tools">'+[['all','All']].concat(GROUPS).map(function(g){return '<button class="chip'+(S.grp===g[0]?' on':'')+'" type="button" data-grp="'+g[0]+'" style="border:0;cursor:pointer;padding:6px 12px">'+T(g[1])+'</button>'}).join('')+'</div><div class="seg s6" role="group" aria-label="Sort">'+[['most','Most'],['least','Least'],['az','A–Z']].map(function(x){return '<button type="button" data-sort="'+x[0]+'" aria-pressed="'+(S.sort===x[0])+'">'+T(x[1])+'</button>'}).join('')+'</div></div>'
+   +'<div class="mr6">'+list.map(function(i,j){var v=p.mu[i];return '<button type="button" class="mi6" data-m="'+i+'"><b>'+esc(T(M[i].name))+'</b><i><u class="gx" style="width:'+(v/max*100).toFixed(1)+'%;--dl:'+K.sd(Math.min(j,11))+'ms"></u></i><span class="num">'+fmt(v)+'</span>'+arrow(pct(v,pp.mu[i]))+'<span class="bt6'+(low(i)?' lo':'')+'">'+(low(i)?T('battery low'):T('battery ok'))+'</span></button>'}).join('')+'</div></section>';
+  return page(h,'machines')}
+function machineDrawer(i){var m=M[i],p=P(E,n()),vals=[],labs=[];for(var w=0;w<=LAST;w++){vals.push(G.weeks[w].mu[i]);labs.push('W'+WKS[w].n)}
+  K.openDrawer(K.dhead(T('Machine'),m.name,m.model,'<span class="chip">'+T(m.group)+'</span>'+smp())+'<div class="dbody"><div class="grid g3"><div class="card fig"><span class="lab">'+T('Uses')+'</span>'+N(p.mu[i])+'</div><div class="card fig"><span class="lab">'+T('Sensor')+'</span><span class="num" style="font-size:1.6rem">'+(low(i)?T('Battery low'):T('Battery ok'))+'</span></div><div class="card fig"><span class="lab">'+T('Coin cell')+'</span><span class="num" style="font-size:1.6rem">CR2477</span></div></div>'
+   +'<div class="card"><div class="ch"><h3>'+T('16 weeks')+'</h3></div>'+K.line([{vals:vals,area:true,dots:true}],labs,{hi:E,h:200,label:m.name+', 16 weeks'})+'</div><div class="card"><div class="ch"><h3>'+T('Hours')+'</h3><span class="lab">'+T('Last 4 weeks')+'</span></div>'+K.heat(G.machineHours[i],K.DAYS,HOURCOLS,{cw:20,ch:16,label:'Uses by hour'})+'</div></div>')}
 
-/* ---- the gym TV (records only from members who agreed) and the Monday e-mail ---- */
+/* ---- the gym TV and the Monday e-mail ---- */
 function tv(){var busy=TVS||(TVS=G.busy.slice()),recs=G.records.filter(function(r){return G.members[r.m].consent}).sort(function(a,b){return (b.D*1440+b.t)-(a.D*1440+a.t)}).slice(0,6);
-  return frame('<section class="pg5"><div class="tt5"><span class="lab">'+T('For members')+'</span><h1 class="ttl5">'+T('Gym TV','gym tv.')+'</h1><div class="st5"><button class="btn sm" type="button" data-fs>'+K.ic('tv',16)+T('Full screen')+'</button></div></div>'
-   +'<div class="tv" id="tvp"><div class="tvtop"><span class="tvlogo">'+esc(LOGO)+'</span><span class="lab">'+T(K.DAYL[0])+' 18:10</span></div>'
-   +'<div><span class="lab">'+T('Free now')+'</span><div class="tvbig"><span id="tvfree">'+(NM-busy.length)+'</span><small> / '+NM+'</small></div>'
-   +'<div class="tvgrid">'+M.map(function(m,i){return '<div class="tvm'+(busy.indexOf(i)>=0?' on':'')+'" data-tvm="'+i+'"><b>'+esc(m.name)+'</b></div>'}).join('')+'</div></div>'
+  return page('<div class="ph6"><h1>'+word('Gym TV','gym tv.')+'</h1><button class="btn sm" type="button" data-fs>'+T('Full screen')+'</button></div><div class="tv" id="tvp"><div class="tvtop"><span class="tvlogo">'+esc(LOGO)+'</span><span class="lab">'+T(K.DAYL[0])+' 18:10</span></div>'
+   +'<div><span class="lab">'+T('Free now')+'</span><div class="tvbig"><span id="tvfree">'+(NM-busy.length)+'</span><small> / '+NM+'</small></div><div class="tvgrid">'+M.map(function(m,i){return '<div class="tvm'+(busy.indexOf(i)>=0?' on':'')+'" data-tvm="'+i+'"><b>'+esc(m.name)+'</b></div>'}).join('')+'</div></div>'
    +'<div class="tvr"><span class="lab">'+T('Records this week')+'</span><div class="tvrec">'+recs.map(function(r){return '<div><b>'+esc(G.members[r.m].short)+'</b><em>'+K.fmtN(r.kg,r.kg%1?1:0)+' kg</em><span>'+esc(M[r.mi].name)+'</span></div>'}).join('')+'</div></div>'
-   +'<div class="tvbot"><div><span class="lab">'+T('Reps today')+'</span><div class="tvmid">'+N(G.weeks[G.nwk].reps,{k:'tv-reps'})+'</div></div><div><span class="lab">'+T('In the gym')+'</span><div class="tvmid">'+N(G.inNow.length,{k:'tv-in'})+'</div></div><div><span class="lab">'+T('Workouts today')+'</span><div class="tvmid">'+N(G.todays.length,{k:'tv-w'})+'</div></div></div></div></section>','tv')}
+   +'<div class="tvbot"><div><span class="lab">'+T('Reps today')+'</span><div class="tvmid">'+N(G.weeks[G.nwk].reps,{k:'tv-reps'})+'</div></div><div><span class="lab">'+T('In the gym')+'</span><div class="tvmid">'+N(G.inNow.length,{k:'tv-in'})+'</div></div></div></div>','tv')}
 function tick(){var tiles=document.querySelectorAll('[data-tvm]');if(!tiles.length)return;var on=[],off=[];tiles.forEach(function(t){(t.classList.contains('on')?on:off).push(t)});
-  if(on.length>6&&(on.length>16||Math.random()<.5))on[Math.floor(Math.random()*on.length)].classList.remove('on');
-  if(off.length&&(on.length<8||Math.random()<.5))off[Math.floor(Math.random()*off.length)].classList.add('on');
+  if(on.length>6&&(on.length>16||Math.random()<.5))on[Math.floor(Math.random()*on.length)].classList.remove('on');if(off.length&&(on.length<8||Math.random()<.5))off[Math.floor(Math.random()*off.length)].classList.add('on');
   TVS=[];document.querySelectorAll('[data-tvm].on').forEach(function(t){TVS.push(+t.getAttribute('data-tvm'))});var f=document.getElementById('tvfree');if(f)f.textContent=NM-TVS.length}
-function email(){var E=LAST,p=P(E,1),pp=P(E-1,1),k=kept(cohort(E)),st=stronger(E),q=quiet(E*7+6),g=heatP([E]),pk=peakOf(g),n=st.n||1,r=M.map(function(m,i){return i}).sort(function(a,b){return p.mu[b]-p.mu[a]});
-  var mf=function(l,v,d){return '<div><span class="lab">'+T(l)+'</span><b class="num">'+fmt(v)+'</b>'+(d?'<span>'+d+'</span>':'')+'</div>'},ml=function(i){return '<p class="ml"><span>'+esc(M[i].name)+'</span><b>'+p.mu[i]+'</b></p>'};
-  return frame('<section class="pg5"><div class="tt5"><span class="lab">'+T('Every Monday')+'</span><h1 class="ttl5">'+T('Monday e-mail','monday e-mail.')+'</h1><div class="st5"><button type="button" class="tog" data-mail aria-pressed="'+S.mail+'">'+T('Monday')+', 07:00<i></i></button></div></div>'
-   +'<div class="mail lg"><div class="mhead"><span class="mlogo">'+esc(LOGO)+'</span><span class="mute">'+T('Week')+' '+WKS[E].n+', '+wkLabel(E)+'</span></div><div class="mbody">'
-   +'<div class="mfig">'+mf('Members',p.mem,K.delta(pct(p.mem,pp.mem)))+mf('Workouts',p.ses,K.delta(pct(p.ses,pp.ses)))+mf('Reps',p.reps,K.delta(pct(p.reps,pp.reps)))+mf('Records',p.recs,K.delta(p.recs-pp.recs,{unit:'',dec:0}))+mf('New',p.newM)+'</div>'
-   +'<div><div class="ch" style="margin-bottom:8px"><span class="lab">'+T('Busy hours')+'</span><span class="mute msm">'+T('Peak')+' '+K.DAYS[pk.d]+' '+hh(pk.h+6)+'</span></div>'+K.heat(g,K.DAYS,HOURCOLS,{cw:24,ch:14,label:'Busy hours'})+'</div>'
-   +'<div class="mfig m3"><div><span class="lab">'+T('New, week 4')+'</span><b class="num">'+k.kept+'<small> / '+k.reached+'</small></b></div><div><span class="lab">'+T('Stronger')+'</span><b class="num">'+Math.round(st.up.length/n*100)+'%</b></div><div><span class="lab">'+T('Gone quiet')+'</span><b class="num">'+q.length+'</b></div></div>'
-   +'<div class="mfig m2"><div><span class="lab">'+T('Most used')+'</span>'+r.slice(0,3).map(ml).join('')+'</div><div><span class="lab">'+T('Least used')+'</span>'+r.slice(-3).reverse().map(ml).join('')+'</div></div>'
-   +'<a class="btn p" href="#week" style="justify-self:start">'+T('Open the hub')+'</a></div><div class="mfoot"><span>'+T('Sample gym')+'</span><span>'+T('Unsubscribe')+'</span></div></div></section>','email')}
+function email(){var p=P(LAST,1),pp=P(LAST-1,1),k=kept(cohort(LAST)),st=stronger(LAST),q=quiet(LAST*7+6),bw=busyWindow(weekdayCurve(heatP([LAST]))),r=M.map(function(m,i){return i}).sort(function(a,b){return p.mu[b]-p.mu[a]});
+  var mf=function(l,v,d){return '<div><span class="lab">'+T(l)+'</span><b class="num">'+v+'</b>'+(d||'')+'</div>'};
+  return page('<div class="ph6"><h1>'+word('Monday e-mail','monday e-mail.')+'</h1><button type="button" class="tog" data-mail aria-pressed="'+S.mail+'">'+T('Monday')+', 07:00<i></i></button></div>'
+   +'<div class="mail"><div class="mhead"><span class="mlogo">'+esc(LOGO)+'</span><span class="mute">'+T('Week')+' '+WKS[LAST].n+'</span></div><div class="mbody"><div class="mfig">'+mf('Members',fmt(p.mem),arrow(pct(p.mem,pp.mem)))+mf('Workouts',fmt(p.ses),arrow(pct(p.ses,pp.ses)))+mf('Busy hours',hr(bw.a).replace(/ (am|pm)$/,'')+'–'+hr(bw.b))+mf('New, week 4',k.kept+'/'+k.reached)+mf('Stronger',st.p+'%')+'</div>'
+   +'<div class="mfig m2"><div><span class="lab">'+T('Busiest machine')+'</span><b class="num">'+esc(M[r[0]].name)+'</b></div><div><span class="lab">'+T('Gone quiet')+'</span><b class="num">'+q.length+'</b></div></div><a class="btn p" href="#week" style="justify-self:start">'+T('Open the hub')+'</a></div><div class="mfoot"><span>'+T('Sample gym')+'</span><span>'+T('Unsubscribe')+'</span></div></div>','email')}
 
 K.mount({logo:LOGO,sub:'Hub for gyms',def:DEF,
   nav:[['week','Overview','overview'],['today','Today','today'],['members','Members','clients'],['machines','Machines','machines'],['tv','Gym TV','tv',1],['email','Monday e-mail','mail',1]],
-  after:function(k,v){clearInterval(TVT);TVT=null;if(k==='tv'&&!K.RED)TVT=setInterval(tick,3000);mountWave(k,v)},
+  after:function(k){clearInterval(TVT);TVT=null;if(k==='tv'&&!K.RED)TVT=setInterval(tick,3000)},
   views:{week:week,today:today,members:members,machines:machines,tv:tv,email:email}});
-document.body.insertAdjacentHTML('afterbegin','<div class="aur" aria-hidden="true"><i></i><i></i><i></i></div>');
 })();
-
-</script>
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
-<script type="module">
-/* The hero of the owner hub, version 5: the gym's week as a liquid glass sculpture. Seven days by seventeen hours,
-   rising where the gym is busy and settling where it is quiet; it breathes slowly, the peak glows, pointing reads any
-   hour. Works for every gym: it needs no floor plan and no names. Built from code (three.js), no downloaded models. */
-import * as THREE from 'three';
-import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
-
-const css=getComputedStyle(document.documentElement),ACC=(css.getPropertyValue('--acc')||'#2747D6').trim(),accC=new THREE.Color(ACC);
-const STILL=/[?&]still/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches;
-const NX=17,NZ=7,SX=6,SZ=6,VX=(NX-1)*SX+1,VZ=(NZ-1)*SZ+1,W=16.5,D=8.4,HM=3.3;
-const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-let R,scene,cam,host=null,lab=null,root,geo,mesh,skirt,lines,dot,glow,nowDot,nowGlow,hov,cfg={},cur=null,from=null,to=null,anim=null,t0=performance.now(),raf=0,camBase=null,ptr={x:0,y:0};
-
-/* smooth heights between the hours and days (Catmull-Rom both ways) */
-const cr=(a,b,c,d,t)=>.5*((2*b)+(-a+c)*t+(2*a-5*b+4*c-d)*t*t+(-a+3*b-3*c+d)*t*t*t);
-function sample(g,fx,fz){const v=(z,x)=>g[Math.max(0,Math.min(NZ-1,z))][Math.max(0,Math.min(NX-1,x))],x0=Math.floor(fx),z0=Math.floor(fz),tx=fx-x0,tz=fz-z0,row=[];
-  for(let k=-1;k<3;k++)row.push(cr(v(z0+k,x0-1),v(z0+k,x0),v(z0+k,x0+1),v(z0+k,x0+2),tx));return Math.max(0,cr(row[0],row[1],row[2],row[3],tz))}
-function heights(g,max){const out=new Float32Array(VX*VZ);for(let iz=0;iz<VZ;iz++)for(let ix=0;ix<VX;ix++)out[iz*VX+ix]=.12+sample(g,ix/SX,iz/SZ)/max*HM;return out}
-const X=ix=>-W/2+ix*W/(VX-1),Z=iz=>-D/2+iz*D/(VZ-1);
-
-function build(){root=new THREE.Group();scene.add(root);
-  geo=new THREE.BufferGeometry();const pos=new Float32Array(VX*VZ*3),col=new Float32Array(VX*VZ*3),idx=[];
-  for(let iz=0;iz<VZ;iz++)for(let ix=0;ix<VX;ix++){const i=iz*VX+ix;pos[i*3]=X(ix);pos[i*3+1]=.12;pos[i*3+2]=Z(iz)}
-  for(let iz=0;iz<VZ-1;iz++)for(let ix=0;ix<VX-1;ix++){const a=iz*VX+ix,b=a+1,c=a+VX,d=c+1;idx.push(a,c,b,b,c,d)}
-  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));geo.setAttribute('color',new THREE.BufferAttribute(col,3));geo.setIndex(idx);
-  const glass=new THREE.MeshPhysicalMaterial({color:0xffffff,vertexColors:true,roughness:.2,metalness:0,transmission:.3,thickness:1.2,ior:1.45,
-    clearcoat:1,clearcoatRoughness:.05,iridescence:.22,iridescenceIOR:1.3,iridescenceThicknessRange:[150,400],specularIntensity:.85,envMapIntensity:1.05,side:THREE.DoubleSide});
-  mesh=new THREE.Mesh(geo,glass);root.add(mesh);
-  /* the sides, so it reads as one solid piece of glass */
-  const sg=new THREE.BufferGeometry(),edge=[];for(let ix=0;ix<VX;ix++)edge.push([ix,VZ-1]);for(let iz=VZ-1;iz>=0;iz--)edge.push([VX-1,iz]);for(let ix=VX-1;ix>=0;ix--)edge.push([ix,0]);for(let iz=0;iz<VZ;iz++)edge.push([0,iz]);
-  const sp=new Float32Array(edge.length*2*3),sc=new Float32Array(edge.length*2*3),si=[];edge.forEach((e,k)=>{sp[k*6]=X(e[0]);sp[k*6+2]=Z(e[1]);sp[k*6+3]=X(e[0]);sp[k*6+4]=0;sp[k*6+5]=Z(e[1])});
-  for(let k=0;k<edge.length-1;k++){const a=k*2,b=a+1,c=a+2,d=a+3;si.push(a,b,c,c,b,d)}sg.setAttribute('position',new THREE.BufferAttribute(sp,3));sg.setAttribute('color',new THREE.BufferAttribute(sc,3));sg.setIndex(si);
-  skirt=new THREE.Mesh(sg,glass);skirt.userData.edge=edge;root.add(skirt);
-  /* a frosted base, the day lines and the hour lines */
-  const baseM=new THREE.MeshPhysicalMaterial({color:0xffffff,roughness:.35,transmission:.4,thickness:.6,clearcoat:.6,envMapIntensity:1});
-  const plate=new THREE.Mesh(new THREE.BoxGeometry(W+.9,.16,D+.9),baseM);plate.position.y=-.09;root.add(plate);
-  lines=new THREE.Group();root.add(lines);
-  for(let d=0;d<NZ;d++){const g=new THREE.BufferGeometry().setFromPoints(new Array(VX).fill(0).map((_,ix)=>new THREE.Vector3(X(ix),0,Z(d*SZ))));
-    const l=new THREE.Line(g,new THREE.LineBasicMaterial({color:0x3a2c26,transparent:true,opacity:.24}));l.userData={kind:'day',iz:d*SZ};lines.add(l)}
-  for(let h=0;h<NX;h+=3){const g=new THREE.BufferGeometry().setFromPoints(new Array(VZ).fill(0).map((_,iz)=>new THREE.Vector3(X(h*SX),0,Z(iz))));
-    const l=new THREE.Line(g,new THREE.LineBasicMaterial({color:0x3a2c26,transparent:true,opacity:.11}));l.userData={kind:'hour',ix:h*SX};lines.add(l)}
-  /* the peak, now and the pointer */
-  const orbT=orbTex();dot=new THREE.Mesh(new THREE.SphereGeometry(.12,24,16),new THREE.MeshBasicMaterial({color:accC}));glow=new THREE.Sprite(new THREE.SpriteMaterial({map:orbT,transparent:true,depthWrite:false}));glow.scale.set(1.9,1.9,1);
-  nowDot=dot.clone();nowGlow=glow.clone();nowDot.visible=nowGlow.visible=false;
-  hov=new THREE.Mesh(new THREE.SphereGeometry(.09,20,12),new THREE.MeshBasicMaterial({color:0x111111}));hov.visible=false;
-  root.add(dot,glow,nowDot,nowGlow,hov);
-  /* a soft floor and shadow so the glass has something to bend */
-  const fl=new THREE.Mesh(new THREE.CircleGeometry(16,64),new THREE.MeshBasicMaterial({map:floorTex(),transparent:true,depthWrite:false}));fl.rotation.x=-Math.PI/2;fl.position.y=-.18;scene.add(fl)}
-function orbTex(){const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d'),g=x.createRadialGradient(64,64,0,64,64,64),r=Math.round(accC.r*255),gg=Math.round(accC.g*255),b=Math.round(accC.b*255);
-  g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(.16,'rgba('+r+','+gg+','+b+',1)');g.addColorStop(.42,'rgba('+r+','+gg+','+b+',.4)');g.addColorStop(1,'rgba('+r+','+gg+','+b+',0)');x.fillStyle=g;x.fillRect(0,0,128,128);
-  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t}
-function floorTex(){const c=document.createElement('canvas');c.width=c.height=512;const x=c.getContext('2d'),r=Math.round(accC.r*255),g=Math.round(accC.g*255),b=Math.round(accC.b*255);
-  let gr=x.createRadialGradient(256,256,0,256,256,256);gr.addColorStop(0,'rgba(40,30,25,.22)');gr.addColorStop(.45,'rgba(40,30,25,.08)');gr.addColorStop(1,'rgba(40,30,25,0)');x.fillStyle=gr;x.fillRect(0,0,512,512);
-  gr=x.createRadialGradient(300,220,0,300,220,200);gr.addColorStop(0,'rgba('+r+','+g+','+b+',.22)');gr.addColorStop(1,'rgba('+r+','+g+','+b+',0)');x.fillStyle=gr;x.fillRect(0,0,512,512);
-  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t}
-
-/* write heights into the surface, the sides, the lines and the colours */
-const cream=new THREE.Color(0xf6efe9).lerp(accC,.06),tmp=new THREE.Color();
-function apply(h,breath){const p=geo.attributes.position.array,c=geo.attributes.color.array;let mx=0;for(let i=0;i<h.length;i++)if(h[i]>mx)mx=h[i];
-  for(let i=0;i<h.length;i++){const iz=Math.floor(i/VX),ix=i%VX,y=h[i]*(breath?1+.018*Math.sin(breath*1.05+ix*.11+iz*.23):1);p[i*3+1]=y;
-    const t=Math.pow(Math.min(1,y/HM),.9);tmp.copy(cream).lerp(accC,Math.min(1,t*1.05));if(cfg.today&&Math.abs(iz-cfg.today.d*SZ)<=1)tmp.lerp(accC,.35);c[i*3]=tmp.r;c[i*3+1]=tmp.g;c[i*3+2]=tmp.b}
-  geo.attributes.position.needsUpdate=true;geo.attributes.color.needsUpdate=true;geo.computeVertexNormals();
-  const sp=skirt.geometry.attributes.position.array,sc=skirt.geometry.attributes.color.array;skirt.userData.edge.forEach((e,k)=>{const i=e[1]*VX+e[0];sp[k*6+1]=p[i*3+1];
-    for(let q=0;q<2;q++){sc[k*6+q*3]=c[i*3]*.92;sc[k*6+q*3+1]=c[i*3+1]*.92;sc[k*6+q*3+2]=c[i*3+2]*.92}});
-  skirt.geometry.attributes.position.needsUpdate=true;skirt.geometry.attributes.color.needsUpdate=true;skirt.geometry.computeVertexNormals();
-  lines.children.forEach(l=>{const a=l.geometry.attributes.position.array;if(l.userData.kind==='day'){for(let ix=0;ix<VX;ix++)a[ix*3+1]=p[(l.userData.iz*VX+ix)*3+1]+.025}else{for(let iz=0;iz<VZ;iz++)a[iz*3+1]=p[(iz*VX+l.userData.ix)*3+1]+.025}l.geometry.attributes.position.needsUpdate=true});
-  const pk=cfg.peak;if(pk){const i=pk.d*SZ*VX+pk.h*SX;dot.position.set(X(pk.h*SX),p[i*3+1]+.16,Z(pk.d*SZ));glow.position.copy(dot.position)}
-  if(cfg.today){const fx=cfg.today.h*SX,ix=Math.round(fx),i=cfg.today.d*SZ*VX+ix;nowDot.position.set(X(ix),p[i*3+1]+.16,Z(cfg.today.d*SZ));nowGlow.position.copy(nowDot.position)}}
-
-/* labels: days on the left, hours in front, the peak, now and the pointer */
-function labels(){if(!lab)return;const r=R.domElement.getBoundingClientRect(),P=(v)=>{const q=v.clone();root.localToWorld(q);q.project(cam);return [(q.x*.5+.5)*r.width,(-q.y*.5+.5)*r.height]};
-  const items=[],narrow=r.width<560;for(let d=0;d<NZ;d++)if(!narrow||d%2===0)items.push({k:'d'+d,cls:'ax',html:DAYS[d],p:P(new THREE.Vector3(-W/2-.75,.1,Z(d*SZ)))});
-  for(let h=0;h<NX;h+=3)items.push({k:'h'+h,cls:'ax',html:String(6+h).padStart(2,'0'),p:P(new THREE.Vector3(X(h*SX),.1,D/2+.75))});
-  if(cfg.peak&&cfg.peakLabel)items.push({k:'pk',cls:'pk',html:cfg.peakLabel,p:P(dot.position.clone().add(new THREE.Vector3(0,.35,0)))});
-  if(cfg.today&&cfg.nowLabel)items.push({k:'now',cls:'pk now',html:cfg.nowLabel,p:P(nowDot.position.clone().add(new THREE.Vector3(0,.35,0)))});
-  if(hov.visible&&hov.userData.html)items.push({k:'hv',cls:'hv',html:hov.userData.html,p:P(hov.position.clone().add(new THREE.Vector3(0,.25,0)))});
-  const sig=items.map(i=>i.k+i.html).join('|');if(lab.__sig!==sig){lab.innerHTML=items.map(i=>'<div class="wl5 '+i.cls+'">'+i.html+'</div>').join('');lab.__sig=sig}
-  items.forEach((it,k)=>{const el=lab.children[k];if(el)el.style.transform='translate('+it.p[0].toFixed(1)+'px,'+it.p[1].toFixed(1)+'px) translate(-50%,'+(it.cls==='ax'?'-50%':'-100%')+')'})}
-
-/* pointing: read any hour */
-const ray=new THREE.Raycaster(),v2=new THREE.Vector2();
-function onMove(e){const r=R.domElement.getBoundingClientRect();ptr.x=((e.clientX-r.left)/r.width)*2-1;ptr.y=-((e.clientY-r.top)/r.height)*2+1;
-  v2.set(ptr.x,ptr.y);ray.setFromCamera(v2,cam);const hit=ray.intersectObject(mesh,false)[0];if(!hit){hov.visible=false;R.domElement.style.cursor='';return}
-  const lp=root.worldToLocal(hit.point.clone()),h=Math.max(0,Math.min(NX-1,Math.round((lp.x+W/2)/W*(NX-1)))),d=Math.max(0,Math.min(NZ-1,Math.round((lp.z+D/2)/D*(NZ-1))));
-  const i=d*SZ*VX+h*SX,p=geo.attributes.position.array;hov.position.set(X(h*SX),p[i*3+1]+.1,Z(d*SZ));hov.visible=true;hov.userData.html=cfg.hourLabel?cfg.hourLabel(d,h):'';R.domElement.style.cursor='crosshair'}
-
-function fit(){if(!host)return;const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;cam.aspect=w/h;cam.updateProjectionMatrix();
-  const az=cfg.az===undefined?.36:cfg.az,el=cfg.el===undefined?.5:cfg.el,dir=new THREE.Vector3(Math.sin(az)*Math.cos(el),Math.sin(el),Math.cos(az)*Math.cos(el)),c=new THREE.Vector3(0,HM*.32,0),box=new THREE.Box3(new THREE.Vector3(-W/2-1.2,0,-D/2-1),new THREE.Vector3(W/2+.6,HM*1.05,D/2+1.2));
-  let d=30;for(let k=0;k<3;k++){cam.position.copy(c).addScaledVector(dir,d);cam.lookAt(c);cam.updateMatrixWorld();const pr=new THREE.Box2();for(let i=0;i<8;i++){const p=new THREE.Vector3(i&1?box.max.x:box.min.x,i&2?box.max.y:box.min.y,i&4?box.max.z:box.min.z).project(cam);pr.expandByPoint(new THREE.Vector2(p.x*w/2,p.y*h/2))}
-    const s=pr.getSize(new THREE.Vector2());d*=Math.max(s.x/(w*(cfg.fw||.97)),s.y/(h*(cfg.fh||.9)))}
-  camBase={c,dir,d};cam.position.copy(c).addScaledVector(dir,d);cam.lookAt(c)}
-function frame(now){raf=requestAnimationFrame(frame);if(!host||!host.isConnected||document.hidden)return;const t=(now-t0)/1000;
-  if(anim){const p=Math.min(1,(now-anim.t)/anim.ms),e=anim.ease(p),h=new Float32Array(to.length);for(let i=0;i<h.length;i++)h[i]=from[i]+(to[i]-from[i])*e;cur=h;if(p>=1)anim=null}
-  apply(cur,STILL?0:t);if(!STILL){root.rotation.y=Math.sin(t*.13)*.05;const k=1+Math.sin(t*1.7)*.08;glow.scale.set(1.9*k,1.9*k,1);nowGlow.scale.set(2.2*k,2.2*k,1);
-    if(camBase){const off=new THREE.Vector3(ptr.x*.6,ptr.y*.3,0);cam.position.copy(camBase.c).addScaledVector(camBase.dir,camBase.d).add(off);cam.lookAt(camBase.c)}}
-  R.render(scene,cam);labels()}
-function init(){R=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});R.setPixelRatio(Math.min(2,devicePixelRatio||1));R.outputColorSpace=THREE.SRGBColorSpace;R.toneMapping=THREE.ACESFilmicToneMapping;R.toneMappingExposure=.98;
-  scene=new THREE.Scene();scene.environment=new THREE.PMREMGenerator(R).fromScene(new RoomEnvironment(),.035).texture;
-  scene.add(new THREE.HemisphereLight(0xffffff,0xe9ddd2,.42));const key=new THREE.DirectionalLight(0xffffff,2.3);key.position.set(-12,13,6);scene.add(key);const rim=new THREE.DirectionalLight(accC,1.3);rim.position.set(10,5,-12);scene.add(rim);const fill=new THREE.DirectionalLight(0xffffff,.5);fill.position.set(8,4,12);scene.add(fill);
-  cam=new THREE.PerspectiveCamera(27,1,.5,300);build();
-  R.domElement.addEventListener('pointermove',onMove);R.domElement.addEventListener('pointerleave',()=>{hov.visible=false;ptr.x=ptr.y=0});
-  new ResizeObserver(()=>{if(!host)return;R.setSize(host.clientWidth,host.clientHeight,false);R.domElement.style.width='100%';R.domElement.style.height='100%';fit()}).observe(document.body);
-  raf=requestAnimationFrame(frame)}
-function setValues(g,o){o=o||{};Object.assign(cfg,o);const max=cfg.max||Math.max(1,...g.flat());const target=heights(g,max);
-  if(!cur||STILL||o.instant){cur=target;anim=null}else{from=cur;to=target;anim={t:performance.now(),ms:o.rise?1500:750,ease:o.rise?(p=>1-Math.pow(1-p,4)):(p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2)}}
-  nowDot.visible=nowGlow.visible=!!cfg.today;apply(cur,0)}
-function mount(el,o){if(!R)init();host=el;cfg=Object.assign({},o||{});el.innerHTML='';el.appendChild(R.domElement);lab=document.createElement('div');lab.className='wlay5';el.appendChild(lab);
-  R.setSize(el.clientWidth,el.clientHeight,false);R.domElement.style.width='100%';R.domElement.style.height='100%';fit();
-  const g=cfg.values;if(cfg.glide!==false&&!STILL){cur=heights(g.map(r=>r.map(()=>0)),1);setValues(g,{rise:true})}else if(cur&&!STILL){setValues(g,{})}else{cur=null;setValues(g,{instant:true})}el.classList.add('ready')}
-window.WAVE={mount,setValues};window.dispatchEvent(new Event('wave-ready'));
 
 </script>
 </body>
