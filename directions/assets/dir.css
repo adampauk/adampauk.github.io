@@ -209,6 +209,15 @@ body{background:var(--bg);color:var(--ink);font:16.5px/1.55 var(--tx)}
 .mfoot{background:#000;color:#fff;font-size:.72rem;padding:10px 16px;text-align:center;opacity:.95;text-transform:lowercase}
 /* readout: the visuals stay, the long explanations go */
 .t-ro #kit .ro-kr p:not([class]),.t-ro #kit .ro-rules,.t-ro #social .ro-grid3,.t-ro #social .ro-rows,.t-ro #social .ro-mk ~ *{display:none}
+.rm-intro{max-width:60ch;color:#555;margin:0 0 22px}
+.rm-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.rm{min-width:0;display:flex;flex-direction:column;gap:10px}
+.rm-meta{background:#fff;border:1px solid #E6E6E6;border-radius:16px;padding:12px 14px;display:grid;gap:3px;font-size:.88rem}
+.rm-meta .w{font:500 .68rem/1.2 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#2747D6}
+.rm-meta b{font-weight:600}.rm-meta .s{font-weight:600;color:#111}.rm-meta .pv{color:#6B6B6B;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rm-frame{height:620px;overflow-y:auto;border-radius:20px;background:#E4E5E8;box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}
+.rm-frame img{display:block;width:100%;height:auto}
+@media (max-width:900px){.rm-grid{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:82%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}.rm{scroll-snap-align:start}.rm-frame{height:520px}}
 .t-ro #emails .ro-mails{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;max-width:none}
 .t-ro #emails .ro-em{border-radius:28px;box-shadow:0 30px 60px -34px rgba(0,0,0,.35),0 0 0 1px rgba(0,0,0,.04)}
 .t-ro #emails .ro-meta{background:#F1F1F0}
