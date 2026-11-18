@@ -837,7 +837,7 @@ function finish() {
   finalize(w); S.next = w.type === 'legs' ? 'upper' : 'legs';
   const f = facts(w);
   const amps = []; w.ex.forEach(e => e.sets.forEach(s => amps.push(.82 * clamp(s.r / e.t, .2, 1))));
-  const checks = [`${ICON.check('#3E9B57').replace('16" height="14"', '12" height="10"')}${setsDone(w)} sets counted`];
+  const checks = [`${ICON.check('#3E9B57').replace('16" height="14"', '12" height="10"')}${setsDone(w)} ${setsDone(w) === 1 ? 'set' : 'sets'} counted`];
   checks.push(w.c.e >= .97 ? `${ICON.check('#3E9B57').replace('16" height="14"', '12" height="10"')}Plan followed` : `${w.c.rp} of ${w.c.pl} reps`);
   if (w.bests.length) checks.push(`${ICON.check('#3E9B57').replace('16" height="14"', '12" height="10"')}New best`);
   screen(`<div class="wglow" style="top:60px;height:300px;background:radial-gradient(60% 50% at 50% 50%,rgba(39,71,214,.13) 0%,rgba(246,246,245,0) 70%)"></div>
