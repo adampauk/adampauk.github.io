@@ -1,4 +1,12 @@
 /* about ten.: the product sections (18 Nov 2026). Same tokens as site.css. */
+.at-pil{background:var(--paper)}
+.pil-card{max-width:780px;margin:0 auto;background:#fff;border:1px solid var(--rule);border-radius:6px;padding:clamp(24px,4vw,46px);box-shadow:0 24px 48px -34px rgba(0,0,0,.3)}
+.pil-card .kick{color:var(--red)}
+.pil-sym{list-style:none;margin:22px 0 18px;padding:0;border-top:1px solid var(--rule)}
+.pil-sym li{border-bottom:1px solid var(--rule)}
+.pil-sym label{display:flex;gap:14px;align-items:center;padding:14px 2px;font-size:1.06rem;cursor:pointer;text-transform:lowercase}
+.pil-sym input{width:22px;height:22px;accent-color:var(--red);flex:none;margin:0}
+.pil-fine{margin-top:22px;font-size:.8rem;line-height:1.5;color:var(--mute);text-transform:lowercase;border-top:1px dashed var(--rule);padding-top:14px}
 .at-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:30px}
 .at-facts > div{border-top:2px solid var(--ink);padding-top:12px;min-width:0}
 .at-facts b{display:block;font:400 3.4rem/1 var(--serif)}
