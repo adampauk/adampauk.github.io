@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>readout: your training, measured</title>
+<title>Sedulo: your training, measured</title>
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1009,6 +1009,58 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
   .hero .sl{transition:opacity .4s ease!important}
   .hero .sl .art,.hero .sl .hv,.hero .sl .cap{transform:none!important;filter:none!important}
 }
+
+/* ---------- v4 (21 Nov 2026): renders made for their spots (flat colours wherever one sits), the new sections ---------- */
+.hero .sl.s-blue{background:#2747D6}
+.hero .sl.s-amber{background:#B4601C}
+.hero .sl.s-teal{background:#157266}
+.hero .hbox{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 50%;transform:none;filter:none}
+.hero .sl.s-blue .art{z-index:3}
+.camp{background:#D2CCC1}
+.camp .cbg{mix-blend-mode:normal;object-position:50% 50%}
+.say2{padding:150px var(--pad);text-align:center;display:grid;justify-items:center;gap:16px;background:#fff;color:#000}
+.say2 .mono{font-size:13px;color:var(--mute2);letter-spacing:.04em;text-transform:uppercase}
+.say2 h2{font-weight:500;font-size:clamp(44px,6vw,88px);line-height:1;letter-spacing:-.05em}
+.say2 h2 span{color:var(--acc)}
+.say2 .s{font-size:19px;line-height:1.5;letter-spacing:-.02em;color:var(--mute);max-width:44ch;margin-top:8px}
+.say2 .fine{font-size:12px;color:var(--mute2)}
+.coll .t-l,.coll .t-f{background:#F2F2F2}
+.pair.dark .pimg{background:#101010}
+.priv{background:var(--g3);color:#000;padding:130px var(--pad);text-align:center;display:grid;justify-items:center;gap:18px}
+.priv .lk{color:var(--acc)}
+.priv h2{font-weight:500;font-size:clamp(38px,4.6vw,60px);letter-spacing:-.045em;line-height:1.05}
+.priv p{font-size:18px;line-height:1.55;color:var(--mute);max-width:46ch;letter-spacing:-.015em}
+.floorsec .t > p.mono{font-size:13px;color:var(--mute2);letter-spacing:.04em;text-transform:uppercase;margin:0 0 12px}
+.floorsec .g3{display:grid;gap:20px;margin-top:30px;max-width:46ch}
+.floorsec .g3 div{display:grid;gap:4px;padding-left:16px;border-left:2px solid var(--acc)}
+.floorsec .g3 b{font-weight:500;font-size:18px;letter-spacing:-.02em}
+.floorsec .g3 span{font-size:15px;line-height:1.45;color:var(--mute)}
+.floorsec .ctas{display:flex;gap:10px;margin-top:32px;flex-wrap:wrap}
+.bhero{background:#101010}
+.bhero::after{display:none}
+.bhero img.bfull{object-position:50% 50%}
+.ac .im.ir{background:#1C1C1C}
+.light{background:#F2F2F2}
+.light .lfull{object-fit:cover;object-position:50% 50%;mix-blend-mode:normal}
+.full.mac{color:#fff;background:#2A2A2A}
+.full.mac .in{left:0;right:0;top:auto;bottom:6%;text-align:center;max-width:none;padding:0 16px}
+.full.mac h2{font-size:clamp(44px,5.6vw,84px)}
+.full.mac p{color:rgba(255,255,255,.78);margin-left:auto;margin-right:auto;max-width:46ch}
+.full.mac img.ffull{object-position:50% 40%}
+.angles figure{background:#F2F2F2}
+.angles figcaption{color:rgba(0,0,0,.5)}
+.hwh .mb2,.hwh .m3{background:#F2F2F2}
+@media (max-width:760px){
+  .hero .hbox{inset:auto;left:50%;top:56%;width:205vw;height:auto;transform:translate(-50%,-50%)}
+  .camp .cbg{top:auto;bottom:0;height:auto;object-fit:fill}
+  .say2{padding:100px 16px}
+  .say2 .s{font-size:17px}
+  .priv{padding:96px 16px}
+  .priv p{font-size:16px}
+  .bhero img.bfull{object-fit:contain;object-position:50% 20%}
+  .light .lfull{inset:auto;left:-45%;top:calc(44% - 71.25vw);width:190%;max-width:none;height:auto}   /* no transform: the reveal zoom owns it */
+  .full.mac img.ffull{object-position:80% 40%}
+}
 </style>
 </head>
 <body>
@@ -1023,7 +1075,7 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
         <a href="#sensor">The sensor</a><a href="#app">The app</a><a href="#how">How it works</a><a href="#gyms">For gyms</a><a href="#lab">The open lab</a>
       </nav>
     </div>
-    <a class="logo" href="#home" aria-label="readout home"><b>readout</b><span class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></span></a>
+    <a class="logo" href="#home" aria-label="Sedulo home"><b>Sedulo</b><span class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></span></a>
     <div class="hr">
       <a class="mtry" href="#try">Try it free</a>
       <span class="lang"><i aria-hidden="true"></i>EN</span>
@@ -1033,7 +1085,7 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
 </header>
 
 <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
-  <div class="top"><a class="logo" href="#home"><b>readout</b><span class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></span></a><button class="x" type="button" aria-label="Close menu" data-close>✕</button></div>
+  <div class="top"><a class="logo" href="#home"><b>Sedulo</b><span class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></span></a><button class="x" type="button" aria-label="Close menu" data-close>✕</button></div>
   <nav aria-label="Menu"><a href="#home">Home</a><a href="#sensor">The sensor</a><a href="#app">The app</a><a href="#how">How it works</a><a href="#gyms">For gyms</a><a href="#lab">The open lab</a><a href="#story">Our story</a></nav>
   <div class="foot"><a class="btn b lg" href="#try">Try it free</a><a class="btn og lg" href="#try-gym">Run a pilot</a></div>
 </div>
@@ -1042,19 +1094,19 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
 <main class="pg" data-p="home">
   <section class="hero" id="hero" aria-roledescription="carousel" aria-label="Highlights">
     <div class="sl on s-blue" role="group" aria-roledescription="slide" aria-label="1 of 3: the sensor">
-      <div class="hv"><img class="hbox" src="render/v4-hero.webp" alt="The readout sensor, readout printed on its lid" width="1563" height="713"></div>
+      <div class="hv"><img class="hbox" src="render/s-hero-blue.jpg" alt="The Sedulo sensor on a blue table, its name on the lid" width="2400" height="1200"></div>
       <p class="art">The sensor</p>
-      <div class="cap"><p>A small sensor on the weight stack. It counts every rep, set and rest by itself.</p><div><a class="btn ow" href="#sensor">Explore the sensor</a><a class="btn w" href="#try">Try it free</a></div></div>
+      <div class="cap"><p>A small sensor on the weight stack. It counts every rep, set and rest, so you can see yourself getting stronger.</p><div><a class="btn ow" href="#sensor">Explore the sensor</a><a class="btn w" href="#try">Try it free</a></div></div>
     </div>
     <div class="sl s-amber" role="group" aria-roledescription="slide" aria-label="2 of 3: the app" inert>
-      <div class="hv"><div class="iph hphone"><div class="bd"><div class="scr"><img src="ro5/own-finish.jpg" alt="The readout app after a workout: score 78" width="786" height="1704"><i class="di"></i></div></div></div></div>
+      <div class="hv"><div class="iph hphone"><div class="bd"><div class="scr"><img src="ro5/own-finish.jpg" alt="The Sedulo app after a workout: score 78" width="786" height="1704"><i class="di"></i></div></div></div></div>
       <p class="art">The app</p>
       <div class="cap"><p>Your training, measured: a score after every workout and one clear next step.</p><div><a class="btn ow" href="#app">See the app</a><a class="btn w" href="#try">Try it free</a></div></div>
     </div>
     <div class="sl s-teal" role="group" aria-roledescription="slide" aria-label="3 of 3: for gyms" inert>
       <div class="hv hwave" data-wave='{"w":1600,"h":420,"reps":10,"amp":0.8,"id":"hw","g":"rest","strands":5}'></div>
       <p class="art">Your gym</p>
-      <div class="cap"><p>For gym owners: which machines earn their space, when the floor is full, who gets stronger.</p><div><a class="btn ow" href="#gyms">For gyms</a><a class="btn w" href="#try-gym">Run a pilot</a></div></div>
+      <div class="cap"><p>For gyms: members who see their progress, a gym that keeps up with what comes next, and the floor, measured.</p><div><a class="btn ow" href="#gyms">For gyms</a><a class="btn w" href="#try-gym">Run a pilot</a></div></div>
     </div>
     <div class="dots" role="tablist" aria-label="Slides"><button class="on" type="button" role="tab" aria-selected="true" aria-label="The sensor"><i></i></button><button type="button" role="tab" aria-selected="false" aria-label="The app"><i></i></button><button type="button" role="tab" aria-selected="false" aria-label="For gyms"><i></i></button></div>
   </section>
@@ -1063,23 +1115,25 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
     <div class="txt">
       <p class="lab">The sensor</p>
       <h2>Counts every rep.</h2>
-      <p class="s">A small sensor on the weight stack. Reps, sets and rest, without a single tap.</p>
+      <p class="s">A small sensor on the weight stack. Reps, sets, rest and the speed of every rep, without a single tap.</p>
       <div class="ctas"><a class="btn b" href="#try">Try it free</a><a class="btn l" href="#sensor">Explore</a></div>
     </div>
-    <picture><source media="(max-width:760px)" srcset="render/v4-campp.webp"><img class="cbg" src="render/v4-camp.webp" alt="The readout sensor on a beige studio floor" width="2400" height="1400"></picture>
+    <picture><source media="(max-width:760px)" srcset="render/s-camp-sand-p.jpg" width="1200" height="1500"><img class="cbg" src="render/s-camp-sand.jpg" alt="The Sedulo sensor on a sand-coloured table" width="2400" height="1400"></picture>
   </section>
+
+  <section class="say2" aria-label="Strength, measured"><p class="mono">Strength, measured</p><h2>You track your sleep.<br><span>Why not your strength?</span></h2><p class="s">Rings and watches measure the night. Sedulo measures the set: every rep, every rest and the speed of each lift, on the machines your gym already has.</p><p class="fine">Apple Health, Strava and Garmin: planned.</p></section>
 
   <section class="coll" aria-label="How we test">
     <div class="c c1 t-app"><img src="ro5/own-score.jpg" alt=""></div>
     <div class="c c2 t-k"><div class="tl"><p class="mono">Counted by hand</p><b>10</b><p class="mono">Counted by the sensor</p><b class="bl">10</b></div></div>
-    <div class="c c3 t-f"><img src="render/v4-a-end.webp" alt=""></div>
+    <div class="c c3 t-f"><img src="render/s-macro.jpg" alt="" style="object-position:72% 30%"></div>
     <div class="mid">
       <h2>Every count, checked by hand.</h2>
       <p>Our test: a thousand reps, filmed and counted by people. The results go up here.</p>
       <a class="btn k" href="#how-test">How we test</a>
     </div>
     <div class="c c4 t-w"><div data-wave='{"w":600,"h":230,"reps":10,"amp":0.8,"id":"cw4"}'></div></div>
-    <div class="c c5 t-l"><img src="render/v4-bart.webp" alt=""></div>
+    <div class="c c5 t-l"><img src="render/s-tile-light.jpg" alt=""></div>
     <div class="c c6 t-n"><div class="tl"><b data-count="1000">1,000</b><p class="mono">reps, counted twice</p></div></div>
   </section>
 
@@ -1093,14 +1147,14 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
   <section class="stage" aria-label="Every set, measured"><div class="pin">
     <div class="head"><h2>Every set, measured</h2><p>What the sensor counts, and what each number tells you about the next set.</p></div>
     <div class="tabs" role="tablist" aria-label="What it measures">
-      <button role="tab" aria-selected="true" data-i="0">Reps</button><button role="tab" aria-selected="false" data-i="1">Rest</button><button role="tab" aria-selected="false" data-i="2">Next step</button><button role="tab" aria-selected="false" data-i="3">Progress</button><button role="tab" aria-selected="false" data-i="4">For gyms</button>
+      <button role="tab" aria-selected="true" data-i="0">Reps</button><button role="tab" aria-selected="false" data-i="1">Rest</button><button role="tab" aria-selected="false" data-i="2">Next step</button><button role="tab" aria-selected="false" data-i="3">Progress</button><button role="tab" aria-selected="false" data-i="4">Speed</button>
     </div>
     <div class="rail" id="rail">
       <article class="rc on"><div class="ph"><img src="fp/leg-press.jpg" alt="A man on the leg press" style="object-position:72% 50%"><div class="note"><span class="ni"><svg width="16" height="16" viewBox="0 0 22 22"><rect x="4" y="5" width="14" height="12" rx="3" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="11" cy="11" r="2.2" fill="#8CA2FF"/></svg></span><div><b>Leg press, 85 kg</b><i>8 of 10 reps</i></div><span class="nb">✕</span><span class="nb ok">✓</span></div></div><h3>Counts while you lift</h3><p>The sensor counts every rep from the stack. Your phone stays in your pocket.</p></article>
       <article class="rc"><div class="ph ui u-teal"><div class="uic"><p class="mono">Rest</p><b>1:12</b><div data-scale='{"v":72,"max":180,"w":520,"h":56,"g":"rest","labels":["0:00","1:30","3:00"],"id":"st2","num":false}'></div><p>Next set in 0:48. Your plan says 2:00.</p></div></div><h3>Rest that times itself</h3><p>The clock starts when the stack lands and stops when you lift again.</p></article>
       <article class="rc"><div class="ph"><img src="fp/18-detail-kotouce.jpg" alt="Weight plates, ready for the next step up"><div class="note"><span class="ni"><svg width="16" height="16" viewBox="0 0 22 22"><path d="M11 17V5M6 10l5-5 5 5" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Next time: 90 kg</b><i>10, 10, 10, twice in a row</i></div><span class="nb ok">✓</span></div></div><h3>Knows when to go up</h3><p>Every set at the top of your range, twice in a row. Then it adds the smallest step.</p></article>
-      <article class="rc"><div class="ph ui u-amber"><div class="uic"><p class="mono">This month (sample)</p><b>8,650 kg</b><div data-scale='{"v":8650,"max":10000,"w":520,"h":56,"g":"prog","labels":["0","5,000","10,000"],"id":"st4","num":false}'></div><p>+12% on October.</p></div></div><h3>Progress you can see</h3><p>Every set is kept, so the months add up to a line that goes somewhere.</p></article>
-      <article class="rc"><div class="ph ui u-blue"><div class="uic"><p class="mono">Sets this week (sample)</p><div class="ubars"><div><span>Leg press</span><i><u style="width:92%"></u></i><em>412</em></div><div><span>Chest press</span><i><u style="width:71%"></u></i><em>318</em></div><div><span>Lat pulldown</span><i><u style="width:64%"></u></i><em>287</em></div><div><span>Hip thrust</span><i><u style="width:47%"></u></i><em>210</em></div><div><span>Hack squat</span><i><u style="width:23%"></u></i><em>103</em></div></div><p>Which machines earn their space.</p></div></div><h3>Your gym floor, measured</h3><p>For owners: which machines earn their space, and when the gym is full.</p></article>
+      <article class="rc"><div class="ph ui u-amber"><div class="uic"><p class="mono">This month (sample)</p><b>8,650 kg</b><div data-scale='{"v":8650,"max":10000,"w":520,"h":56,"g":"prog","labels":["0","5,000","10,000"],"id":"st4","num":false}'></div><p>+12% on October.</p></div></div><h3>Progress you can see</h3><p>Every set is kept, so the months add up to a line that goes somewhere. A new best is marked the moment you lift it.</p></article>
+      <article class="rc"><div class="ph ui u-blue"><div class="uic"><p class="mono">Speed of each rep, m/s (sample)</p><div class="ubars"><div><span>Rep 1</span><i><u style="width:94%"></u></i><em>0.62</em></div><div><span>Rep 4</span><i><u style="width:88%"></u></i><em>0.58</em></div><div><span>Rep 7</span><i><u style="width:74%"></u></i><em>0.49</em></div><div><span>Rep 9</span><i><u style="width:59%"></u></i><em>0.39</em></div><div><span>Rep 10</span><i><u style="width:50%"></u></i><em>0.33</em></div></div><p>The last reps slowed down. The set was hard enough.</p></div></div><h3>How hard each set was</h3><p>Pro teams have measured lifting speed for years. Here every rep is measured, and the app says when a set was hard enough, or a lift too fast.</p></article>
     </div>
     <p class="fine">Numbers in the pictures are samples until the pilot runs.</p>
   </div></section>
@@ -1109,12 +1163,12 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
     <div class="ttl"><h3>The sensor</h3><p>Counts every rep, set and rest.</p></div>
     <div class="pg2">
       <div>
-        <div class="pimg"><img class="pfull" src="render/v4-darklow.webp" alt="The readout sensor, low, in a dark studio" width="1600" height="1170"></div>
+        <div class="pimg"><img class="pfull" src="render/s-low-dark.jpg" alt="The Sedulo sensor, low, on dark" width="1600" height="1170"></div>
         <div class="pname"><h4>The sensor</h4><a class="btn b" href="#try">Try it free</a><a class="btn ow" href="#sensor">Learn more</a></div>
       </div>
       <div>
-        <div class="ptxt">A small sensor that clips onto the weight stack. It counts every rep, every set and every rest by itself, so nothing gets typed and nothing gets guessed.</div>
-        <div class="pstat"><span class="mono">To fit it</span><b>2 magnets</b><p>No screws, no tools. On the stack in seconds.</p></div>
+        <div class="ptxt">A small sensor that sits on the weight stack. It counts every rep, every set and every rest by itself, and how fast each rep moves, so nothing gets typed and nothing gets guessed.</div>
+        <div class="pstat"><span class="mono">To plug in</span><b>0 cables</b><p>A coin cell inside, magnets underneath. Nothing to screw on.</p></div>
       </div>
     </div>
   </section>
@@ -1123,7 +1177,7 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
     <div class="ttl"><h3>The app</h3><p>Your training, measured.</p></div>
     <div class="pg2">
       <div>
-        <div class="pimg" style="display:grid;place-items:center"><div class="iph" style="width:min(214px,44%)"><div class="bd"><div class="scr"><img src="ro5/own-home.jpg" alt="The readout app, today screen" width="786" height="1704" loading="lazy"><i class="di"></i></div></div></div></div>
+        <div class="pimg" style="display:grid;place-items:center"><div class="iph" style="width:min(214px,44%)"><div class="bd"><div class="scr"><img src="ro5/own-home.jpg" alt="The Sedulo app, today screen" width="786" height="1704" loading="lazy"><i class="di"></i></div></div></div></div>
         <div class="pname"><h4>The app</h4><a class="btn b" href="#try">Try it free</a><a class="btn og" href="#app">Learn more</a></div>
       </div>
       <div class="ptxt">The app opens on one thing: what to do next. Everything else waits until you ask for it.
@@ -1142,17 +1196,15 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
     <div class="st"><a class="btn b" href="#app">See the app</a><a class="btn og" href="https://adampauk.github.io/readout-app/" target="_blank" rel="noopener">Open it full screen</a></div>
     <p class="soon">Coming to the App Store and Google Play.</p>
     <div class="live">
-      <div class="iph"><div class="bd"><div class="scr"><img src="ro5/own-home.jpg" alt="The readout app, today screen" width="786" height="1704" loading="lazy"><i class="di"></i><button class="go" type="button" data-live>Try it here</button></div></div></div>
+      <div class="iph"><div class="bd"><div class="scr"><img src="ro5/own-home.jpg" alt="The Sedulo app, today screen" width="786" height="1704" loading="lazy"><i class="di"></i><button class="go" type="button" data-live>Try it here</button></div></div></div>
       <p class="lcap">The real app, running in your browser, with sample data.</p>
     </div>
   </section>
 
-  <section class="floorsec" aria-label="One gym, one system">
-    <div class="t">
-      <h2>Every rep in the gym, on one system.</h2>
-      <p>A sensor on every machine, one picture of the whole floor: which machines work, when the gym is full, who gets stronger.</p>
-      <div class="nums"><div><b>1 sensor</b><span>On every machine</span></div><div><b>0 taps</b><span>During a set</span></div></div>
-    </div>
+  <section class="priv" aria-label="Privacy"><svg class="lk" width="40" height="48" viewBox="0 0 40 48" aria-hidden="true"><rect x="3" y="20" width="34" height="25" rx="7" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M11 20v-6a9 9 0 0 1 18 0v6" fill="none" stroke="currentColor" stroke-width="2.6"/><circle cx="20" cy="32.5" r="3" fill="currentColor"/></svg><h2>Your sets are yours.</h2><p>The sensor has no camera and records no video. Your workouts belong to you. Your gym sees its floor as totals, and sees your name only if you say yes.</p></section>
+
+  <section class="floorsec" aria-label="For gyms">
+    <div class="t"><p class="mono">For gyms</p><h2>Good for your gym, too.</h2><p>Gyms run Sedulo for their members. Three things come back to the gym.</p><div class="g3"><div><b>Members who stay</b><span>New members get a plan and progress they can see. Trainers see who has gone quiet, in time to reach out.</span></div><div><b>Ready for what comes next</b><span>Phones, cars and homes got smart years ago. The machines you already have join them, no new ones needed.</span></div><div><b>The floor, measured</b><span>Busy hours, the machines that earn their space and the ones nobody uses, as totals.</span></div></div><div class="ctas"><a class="btn b" href="#gyms">For gyms</a><a class="btn l" href="#try-gym">Run a pilot</a></div></div>
     <div class="globe">
       <div class="dialbg"></div><div class="dial" data-dial></div>
       <div class="gc" style="left:66%;top:12%"><p class="mono">Most used (sample)</p><b>Leg press</b><span>412 sets this week</span></div>
@@ -1169,29 +1221,23 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
 <!-- =================================== THE SENSOR =================================== -->
 <main class="pg" data-p="sensor">
   <section class="bhero">
-    <picture><source media="(max-width:760px)" srcset="render/v4-blackp.webp"><img class="bfull" src="render/v4-black.webp" alt="The readout sensor in a dark studio" width="2400" height="1350"></picture>
+    <picture><source media="(max-width:760px)" srcset="render/s-dark-hero-p.jpg" width="1200" height="1600"><img class="bfull" src="render/s-dark-hero.jpg" alt="The Sedulo sensor on dark" width="2400" height="1350"></picture>
     <div class="in"><h1>the sensor</h1><p class="k">A small sensor on every gym machine.</p><p>It counts reps, sets and rest by itself, so your phone stays in your pocket.</p><a class="btn b lg" href="#try">Try it free</a></div>
   </section>
 
   <section class="acc dark" aria-label="Built for the weight stack">
     <div class="hd"><h2>Built for the weight stack</h2><div class="arrows"><button type="button" aria-label="Previous" data-acc="-1">←</button><button type="button" aria-label="Next" data-acc="1">→</button></div></div>
     <div class="accr" id="accr">
-      <article class="ac"><div class="tx"><h3>Clips onto the stack</h3><p>Two magnets hold it on the weight stack. It goes on in seconds and comes off just as fast.</p></div><div class="im ir cov"><img src="render/v4-bart.webp" alt="The sensor along a machine's bar"></div></article>
+      <article class="ac"><div class="tx"><h3>Holds on with magnets</h3><p>Magnets underneath hold it on the weight stack, set after set. Nothing to screw on.</p></div><div class="im"><img src="fp/18-detail-kotouce.jpg" alt="A weight stack, where the sensor sits"></div></article>
       <article class="ac"><div class="tx"><h3>Counts from the movement</h3><p>Every rep moves the stack. The sensor feels each one and counts it, set by set.</p></div><div class="im" style="background:#141414"><div class="wv" data-wave='{"w":600,"h":220,"reps":8,"amp":0.78,"id":"aw"}'></div></div></article>
       <article class="ac"><div class="tx"><h3>Made in a real gym</h3><p>We build it and test it in a working gym, on real members’ sets.</p></div><div class="im"><img src="fp/lat-pulldown.jpg" alt="" style="object-position:60% 35%"></div></article>
-      <article class="ac"><div class="tx"><h3>Nothing to press</h3><p>No screen and no buttons on the sensor. The numbers show up in the app.</p></div><div class="im ir cov"><img src="render/v4-a-side.webp" alt="The plain side of the sensor"></div></article>
+      <article class="ac"><div class="tx"><h3>Nothing to press</h3><p>No screen and no buttons on the sensor. The numbers show up in the app.</p></div><div class="im ir cov"><img src="render/s-side-card.jpg" alt="The plain side of the sensor"></div></article>
     </div>
   </section>
 
-  <section class="light" aria-label="Two magnets">
-    <picture><source media="(max-width:760px)" srcset="render/v4-whitep.webp"><img class="lfull" src="render/v4-white.webp" alt="The readout sensor from above, on a white sweep" width="2400" height="1800"></picture>
-    <p class="say">Two magnets. No screws.<br>On the stack in seconds.</p>
-  </section>
+  <section class="light" aria-label="It sits on the machine"><img class="lfull" src="render/s-top-light.jpg" alt="The Sedulo sensor from above" width="2400" height="1800"><p class="say">It sits on the machine,<br>not on you.</p></section>
 
-  <section class="full lightf" aria-label="Clip it on">
-    <picture><source media="(max-width:760px)" srcset="render/v4-barp.webp"><img class="ffull" src="render/v4-bar.webp" alt="The sensor along a machine's bar" width="2400" height="1650"></picture>
-    <div class="in"><h2>Clip it on. Lift.</h2><p>Your phone stays in your pocket. The sensor does the counting.</p></div>
-  </section>
+  <section class="full lightf mac" aria-label="One piece"><img class="ffull" src="render/s-macro.jpg" alt="The sensor's matte top up close, the name in the same grain" width="2000" height="1333"><div class="in"><h2>One plain black block.</h2><p>No screen, no buttons and no seam on top. Matte plastic, with the name in the same grain.</p></div></section>
 
   <section class="zero" aria-label="Zero taps"><div class="zs">
     <svg class="rings" viewBox="0 0 1500 1500" aria-hidden="true"><g fill="none" stroke="#5B78FF"><circle cx="750" cy="750" r="200" stroke-width="2" opacity=".9"/><circle cx="750" cy="750" r="420" stroke-width="2.5"/><circle cx="750" cy="750" r="440" stroke-width="1.5" opacity=".5"/><circle cx="750" cy="750" r="690" stroke-width="3"/></g></svg>
@@ -1216,17 +1262,10 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
     <div class="pp"><div class="iph"><div class="bd"><div class="scr"><img src="ro5/own-live.jpg" alt="The app during a set" width="786" height="1704" loading="lazy"><i class="di"></i></div></div></div><div class="iph"><div class="bd"><div class="scr"><img src="ro5/own-finish.jpg" alt="The app after a workout" width="786" height="1704" loading="lazy"><i class="di"></i></div></div></div></div>
   </section>
 
-  <section class="specs" id="sensor-specs" aria-label="What’s included">
-    <h3>What’s included</h3>
-    <div class="angles"><figure><img src="render/v4-a-top.webp" alt="The sensor from above" loading="lazy"><figcaption>From above</figcaption></figure><figure><img src="render/v4-a-side.webp" alt="The long side of the sensor" loading="lazy"><figcaption>The side</figcaption></figure><figure><img src="render/v4-a-end.webp" alt="The end of the sensor with the USB slot" loading="lazy"><figcaption>The USB end</figcaption></figure></div>
-    <p class="anote">Shown: renders of the current design (v8), made from the files that go to the printer, with the print’s layer lines.</p>
+  <section class="specs" id="sensor-specs" aria-label="Tech specs"> <h3>Tech specs</h3> <div class="angles"><figure><img src="render/s-spec-top.jpg" alt="The sensor from above" loading="lazy" width="1200" height="900"><figcaption>From above</figcaption></figure><figure><img src="render/s-spec-side.jpg" alt="The long side of the sensor" loading="lazy" width="1200" height="900"><figcaption>The side</figcaption></figure><figure><img src="render/s-spec-end.jpg" alt="The end of the sensor" loading="lazy" width="1200" height="900"><figcaption>The end</figcaption></figure></div> <p class="anote">Shown: renders of the current design, made from the files that go to the printer.</p>
     <div class="sg">
       <div><p class="mono">The sensor</p><p>A small, solid sensor for the weight stack. No screen, no buttons.</p></div>
-      <div><p class="mono">Holder</p><p>Shaped to the sensor, with two magnets.</p></div>
-      <div><p class="mono">Power</p><p>A CR2477 coin cell, inside the lid.</p></div>
-      <div><p class="mono">Updates</p><p>A USB slot under the lid.</p></div>
-      <div><p class="mono">Fits</p><p>Machines with a weight stack first.</p></div>
-      <div><p class="mono">Works with</p><p>The readout app, on iPhone and Android (coming).</p></div>
+      <div><p class="mono">Counts</p><p>Reps, sets, rest and the speed of every rep, as they happen.</p></div> <div><p class="mono">Holds on</p><p>Magnets underneath, and a holder shaped to the sensor.</p></div> <div><p class="mono">Power</p><p>A CR2477 coin cell, inside.</p></div> <div><p class="mono">Wireless</p><p>Bluetooth Low Energy.</p></div> <div><p class="mono">Fits</p><p>Machines with a weight stack first.</p></div> <div><p class="mono">Privacy</p><p>No camera, no video.</p></div> <div><p class="mono">Works with</p><p>The Sedulo app, on iPhone and Android (coming). Apple Health, Strava and Garmin: planned.</p></div> <div><p class="mono">Status</p><p>A prototype. Details may change.</p></div>
     </div>
   </section>
 
@@ -1236,10 +1275,9 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
 <!-- =================================== HOW IT WORKS =================================== -->
 <main class="pg" data-p="how">
   <section class="hwh">
-    <h1 class="dsp">How the readout sensor works</h1>
+    <h1 class="dsp">How the Sedulo sensor works</h1>
     <div class="m m1"><img src="ro5/own-live.jpg" alt="" style="object-position:50% 0%"></div>
-    <div class="m m2 mb2"><img src="render/v4-bart.webp" alt=""></div>
-    <div class="m m3"><img src="render/v4-a-end.webp" alt="The readout sensor"></div>
+    <div class="m m2 mb2"><img src="render/s-macro.jpg" alt="" style="object-position:70% 30%"></div> <div class="m m3"><img src="render/s-tile-light.jpg" alt="The Sedulo sensor"></div>
   </section>
 
   <p class="words">The sensor reads <span>reps, sets and rest</span> straight from the weight stack. The app turns them into <span>a score</span>, <span>your progress</span> and <span>one next step</span>, in words anyone can read.</p>
@@ -1288,10 +1326,10 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
     <h2>Frequently asked questions</h2>
     <div>
       <details><summary>Do I need my phone during a set?</summary><p>No. The sensor counts on its own. Look at the app before the workout for the plan and after it for the numbers.</p></details>
-      <details><summary>Who pays for it?</summary><p>The gym. Members use the sensor and the app at gyms that run readout.</p></details>
+      <details><summary>Who pays for it?</summary><p>The gym. Members use the sensor and the app at gyms that run Sedulo.</p></details>
       <details><summary>Which machines does it fit?</summary><p>Machines with a weight stack come first: leg press, chest press, lat pulldown and the like. Free weights come later.</p></details>
       <details><summary>Does the sensor count right?</summary><p>That is the test we are running now: a thousand reps, filmed and counted by people. The results go up under <a href="#how-test">How we test</a>, misses included.</p></details>
-      <details><summary>What happens to my data?</summary><p>Your workouts are yours. Gyms see their floor as totals, never one member's sets.</p></details>
+      <details><summary>What happens to my data?</summary><p>Your workouts are yours. Gyms see their floor as totals, and see your name only if you say yes.</p></details>
       <details><summary>When can my gym get it?</summary><p>Pilots start with our first gym. Other gyms can <a href="#try-gym">ask for a four-week pilot</a>.</p></details>
     </div>
   </section>
@@ -1300,23 +1338,20 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
 <!-- =================================== FOR GYMS =================================== -->
 <main class="pg" data-p="gyms">
   <section class="gy">
-    <h1>The workout data your gym never had</h1>
-    <p class="sub">Which machines earn their space, which hours are full, which members get stronger. Counted, not guessed.</p>
+    <h1>Give your members a reason to come back.</h1> <p class="sub">Progress they can see, on the machines you already have. A gym that keeps up with what comes next, and your floor, measured.</p>
     <div class="gylogos" id="gyms-partners"><span class="fp"><img class="plogo" src="logos/fitpods-wordmark-cream.svg" alt="FitPods"><small>FIRST GYM</small></span><a class="slot" href="#try-gym">Your gym</a><a class="slot" href="#try-gym">Your gym</a></div>
-    <h2>readout for gyms</h2>
-    <p class="big">Members train with a small sensor on every machine and an app that tells them what to do next. <b>You get the floor, measured: which machines earn their space, when the gym is full, and who is getting stronger.</b> Start with a four-week pilot on up to ten machines.</p>
+    <h2>Sedulo for gyms</h2>
+    <p class="big">Members train with a small sensor on every machine and an app that shows them getting stronger. <b>Three things come back to you: new members who settle in, a gym that keeps up with the phones in their pockets, and the floor, measured.</b> Start with a four-week pilot on up to ten machines.</p>
     <div class="ctas"><a class="btn b2 m" href="#try-gym">Run a pilot</a><a class="btn ow m" href="#try-gym">Request a call</a></div>
     <div class="gy3">
-      <div><p class="mono">Machine use (sample)</p><b>4× more</b><p>Leg press against hack squat, this week.</p></div>
-      <div><p class="mono">Busy hours (sample)</p><b>6 to 8 pm</b><p>Full on weekdays. 2 to 4 pm is empty.</p></div>
-      <div><p class="mono">Members (sample)</p><b data-count="31" data-suffix="%">31%</b><p>Lifted more than last month.</p></div>
+      <div><p class="mono">New members (sample)</p><b>9 of 12</b><p>Still training in week four. A trainer can reach the other three.</p></div> <div><p class="mono">Members (sample)</p><b data-count="31" data-suffix="%">31%</b><p>Lifted more than last month.</p></div> <div><p class="mono">Busy hours (sample)</p><b>6 to 8 pm</b><p>Full on weekdays. 2 to 4 pm is empty.</p></div>
     </div>
     <p class="fine">Sample numbers. A four-week pilot shows yours.</p>
   </section>
 </main>
 
 <!-- =================================== THE OPEN LAB =================================== -->
-<div class="lsub" id="lsub"><a class="logo" href="#home" style="color:#fff"><b>readout</b><span class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></span></a><nav aria-label="The open lab"><a href="#lab">The lab</a><a href="#lab-report">Sample report</a><a href="#lab-plans">For gyms</a><a href="#lab-find">Visit</a></nav><a class="btn b2 m" href="#try">Book a free workout</a></div>
+<div class="lsub" id="lsub"><a class="logo" href="#home" style="color:#fff"><b>Sedulo</b><span class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></span></a><nav aria-label="The open lab"><a href="#lab">The lab</a><a href="#lab-report">Sample report</a><a href="#lab-plans">For gyms</a><a href="#lab-find">Visit</a></nav><a class="btn b2 m" href="#try">Book a free workout</a></div>
 <main class="pg" data-p="lab">
   <section class="lhero">
     <img src="fp/coach-machine.jpg" alt="A trainer next to a member on a machine" style="object-position:60% 40%">
@@ -1366,8 +1401,8 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
 
   <section class="cmp">
     <div class="hd"><p class="mono">How it compares</p><h2 class="dsp">Beyond the notebook</h2></div>
-    <div class="ct" role="table" aria-label="readout compared with a notebook or phone app">
-      <div class="th" role="row"><span>What you get</span><span>readout</span><span>Notebook or phone</span></div>
+    <div class="ct" role="table" aria-label="Sedulo compared with a notebook or phone app">
+      <div class="th" role="row"><span>What you get</span><span>Sedulo</span><span>Notebook or phone</span></div>
       <div role="row"><span class="lbl"><i>1</i>Counts reps by itself</span><span class="ok">✓</span><span class="no">✕</span></div>
       <div role="row"><span class="lbl"><i>2</i>Times your rest by itself</span><span class="ok">✓</span><span class="no">✕</span></div>
       <div role="row"><span class="lbl"><i>3</i>Phone stays in your pocket</span><span class="ok">✓</span><span>Notebook only</span></div>
@@ -1414,7 +1449,7 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
 <!-- =================================== THE APP =================================== -->
 <main class="pg" data-p="app">
   <section class="ahero">
-    <p class="mono">The readout app</p>
+    <p class="mono">The Sedulo app</p>
     <h1>Your training, measured.</h1>
     <p class="sub">The sensor counts. The app explains: one next step, a score after every workout and progress you can see.</p>
     <div class="ctas"><a class="btn b lg" href="https://adampauk.github.io/readout-app/" target="_blank" rel="noopener">Try it in your browser</a><a class="btn og lg" href="#try">Try it free in the gym</a></div>
@@ -1477,10 +1512,10 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
     <div class="sbody">
       <p class="lead">Watch any gym for an hour and you see the same thing: people working hard and guessing.</p>
       <p>How many reps was that? Was the rest two minutes or four? Is this more than last month? The answers live in notebooks, in apps that need typing between sets, or nowhere.</p>
-      <p>readout started on a gym floor in Brno. We wanted the machines to keep count, so the people on them could keep their heads in the lift. That became a small sensor that clips onto the weight stack and counts every rep, set and rest by itself, and an app that turns those numbers into one plain next step.</p>
+      <p>Sedulo started on a gym floor in Brno. We wanted the machines to keep count, so the people on them could keep their heads in the lift. That became a small sensor that sits on the weight stack and counts every rep, set and rest by itself, and an app that turns those numbers into one plain next step.</p>
       <p>We test it in the open. For ninety days our first gym runs on it, and the numbers go public: what works, what we got wrong, what the sensor missed.</p>
       <h2>What we promise</h2>
-      <ul><li>Your workouts are yours. Gyms see their floor as totals, never one member’s sets.</li><li>Every number comes with a sentence that says what it means.</li><li>When the sensor gets it wrong, we say so.</li></ul>
+      <ul><li>Your workouts are yours. Gyms see their floor as totals, and see your name only if you say yes.</li><li>Every number comes with a sentence that says what it means.</li><li>When the sensor gets it wrong, we say so.</li></ul>
     </div>
     <div class="ctas"><a class="btn b lg" href="#try">Try it free</a><a class="btn og lg" href="#lab">Visit the open lab</a></div>
   </section>
@@ -1493,9 +1528,9 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
     <h1>Privacy</h1>
     <p class="lead">This site is a preview. It sets no cookies, runs no tracking, and its forms send nothing.</p>
     <p>The one outside request is for the fonts, which load from Google Fonts. Whatever you type into a form stays on this page and is gone when you leave it.</p>
-    <h2>When readout launches</h2>
+    <h2>When Sedulo launches</h2>
     <p>This page will say what the sensor and the app keep, why, and for how long. Two rules will not change:</p>
-    <ul><li>Your workouts are yours.</li><li>Gyms see their floor as totals, never one member’s sets.</li></ul>
+    <ul><li>Your workouts are yours.</li><li>Gyms see their floor as totals, and see your name only if you say yes.</li></ul>
     <p class="upd">Last updated 17 November 2026.</p>
   </section>
 </main>
@@ -1503,8 +1538,8 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
   <section class="legal">
     <p class="mono">Legal</p>
     <h1>Terms</h1>
-    <p class="lead">readout is a working name, and this site is a concept.</p>
-    <p>Nothing here is for sale yet. Prices are on request, numbers marked sample are samples, and the product pictures are renders of the current design (v8).</p>
+    <p class="lead">This site is a concept, and the sensor a prototype.</p>
+    <p>Nothing here is for sale yet. Prices are on request, numbers marked sample are samples, and the product pictures are renders of the current design.</p>
     <p>The full terms of use will be here before the first gym signs up.</p>
     <p class="upd">Last updated 17 November 2026.</p>
   </section>
@@ -1514,7 +1549,7 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
 <footer class="foot">
   <div class="fcols">
     <div><p class="fh">The sensor</p><a href="#sensor">The sensor <span class="new">NEW</span></a><a href="#how">How it works</a><a href="#sensor-specs">What’s included</a><p class="fh">The app</p><a href="#app-today">Today</a><a href="#app-score">Workout score</a><a href="#app-progress">Progress</a></div>
-    <div><p class="fh">For gyms</p><a href="#gyms">readout for gyms</a><a href="#lab-plans">Pilot</a><a href="#lab">The open lab</a><p class="fh">Learn</p><a href="#how-test">How we test</a><a href="#how-faq">Questions</a></div>
+    <div><p class="fh">For gyms</p><a href="#gyms">Sedulo for gyms</a><a href="#lab-plans">Pilot</a><a href="#lab">The open lab</a><p class="fh">Learn</p><a href="#how-test">How we test</a><a href="#how-faq">Questions</a></div>
     <div><p class="fh">Company</p><a href="#story">Our story</a><a href="#try-ask">Contact</a><a href="#gyms-partners">Partners</a></div>
     <div><p class="fh">Legal</p><a href="#privacy">Privacy</a><a href="#terms">Terms</a></div>
   </div>
@@ -1523,8 +1558,8 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
     <div><p class="fh">The open lab report</p><form class="nl" data-form="news"><label class="vh" for="nl-e">Your e-mail</label><input id="nl-e" type="email" placeholder="Your e-mail" autocomplete="email" required><button class="btn k" type="submit" data-done="Done"><span class="bl">Get it</span></button></form><p class="fmsg nlm" aria-live="polite" data-msg="Thank you. This is a preview, so nothing was sent."></p></div>
     <div><p class="fh">Download the app</p><div class="badges"><a href="#app-get"><svg width="11" height="13" viewBox="0 0 11 13"><path d="M9 7c0-1.4 1.1-2 1.2-2.1C9.5 3.9 8.5 3.8 8.1 3.8c-.9-.1-1.7.5-2.1.5s-1.1-.5-1.8-.5C3.2 3.8 2.3 4.4 1.8 5.3.8 7.1 1.5 9.8 2.5 11.2c.5.7 1 1.4 1.7 1.4s1-.4 1.8-.4 1.1.4 1.8.4 1.2-.7 1.6-1.4c.5-.8.7-1.5.7-1.6C10.1 9.6 9 9 9 7zM7.6 2.6c.4-.5.7-1.1.6-1.8-.6 0-1.3.4-1.7.9-.4.4-.7 1.1-.6 1.7.6.1 1.3-.3 1.7-.8z" fill="#fff"/></svg><span><small>Soon on the</small>App Store</span></a><a href="#app-get"><svg width="12" height="13" viewBox="0 0 12 13"><path d="M1 .8l6.4 5.7L1 12.2z" fill="#3BCCFF"/><path d="M1 .8l8.4 4.7-2 1z" fill="#48FF48"/><path d="M1 12.2l8.4-4.7-2-1z" fill="#FF3A44"/><path d="M9.4 5.5L11 6.5 9.4 7.5 7.4 6.5z" fill="#FFD400"/></svg><span><small>Soon on</small>Google Play</span></a></div></div>
   </div>
-  <div class="fcopy"><span>© 2026 readout (working name). A concept site: numbers marked sample are samples, and the forms send nothing. Photos: our first gym. The sensor: renders of the v8 design from its CAD files.</span><span class="lang"><i aria-hidden="true"></i>Czechia</span></div>
-  <div class="giant" aria-hidden="true"><span>readout</span></div>
+  <div class="fcopy"><span>© 2026 Sedulo. A concept site: numbers marked sample are samples, and the forms send nothing. Photos: our first gym. The sensor: renders of the v8 design from its CAD files.</span><span class="lang"><i aria-hidden="true"></i>Czechia</span></div>
+  <div class="giant" aria-hidden="true"><span>Sedulo</span></div>
 </footer>
 
 <script>
@@ -1556,7 +1591,7 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
 
   // router: one page per hash (#home #sensor #app #how #gyms #lab #try #story #privacy #terms), plus anchors (#lab-plans, #how-test, ...)
   var pages=['home','sensor','app','how','gyms','lab','try','story','privacy','terms'],hdr=document.getElementById('hdr'),lsub=document.getElementById('lsub'),curPage=null,firstRoute=true;
-  var titles={home:'readout: your training, measured',sensor:'The sensor | readout',app:'The app | readout',how:'How it works | readout',gyms:'For gyms | readout',lab:'The open lab | readout',try:'Try it free | readout',story:'Our story | readout',privacy:'Privacy | readout',terms:'Terms | readout'};
+  var titles={home:'Sedulo: your training, measured',sensor:'The sensor | Sedulo',app:'The app | Sedulo',how:'How it works | Sedulo',gyms:'For gyms | Sedulo',lab:'The open lab | Sedulo',try:'Try it free | Sedulo',story:'Our story | Sedulo',privacy:'Privacy | Sedulo',terms:'Terms | Sedulo'};
   function route(){var h=(location.hash||'#home').slice(1);if(h==='box'||h.indexOf('box-')===0){location.replace('#sensor');return}
     var p=h.split('-')[0];if(pages.indexOf(p)<0)p='home';var changed=p!==curPage;curPage=p;
     document.querySelectorAll('.pg').forEach(function(m){var on=m.getAttribute('data-p')===p;m.classList.toggle('on',on);if(on&&changed&&!firstRoute&&!shot&&!reduce){m.classList.remove('enter');void m.offsetWidth;m.classList.add('enter')}});
@@ -1673,7 +1708,7 @@ img[src$="t-bar.webp"]{-webkit-mask-image:radial-gradient(64% 74% at 52% 42%,#00
   var live=document.querySelector('[data-live]');
   if(live)live.addEventListener('click',function(){var url='https://adampauk.github.io/readout-app/',scr=live.closest('.scr');
     if(innerWidth<761||matchMedia('(pointer:coarse)').matches){window.open(url,'_blank','noopener');return}
-    var s=scr.clientWidth/393,fr=document.createElement('iframe');fr.src=url;fr.title='The readout app, live';
+    var s=scr.clientWidth/393,fr=document.createElement('iframe');fr.src=url;fr.title='The Sedulo app, live';
     fr.style.cssText='position:absolute;z-index:2;left:0;top:'+(54*s).toFixed(1)+'px;width:393px;height:798px;border:0;transform:scale('+s.toFixed(4)+');transform-origin:0 0;opacity:0;transition:opacity .45s ease';
     fr.addEventListener('load',function(){fr.style.opacity=1});scr.appendChild(fr);live.classList.add('gone');setTimeout(function(){live.remove()},320)});
   // a few numbers count up once, when they first come into view

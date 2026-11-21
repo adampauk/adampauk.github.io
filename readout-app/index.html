@@ -10,8 +10,8 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23F6F6F5'/%3E%3Cpath d='M3 22 C6 22 7 8 10 8 S14 22 16 22 S19 9 22 9 S26 22 29 22' fill='none' stroke='%232747D6' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="icon-180.png">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="readout">
-<title>readout</title>
+<meta name="apple-mobile-web-app-title" content="Sedulo">
+<title>Sedulo</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <style>
 /* readout, the app (concept, 17 Nov 2026). The v3 screens' language made tappable: Ultrahuman's craft (cards, spacing,
@@ -268,7 +268,7 @@ svg.wave .wglow{animation:breathe 4.5s ease-in-out infinite}
     <div class="sbar" aria-hidden="true"><span>9:41</span><span class="ic"><svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="#151617"/><rect x="5" y="5.5" width="3" height="6.5" rx="1" fill="#151617"/><rect x="10" y="3" width="3" height="9" rx="1" fill="#151617"/><rect x="15" y="0" width="3" height="12" rx="1" fill="#151617"/></svg><svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 11.5 L5.6 9 a3.4 3.4 0 0 1 4.8 0 Z" fill="#151617"/><path d="M3.3 6.7 a6.6 6.6 0 0 1 9.4 0 l-1.5 1.5 a4.5 4.5 0 0 0 -6.4 0 Z" fill="#151617"/><path d="M1 4.4 a9.9 9.9 0 0 1 14 0 l-1.5 1.5 a7.8 7.8 0 0 0 -11 0 Z" fill="#151617"/></svg><svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.5" fill="none" stroke="#151617" opacity=".4"/><rect x="2" y="2" width="18" height="9" rx="2" fill="#151617"/><rect x="24.5" y="4.5" width="1.6" height="4" rx=".8" fill="#151617" opacity=".4"/></svg></span></div>
     <i class="homeind" aria-hidden="true"></i>
   </div>
-  <p class="caption">readout, a concept app with sample data. The sensor is simulated.</p>
+  <p class="caption">Sedulo, a concept app with sample data. The sensor is simulated.</p>
 </div>
 <script>
 (function () {
@@ -511,7 +511,7 @@ function todayHTML() {
   const delta = lastFirst ? p.w - lastFirst.w : 0;
   const tag = delta > 0 ? `<span class="st good">Up ${wt(delta)}</span>` : `<span class="st inkc">Same weight</span>`;
   const label = done ? 'Today, your last set, as the sensor saw it' : DAYS[ref.type].n + ', your last set, as the sensor saw it';
-  let html = `<div class="wm" aria-label="readout"><b>readout</b><span>${Array.from({ length: 11 }, (_, i) => `<i class="${i === 8 ? 'r' : ''}"></i>`).join('')}</span></div>
+  let html = `<div class="wm" aria-label="Sedulo"><b>Sedulo</b><span>${Array.from({ length: 11 }, (_, i) => `<i class="${i === 8 ? 'r' : ''}"></i>`).join('')}</span></div>
   <div class="hero"><div class="glow"></div>${waveSVG({ amps: setAmps(main), draw: true })}</div>
   <div class="say"><p class="lab">${esc(label)}</p><h1>${esc(advice(ref))}</h1></div>
   <div class="trio">
@@ -623,8 +623,8 @@ function youHTML() {
   <div class="card cardp"><div class="setrow" style="border:0;padding-top:0"><span style="font-size:15px;font-weight:500">Rest between sets</span></div>${segs('restplan', S.rest, [[90, '1:30'], [120, '2:00'], [150, '2:30'], [180, '3:00']])}
     <div class="setrow" style="margin-top:12px"><span style="font-size:15px;font-weight:500">Units</span>${segs('unit', S.unit, [['kg', 'kg'], ['lb', 'lb']])}</div>
     <div class="setrow"><span><span style="display:block;font-size:15px;font-weight:500">Motion</span><span class="lab" style="display:block;margin-top:3px">its own switch, so the demo moves</span></span><button type="button" class="sw" role="switch" aria-checked="${S.motion}" aria-label="motion" data-act="motion"></button></div></div>
-  <div class="card cardp"><p class="ttl">The sensor</p><p class="note" style="margin-top:8px">readout counts with a sensor on each machine’s weight stack: tap in with your phone, lift, and it counts every rep and times every rest. In this concept the sensor is simulated. Reps come in on their own, rests run ${REST_X}× faster, and Emma’s four weeks are sample data.</p><div style="margin-top:16px"><button type="button" class="btn light" data-act="reset">Reset sample data</button></div></div>
-  <p class="lab" style="text-align:center;margin:10px 0 0">readout, a concept, not a product yet</p>
+  <div class="card cardp"><p class="ttl">The sensor</p><p class="note" style="margin-top:8px">Sedulo counts with a sensor on each machine’s weight stack: tap in with your phone, lift, and it counts every rep and times every rest. In this concept the sensor is simulated. Reps come in on their own, rests run ${REST_X}× faster, and Emma’s four weeks are sample data.</p><div style="margin-top:16px"><button type="button" class="btn light" data-act="reset">Reset sample data</button></div></div>
+  <p class="lab" style="text-align:center;margin:10px 0 0">Sedulo, a concept, not a product yet</p>
   </div>`;
 }
 
@@ -740,7 +740,7 @@ function tapIn() {
   const p = curP(), n = WK.w.plan.length;
   screen(`<div class="wglow" style="top:80px;height:340px;background:radial-gradient(55% 50% at 50% 50%,rgba(39,71,214,.12) 0%,rgba(246,246,245,0) 70%)"></div>
   <div id="bn" style="min-height:84px"></div>
-  <button type="button" class="boxart" data-act="tapbox" aria-label="tap your phone to the sensor"><i class="ring"></i><i class="ring b"></i><i class="ring c"></i><img src="box.jpg" alt="the readout sensor, matte black, a USB-C port in its end, readout printed on the lid" width="1000" height="548" draggable="false"></button>
+  <button type="button" class="boxart" data-act="tapbox" aria-label="tap your phone to the sensor"><i class="ring"></i><i class="ring b"></i><i class="ring c"></i><img src="box.jpg" alt="the Sedulo sensor, matte black, its name on the top" width="1000" height="548" draggable="false"></button>
   <div class="tapt"><p class="lab">Machine ${WK.i + 1} of ${n}, ${esc(DAYS[WK.w.type].n)}</p><h2>${esc(MX[p.k].n)}</h2><p>Hold your phone to the sensor on the weight stack.</p></div>
   <div class="bottom"><button type="button" class="tlink" data-act="endwk">${WK.w.ex.some(e => e.sets.length) ? 'End workout' : 'Cancel'}</button></div>`, 'tapin');
   WK.timers.push(setTimeout(showBanner, 1500 / SPEED));
