@@ -1,0 +1,16 @@
+# The only paths this public repository may hold (S2 of the organisation plan, PR 474, A7).
+# A line ending in / allows everything under it. .githooks/pre-push refuses any push with a path not listed here.
+.nojekyll
+.well-known/apple-app-site-association
+404.html
+index.html
+staff/
+join/
+trainer/
+pilot/
+directions/sedulo-gyms-middle/img/hero-tall.webp
+directions/sedulo-gyms-middle/img/hero.webp
+directions/sedulo-gyms-middle/img/sensor-dark.webp
+directions/sedulo-gyms-middle/social/post-1.jpg
+ALLOWLIST
+.githooks/

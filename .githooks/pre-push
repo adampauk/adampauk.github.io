@@ -1,0 +1,4 @@
+#!/bin/sh
+# Refuses a push whose tree holds any path that ALLOWLIST does not list (S2 of the organisation plan).
+# Turn it on in a clone with: git config core.hooksPath .githooks
+exec python3 "$(git rev-parse --show-toplevel)/.githooks/check_allowlist.py"
